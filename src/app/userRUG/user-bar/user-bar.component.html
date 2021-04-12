@@ -1,0 +1,57 @@
+
+    <mat-card class="mat-elevation-z2 card" >
+        <div class="userBar">
+            <div mat-card-avatar class="avatar"></div>
+            <div class="userInfo">
+                <h2 class="nameUG">UNIDAD DE DEPORTES Y BIENESTAR</h2>
+                <h4 > Responsable</h4>
+                <p>Lic. Valeriano valdes</p>
+            </div>
+    
+        </div>
+
+    </mat-card>
+
+
+
+<style>
+    .card{
+        width: fit-content; height: 100%; border-radius: 0;background-color: rgb(236, 236, 236);
+        
+    }
+    .userBar{
+        
+        text-align: left;
+        display: grid;
+        place-items: center;
+        min-width: 50%;
+
+    }
+    .avatar{
+        margin-top: 30px;
+        margin-bottom: 15px;
+        width: 100px; height: 100px;
+        background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    }
+    .userInfo{
+        margin-left: 5%;
+        line-height: 10px;
+    }
+    .nameUG{
+        color: var(--txt-color-title2);
+        font-weight: 500;
+    }
+    .userInfo h4{
+        line-height: 10px;
+        color: var(--txt-color-subt);
+        font-size: 17px;
+        font-weight: bold;
+    }
+    .userInfo p{
+        color: var(--txt-color-subt);
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+
+</style>

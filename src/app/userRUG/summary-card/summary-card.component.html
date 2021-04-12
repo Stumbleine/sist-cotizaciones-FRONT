@@ -1,0 +1,57 @@
+
+<mat-card style="width: 700px;  margin-top: 2%;" class="mat-elevation-z4">
+
+    <div style="text-align: end; margin-top: -10px; display: flex;">
+        <mat-progress-bar id="pbar" mode="determinate" value="40" ></mat-progress-bar>
+        <div style="text-align: end; margin-top: 5px; width: 100px;"><p id="nroPedido">Nro 7458</p></div>
+        <button mat-button style="margin-top: -4px; margin-right: -20px;" ><mat-icon>launch</mat-icon></button>
+
+    </div>
+
+    <mat-card-header style="margin-left: -17px; ">
+        <mat-card-title >Titulo de la solicitud</mat-card-title>
+        <mat-card-subtitle>Sigla RSFG </mat-card-subtitle>
+        
+    </mat-card-header>
+    <mat-card-content>
+        <div>
+            <p>Solicitante: <b>Lic. Marco Antonio Buenavista Gonzales</b></p>
+            <p>Total Estimado: <b>Bs. 24 000.00</b></p>
+        </div>
+        <div style="text-align: end;" >
+            <p id="status">APROBADO</p>
+            <p id="fecha">Emitido en fecha 04/05/2021</p>
+        </div>
+    </mat-card-content>
+
+  </mat-card>
+  <style>
+      p {
+        font-size: 17px;
+        font-weight: bolder;
+        color: var(--txt-color-subt);
+
+    }
+    b {
+    font-weight: normal;
+    }
+    #nroPedido{
+        color: var(--txt-color-error);
+        font-weight: 500;
+    }
+    #status{
+        font-style: italic;
+        font-weight: bold;
+        color: var(--state-color-2);
+    }
+    #fecha{        
+        font-style: italic;
+        font-weight: normal;}
+    #pbar{
+        margin-top:15px;
+        marg
+    }
+    mat-progress-bar::after{
+	background-color: #f8d300;
+}
+  </style>

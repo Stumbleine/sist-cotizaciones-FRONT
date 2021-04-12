@@ -1,0 +1,73 @@
+
+  
+<div>
+    <mat-toolbar style="background-color: #0a6cff; color:#ffff" class="mat-elevation-z5">
+      <span style="font-size: 40px;">Sistema de cotizaciones</span>
+      <span class="example-spacer"></span>
+      <button mat-stroked-button style="border-color: #ffff; font-size: 17px; margin-right: 1%; ">SALIR</button>
+    </mat-toolbar>
+    <div style="display: flex; ">
+        <div id="user-bar" style=" width: 25%;">
+            <app-user-bar></app-user-bar>
+        </div>
+        <div style="width: 75%;">
+            <div id="action-bar">
+                <mat-form-field appearance="fill">
+                    <mat-label>Ordenar por</mat-label>
+                    <mat-select disableRipple>
+                      <mat-option value="1">Option 1</mat-option>
+                      <mat-option value="2">Option 2</mat-option>
+                      <mat-option value="3">Option 3</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div class="spacer"></div>
+                <button class="btn-pri" mat-raised-button >
+                    NUEVA SOLICITUD
+                </button>
+            </div>
+            <div id="lista">
+                <mat-grid-list cols="1" rowHeight="270px"  >
+                    
+                    <mat-grid-tile ><app-summary-card></app-summary-card></mat-grid-tile>
+                    <mat-grid-tile ><app-summary-card></app-summary-card></mat-grid-tile>
+                    <mat-grid-tile ><app-summary-card></app-summary-card></mat-grid-tile>
+                    <mat-grid-tile ><app-summary-card></app-summary-card></mat-grid-tile>
+                    <mat-grid-tile ><app-summary-card></app-summary-card></mat-grid-tile>
+                    <mat-grid-tile ><app-summary-card></app-summary-card></mat-grid-tile>
+
+                    
+                </mat-grid-list>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<style>
+    .example-spacer {
+  flex: 1 1 auto;
+}
+.spacer {
+  flex-grow: 1;
+}
+    .btn-pri{
+        background-color: var(--btn-color-pri);
+        color: white;
+        height: fit-content;
+        margin-top:10px ;
+    }
+   /* #lista{
+        display: grid;
+        place-items: center;
+        background-color: aqua;
+        
+    }*/
+    #action-bar{
+    margin:0 2% 0 2%;
+    display: flex;
+    justify-content: space-between;
+
+        padding: 15px;
+
+    }
+</style>
