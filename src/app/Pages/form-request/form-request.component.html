@@ -65,16 +65,16 @@
                   <mat-form-field appearance="fill" class="form__product--textfield">
                     <mat-label>Producto</mat-label>
                     <input matInput 
-                          formControlName='product' 
-                          [ngClass]="{'is-invalid': !productForm.get('cant')?.valid}"
+                          formControlName='name' 
+                          [ngClass]="{'is-invalid': !productForm.get('name')?.valid}"
                           required>
                           <mat-error>campo producto es requerido</mat-error>
                   </mat-form-field>
                   <mat-form-field appearance="fill" class="form__product--textfield">
                     <mat-label>Cantidad</mat-label>
                     <input type="number" matInput 
-                          formControlName='cant'
-                          [ngClass]="{'is-invalid': !productForm.get('cant')?.valid}" 
+                          formControlName='quantity'
+                          [ngClass]="{'is-invalid': !productForm.get('quantity')?.valid}" 
                           required>
                           <mat-error>campo cantidad es requerido</mat-error>
                   </mat-form-field>
@@ -85,7 +85,7 @@
                   </mat-form-field>
                   <mat-form-field appearance="fill"class="form__product--textfield">
                     <mat-label>Detalle</mat-label>
-                    <input matInput formControlName='detail' required>
+                    <input matInput formControlName='description' required>
                     <mat-error>campo detalle es requerido</mat-error>
                   </mat-form-field>
                   <button mat-raised-button color="primary" 

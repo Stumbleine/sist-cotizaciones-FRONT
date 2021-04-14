@@ -17,10 +17,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
   
 ];
 interface Product{
-  product: string;
-  cant: Number;
+  name: string;
+  quantity: Number;
   unit: string;
-  detail:string;
+  description:string;
 }
 interface Request{
   date: Date;
@@ -37,10 +37,10 @@ var i=0;
 })
 export class FormRequestComponent implements OnInit {
   productForm = this.formBuilder.group({
-    product: ['',[Validators.required]],
-    cant: ['',[Validators.required]],
+    name: ['',[Validators.required]],
+    quantity: ['',[Validators.required]],
     unit: ['',[Validators.required]],
-    detail: ['',[Validators.required]],
+    description: ['',[Validators.required]],
   });
   requestForm = this.formBuilder.group({
     date: ['',],
@@ -60,7 +60,7 @@ export class FormRequestComponent implements OnInit {
   pressed:boolean;
 
   saveProduct(value){
-      console.log(JSON.stringify(value))
+      //console.log(JSON.stringify(value))
       this.pressed=true;
       listProducts[i]=value;
       i++;
@@ -72,8 +72,7 @@ export class FormRequestComponent implements OnInit {
     return this.pressed;
   }
   saveRequest(request){
-    console.log(JSON.stringify(request))
-    
-
+    Request=request;
+    console.log(Request);
   }
 }
