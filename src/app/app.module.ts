@@ -25,6 +25,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { HomePageRAFComponent } from './userRAF/home-page-raf/home-page-raf.component'
 import {HttpClientModule} from '@angular/common/http'
+import {RequestService} from '../app/services/request.service';
+import {CommonModule} from '@angular/common';
+
 //import { HomeRugComponent } from './respUnidadGasto/home-rug/home-rug.component';
 
 @NgModule({
@@ -36,13 +39,12 @@ import {HttpClientModule} from '@angular/common/http'
     UserBarComponent,
     DialogRequestedComponent,
     HomePageRAFComponent,
-
-
-    FormRequestComponent
-
+    FormRequestComponent,
   ],
   imports: [
     HttpClientModule,
+
+    CommonModule,     
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -58,7 +60,8 @@ import {HttpClientModule} from '@angular/common/http'
     ReactiveFormsModule
 
   ],
-  providers: [],
-  bootstrap: [AppComponent,FormRequestComponent]
+  providers: [    RequestService,],
+  bootstrap: [AppComponent,FormRequestComponent,
+  ]
 })
 export class AppModule { }

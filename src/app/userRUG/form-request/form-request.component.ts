@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-
+import {RequestService} from '../../services/request.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -23,10 +23,10 @@ interface Product{
   description:string;
 }
 interface Request{
-  date: Date;
-  sigla: string;
-  total: number;
-  justify: string;
+  status: Date;
+  name: string;
+  estimated_amount: number;
+  detail: string;
 }
 const listProducts: Product[] = [];
 var i=0;
@@ -43,13 +43,14 @@ export class FormRequestComponent implements OnInit {
     description: ['',[Validators.required]],
   });
   requestForm = this.formBuilder.group({
-    date: ['',],
-    sigla: ['',],
-    total: ['',[Validators.required]],
-    justify: ['',[Validators.required]],
+    status: ['pendiente',],
+    name: ['',],
+    estimated_amount: ['',[Validators.required]],
+    detail: ['',[Validators.required]],
   });
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private RequestService: RequestService
   ) { }
 
   ngOnInit(): void {
@@ -65,7 +66,15 @@ export class FormRequestComponent implements OnInit {
       listProducts[i]=value;
       i++;
       console.log(listProducts);
-      //this.productForm.reset();
+      this.productForm.reset();
+      this.productForm.get('name').clearValidators();
+      this.productForm.get('name').updateValueAndValidity();
+      this.productForm.get('quantity').clearValidators();
+      this.productForm.get('quantity').updateValueAndValidity();
+      this.productForm.get('unit').clearValidators();
+      this.productForm.get('unit').updateValueAndValidity();
+      this.productForm.get('description').clearValidators();
+      this.productForm.get('description').updateValueAndValidity();
     }
     
   saveProductPressed():boolean{
@@ -74,6 +83,28 @@ export class FormRequestComponent implements OnInit {
   saveRequest(request){
     Request=request;
     console.log(Request);
+    this.RequestService.post('http://localhost:8080/api/request',Request)
+    .subscribe( respuesta =>{
+      console.log('Solicitud enviada!!');
+    })
+    this.requestForm.reset();
+    this.productForm.reset();
+        this.requestForm.get('status').clearValidators();
+        this.requestForm.get('status').updateValueAndValidity();
+        this.requestForm.get('name').clearValidators();
+        this.requestForm.get('name').updateValueAndValidity();
+        this.requestForm.get('estimated_amount').clearValidators();
+        this.requestForm.get('estimated_amount').updateValueAndValidity();
+        this.requestForm.get('detail').clearValidators();
+        this.requestForm.get('detail').updateValueAndValidity();
+        this.productForm.get('name').clearValidators();
+        this.productForm.get('name').updateValueAndValidity();
+        this.productForm.get('quantity').clearValidators();
+        this.productForm.get('quantity').updateValueAndValidity();
+        this.productForm.get('unit').clearValidators();
+        this.productForm.get('unit').updateValueAndValidity();
+        this.productForm.get('description').clearValidators();
+        this.productForm.get('description').updateValueAndValidity();
+    
   }
-  
 }
