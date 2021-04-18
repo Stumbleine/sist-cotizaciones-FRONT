@@ -19,7 +19,7 @@ import {MatIconModule} from '@angular/material/icon'
 
 import {MatCardModule} from '@angular/material/card'
 import {MatProgressBarModule} from '@angular/material/progress-bar'
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSelectModule} from '@angular/material/select'
 import {MatDividerModule} from '@angular/material/divider';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -57,6 +57,7 @@ import {CommonModule} from '@angular/common';
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
+    MatPaginatorModule,
     ReactiveFormsModule
 
   ],

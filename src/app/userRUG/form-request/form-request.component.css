@@ -26,17 +26,30 @@
   width: 50%;
   padding: 30px;
   text-align: center;
+  
+}
+.form__dateTypeSigla{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding-left: 20px;
 }
 .form__date {
+  width: 45%;
   padding: 10px;
-  text-align: left;
+  text-align: right;
   padding: 10px;
+}
+.form__type{
+  width: 50%;
+  font-weight: bold;
 }
 .form__content {
   background-color: white;
   border-radius: 20px;
   padding: 50px;
   box-shadow: 0px 20px 50px -15px #818181;
+  
 }
 .form__agregarProduct {
   display: flex;
@@ -63,6 +76,7 @@ table {
   padding: 20px;
   max-width: 100%;
   text-align: left;
+  font-weight: bold;
 }
 .form__justify {
   font-size: 14px;
@@ -72,4 +86,26 @@ table {
 }
 .form__buttons {
   text-align: center;
+  padding: 20px;
+}
+.form__validation--size{
+  font-size: 14px;
+}
+.form__components--padding{
+  padding-left: 20px;
+  padding-top: 20px;
+}
+.mat-header-row{
+  background-color: #0a6cff;
+  
+}
+.mat-header-cell{
+  font-weight: bolder;
+  font-size: 14px;
+}
+.mat-row:nth-child(n+1){
+  background-color: #e4f0ec;
+}
+.mat-row:not(:nth-child(2n+1)){
+  background-color:#ffffff;
 }

@@ -5,6 +5,7 @@ import { FormRequestComponent } from './userRUG/form-request/form-request.compon
 const routes: Routes = [
   { path: 'home-rug', component:  HomePageComponent},
   { path: 'form-solicitud', component:  FormRequestComponent},
+  {path: '', pathMatch: 'full', redirectTo: 'home-rug'}
 ];
 
 @NgModule({
