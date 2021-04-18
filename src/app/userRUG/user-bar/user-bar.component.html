@@ -3,11 +3,18 @@
         <div class="userBar">
             <div mat-card-avatar class="avatar"></div>
             <div class="userInfo">
-                <h2 class="nameUG">UNIDAD DE DEPORTES Y BIENESTAR</h2>
+                
+                
+                <h2 class="nameUG" *ngIf="rol!='admin'" >UNIDAD DE DEPORTES Y BIENESTAR</h2>
+                <h2 class="nameAf"  *ngIf="rol=='admin'" >Administracion financiera</h2>
                 <h4 > Responsable</h4>
                 <p>Lic. Valeriano valdes</p>
             </div>
     
+        </div >
+        <div *ngIf="rol=='admin'">
+            <h3 class="nameUG" *ngFor="let number of [0,1,2,3,4,5,6,7,8,9]">UNIDAD DE DEPORTES Y BIENESTAR</h3>
+
         </div>
 
     </mat-card>
@@ -16,7 +23,7 @@
 
 <style>
     .card{
-        width: fit-content; height: 100%; border-radius: 0;background-color: rgb(236, 236, 236);
+        width: fit-content; height: 100%; border-radius: 0;background-color: var(--color-back);
         
     }
     .userBar{
@@ -40,6 +47,7 @@
     .nameUG{
         color: var(--txt-color-title2);
         font-weight: 500;
+        line-height: 20px;
     }
     .userInfo h4{
         line-height: 10px;

@@ -1,0 +1,68 @@
+[
+  {
+    "idSpendingUnitRequest": 4,
+    "name": "Para comprar cualquier cosa",
+    "date": "2021-04-18",
+    "status": "pending",
+    "type": "Buy",
+    "estimatedAmount": 72000.0,
+    "justification": "Cualquier cosa",
+    "userId": 3,
+    "username": "Maria",
+    "roleId": 2,
+    "roleName": "Spending Unit Representative"
+  },
+  {
+    "idSpendingUnitRequest": 3,
+    "name": "Buy desktop computers",
+    "date": "2021-04-17",
+    "status": "pending",
+    "type": "Buy",
+    "estimatedAmount": 6000.0,
+    "justification": "Need to buy desktop computers for laboratories",
+    "userId": 3,
+    "username": "Maria",
+    "roleId": 2,
+    "roleName": "Spending Unit Representative"
+  },
+  {
+    "idSpendingUnitRequest": 2,
+    "name": "Rent industrial Machines",
+    "date": "2021-04-17",
+    "status": "in progress",
+    "type": "Rent",
+    "estimatedAmount": 42000.0,
+    "justification": "Need to rent industrial machines",
+    "userId": 2,
+    "username": "Alan",
+    "roleId": 2,
+    "roleName": "Spending Unit Representative"
+  },
+  {
+    "idSpendingUnitRequest": 1,
+    "name": "Request for more trainin equipment",
+    "date": "2021-04-17",
+    "status": "in progress",
+    "type": "Buy",
+    "estimatedAmount": 25000.0,
+    "justification": "Need more Training equipment",
+    "userId": 1,
+    "username": "Alison",
+    "roleId": 1,
+    "roleName": "Administration Representative"
+  }
+][
+  {
+    "idSpendingUnitRequest": 1,
+    "name": "Request for more trainin equipment",
+    "date": "2021-04-17",
+    "status": "in progress",
+    "type": "Buy",
+    "estimatedAmount": 25000.0,
+    "justification": "Need more Training equipment",
+    "userId": 1,
+    "username": "Alison",
+    "roleId": 1,
+    "roleName": "Administration Representative"
+  }
+]

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-user-bar',
@@ -11,5 +11,6 @@ export class UserBarComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  @Input()
+  rol: string;
 }

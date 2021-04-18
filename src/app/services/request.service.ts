@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import{HttpClient} from '@angular/common/http';
+import{HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +12,8 @@ export class RequestService {
 
   public post(url:string, body){
     return this.http.post(url,body);
+  }
+  public get(url:string){
+    return this.http.get(url);
   }
 }

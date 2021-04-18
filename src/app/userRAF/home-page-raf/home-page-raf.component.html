@@ -1,1 +1,88 @@
-<p>home-page-raf works!</p>
+
+  
+<div>
+
+    <div style="display: flex; ">
+        <div id="user-bar" style=" width: 25%;">
+            <app-user-bar [rol]="message"></app-user-bar>
+        </div>
+        <div style="width: 75%;">
+            <div id="action-bar">
+                <mat-form-field appearance="fill">
+                    <mat-label>Ordenar por</mat-label>
+                    <mat-select disableRipple>
+                      <mat-option value="1">Option 1</mat-option>
+                      <mat-option value="2">Option 2</mat-option>
+                      <mat-option value="3">Option 3</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div class="monto">
+                      <h2>Monto tope</h2>
+                      <div>
+                          <h2>Bs. 20 0000.00</h2>
+                          <button mat-button style="margin-top: -5px; " ><mat-icon>edit</mat-icon></button>
+                        </div>
+                  </div>
+            </div>
+            <div id="lista">
+                <h2 >Lista de solicitudes recibidas.</h2>
+                <mat-grid-list cols="1" rowHeight="270px"  >
+                    
+                    <mat-grid-tile ><app-summary-card></app-summary-card></mat-grid-tile>
+
+                </mat-grid-list>
+
+            </div>
+            <p>{{req}}</p>
+            <p>AQUI: {{req[0]?.spendingUnitRequestList}}</p>
+        </div>
+
+    </div>
+</div>
+<style>
+    #lista h2{
+        color: var(--txt-color-subt);
+        margin-left: 4%;
+    }
+    .monto{
+        display: flex;
+        width: 400px;
+        
+        align-items: center;
+    }
+    .monto h2{
+        margin-right: 5%;
+        margin-top: 2%;
+        color: var(--txt-color-subt);
+    }
+    .monto div{
+        height: 55px;
+        display: flex;
+        background-color:var(--color-back);
+        width: 250px;
+        justify-content: space-between;
+        align-items: center;    
+
+        border-radius: 10px;
+    }
+    .monto div h2{
+        margin-top: 5%;
+        margin-left: 10%;
+        font-weight: bold;
+        color: var(--state-color-3);
+
+    }
+   /* #lista{
+        display: grid;
+        place-items: center;
+        background-color: aqua;
+        
+    }*/
+    #action-bar{
+    margin:0 2% 0 2%;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+
+    }
+</style>
