@@ -27,7 +27,8 @@ import { HomePageRAFComponent } from './userRAF/home-page-raf/home-page-raf.comp
 import {HttpClientModule} from '@angular/common/http'
 import {RequestService} from '../app/services/request.service';
 import {CommonModule} from '@angular/common';
-
+import { DialogValidationComponent } from './userRUG/dialog-validation/dialog-validation.component';
+import {MatDialogModule} from '@angular/material/dialog';
 //import { HomeRugComponent } from './respUnidadGasto/home-rug/home-rug.component';
 
 @NgModule({
@@ -40,6 +41,7 @@ import {CommonModule} from '@angular/common';
     DialogRequestedComponent,
     HomePageRAFComponent,
     FormRequestComponent,
+    DialogValidationComponent,
   ],
   imports: [
     HttpClientModule,
@@ -58,6 +60,7 @@ import {CommonModule} from '@angular/common';
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDialogModule,
     ReactiveFormsModule
 
   ],

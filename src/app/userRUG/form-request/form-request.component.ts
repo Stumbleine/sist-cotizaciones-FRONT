@@ -1,10 +1,11 @@
-import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroupDirective, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import {RequestService} from '../../services/request.service';
+import {MatDialog} from '@angular/material/dialog';
+import { DialogValidationComponent } from '../dialog-validation/dialog-validation.component';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -70,7 +71,8 @@ export class FormRequestComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private RequestService: RequestService
+    private RequestService: RequestService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -127,6 +129,10 @@ export class FormRequestComponent implements OnInit {
       }
       else{
           console.log("POr lo menos un detalle!!!")
+          this.openDialog()
       };
+}
+openDialog() {
+  this.dialog.open(DialogValidationComponent);
 }
 }
