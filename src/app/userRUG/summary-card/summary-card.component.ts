@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-summary-card',
@@ -11,5 +11,11 @@ export class SummaryCardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  @Input()
+  type: string;
+  sigla: string;
+  username: string;
+  amount:string;
+  status:string;
+  date:string;
 }

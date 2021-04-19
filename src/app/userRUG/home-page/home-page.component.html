@@ -24,8 +24,10 @@
             <div id="lista">
                 <mat-grid-list cols="1" rowHeight="270px"  >
                     
-                    <mat-grid-tile *ngFor="let number of [0,1,2,3,4]"><app-summary-card></app-summary-card></mat-grid-tile>
-
+                    <mat-grid-tile *ngFor="let req of requestsSent" >
+                        <app-summary-card [nro]="req.idSpendingUnitRequest" [sigla]="req.name" [date]="req.date" [status]="req.status"
+                        [type]="req.type" [amount]="req.estimatedAmount" [username]="req.username"></app-summary-card>
+                    </mat-grid-tile>
 
                     
                 </mat-grid-list>

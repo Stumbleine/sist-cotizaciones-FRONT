@@ -9,18 +9,18 @@
     </div>
 
     <mat-card-header style="margin-left: -17px; ">
-        <mat-card-title >Titulo de la solicitud</mat-card-title>
-        <mat-card-subtitle>Sigla RSFG </mat-card-subtitle>
+        <mat-card-title >Pedido de {{type}}</mat-card-title>
+        <mat-card-subtitle>Sigla {{sigla}}</mat-card-subtitle>
         
     </mat-card-header>
     <mat-card-content>
         <div>
-            <p>Solicitante: <b>Lic. Marco Antonio Buenavista Gonzales</b></p>
-            <p>Total Estimado: <b>Bs. 24 000.00</b></p>
+            <p>Solicitante: <b>{{username}}</b></p>
+            <p>Total Estimado: <b>Bs. {{amount}}</b></p>
         </div>
         <div style="text-align: end;" >
-            <p id="status">APROBADO</p>
-            <p id="fecha">Emitido en fecha 04/05/2021</p>
+            <p id="status">{{status}}</p>
+            <p id="fecha">Emitido en fecha {{date}}</p>
         </div>
     </mat-card-content>
 
