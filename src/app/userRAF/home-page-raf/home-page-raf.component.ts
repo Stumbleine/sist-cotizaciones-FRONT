@@ -8,7 +8,7 @@ import {RequestService} from '../../services/request.service';
 export class HomePageRAFComponent implements OnInit {
   message="admin";
   constructor(private RequestService: RequestService) { }
-  public requestsReceived=null
+  public requestsReceived=null;
   
   ngOnInit(): void {
     this.loadData();

@@ -11,11 +11,10 @@ export class SummaryCardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  @Input()
-  type: string;
-  sigla: string;
-  username: string;
-  amount:string;
-  status:string;
-  date:string;
+  @Input() type: string;
+  @Input() sigla: string;
+  @Input() username: string;
+  @Input() amount:string;
+  @Input() status:string;
+  @Input() date:string;
 }

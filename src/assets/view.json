@@ -51,18 +51,4 @@
     "roleId": 1,
     "roleName": "Administration Representative"
   }
-][
-  {
-    "idSpendingUnitRequest": 1,
-    "name": "Request for more trainin equipment",
-    "date": "2021-04-17",
-    "status": "in progress",
-    "type": "Buy",
-    "estimatedAmount": 25000.0,
-    "justification": "Need more Training equipment",
-    "userId": 1,
-    "username": "Alison",
-    "roleId": 1,
-    "roleName": "Administration Representative"
-  }
 ]
