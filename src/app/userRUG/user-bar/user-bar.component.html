@@ -8,7 +8,8 @@
                 <h2 class="nameUG" *ngIf="rol!='admin'" >UNIDAD DE DEPORTES Y BIENESTAR</h2>
                 <h2 class="nameAf"  *ngIf="rol=='admin'" >Administracion financiera</h2>
                 <h4 > Responsable</h4>
-                <p>Lic. Valeriano valdes</p>
+                <p *ngIf="rol=='admin'">Lic. Valeriano valdes</p>
+                <p *ngIf="rol!='admin'">Lic. Marco Antonio Buenavista gonzales</p>
             </div>
     
         </div >
