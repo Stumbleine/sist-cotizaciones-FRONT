@@ -6,21 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import {RequestService} from '../../services/request.service';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogValidationComponent } from '../dialog-validation/dialog-validation.component';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  
-];
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { SnackbarSendRequestComponent } from '../snackbar-send-request/snackbar-send-request.component';
 export interface Product{
   
   quantity: Number;
@@ -34,6 +21,7 @@ interface Request{
     type:string,
     estimatedAmount: number,
     justification: string,
+    requestDetail: [],
 }
 
 
@@ -72,7 +60,8 @@ export class FormRequestComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private RequestService: RequestService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -91,7 +80,6 @@ export class FormRequestComponent implements OnInit {
 } 
 
   saveProduct(value,formDirective: FormGroupDirective){
-      console.log(this.i)
       //console.log(JSON.stringify(value))
       this.pressed=true;
       this.requestDetail[this.i]=value;
@@ -111,6 +99,7 @@ export class FormRequestComponent implements OnInit {
           this.RequestService.post('http://localhost:8080/api/request',Request)
           .subscribe( respuesta =>{
             console.log('Solicitud enviada!!');
+            this.openSnackBar();
           })
           formDirective1.resetForm();
           this.requestForm.reset();
@@ -126,6 +115,7 @@ export class FormRequestComponent implements OnInit {
           this.requestForm.get('requestDetail').setValue(this.requestDetail);
           this.pressed=false;
           this.refresh();
+          
       }
       else{
           console.log("POr lo menos un detalle!!!")
@@ -134,5 +124,11 @@ export class FormRequestComponent implements OnInit {
 }
 openDialog() {
   this.dialog.open(DialogValidationComponent);
+}
+openSnackBar() {
+  this._snackBar.openFromComponent(SnackbarSendRequestComponent, {
+    duration: 2000,
+    panelClass:"blue-snackbar",
+  });
 }
 }

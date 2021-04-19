@@ -29,6 +29,8 @@ import {RequestService} from '../app/services/request.service';
 import {CommonModule} from '@angular/common';
 import { DialogValidationComponent } from './userRUG/dialog-validation/dialog-validation.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { SnackbarSendRequestComponent } from './userRUG/snackbar-send-request/snackbar-send-request.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 //import { HomeRugComponent } from './respUnidadGasto/home-rug/home-rug.component';
 
 @NgModule({
@@ -42,6 +44,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     HomePageRAFComponent,
     FormRequestComponent,
     DialogValidationComponent,
+    SnackbarSendRequestComponent,
   ],
   imports: [
     HttpClientModule,
@@ -61,6 +64,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatSnackBarModule,
     ReactiveFormsModule
 
   ],
