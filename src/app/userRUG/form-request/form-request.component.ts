@@ -15,7 +15,7 @@ export interface Product{
   description:string;
 }
 interface Request{
-  name: string,
+  initials: string,
     date:Date,
     status:String,
     type:string,
@@ -43,7 +43,7 @@ export class FormRequestComponent implements OnInit {
   });
 
   requestForm = this.formBuilder.group({
-    name: ['',],
+    initials: ['',],
     date:[this.date,],
     status: ['pendiente',],
     type:['',],
@@ -108,7 +108,7 @@ export class FormRequestComponent implements OnInit {
           this.requestForm.get('status').setValue("pendiente");
           this.requestForm.get('estimatedAmount').setValue("");
           this.requestForm.get('type').setValue("");
-          this.requestForm.get('name').setValue("");
+          this.requestForm.get('initials').setValue("");
           this.requestForm.get('justification').setValue("");
           this.i=0;
           this.requestDetail=[];
