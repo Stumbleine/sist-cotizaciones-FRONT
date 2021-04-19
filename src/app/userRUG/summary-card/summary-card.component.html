@@ -3,14 +3,14 @@
 
     <div style="text-align: end; margin-top: -10px; display: flex;">
         <mat-progress-bar id="pbar" mode="determinate" value="40" ></mat-progress-bar>
-        <div style="text-align: end; margin-top: 5px; width: 100px;"><p id="nroPedido">Nro 7458</p></div>
+        <div style="text-align: end; margin-top: 5px; width: 100px;"><p id="nroPedido">Nro {{nro}}</p></div>
         <button mat-button style="margin-top: -4px; margin-right: -20px;" ><mat-icon>launch</mat-icon></button>
 
     </div>
 
     <mat-card-header style="margin-left: -17px; ">
         <mat-card-title >Pedido de {{type}}</mat-card-title>
-        <mat-card-subtitle>Sigla {{sigla}}</mat-card-subtitle>
+        <mat-card-subtitle >Sigla {{sigla}}</mat-card-subtitle>
         
     </mat-card-header>
     <mat-card-content>
@@ -43,7 +43,8 @@
         font-style: italic;
         font-weight: bold;
         color: var(--state-color-2);
-    }
+        text-transform: uppercase;
+        }
     #fecha{        
         font-style: italic;
         font-weight: normal;}

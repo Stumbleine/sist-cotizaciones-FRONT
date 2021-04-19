@@ -12,6 +12,7 @@ export class SummaryCardComponent implements OnInit {
   ngOnInit(): void {
   }
   @Input() type: string;
+  @Input() nro:string;
   @Input() sigla: string;
   @Input() username: string;
   @Input() amount:string;
