@@ -28,13 +28,12 @@
                 <h2 >Lista de solicitudes recibidas.</h2>
                 <mat-grid-list cols="1" rowHeight="270px"  >
                     
-                    <mat-grid-tile ><app-summary-card></app-summary-card></mat-grid-tile>
+                    <mat-grid-tile *ngFor="let req of requestsReceived" ><app-summary-card></app-summary-card></mat-grid-tile>
 
                 </mat-grid-list>
 
             </div>
-            <p>{{req}}</p>
-            <p>AQUI: {{req[0]?.spendingUnitRequestList}}</p>
+
         </div>
 
     </div>

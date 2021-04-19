@@ -8,16 +8,16 @@ import {RequestService} from '../../services/request.service';
 export class HomePageRAFComponent implements OnInit {
   message="admin";
   constructor(private RequestService: RequestService) { }
-  public req={}
-  public sUR=this.req[0].spendingUnitRequestList;
+  public requestsReceived=null
+  
   ngOnInit(): void {
     this.loadData();
   }
   loadData(){
-    this.RequestService.get('http://localhost:8080/api/User')
+    this.RequestService.get('http://localhost:8080/api/administration')
     .subscribe(r=>{
       console.log(r);
-      this.req = r;
+      this.requestsReceived = r;
     })
   }
 }
