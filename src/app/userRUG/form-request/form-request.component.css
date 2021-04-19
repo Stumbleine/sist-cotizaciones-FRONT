@@ -109,3 +109,6 @@ table {
 .mat-row:not(:nth-child(2n+1)){
   background-color:#ffffff;
 }
+.blue-snackbar {
+    background: #0a6cff;
+  }
