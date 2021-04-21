@@ -1,5 +1,5 @@
 <div class="form">
-  <form class="form__content" [formGroup]="requestForm" #formDirectiveNew="ngForm" (ngSubmit)="saveRequest(requestForm.value,formDirectiveNew)">
+  <form class="form__content " [formGroup]="requestForm" #formDirectiveNew="ngForm" (ngSubmit)="saveRequest(requestForm.value,formDirectiveNew)">
     <div class="form__title">
       <p>PEDIDO </p>
 
@@ -37,7 +37,7 @@
     
       <div class="form__agregarProduct">
         <div class="form__table">
-          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z5" >
 
             <ng-container *ngFor="let column of columns" matColumnDef="{{column.name}}">
               <th mat-header-cell *matHeaderCellDef> {{column.titulo}} </th>
@@ -48,7 +48,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-          <mat-paginator [pageSizeOptions]="[3, 5]" showFirstLastButtons></mat-paginator>
+          <mat-paginator  style="box-shadow: 0px 10px 20px -10px #818181;" [pageSizeOptions]="[3, 5]" showFirstLastButtons></mat-paginator>
         </div>
 
         <form class="form__product" [formGroup]="productForm" #formDirective="ngForm"  (ngSubmit)="saveProduct(productForm.value, formDirective)">
