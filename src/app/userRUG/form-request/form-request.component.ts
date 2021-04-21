@@ -118,7 +118,7 @@ export class FormRequestComponent implements OnInit {
           
       }
       else{
-          console.log("POr lo menos un detalle!!!")
+          console.log("Por lo menos un detalle!!!")
           this.openDialog()
       };
 }
@@ -127,7 +127,7 @@ openDialog() {
 }
 openSnackBar() {
   this._snackBar.openFromComponent(SnackbarSendRequestComponent, {
-    duration: 2000,
+    duration: 3000,
     panelClass:"blue-snackbar",
   });
 }

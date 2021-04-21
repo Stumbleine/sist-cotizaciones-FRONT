@@ -1,6 +1,6 @@
 .send-request {
-    color: black;
-  }
-  .blue-snackbar {
-    background: #0a6cff;
-  }
+  color: rgb(255, 255, 255);
+}
+.blue-snackbar {
+  background: var(--state-color-5);
+}
