@@ -2,15 +2,14 @@
   flex: 1 1 auto;
 }
 .form {
-  max-width: 1500px;
-  padding: 100px;
+  padding: 50px;
   background-color: white;
 }
 .form_header {
   display: flex;
   text-align: left;
   padding: 5px;
-  border: 5px solid #0a6cff;
+ 
   border-radius: 30px;
   font-family: Roboto;
   background-color: white;
@@ -23,9 +22,11 @@
   padding: 25px 50px;
 }
 .form__title {
-  width: 50%;
+  width: 100%;
   padding: 30px;
   text-align: center;
+  font-family: Roboto;
+  font-size: 40px;
   
 }
 .form__dateTypeSigla{
@@ -95,20 +96,12 @@ table {
   padding-left: 20px;
   padding-top: 20px;
 }
-.mat-header-row{
-  background-color: #0a6cff;
-  
-}
+
 .mat-header-cell{
   font-weight: bolder;
   font-size: 14px;
 }
-.mat-row:nth-child(n+1){
-  background-color: #e4f0ec;
-}
-.mat-row:not(:nth-child(2n+1)){
-  background-color:#ffffff;
-}
+
 .blue-snackbar {
     background: #0a6cff;
   }

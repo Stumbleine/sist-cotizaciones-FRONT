@@ -1,20 +1,11 @@
 <div class="form">
-  <div class="form_header">
-    <div class="form__image">
-      <img src="../../../assets/logoumss.JPG" alt="" >
-    </div>  
-    <div class="form__title">
-      <h1 >PEDIDO </h1>
-
-      <h3 >N° </h3>
-    
-    </div>
-    
-  </div>
-
-
   <form class="form__content" [formGroup]="requestForm" #formDirectiveNew="ngForm" (ngSubmit)="saveRequest(requestForm.value,formDirectiveNew)">
-      <div class="form__dateTypeSigla">
+    <div class="form__title">
+      <p>PEDIDO </p>
+
+    
+    </div>  
+    <div class="form__dateTypeSigla">
            
           <div class="form__type">
             <label for="typeid">TIPO: </label>
@@ -23,7 +14,7 @@
               <mat-select id="typeid" formControlName='type' required>
                 <mat-option value="Solicitud de Compra">Solicitud de Compra</mat-option>
                 <mat-option value="Solicitud de Servicio">Solicitud de Servicio</mat-option>
-                <mat-option value="Solicitud de Compra/Servicio">Solicitud de Compra/Servicio</mat-option>
+                <mat-option value="Solicitud de Compra y Servicio">Solicitud de Compra y Servicio</mat-option>
               </mat-select>
               <mat-error class="form__validation--size">seleccionar tipo de solicitud</mat-error>
             </mat-form-field>
@@ -31,7 +22,8 @@
               <label for="proyect">SOLICITADO POR PROYECTO:</label>
               <mat-form-field appearance="outline" class="form__components--padding">
                 <mat-label></mat-label>
-                <input matInput placeholder="Ingrese siglas del Proyecto" id="proyect" formControlName='initials'>
+                <input matInput placeholder="Ingrese siglas del Proyecto" id="proyect" formControlName='initials' oninput="this.value = this.value.toUpperCase()"  pattern="[A-Za-z_-]{1,15}">
+                <mat-error class="form__validation--size">Campo no valido. Solo se permiten letras y operadores "-" o "_"</mat-error>
               </mat-form-field>
           
             </div>  
@@ -65,6 +57,7 @@
                   <mat-label>Cantidad</mat-label>
                   <input type="number" matInput 
                         formControlName='quantity'
+                        min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
                         required>
                         <mat-error  class="form__validation--size">campo cantidad es requerido</mat-error>
                 </mat-form-field>
@@ -89,7 +82,7 @@
             <label for="total">TOTAL ESTIMADO: </label>
             <mat-form-field appearance="outline" >
               <mat-label></mat-label>
-              <input matInput placeholder="Ingrese el Total Estimado" id="total" formControlName='estimatedAmount' type="number" required>
+              <input matInput placeholder="Ingrese el Total Estimado" id="total" formControlName='estimatedAmount' type="number" min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required>
               <mat-error class="form__validation--size">este campo es requerido</mat-error>
             </mat-form-field>
           </div>

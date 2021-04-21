@@ -15,7 +15,7 @@ export interface Product{
   description:string;
 }
 interface Request{
-  initials: string,
+  name: string,
     date:Date,
     status:String,
     type:string,
@@ -70,9 +70,9 @@ export class FormRequestComponent implements OnInit {
   
   pressed:boolean;
   columns=[
-    {titulo:"Cantidad" ,name: "quantity"},
-    {titulo:"Unidad" ,name: "unit"},
-    {titulo:"Detalle" ,name: "description"}
+    {titulo:"CANTIDAD" ,name: "quantity"},
+    {titulo:"UNIDAD" ,name: "unit"},
+    {titulo:"DETALLE" ,name: "description"}
   ];
 
   refresh() {
