@@ -22,6 +22,7 @@
                 </button>
             </div>
             <div id="lista">
+                <h2 >Lista de solicitudes enviadas.</h2>
                 <mat-grid-list cols="1" rowHeight="270px"  >
                     
                     <mat-grid-tile *ngFor="let req of requestsSent" >
@@ -42,6 +43,10 @@
 .spacer {
   flex-grow: 1;
 }
+#lista h2{
+        color: var(--txt-color-subt);
+        margin-left: 3%;
+    }
     .btn-pri{
         background-color: var(--btn-color-pri);
         color: white;
