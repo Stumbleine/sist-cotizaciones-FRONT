@@ -72,7 +72,7 @@
                   <mat-error class="form__validation--size">campo detalle es requerido</mat-error>
                 </mat-form-field>
                 <div class="form__components--padding">
-                  <button mat-raised-button color="primary" 
+                  <button mat-raised-button 
                   [disabled]="productForm.invalid">AÑADIR ITEM</button>
                 </div>
                 
@@ -95,8 +95,8 @@
           </div>
 
         <div class="form__buttons">
-          <button mat-button color="primary" routerLink='' >CANCELAR</button>
-          <button mat-raised-button color="primary" [disabled]="requestForm.invalid" type="submit" >ENVIAR</button>
+          <button class="btn-text"mat-button  routerLink='' >CANCELAR</button>
+          <button class="btn-raised "mat-raised-button  [disabled]="requestForm.invalid" type="submit" >ENVIAR</button>
         </div>
   </form>
 

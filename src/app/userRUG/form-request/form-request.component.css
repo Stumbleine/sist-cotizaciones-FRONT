@@ -87,12 +87,23 @@ table {
   text-align: center;
   padding: 20px;
 }
+.btn-raised {
+  color: white;
+  background-color: var(--btn-color-pri);
+}
+.btn-text {
+  color: var(--btn-color-pri);
+}
 .form__validation--size {
   font-size: 14px;
 }
 .form__components--padding {
   padding-left: 20px;
   padding-top: 20px;
+}
+.form__components--padding button {
+  color: white;
+  background-color: var(--btn-color-pri);
 }
 
 .mat-header-cell {
