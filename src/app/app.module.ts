@@ -31,7 +31,9 @@ import { DialogValidationComponent } from './userRUG/dialog-validation/dialog-va
 import {MatDialogModule} from '@angular/material/dialog';
 import { SnackbarSendRequestComponent } from './userRUG/snackbar-send-request/snackbar-send-request.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ReqContentComponent } from './userRAF/req-content/req-content.component';
 //import { HomeRugComponent } from './respUnidadGasto/home-rug/home-rug.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FormRequestComponent,
     DialogValidationComponent,
     SnackbarSendRequestComponent,
+    ReqContentComponent,
   ],
   imports: [
     HttpClientModule,
@@ -56,7 +59,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 
     MatToolbarModule, 
     MatIconModule,MatButtonModule, MatCardModule,MatProgressBarModule, MatFormFieldModule,
-    MatSelectModule, MatDividerModule,MatGridListModule, 
+    MatSelectModule, MatDividerModule,MatGridListModule, MatExpansionModule,
 
     MatButtonModule,
     MatFormFieldModule,
