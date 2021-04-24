@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,7 +34,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ReqContentComponent } from './userRAF/req-content/req-content.component';
 //import { HomeRugComponent } from './respUnidadGasto/home-rug/home-rug.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { DgCreateCotComponent } from './userRAF/dg-create-cot/dg-create-cot.component'
+import {MatStepperModule} from '@angular/material/stepper'
+import {MatRadioModule} from '@angular/material/radio'
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +51,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     DialogValidationComponent,
     SnackbarSendRequestComponent,
     ReqContentComponent,
+    DgCreateCotComponent,
   ],
   imports: [
     HttpClientModule,
@@ -59,7 +63,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 
     MatToolbarModule, 
     MatIconModule,MatButtonModule, MatCardModule,MatProgressBarModule, MatFormFieldModule,
-    MatSelectModule, MatDividerModule,MatGridListModule, MatExpansionModule,
+    MatSelectModule, MatDividerModule,MatGridListModule, MatExpansionModule, MatDatepickerModule,
+    MatStepperModule, MatRadioModule,FormsModule,
 
     MatButtonModule,
     MatFormFieldModule,

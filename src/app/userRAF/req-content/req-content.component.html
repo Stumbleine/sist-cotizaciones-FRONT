@@ -1,7 +1,7 @@
 <div style="        display: grid;
 place-items: center;">
     <div class="container">
-        <div class="header" style="margin-top: 15px; width: 100%;">
+        <div class="header" style="margin-top: 30px; width: 100%;">
             
             <div class="header__title">
                 <h1>Solicitud de compra y servicios</h1>
@@ -21,7 +21,6 @@ place-items: center;">
                     <mat-panel-title style="font-weight: bold;">
                       DESCRIPCION
                     </mat-panel-title>
-
                   </mat-expansion-panel-header>
                   <p style="margin-top: 10px; font-size: 17px;">Lista de productos/servicios</p>
                   <div style="display: grid; place-items: center;"><table mat-table [dataSource]="dataSource" class="mat-elevation-z5">
@@ -59,9 +58,10 @@ place-items: center;">
                   <div class="desc__foot" style="        margin-top: 20px;">
                         <h3>Total estimado: <p style="margin-left: 10px;font-weight: 400;">Bs 19 000.00</p> </h3>
                         <h3>Justifiacion</h3>
-                        <p style="margin:0 20px 0 20px;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, accusamus, velit accusantium eaque commodi voluptas at doloribus soluta delectus iusto inventore deleniti! Numquam necessitatibus perferendis harum officiis, animi fuga distinctio. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, accusamus, velit accusantium eaque commodi voluptas at doloribus soluta delectus iusto inventore deleniti! Numquam necessitatibus perferendis harum officiis, animi fuga distinctio.</p>
+                        <p style="margin:0 20px 0 20px;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, accusamus, velit accusantium eaque commodi voluptas at doloribus soluta delectus iusto inventore deleniti! Numquam necessitatibus perferendis harum officiis, animi fuga distinctio.
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, accusamus, velit accusantium eaque commodi voluptas at doloribus soluta delectus iusto inventore deleniti! Numquam necessitatibus perferendis harum officiis, animi fuga distinctio.</p>
                   </div>
-                  <div  style="text-align: end; margin-bottom: 10px;">
+                  <div  style="text-align: end; margin-bottom: 10px; margin-top: 15px;">
                         <button mat-raised-button class="btn-raised-e">RECHAZAR</button>
                         <button mat-raised-button class="btn-raised-s">AUTORIZAR</button>
                   </div>
@@ -85,6 +85,21 @@ place-items: center;">
                 </mat-panel-title>
 
             </mat-expansion-panel-header></mat-expansion-panel>
+            <div>
+                <h3>COTIZACIONES</h3>
+                <!--mat-form-field appearance="fill">
+                    <mat-label>Elija una fecha limite</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field-->
+                <div>
+
+                </div>
+                <div style="text-align: center;">
+                    <button mat-raised-button class="btn-raised-p" (click)="openDialog()" > <mat-icon>add</mat-icon> COTIZACIÓN</button>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -92,7 +107,6 @@ place-items: center;">
 <style>
     table {
         width:85%;
-
     }
     .container{
         padding: 0 15px 0 15px;
@@ -130,7 +144,6 @@ place-items: center;">
         font-weight: 400;
     }
     .desc__foot h3{
-
         display: flex;
         font-size: 17px;
         font-weight: bolder;
@@ -145,6 +158,10 @@ place-items: center;">
     .btn-raised-s{
         color:white;
         background-color: var(--btn-color-scss);margin-right: 20px;
+    }
+    .btn-raised-p{
+        background-color: var(--btn-color-pri);
+        color:white;
 
     }
 </style>

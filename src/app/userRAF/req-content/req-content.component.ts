@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {DgCreateCotComponent} from './../dg-create-cot/dg-create-cot.component'
+import {MatDialog} from '@angular/material/dialog';
+import {RequestService} from '../../services/request.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -17,25 +20,40 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
 ];
-
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 @Component({
   selector: 'app-req-content',
   templateUrl: './req-content.component.html',
   styleUrls: ['./req-content.component.css']
 })
 
-
-
 export class ReqContentComponent implements OnInit {
   panelOpenState = false;
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
+  animal: string;
+  name: string;
 
-  constructor() {
+  public reqReceived=null;
+  idReqSpending=1;
+  constructor(public dialog: MatDialog,private RequestService: RequestService) {
 
    }
 
   ngOnInit(): void {
+    this.loadData();
   }
-
+  openDialog(): void {
+    this.dialog.open(DgCreateCotComponent);
+  }
+  loadData(){
+    this.RequestService.get('http://localhost:8080/api/request/'+this.idReqSpending)
+    .subscribe(r=>{
+      console.log(r);
+      this.reqReceived = r;
+    })
+  }
 }

@@ -1,0 +1,63 @@
+<div>
+    
+    <div class="search">
+        <mat-card-content>
+            <mat-card-title>Elija un empresa</mat-card-title>
+            
+        </mat-card-content>
+        <div class="search__content">
+            <p>Aqui funcionalidad para buscar empresa</p>
+            <button mat-button><mat-icon>search</mat-icon></button>
+        </div>
+        <div style="text-align: end;" class="btn__search">        
+            <button mat-button> OMITIR </button>
+            <button mat-button > ELEGIR </button>
+            
+        </div>
+
+        
+    </div>
+    <mat-divider></mat-divider>
+    <div class="choice">
+        <mat-card-content>
+            <mat-card-title>Elija un tipo de cotizacion</mat-card-title>
+            
+        </mat-card-content>
+
+        <mat-radio-group    class="example-radio-group" [(ngModel)]="favoriteSeason">
+            <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+                {{season}}
+            </mat-radio-button>
+        </mat-radio-group>
+        <div>Su eleccion es: {{favoriteSeason}}</div>
+        <div style="text-align: end;">
+            <button mat-raised-button style="background-color: #1975ff; color: white;" >
+                CONTINUAR
+            </button>
+      
+        </div>
+    </div>
+</div>
+<style>
+        .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    }
+
+    .example-radio-button {
+    margin: 5px;
+    }
+    .search__content{
+        width: max-content;
+        height: 300px;
+        text-align: center;
+    }
+    .choice{
+        margin-top: 20px;
+        text-align: center;
+    }
+    .btn__search button{
+        color: var( --txt-color-title2);
+    }
+</style>
