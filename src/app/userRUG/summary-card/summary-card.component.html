@@ -4,7 +4,7 @@
     <div style="text-align: end; margin-top: -10px; display: flex;">
         <mat-progress-bar id="pbar" mode="determinate" value="40" ></mat-progress-bar>
         <div style="text-align: end; margin-top: 5px; width: 100px;"><p id="nroPedido">Nro {{nro}}</p></div>
-        <button mat-button style="margin-top: -4px; margin-right: -20px;" ><mat-icon>launch</mat-icon></button>
+        <button mat-button style="margin-top: -4px; margin-right: -20px;" (click)="openDialog()"><mat-icon>launch</mat-icon></button>
 
     </div>
 

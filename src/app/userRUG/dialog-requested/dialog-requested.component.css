@@ -1,0 +1,78 @@
+.dialog{
+    padding: 10px;
+}
+h1{
+    font-size: 30px;
+}
+.dialog__number{
+    text-align: end; 
+    margin-top: 5px;
+ 
+    color: var(--txt-color-error);
+    font-weight: 500;
+    font-size: 15px;
+    padding-right: 100px;
+}
+.dialog__title{
+    text-align: center;
+    font-size: 17px;
+    font-style: italic;
+    font-weight: normal;
+}
+.dialog__state{
+    text-transform: uppercase;
+    text-align: end;
+    font-size: 17px;
+    font-style: italic;
+    font-weight: normal;
+    color: var(--txt-color-error);
+    padding-right: 100px;
+}
+.dialog__date{
+    font-size: 15px;
+    font-style: italic;
+    padding-left: 25px;
+}
+.dialog__solicitante{
+    font-size: 17px;
+    font-weight: bolder;
+    color: var(--txt-color-subt);
+    padding-left: 25px;
+}
+.dialog__table {
+    width: 90%;
+    padding: 30px;
+  }
+  b{
+    font-weight: normal;
+   
+  }
+  table {
+    width: 100%;
+  }
+  .dialog__total{
+      font-size: 20px;
+      font-weight: bolder;
+      color: var(--txt-color-subt);
+      text-align: right;
+      width: 90%;
+  }
+.dialog__justify{
+    font-size: 18px;
+    font-weight: bolder;
+    color: var(--txt-color-subt);
+    padding-left: 25px;
+}
+.dialog__content{
+    padding-bottom: 5px;
+    max-height: 50vh;
+}
+.btn-text {
+    color: var(--btn-color-pri);
+    
+  }
+  .dialog__button{
+      padding:5px;
+      align-items:flex-start ;
+  }
+  

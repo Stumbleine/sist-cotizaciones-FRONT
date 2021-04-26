@@ -1,1 +1,54 @@
-<p>dialog-requested works!</p>
+<div class="dialog" *ngIf="variableNula()">
+    <div class="dialog__number"><p >Nro- {{nro}}</p></div>
+    <div class="dialog__title">
+        <h1 mat-dialog-title >{{requested.type}}</h1>
+        <p>Solicitado por proyecto {{requested.initials}}</p>
+    </div>
+    <div class="dialog__state"><p >{{requested.status}} </p></div>
+    <div class="dialog__date"> <p>Emitido el {{requested.date | date:'dd/MM/yyyy'}}</p></div>
+    <div class="dialog__solicitante"><p>Solicitante: <b>{{requested.username}}</b></p></div>
+    <mat-dialog-content class="dialog__content">
+        
+  
+        <div class="dialog__table">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="idRequestDetail" >
+                    <th mat-header-cell *matHeaderCellDef> Nro. </th>
+                    <td mat-cell *matCellDef="let Detail" > {{Detail.idRequestDetail - getDescuento() }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef> CANTIDAD </th>
+                    <td mat-cell *matCellDef="let Detail"> {{Detail.quantity}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="unit">
+                    <th mat-header-cell *matHeaderCellDef> UNIDAD </th>
+                    <td mat-cell *matCellDef="let Detail"> {{Detail.unit}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef> DETALLE </th>
+                    <td mat-cell *matCellDef="let Detail"> {{Detail.description}} </td>
+                </ng-container>
+
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              
+        </div>
+        <div class="dialog__total">
+            <p>Total Estimado: <b>Bs. {{requested.estimatedAmount}} </b></p>
+        </div>
+        <div class="dialog__justify"><p>Justificación:</p>
+        <b>{{requested.justification}}</b></div>
+      
+           
+    </mat-dialog-content>
+    <mat-dialog-actions align="end" class="dialog__button">
+      <button class="btn-text"mat-button mat-dialog-close>CERRAR</button>
+      </mat-dialog-actions>
+
+</div>
