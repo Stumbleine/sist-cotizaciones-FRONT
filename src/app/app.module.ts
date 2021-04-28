@@ -38,6 +38,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DgCreateCotComponent } from './userRAF/dg-create-cot/dg-create-cot.component'
 import {MatStepperModule} from '@angular/material/stepper'
 import {MatRadioModule} from '@angular/material/radio'
+import {MatTooltipModule} from '@angular/material/tooltip'
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,7 @@ import {MatRadioModule} from '@angular/material/radio'
     CommonModule,     
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,MatTooltipModule,
 
     MatToolbarModule, 
     MatIconModule,MatButtonModule, MatCardModule,MatProgressBarModule, MatFormFieldModule,

@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'form-solicitud', component:  FormRequestComponent},
   { path: 'home-raf', component:  HomePageRAFComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home-rug'},
-  {path:'req-content/id',component:ReqContentComponent},
+  {path:'req-content/:id',component:ReqContentComponent},
 ];
 
 @NgModule({

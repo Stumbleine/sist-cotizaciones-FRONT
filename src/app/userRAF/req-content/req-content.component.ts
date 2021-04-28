@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {DgCreateCotComponent} from './../dg-create-cot/dg-create-cot.component'
 import {MatDialog} from '@angular/material/dialog';
 import {RequestService} from '../../services/request.service';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-const ELEMENT_DATA: PeriodicElement[] = [
+import { ActivatedRoute } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+
+/*const ELEMENT_DATA: PeriodicElement[] = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
@@ -19,10 +16,17 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
   {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+];*/
 export interface DialogData {
   animal: string;
   name: string;
+}
+
+export interface Items{
+  idRequestDetail: number;
+  quantity: number;
+  unit: string;
+  description:string;
 }
 @Component({
   selector: 'app-req-content',
@@ -32,28 +36,39 @@ export interface DialogData {
 
 export class ReqContentComponent implements OnInit {
   panelOpenState = false;
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+
+
+  displayedColumns: string[] = ['index', 'quantity', 'unit', 'description'];
+  dataSource =  new MatTableDataSource<Items>([]);
+  columnas=[
+    
+    {titulo:"CANTIDAD" ,name: "quantity"},
+    {titulo:"UNIDAD" ,name: "unit"},
+    {titulo:"DETALLE" ,name: "description"}
+  ];
+
   animal: string;
   name: string;
 
-  public reqReceived=null;
-  idReqSpending=1;
-  constructor(public dialog: MatDialog,private RequestService: RequestService) {
-
-   }
+  public reqReceived:any;
+  public idReqSpending:any;
+  public items:Items[]=[];
+  constructor(public dialog: MatDialog,private RequestService: RequestService,private rutaActiva: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.loadData();
+    this.idReqSpending= this.rutaActiva.snapshot.params.id,
+    this.loadData(this.idReqSpending);
   }
   openDialog(): void {
     this.dialog.open(DgCreateCotComponent);
   }
-  loadData(){
-    this.RequestService.get('http://localhost:8080/api/request/'+this.idReqSpending)
-    .subscribe(r=>{
+  loadData(id:any){
+    this.RequestService.get('http://localhost:8080/api/request/'+id)
+    .subscribe(r  =>{
       console.log(r);
       this.reqReceived = r;
+      this.items=this.reqReceived.requestDetail;
+      this.dataSource.data=this.items;
     })
   }
 }

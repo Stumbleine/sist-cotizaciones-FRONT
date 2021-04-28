@@ -4,14 +4,14 @@ place-items: center;">
         <div class="header" style="margin-top: 30px; width: 100%;">
             
             <div class="header__title">
-                <h1>Solicitud de compra y servicios</h1>
-                <h3>Solicitado por proyecto SEFW</h3>
+                <h1>{{reqReceived?.type}}</h1>
+                <h3>Solicitado por proyecto {{reqReceived?.initials}}</h3>
             </div>
             <div class="header__data" style="text-align: end;">
-                <p class="header__data--n">Nro 475</p>
-                <p>emitido el dd/mm/yy</p>
+                <p class="header__data--n">Nro {{reqReceived?.idSpendingUnitRequest}}</p>
+                <p style="font-style: italic;">emitido el {{reqReceived?.date}}</p>
             </div>
-            <h3 id="solicitante">Solicitante: <p>Marco Antonio Buenavista gonzales</p></h3>
+            <h3 id="solicitante">Solicitante: <p>{{reqReceived?.username}}</p></h3>
         </div>
         <div class="section" style="width: 100%;">
 
@@ -23,43 +23,34 @@ place-items: center;">
                     </mat-panel-title>
                   </mat-expansion-panel-header>
                   <p style="margin-top: 10px; font-size: 17px;">Lista de productos/servicios</p>
-                  <div style="display: grid; place-items: center;"><table mat-table [dataSource]="dataSource" class="mat-elevation-z5">
 
-                    <!--- Note that these columns can be defined in any order.
-                          The actual rendered columns are set as a property on the row definition" -->
-                  
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="position">
-                      <th mat-header-cell *matHeaderCellDef> No. </th>
-                      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+
+
+                  <div style="display: grid; place-items: center;">
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z5">
+
+                    <ng-container matColumnDef="index" >
+                        <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> Nro </th>
+                        <td mat-cell *matCellDef="let element;let i=index;" style="text-align: center;" > {{i+1}} </td>
                     </ng-container>
-                  
-                    <!-- Name Column -->
-                    <ng-container matColumnDef="name">
-                      <th mat-header-cell *matHeaderCellDef> CANTIDAD </th>
-                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+
+                    <ng-container *ngFor="let columna of columnas" matColumnDef="{{columna.name}}" >
+                      <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 85px; font-weight: bold;"> {{columna.titulo}}  </th>
+                      <td mat-cell *matCellDef="let element" style="min-width: 85px;text-align: center;"> {{element[columna.name]}} </td>
                     </ng-container>
-                  
-                    <!-- Weight Column -->
-                    <ng-container matColumnDef="weight">
-                      <th mat-header-cell *matHeaderCellDef> UNIDAD </th>
-                      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-                    </ng-container>
-                  
-                    <!-- Symbol Column -->
-                    <ng-container matColumnDef="symbol">
-                      <th mat-header-cell *matHeaderCellDef> DETALLE </th>
-                      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-                    </ng-container>
-                  
+
+
+
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   </table></div>
+
+
+
                   <div class="desc__foot" style="        margin-top: 20px;">
-                        <h3>Total estimado: <p style="margin-left: 10px;font-weight: 400;">Bs 19 000.00</p> </h3>
+                        <h3>Total estimado: <p style="margin-left: 10px;font-weight: 400;">Bs {{reqReceived?.estimatedAmount}}</p> </h3>
                         <h3>Justifiacion</h3>
-                        <p style="margin:0 20px 0 20px;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, accusamus, velit accusantium eaque commodi voluptas at doloribus soluta delectus iusto inventore deleniti! Numquam necessitatibus perferendis harum officiis, animi fuga distinctio.
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, accusamus, velit accusantium eaque commodi voluptas at doloribus soluta delectus iusto inventore deleniti! Numquam necessitatibus perferendis harum officiis, animi fuga distinctio.</p>
+                        <p style="margin:0 20px 0 20px;">{{reqReceived?.justification}} Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</p>
                   </div>
                   <div  style="text-align: end; margin-bottom: 10px; margin-top: 15px;">
                         <button mat-raised-button class="btn-raised-e">RECHAZAR</button>
@@ -107,7 +98,10 @@ place-items: center;">
 <style>
     table {
         width:85%;
+        overflow: auto;
+
     }
+
     .container{
         padding: 0 15px 0 15px;
         display: grid;
