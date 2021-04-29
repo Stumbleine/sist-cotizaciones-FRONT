@@ -1,4 +1,4 @@
-<div style="display: grid; place-items: center; background-color: aqua; height: 100%;" >
+<div style="display: flex; justify-content: center;align-items: center; background-color: aquamarine; height: 100%;" >
     <div class="container">
 
             <div class="header">
@@ -11,9 +11,9 @@
                 </div>
                 <span class="example-spacer"></span>
                 <div class="header--actions">
-                    <button mat-button class="btn-icons"><mat-icon aria-hidden="false">upload_file</mat-icon></button>
-                    <button mat-button class="btn-icons" ><mat-icon >print</mat-icon></button>
-                    <button mat-raised-button style="margin-right: 25px;"> ENVIAR </button>
+                    <button mat-button matTooltip="Subir cotizacion escaneado" class="btn-icons"><mat-icon >upload_file</mat-icon></button>
+                    <button mat-button matTooltip="Imprimir formulario" class="btn-icons" ><mat-icon >print</mat-icon></button>
+                    <button mat-raised-button style="margin-right: 25px; margin-left: 15px;"> ENVIAR </button>
                 </div>
             </div>
             <div style="width: 100%;">
@@ -22,18 +22,105 @@
                 </div>
                 <mat-divider></mat-divider>
                 <div class="form-base">
+                    <h3>Datos sobre la cotizacion</h3>
                     <div class="form-base__s1">
-                        Informacion de la empresa
+                        <div>
+                            <mat-form-field  appearance="outline">
+                                <mat-label>Forma de pago</mat-label>
+                                <input matInput placeholder="Placeholder">
+                                
+                                <mat-hint>Hint</mat-hint>
+                              </mat-form-field>
+                              <mat-form-field  appearance="outline">
+                                <mat-label>Validez oferta</mat-label>
+                                <input matInput placeholder="Placeholder">
+                                
+                                <mat-hint>Hint</mat-hint>
+                              </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field  appearance="outline">
+                                <mat-label>Tiempo de oferta</mat-label>
+                                <input matInput placeholder="Placeholder">
+                                
+                                <mat-hint>Hint</mat-hint>
+                              </mat-form-field>
+                              <mat-form-field  appearance="outline">
+                                <mat-label>Tiempo de garantia</mat-label>
+                                <input matInput placeholder="Placeholder">
+                                
+                                <mat-hint>Hint</mat-hint>
+                              </mat-form-field>
+                        </div>
                     </div>
                     <mat-divider></mat-divider>
+                    <h3>Detalle del item/articulo/bien/servicio a ser llenado por el cotizador</h3>
                     <div class="form-base__s2">
-                        Lista de items
+                        
+                        <div style="display: grid; place-items: center;  width: 70%;">
+                            <table mat-table [dataSource]="dataSource" class="mat-elevation-z5">
+        
+                            <ng-container matColumnDef="index" >
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> Nro </th>
+                                <td mat-cell *matCellDef="let element;let i=index;" style="text-align: center;" > {{i+1}} </td>
+                            </ng-container>
+        
+                            <ng-container *ngFor="let columna of columnas" matColumnDef="{{columna.name}}" >
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 85px; font-weight: bold;"> {{columna.titulo}}  </th>
+                              <td mat-cell *matCellDef="let element" style="min-width: 85px;text-align: center;"> {{element[columna.name]}} </td>
+                            </ng-container>
+        
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                          </table>
+                        </div>
+                        <!--a>  Text fields para tabla   </a-->
+                        <div class="s2__fields" >
+
+                              <div >
+                                <mat-form-field  appearance="outline">
+                                    <mat-label>Cantidad</mat-label>
+                                    <input matInput placeholder="Placeholder">
+                                    
+                                    <mat-hint>Hint</mat-hint>
+                                  </mat-form-field>
+                              </div>
+                              <div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Unidad</mat-label>
+                                    <input matInput placeholder="Placeholder">
+                                    
+                                    <mat-hint>Hint</mat-hint>
+                                  </mat-form-field>
+                              </div>
+                              <div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Detalle</mat-label>
+                                    <input matInput placeholder="Placeholder">
+                                    
+                                    <mat-hint>Hint</mat-hint>
+                                  </mat-form-field>
+                              </div>
+                              <div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Precio unitario</mat-label>
+                                    <input matInput placeholder="Placeholder">
+                                    
+                                    <mat-hint>Hint</mat-hint>
+                                  </mat-form-field>
+                              </div>
+                            <div  style="width: 100%; padding-top: 15px; padding-bottom: 20px; text-align: center;">
+                                <button mat-raised-button style="background-color: #1975ff; color: white;" >
+                                    AGREGAR ITEM
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <mat-divider></mat-divider>
                 <div  class="form-actions">
-                    <button mat-button style="color: #ff4848;"> CANCELAR</button>
-                    <button mat-raised-button style="background-color: #1975ff; color: white;" >
+                    <button mat-button style="color: #ff4848;margin-right: 15px;"> CANCELAR</button>
+                    <button mat-raised-button style="background-color: #1975ff; color: white;margin-right: 15px; " >
                         GUARDAR
                     </button>
                 </div>
@@ -42,16 +129,25 @@
 </div>
 
 <style>
-        .container{
+    h3{
+        color: var(--txt-color-subt);
+        font-weight: 500;
+        text-align: center;
 
+    }
+        .container{
         display: grid;
         place-items: center;
-        background-color: rgb(255, 255, 255);
         width: 80%;
         min-width: 900px;
+        max-width: 1400px;
+        background-color: rgb(255, 255, 255);
+
         box-shadow: 0px 20px 50px -15px #c2c2c2;
-        min-height: max-content;
+        height: max-content;
         border-radius: 10px;
+
+
     }
     .header{
         display: flex;
@@ -68,19 +164,54 @@
         display: flex;
         align-items: center;
     }
-    .btn-icons{
+    .btn-icons mat-icon{
          color: white;
          font-size: 30px;
+         margin-top: -7px;
+
     }
+
     .example-spacer {
         flex: 1 1 auto;
     }
     /*contenido form-base*/
-    
+    .form-base__s1{
+        text-align: center;
+        display: block;
+        margin-bottom: 25px;
+    }
+    .form-base__s1 div{
+
+    }
+
+    /*tabla*/
+    .form-base__s2{
+        display: flex;
+        background-color: rgb(248, 231, 211);
+        padding: 15px;
+    }
+    /*fields*/
+    .s2__fields{
+        width: 30%;
+        background-color: chartreuse;
+        border-radius: 10px; border:  1px solid;
+        border-color: #e0e0e0;
+
+        text-align: center;
+    }
+    .s2__fields mat-form-field{
+        width: 70%;
+        margin-top: 15px;
+        min-width: 220px;
+    }
+
     /*Botones*/
     .form-actions{
         text-align: end; width: 100%;
+        background-color: coral;
+        padding-top: 25px;padding-bottom: 25px;
         
     }
+
 
 </style>
