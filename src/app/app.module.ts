@@ -31,6 +31,7 @@ import { DialogValidationComponent } from './userRUG/dialog-validation/dialog-va
 import {MatDialogModule} from '@angular/material/dialog';
 import { SnackbarSendRequestComponent } from './userRUG/snackbar-send-request/snackbar-send-request.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { FormQuotationBusinessComponent } from './business/form-quotation-business/form-quotation-business.component';
 //import { HomeRugComponent } from './respUnidadGasto/home-rug/home-rug.component';
 
 @NgModule({
@@ -45,6 +46,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FormRequestComponent,
     DialogValidationComponent,
     SnackbarSendRequestComponent,
+    FormQuotationBusinessComponent,
   ],
   imports: [
     HttpClientModule,
