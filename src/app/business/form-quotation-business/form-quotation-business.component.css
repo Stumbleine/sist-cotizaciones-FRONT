@@ -125,9 +125,9 @@ tr.mat-footer-row {
 .form__buttons{
     text-align: end; 
     width: 100%;
-    padding-top: 35px;
-    padding-bottom: 25px;
-    padding-right: 25px;
+    padding-top: 150px;
+    padding-bottom: 30px;
+    padding-right: 30px;
     
 }
 .mat-divider {

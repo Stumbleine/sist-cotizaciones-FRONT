@@ -28,14 +28,17 @@
                               </mat-form-field>
                               <mat-form-field  appearance="outline">
                                 <mat-label>Tiempo de garantía</mat-label>
-                                <input matInput placeholder="Ingrese tiempo de garantia" formControlName='garantyTerm'>
+                                <input matInput placeholder="Ingrese tiempo de garantia(días)" formControlName='garantyTerm' type="number"
+                                 min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                >
                                 <mat-error class="form__validation--size">campo tiempo de garantia es requerido</mat-error>
                               </mat-form-field>
                         </div>
                         <div class="fields__column2">
                             <mat-form-field  appearance="outline">
                                 <mat-label>Tiempo de entrega</mat-label>
-                                <input matInput placeholder="Ingrese tiempo de entrega" formControlName='deliveryTerm'required>
+                                <input matInput placeholder="Ingrese tiempo de entrega(días)" formControlName='deliveryTerm'required type="number"
+                                min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                 <mat-error class="form__validation--size">campo Tiempo de entrega es requerido</mat-error>
                               </mat-form-field>
                               <mat-form-field  appearance="outline">
@@ -105,7 +108,9 @@
                               <div>
                                 <mat-form-field appearance="outline">
                                     <mat-label>P. Unitario</mat-label>
-                                    <input matInput placeholder="Ingrese precio unitario" formControlName='unitPrice'required>
+                                    <input matInput placeholder="Ingrese precio unitario" formControlName='unitPrice'type="number" required value="0.00"
+                                    min="0" pattern="^[0-9]+(.[0-9]+)?$" onkeypress='return event.charCode >= 48 && event.charCode <= 57 || event.charCode==44 || event.charCode==46'
+                                    step=".01">
                                     <mat-error class="form__validation--size">campo Precio Unitario es requerido</mat-error>
                                   </mat-form-field>
                               </div>
@@ -120,7 +125,7 @@
                 
                 <mat-divider></mat-divider>
                 <div  class="form__buttons">
-                    <button mat-button style="color: #ff4848;margin-right: 15px;" routerLink='form-quotation'> CANCELAR</button>
+                    <button mat-button style="color: #ff4848;margin-right: 15px;" (click)="goForm();" type="button"> CANCELAR</button>
                     <button mat-raised-button style="background-color: #1975ff; color: white;margin-right: 15px; " [disabled]="quotationForm.invalid" type="submit" >
                         ENVIAR COTIZACION
                     </button>

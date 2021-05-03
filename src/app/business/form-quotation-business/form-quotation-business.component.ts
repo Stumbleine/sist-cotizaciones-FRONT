@@ -3,6 +3,7 @@ import { FormBuilder, FormGroupDirective, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { DialogValidationComponent } from 'src/app/userRUG/dialog-validation/dialog-validation.component';
 import { SnackbarSendRequestComponent } from 'src/app/userRUG/snackbar-send-request/snackbar-send-request.component';
 import {RequestService} from '../../services/request.service';
@@ -31,6 +32,7 @@ export interface Quotation{
 })
 export class FormQuotationBusinessComponent implements OnInit {
   priceQuotationDetail: Item[] = [];
+  Quotation:Quotation;
   i=0;
 
   itemForm = this.formBuilder.group({
@@ -54,7 +56,8 @@ export class FormQuotationBusinessComponent implements OnInit {
     private formBuilder: FormBuilder,
     private RequestService: RequestService,
     public dialog: MatDialog,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   displayedColumns: string[] = ['index', 'quantity', 'unit', 'description','unitPrice','totalPrice'];
@@ -69,6 +72,7 @@ export class FormQuotationBusinessComponent implements OnInit {
   ];
   public items:Item[]=[];
   ngOnInit(): void {
+    this.loadDataBusiness();
   }
   pressed:boolean;
 
@@ -87,13 +91,25 @@ export class FormQuotationBusinessComponent implements OnInit {
       this.refresh();
 
     }
-    
-  
+    public dataBusiness:any;
+    public id:number;
+    nro=3;
+
+    loadDataBusiness(){
+      this.RequestService.get('http://localhost:8080/api/quotation/getIdOfNewQuotation')
+      .subscribe(r=>{
+        console.log(r);
+        this.dataBusiness = r;
+        this.id =this.dataBusiness.idPriceQuotation;
+      })
+    }
   saveQuotation(quotation,formDirective1: FormGroupDirective){
-    //Quotation=quotation;
+    this.Quotation=quotation;
     console.log(quotation);
       if(this.pressed){  
-          this.RequestService.post('http://localhost:8080/api/quotation',quotation)
+        quotation.total= this.getTotalCost();  
+       // this.RequestService.post('http://localhost:8080/api/quotation',quotation)
+        this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation',quotation)
           .subscribe( respuesta =>{
             console.log('Solicitud enviada!!');
             this.openSnackBar();
@@ -131,4 +147,8 @@ getTotalCost() {
   return this.priceQuotationDetail.map(t => t.totalPrice).reduce((acc, value) => acc + value, 0);
 }
 
+goForm(){
+  this.router.navigate(['/cotizador/form-quotation']);
+  window.location.reload();
+}
 }
