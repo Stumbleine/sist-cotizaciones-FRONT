@@ -29,8 +29,8 @@
                 <mat-grid-list cols="1" rowHeight="270px"  >
                     
                     <mat-grid-tile *ngFor="let req of requestsReceived" >
-                        <app-summary-card [nro]="req.idSpendingUnitRequest" [sigla]="req.initials" [date]="req.date" [status]="req.status"
-                        [type]="req.type" [amount]="req.estimatedAmount" [username]="req.username"></app-summary-card>
+                        <app-sum-card-raf [nro]="req.idSpendingUnitRequest" [sigla]="req.initials" [date]="req.date" [status]="req.status"
+                        [type]="req.type" [amount]="req.estimatedAmount" [username]="req.username"></app-sum-card-raf>
                     </mat-grid-tile>
 
                 </mat-grid-list>

@@ -1,4 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogRequestedComponent} from '../dialog-requested/dialog-requested.component'
 
 @Component({
   selector: 'app-summary-card',
@@ -7,7 +9,9 @@ import { Component, OnInit,Input } from '@angular/core';
 })
 export class SummaryCardComponent implements OnInit {
 
-  constructor() { }
+  constructor( 
+    public dialog: MatDialog
+    ) { }
 
   ngOnInit(): void {
   }
@@ -18,4 +22,11 @@ export class SummaryCardComponent implements OnInit {
   @Input() amount:string;
   @Input() status:string;
   @Input() date:string;
+
+  openDialog() {
+    this.dialog.open(DialogRequestedComponent,{
+    width: '70%',
+    data: { nro:this.nro }
+    });
+  }
 }

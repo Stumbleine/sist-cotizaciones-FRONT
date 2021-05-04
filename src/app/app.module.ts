@@ -38,7 +38,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { DgCreateCotComponent } from './userRAF/dg-create-cot/dg-create-cot.component'
 import {MatStepperModule} from '@angular/material/stepper'
 import {MatRadioModule} from '@angular/material/radio'
-import {MatTooltipModule} from '@angular/material/tooltip'
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { SumCardRafComponent } from './userRAF/sum-card-raf/sum-card-raf.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +54,7 @@ import {MatTooltipModule} from '@angular/material/tooltip'
     SnackbarSendRequestComponent,
     ReqContentComponent,
     DgCreateCotComponent,
+    SumCardRafComponent,
   ],
   imports: [
     HttpClientModule,
