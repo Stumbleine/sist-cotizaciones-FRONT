@@ -1,0 +1,137 @@
+<div class="page__form">
+    <div class="form__quotation">
+
+            <div class="form__header">
+                <div class="header__icon">
+                    <mat-icon  class="icon">feed</mat-icon></div>
+                <div class="header__title">
+                    <h2 >FORMULARIO DE COTIZACIÓN</h2>
+                    <p >Moneda (Bs)</p>
+                </div>
+            </div>
+            <div class="information__business">
+                
+                <h3>Informacion de la empresa</h3>
+            </div>
+            <mat-divider></mat-divider>
+                <form class="information__quotation" [formGroup]="quotationForm" #formDirectiveNew="ngForm" (ngSubmit)="saveQuotation(quotationForm.value,formDirectiveNew)">
+                    <h3>Información de la cotización</h3>
+                    <div class="form__fields">
+                        <div class="fields__column1">
+                            <mat-form-field  appearance="outline">
+                                <mat-label>Forma de Pago</mat-label>
+                                <mat-select id=""  formControlName='wayOfPayment' required>
+                                    <mat-option value="Crédito">A Crédito</mat-option>
+                                    <mat-option value="Contado">Al Contado</mat-option>
+                                    <mat-option value="Contado y Crédito">Al Contado y a Crédito</mat-option>
+                                </mat-select>
+                                <mat-error >seleccionar forma de pago</mat-error>
+                              </mat-form-field>
+                              <mat-form-field  appearance="outline">
+                                <mat-label>Tiempo de garantía</mat-label>
+                                <input matInput placeholder="Ingrese tiempo de garantia(días)" formControlName='garantyTerm' type="number"
+                                 min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                >
+                                <mat-error class="form__validation--size">campo tiempo de garantia es requerido</mat-error>
+                              </mat-form-field>
+                        </div>
+                        <div class="fields__column2">
+                            <mat-form-field  appearance="outline">
+                                <mat-label>Tiempo de entrega</mat-label>
+                                <input matInput placeholder="Ingrese tiempo de entrega(días)" formControlName='deliveryTerm'required type="number"
+                                min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                <mat-error class="form__validation--size">campo Tiempo de entrega es requerido</mat-error>
+                              </mat-form-field>
+                              <mat-form-field  appearance="outline">
+                                <mat-label>Validez de oferta</mat-label>
+                                <input matInput placeholder="Ingrese Validez de oferta"  type="date" formControlName='offValidation'> 
+                                <mat-error class="form__validation--size">campo Validez de oferta es requerido</mat-error>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <h3>Planilla de cotización</h3>
+                    <div class="form__tableItem">
+                        
+                        <div class="form__table">
+                            <table mat-table [dataSource]="dataSource" class="mat-elevation-z5">
+        
+                            <ng-container matColumnDef="index" >
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> Nro </th>
+                                <td mat-cell *matCellDef="let element;let i=index;" style="text-align: center;" > {{i+1}} </td>
+                                <td mat-footer-cell *matFooterCellDef> TOTAL </td>
+                            </ng-container>
+        
+                            <ng-container *ngFor="let columna of columnas" matColumnDef="{{columna.name}}" >
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 85px; font-weight: bold;"> {{columna.titulo}}  </th>
+                              <td mat-cell *matCellDef="let element" style="min-width: 85px;text-align: center;"> {{element[columna.name]}} </td>
+                              <td mat-footer-cell *matFooterCellDef></td> 
+                            </ng-container>
+
+                            <ng-container matColumnDef="totalPrice" >
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> SUBTOTAL </th>
+                                <td mat-cell *matCellDef="let element" style="text-align: center;" > {{element.totalPrice}} </td>
+                                <td mat-footer-cell *matFooterCellDef> {{ getTotalCost() | currency:"Bs."}}</td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+                          </table>
+                        </div>
+                       
+                        <form class="item__fields" [formGroup]="itemForm" #formDirective="ngForm"  (ngSubmit)="saveItem(itemForm.value, formDirective)">
+
+                              <div >
+                                <mat-form-field  appearance="outline">
+                                    <mat-label>Cantidad</mat-label>
+                                    <input matInput placeholder="Ingrese la cantidad" type="number" matInput 
+                                    formControlName='quantity'
+                                    min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                    required>
+                                    <mat-error class="form__validation--size">campo cantidad es requerido</mat-error>
+                                  </mat-form-field>
+                              </div>
+                              <div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Unidad</mat-label>
+                                    <input matInput placeholder="Ingrese Unidad" formControlName='unit' required>
+                                    <mat-error class="form__validation--size">campo unidad es requerido</mat-error>
+                                  </mat-form-field>
+                              </div>
+                              <div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Detalle</mat-label>
+                                    <input matInput placeholder="Ingrese un detalle" formControlName='description' required>
+                                    <mat-error class="form__validation--size">campo detalle es requerido</mat-error>
+                                  </mat-form-field>
+                              </div>
+                              <div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>P. Unitario</mat-label>
+                                    <input matInput placeholder="Ingrese precio unitario" formControlName='unitPrice'type="number" required value="0.00"
+                                    min="0" pattern="^[0-9]+(.[0-9]+)?$" onkeypress='return event.charCode >= 48 && event.charCode <= 57 || event.charCode==44 || event.charCode==46'
+                                    step=".01">
+                                    <mat-error class="form__validation--size">campo Precio Unitario es requerido</mat-error>
+                                  </mat-form-field>
+                              </div>
+                            <div  class="form__buttomAddItem">
+                                <button mat-raised-button style="background-color: #1975ff; color: white;" [disabled]="itemForm.invalid">
+                                    + AGREGAR ITEM
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                
+                
+                <mat-divider></mat-divider>
+                <div  class="form__buttons">
+                    <button mat-button style="color: #ff4848;margin-right: 15px;" (click)="openDialogCancel();" type="button"> CANCELAR</button>
+                    <button mat-raised-button style="background-color: #1975ff; color: white;margin-right: 15px; " [disabled]="quotationForm.invalid" type="submit" >
+                        ENVIAR COTIZACION
+                    </button>
+                </div>
+            </form>
+            
+    </div>
+</div>

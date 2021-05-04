@@ -1,0 +1,133 @@
+.page__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 25px;
+  padding-top: 25px;
+}
+.form__quotation {
+  display: grid;
+  width: 80%;
+  min-width: 900px;
+  max-width: 1300px;
+  background-color: rgb(255, 255, 255);
+  height: 100%;
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px -10px #818181;
+}
+.form__header {
+  display: flex;
+  height: 75px;
+  width: 100%;
+  background-color: #ebebeb;
+  border-radius: 15px 15px 0px 0px;
+}
+.header__title {
+  text-align: start;
+  align-self: center;
+  color: black;
+  min-width: 300px;
+  padding-left: 10px;
+}
+.header__icon {
+  width: 50px;
+  padding-left: 40px;
+}
+.icon {
+  font-size: 40px;
+  color: black;
+  margin-top: 15px;
+}
+h2 {
+  line-height: 10px;
+  margin-top: 5px;
+  color: black;
+}
+p {
+  line-height: 0px;
+  color: black;
+}
+h3 {
+  padding-top: 25px;
+  color: var(--txt-color-subt);
+  font-weight: 500;
+  text-align: center;
+}
+.form__fields {
+  text-align: right;
+  display: flex;
+  margin-bottom: 25px;
+}
+.fields__column1 {
+  width: 50%;
+  display: block;
+  text-align: center;
+  /* border-radius: 10px; border:  1px solid;
+    border-color: #e0e0e0; */
+}
+.fields__column1 mat-form-field {
+  width: 55%;
+  margin-top: 15px;
+  min-width: 300px;
+}
+.fields__column2 mat-form-field {
+  width: 55%;
+  margin-top: 15px;
+  min-width: 300px;
+}
+.fields__column2 {
+  width: 50%;
+  display: block;
+  text-align: center;
+  /* border-radius: 10px; border:  1px solid;
+    border-color: #e0e0e0; */
+}
+.form__tableItem {
+  display: flex;
+  padding: 15px;
+}
+.form__table {
+  display: grid;
+  padding: 25px;
+  width: 70%;
+}
+table {
+  width: 100%;
+}
+tr.mat-footer-row {
+  font-weight: bold;
+  background-color: #ebebeb;
+}
+.item__fields {
+  width: 30%;
+  border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  /* border:  1px solid;
+    border-color: #e0e0e0; */
+
+  text-align: center;
+  padding-right: 35px;
+}
+.item__fields mat-form-field {
+  width: 70%;
+  margin-top: 15px;
+  min-width: 220px;
+}
+.form__buttomAddItem {
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+.form__buttons {
+  text-align: end;
+  width: 100%;
+  padding-top: 150px;
+  padding-bottom: 30px;
+  padding-right: 30px;
+}
+.mat-divider {
+  border-top-color: #ebebeb;
+}
