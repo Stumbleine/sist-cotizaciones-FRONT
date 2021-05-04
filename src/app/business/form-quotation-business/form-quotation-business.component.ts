@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { DialogValidationComponent } from 'src/app/userRUG/dialog-validation/dialog-validation.component';
 import { SnackbarSendRequestComponent } from 'src/app/userRUG/snackbar-send-request/snackbar-send-request.component';
 import {RequestService} from '../../services/request.service';
+import { DialogValidationCancelComponent } from '../dialog-validation-cancel/dialog-validation-cancel.component';
+import { DialogValidationSendComponent } from '../dialog-validation-send/dialog-validation-send.component';
 
 export interface Item{
   quantity : number,
@@ -67,7 +69,7 @@ export class FormQuotationBusinessComponent implements OnInit {
     {titulo:"CANTIDAD" ,name: "quantity"},
     {titulo:"UNIDAD" ,name: "unit"},
     {titulo:"DETALLE" ,name: "description"},
-    {titulo:"P. UNITARIO" ,name: "unitPrice"},
+    {titulo:"PRECIO UNIT." ,name: "unitPrice"},
     
   ];
   public items:Item[]=[];
@@ -135,7 +137,10 @@ export class FormQuotationBusinessComponent implements OnInit {
       };
 }
 openDialog() {
-  this.dialog.open(DialogValidationComponent);
+  this.dialog.open(DialogValidationSendComponent);
+}
+openDialogCancel(){
+  this.dialog.open(DialogValidationCancelComponent);
 }
 openSnackBar() {
   this._snackBar.openFromComponent(SnackbarSendRequestComponent, {
