@@ -60,7 +60,10 @@ export class ReqContentComponent implements OnInit {
     this.loadData(this.idReqSpending);
   }
   openDialog(): void {
-    this.dialog.open(DgCreateCotComponent);
+    this.dialog.open(DgCreateCotComponent,{
+      data:{idSR:this.idReqSpending}
+    });
+
   }
   loadData(id:any){
     this.RequestService.get('http://localhost:8080/api/request/'+id)

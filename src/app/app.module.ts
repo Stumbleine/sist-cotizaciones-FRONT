@@ -39,7 +39,8 @@ import { DgCreateCotComponent } from './userRAF/dg-create-cot/dg-create-cot.comp
 import {MatStepperModule} from '@angular/material/stepper'
 import {MatRadioModule} from '@angular/material/radio'
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { SumCardRafComponent } from './userRAF/sum-card-raf/sum-card-raf.component'
+import {SumCardRafComponent} from './userRAF/sum-card-raf/sum-card-raf.component'
+import { FormQuotationComponent } from './userRAF/form-quotation/form-quotation.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,20 +56,18 @@ import { SumCardRafComponent } from './userRAF/sum-card-raf/sum-card-raf.compone
     ReqContentComponent,
     DgCreateCotComponent,
     SumCardRafComponent,
+    FormQuotationComponent,
   ],
   imports: [
     HttpClientModule,
-
     CommonModule,     
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,MatTooltipModule,
-
     MatToolbarModule, 
     MatIconModule,MatButtonModule, MatCardModule,MatProgressBarModule, MatFormFieldModule,
     MatSelectModule, MatDividerModule,MatGridListModule, MatExpansionModule, MatDatepickerModule,
     MatStepperModule, MatRadioModule,FormsModule,
-
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
