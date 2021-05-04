@@ -52,3 +52,29 @@
     "roleName": "Administration Representative"
   }
 ]
+  [
+    {
+      idSpendingRequest:211,
+      companyInfo:{
+        businessName:"nombre de empresa",
+        NIT:"123456789012",
+        email:"empres.srl@gmail.com",
+        phoneNumber:"4862 4813 254",
+        address:"Cochabamba Av. Oquendo y Venezuela",
+      }
+      quatation:{}
+    }
+  ]
+
+  [
+    {
+      idSpendingRequest:211,
+      companyInfo:{},
+      quatation:{
+
+        pdf:{},
+      }
+    }
+  ]
+
+idSpendingRequest:211,

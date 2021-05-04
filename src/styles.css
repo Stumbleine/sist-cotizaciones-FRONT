@@ -9,7 +9,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 :root {
-  --txt-color-subt: #6d6d6dd3;
+  --txt-color-subt: #666666d3;
   --txt-color-error: #ff4848;
   --txt-color-title2: #700aff;
 

@@ -1,4 +1,4 @@
-<div style="display: flex; justify-content: center;align-items: center; background-color: aquamarine; height: 100%;" >
+<div style="display: flex; justify-content: center;  align-items: center; background-color: rgb(252, 252, 252);" >
     <div class="container">
 
             <div class="header">
@@ -16,45 +16,78 @@
                     <button mat-raised-button style="margin-right: 25px; margin-left: 15px;"> ENVIAR </button>
                 </div>
             </div>
-            <div style="width: 100%;">
+
+
+
+            <div style="padding:10px;">
                 <div>
                     <h3>Informacion de la empresa</h3>
+                    <div class="info-empresa" style="padding: 15px; ">
+                        <h3 id="solicitante">Razon social: <p> Nombre empresa S.R.L </p></h3>
+                        <h3 id="solicitante">NIT: <p>123456789012</p></h3>
+                        <h3 id="solicitante">e-mail: <p>innovaempresa.srl@gmail.com</p></h3>
+                        <h3 id="solicitante">Telefono: <p>4862 4813 254</p></h3>
+                        <h3 id="solicitante">Direccion: <p>Cochabamba Av. Oquendo y Venezuela</p></h3>
+
+                    </div>
                 </div>
+
                 <mat-divider></mat-divider>
+
                 <div class="form-base">
+                    
                     <h3>Datos sobre la cotizacion</h3>
+
                     <div class="form-base__s1">
-                        <div>
-                            <mat-form-field  appearance="outline">
-                                <mat-label>Forma de pago</mat-label>
+                        <div class="form-base__s1--fds">
+                            <div ><mat-form-field  appearance="outline">
+                                <mat-label>Razon social</mat-label>
                                 <input matInput placeholder="Placeholder">
                                 
                                 <mat-hint>Hint</mat-hint>
                               </mat-form-field>
-                              <mat-form-field  appearance="outline">
+                            </div>
+                            <div>
+                                <mat-form-field  appearance="outline">
+                                    <mat-label>Forma de pago</mat-label>
+                                    <input matInput placeholder="Placeholder">
+                                    
+                                    <mat-hint>Hint</mat-hint>
+                                  </mat-form-field>
+                            </div>
+                              <div>                           
+                                <mat-form-field  appearance="outline">
                                 <mat-label>Validez oferta</mat-label>
                                 <input matInput placeholder="Placeholder">
                                 
                                 <mat-hint>Hint</mat-hint>
                               </mat-form-field>
+                            </div>
                         </div>
-                        <div>
-                            <mat-form-field  appearance="outline">
+                        <div class="form-base__s1--fds">
+                            <div><mat-form-field  appearance="outline">
                                 <mat-label>Tiempo de oferta</mat-label>
                                 <input matInput placeholder="Placeholder">
                                 
                                 <mat-hint>Hint</mat-hint>
                               </mat-form-field>
-                              <mat-form-field  appearance="outline">
-                                <mat-label>Tiempo de garantia</mat-label>
-                                <input matInput placeholder="Placeholder">
-                                
-                                <mat-hint>Hint</mat-hint>
-                              </mat-form-field>
+                            </div>
+                            
+                            <div>
+                                <mat-form-field  appearance="outline">
+                                    <mat-label>Tiempo de garantia</mat-label>
+                                    <input matInput placeholder="Placeholder">
+                                    
+                                    <mat-hint>Hint</mat-hint>
+                                  </mat-form-field>
+                            </div>
                         </div>
+
                     </div>
+
                     <mat-divider></mat-divider>
-                    <h3>Detalle del item/articulo/bien/servicio a ser llenado por el cotizador</h3>
+                    <h3>Detalle del item/articulo/bien/servicio</h3>
+
                     <div class="form-base__s2">
                         
                         <div style="display: grid; place-items: center;  width: 70%;">
@@ -133,26 +166,26 @@
         color: var(--txt-color-subt);
         font-weight: 500;
         text-align: center;
+        margin-top: 15px;
+        font-size: 17px;
 
     }
         .container{
-        display: grid;
-        place-items: center;
         width: 80%;
         min-width: 900px;
-        max-width: 1400px;
+        max-width: 1300px;
         background-color: rgb(255, 255, 255);
-
         box-shadow: 0px 20px 50px -15px #c2c2c2;
-        height: max-content;
+        height: 100%;
         border-radius: 10px;
-
-
+            margin-top: 50px;
+            margin-bottom: 100px;
     }
     .header{
         display: flex;
         height: 75px; width: 100%;
         background-color: var(--txt-color-title2);
+        
     }
     .header__title {
         text-align: start;
@@ -168,32 +201,50 @@
          color: white;
          font-size: 30px;
          margin-top: -7px;
-
     }
 
     .example-spacer {
         flex: 1 1 auto;
     }
+
+    .info-empresa h3{
+        text-align: start; 
+        margin-left: 15px;
+        display: flex; 
+        line-height: 10px; 
+        font-size: 16px;
+    }
+    .info-empresa p{        
+        margin-left: 15px;
+        font-weight: lighter;}
     /*contenido form-base*/
     .form-base__s1{
+        padding: 15px;
         text-align: center;
-        display: block;
-        margin-bottom: 25px;
+
     }
     .form-base__s1 div{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        justify-content: center;
+        display: inline-flex;
 
+    }
+    .form-base__s1--fds div{
+
+        padding-left: 35px;
+        padding-right: 35px;
     }
 
     /*tabla*/
     .form-base__s2{
         display: flex;
-        background-color: rgb(248, 231, 211);
         padding: 15px;
+        margin-bottom: 15px;
     }
     /*fields*/
     .s2__fields{
         width: 30%;
-        background-color: chartreuse;
         border-radius: 10px; border:  1px solid;
         border-color: #e0e0e0;
 
@@ -208,7 +259,7 @@
     /*Botones*/
     .form-actions{
         text-align: end; width: 100%;
-        background-color: coral;
+
         padding-top: 25px;padding-bottom: 25px;
         
     }
