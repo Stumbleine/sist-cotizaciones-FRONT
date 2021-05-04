@@ -28,6 +28,7 @@
   color: black;
   min-width: 300px;
   padding-left: 10px;
+  padding-top: 10px;
 }
 .header__icon {
   width: 50px;
@@ -43,15 +44,28 @@ h2 {
   margin-top: 5px;
   color: black;
 }
-p {
-  line-height: 0px;
-  color: black;
-}
-h3 {
-  padding-top: 25px;
+
+h3{
   color: var(--txt-color-subt);
   font-weight: 500;
   text-align: center;
+  margin-top: 15px;
+  font-size: 17px;
+
+}
+.information__business{
+  padding-left: 35px;
+}
+.info-empresa h3{
+  text-align: start; 
+  margin-left: 15px;
+  display: flex; 
+  line-height: 4px; 
+  font-size: 16px;
+}
+.info-empresa p{        
+  margin-left: 15px;
+  font-weight: lighter;
 }
 .form__fields {
   text-align: right;
@@ -124,7 +138,7 @@ tr.mat-footer-row {
 .form__buttons {
   text-align: end;
   width: 100%;
-  padding-top: 150px;
+  padding-top: 35px;
   padding-bottom: 30px;
   padding-right: 30px;
 }

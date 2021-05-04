@@ -14,23 +14,23 @@
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
                 <ng-container matColumnDef="idRequestDetail" >
-                    <th mat-header-cell *matHeaderCellDef> Nro. </th>
-                    <td mat-cell *matCellDef="let Detail" > {{Detail.idRequestDetail - getDescuento() }}</td>
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center;  font-weight: bold;"> Nro. </th>
+                    <td mat-cell *matCellDef="let Detail" style="text-align: center;"> {{Detail.idRequestDetail - getDescuento() }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="quantity">
-                    <th mat-header-cell *matHeaderCellDef> CANTIDAD </th>
-                    <td mat-cell *matCellDef="let Detail"> {{Detail.quantity}} </td>
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 70px; font-weight: bold;"> CANTIDAD </th>
+                    <td mat-cell *matCellDef="let Detail" style="min-width: 70px;text-align: center;"> {{Detail.quantity}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="unit">
-                    <th mat-header-cell *matHeaderCellDef> UNIDAD </th>
-                    <td mat-cell *matCellDef="let Detail"> {{Detail.unit}} </td>
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 70px; font-weight: bold;"> UNIDAD </th>
+                    <td mat-cell *matCellDef="let Detail" style="min-width: 70px;text-align: center;"> {{Detail.unit}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="description">
-                    <th mat-header-cell *matHeaderCellDef> DETALLE </th>
-                    <td mat-cell *matCellDef="let Detail"> {{Detail.description}} </td>
+                    <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 70px; font-weight: bold;"> DETALLE </th>
+                    <td mat-cell *matCellDef="let Detail"style="min-width: 70px;text-align: center;"> {{Detail.description}} </td>
                 </ng-container>
 
               
