@@ -123,7 +123,7 @@
                                   </mat-form-field>
                               </div>
                             <div  class="form__buttomAddItem">
-                                <button mat-raised-button style="background-color: #1975ff; color: white;" [disabled]="itemForm.invalid">
+                                <button mat-raised-button class="btn-raised" [disabled]="itemForm.invalid">
                                     + AGREGAR ITEM
                                 </button>
                             </div>
@@ -134,7 +134,7 @@
                 <mat-divider></mat-divider>
                 <div  class="form__buttons">
                     <button mat-button style="color: #ff4848;margin-right: 15px;" (click)="openDialogCancel();" type="button"> CANCELAR</button>
-                    <button mat-raised-button style="background-color: #1975ff; color: white;margin-right: 15px; " [disabled]="quotationForm.invalid" type="submit" >
+                    <button mat-raised-button class="btn-raised" style="margin-right: 25px;" [disabled]="quotationForm.invalid" type="submit" >
                         ENVIAR COTIZACION
                     </button>
                 </div>

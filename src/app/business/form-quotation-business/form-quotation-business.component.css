@@ -142,6 +142,10 @@ tr.mat-footer-row {
   padding-bottom: 30px;
   padding-right: 30px;
 }
+.btn-raised {
+  color: white;
+  background-color: var(--btn-color-pri);
+}
 .mat-divider {
   border-top-color: #ebebeb;
 }
