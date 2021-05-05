@@ -1,0 +1,8 @@
+.dontSend-request {
+    color: rgb(255, 255, 255);
+  }
+  ::ng-deep .red-snackbar {
+    background: var(--state-color-4);
+    
+  }
+  
