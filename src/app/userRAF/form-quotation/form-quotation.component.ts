@@ -30,7 +30,7 @@ export class FormQuotationComponent implements OnInit {
     {titulo:"CANTIDAD" ,name: "quantity"},
     {titulo:"UNIDAD" ,name: "unit"},
     {titulo:"DETALLE" ,name: "description"},
-    {titulo:"P. UNITARIO" ,name: "unitPrice"},
+    {titulo:"PRECIO UNIT." ,name: "unitPrice"},
     {titulo:"SUBTOTAL" ,name: "subtotalPrice"}
   ];
   public items:Items[]=[];

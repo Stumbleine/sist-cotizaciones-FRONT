@@ -36,7 +36,7 @@ export interface Items{
 
 export class ReqContentComponent implements OnInit {
   panelOpenState = false;
-
+  panelOpenState2=false;
 
   displayedColumns: string[] = ['index', 'quantity', 'unit', 'description'];
   dataSource =  new MatTableDataSource<Items>([]);
@@ -58,6 +58,7 @@ export class ReqContentComponent implements OnInit {
   ngOnInit(): void {
     this.idReqSpending= this.rutaActiva.snapshot.params.id,
     this.loadData(this.idReqSpending);
+
   }
   openDialog(): void {
     this.dialog.open(DgCreateCotComponent,{

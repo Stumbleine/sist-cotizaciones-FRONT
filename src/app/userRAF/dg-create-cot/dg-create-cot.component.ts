@@ -29,7 +29,7 @@ export class DgCreateCotComponent implements OnInit {
   }
   ngOnInit(): void {
     console.log("Este es el id de la solicitud:",this.quotationForm);
-    this.send=true;
+
   }
 
   createQuataion2(){
