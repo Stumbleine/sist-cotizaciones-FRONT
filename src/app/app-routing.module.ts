@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'home-raf', component:  HomePageRAFComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home-rug'},
   {path:'req-content/:id',component:ReqContentComponent},
-  {path:'req-content/id/form-quotation',component:FormQuotationComponent},
+  {path:'req-content/:id/form-quotation',component:FormQuotationComponent},
   {path: 'cotizador/form-quotation', component: FormQuotationBusinessComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home-rug'}
 ];

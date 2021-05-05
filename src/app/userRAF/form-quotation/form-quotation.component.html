@@ -36,49 +36,54 @@
 
                 <div class="form-base">
                     
-                    <h3>Datos sobre la cotizacion</h3>
+                    <h3>Informacion de la cotizacion</h3>
 
-                    <div class="form-base__s1">
-                        <div class="form-base__s1--fds">
-                            <div ><mat-form-field  appearance="outline">
+                    <div class="form-base__s1" >
+                        <div class="form-base__s1--fds" style=" width: 100%;">
+                            <!--div   style="background-color: beige;">
+                                <mat-form-field appearance="outline">
                                 <mat-label>Razon social</mat-label>
                                 <input matInput placeholder="Placeholder">
                                 
-                                <mat-hint>Hint</mat-hint>
+                                <mat-hint>obligatorio*</mat-hint>
                               </mat-form-field>
+                            </div-->
+                            <div  >
+                                <mat-form-field  appearance="outline">
+                                    <mat-label>Forma de pago *</mat-label>
+                                    <mat-select>
+                                        <mat-option value="Crédito">A Crédito</mat-option>
+                                        <mat-option value="Contado">Al Contado</mat-option>
+                                        <mat-option value="Contado y Crédito">Al Contado y a Crédito</mat-option>
+                                    </mat-select>
+
+                                </mat-form-field>
                             </div>
                             <div>
-                                <mat-form-field  appearance="outline">
-                                    <mat-label>Forma de pago</mat-label>
-                                    <input matInput placeholder="Placeholder">
-                                    
-                                    <mat-hint>Hint</mat-hint>
-                                  </mat-form-field>
-                            </div>
-                              <div>                           
-                                <mat-form-field  appearance="outline">
-                                <mat-label>Validez oferta</mat-label>
-                                <input matInput placeholder="Placeholder">
-                                
-                                <mat-hint>Hint</mat-hint>
+
+                              <mat-form-field  appearance="outline">
+                                <mat-label>Tiempo de entrega*</mat-label>
+                                <input matInput placeholder="Ingrese tiempo de entrega(días)"  >
+
                               </mat-form-field>
                             </div>
-                        </div>
-                        <div class="form-base__s1--fds">
-                            <div><mat-form-field  appearance="outline">
-                                <mat-label>Tiempo de oferta</mat-label>
-                                <input matInput placeholder="Placeholder">
-                                
-                                <mat-hint>Hint</mat-hint>
-                              </mat-form-field>
-                            </div>
+
+                        </div >
+                        <div class="form-base__s1--fds"  style=" width: 100%;">
+
                             
                             <div>
                                 <mat-form-field  appearance="outline">
                                     <mat-label>Tiempo de garantia</mat-label>
                                     <input matInput placeholder="Placeholder">
-                                    
-                                    <mat-hint>Hint</mat-hint>
+
+                                  </mat-form-field>
+                            </div>
+                            <div  >                           
+                                <mat-form-field  appearance="outline">
+                                    <mat-label>Validez de oferta</mat-label>
+                                    <input matInput  type="date" placeholder="Ingrese Validez de oferta"  > 
+                                    <mat-error class="form__validation--size">campo Validez de oferta es requerido</mat-error>
                                   </mat-form-field>
                             </div>
                         </div>
@@ -90,8 +95,9 @@
 
                     <div class="form-base__s2">
                         
-                        <div style="display: grid; place-items: center;  width: 70%;">
-                            <table mat-table [dataSource]="dataSource" class="mat-elevation-z5">
+                        <div style=" width: 70%;  display: grid;
+                        padding: 25px; " >
+                            <table mat-table [dataSource]="dataSource" class="mat-elevation-z5" style="width: 100%;">
         
                             <ng-container matColumnDef="index" >
                                 <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> Nro </th>
@@ -102,9 +108,10 @@
                               <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 85px; font-weight: bold;"> {{columna.titulo}}  </th>
                               <td mat-cell *matCellDef="let element" style="min-width: 85px;text-align: center;"> {{element[columna.name]}} </td>
                             </ng-container>
-        
+
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
                           </table>
                         </div>
                         <!--a>  Text fields para tabla   </a-->
@@ -144,7 +151,7 @@
                               </div>
                             <div  style="width: 100%; padding-top: 15px; padding-bottom: 20px; text-align: center;">
                                 <button mat-raised-button style="background-color: #1975ff; color: white;" >
-                                    AGREGAR ITEM
+                                    AÑADIR ITEM
                                 </button>
                             </div>
                         </div>
@@ -162,6 +169,10 @@
 </div>
 
 <style>
+        .snackSuccess{
+        background: var(--state-color-5);
+        
+    }
     h3{
         color: var(--txt-color-subt);
         font-weight: 500;
@@ -221,21 +232,22 @@
     .form-base__s1{
         padding: 15px;
         text-align: center;
-
     }
     .form-base__s1 div{
         padding-top: 15px;
         padding-bottom: 15px;
         justify-content: center;
         display: inline-flex;
-
     }
-    .form-base__s1--fds div{
 
+    .form-base__s1--fds div{
+        width: 25%;
         padding-left: 35px;
         padding-right: 35px;
     }
-
+    .form-base__s1--fds mat-form-field{
+        width: 100%;
+    }
     /*tabla*/
     .form-base__s2{
         display: flex;
@@ -259,9 +271,7 @@
     /*Botones*/
     .form-actions{
         text-align: end; width: 100%;
-
         padding-top: 25px;padding-bottom: 25px;
-        
     }
 
 
