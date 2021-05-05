@@ -5,11 +5,11 @@ place-items: center;">
             
             <div class="header__title">
                 <h1>{{reqReceived?.type}}</h1>
-                <h3>Solicitado por proyecto {{reqReceived?.initials}}</h3>
+                <h3 style="font-style: italic;">Solicitado por proyecto {{reqReceived?.initials}}</h3>
             </div>
             <div class="header__data" style="text-align: end;">
                 <p class="header__data--n">Nro {{reqReceived?.idSpendingUnitRequest}}</p>
-                <p style="font-style: italic;">emitido el {{reqReceived?.date}}</p>
+                <p style="font-style: italic;">Emitido el {{reqReceived?.date}}</p>
             </div>
             <h3 id="solicitante">Solicitante: <p>{{reqReceived?.username}}</p></h3>
         </div>
@@ -44,9 +44,13 @@ place-items: center;">
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   </table></div>
 
-                  <div class="desc__foot" style="        margin-top: 20px;">
-                        <h3>Total estimado: <p style="margin-left: 10px;font-weight: 400;">Bs {{reqReceived?.estimatedAmount}}</p> </h3>
-                        <h3>Justifiacion</h3>
+                  <div class="desc__foot" style=" margin-top: 25px;">
+                        <div style=" background-color: aqua;">
+                            <h3 style="  text-align: end;">Total estimado: 
+                                <p style="display: inline-flex; font-weight: 400;">Bs. {{reqReceived?.estimatedAmount}}</p> 
+                            </h3>
+                        </div>
+                        <h3 >Justificación:</h3>
                         <p style="margin:0 20px 0 20px;">{{reqReceived?.justification}} Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</p>
                   </div>
                   <div  style="text-align: end; margin-bottom: 10px; margin-top: 15px;">
@@ -60,7 +64,7 @@ place-items: center;">
                 (closed)="panelOpenState = false" class="section--desc" >
                 <mat-expansion-panel-header style="background-color:  #fafafa;">
                 <mat-panel-title style="font-weight: bold;">
-                DESCRIPCION
+                COTIZAIONES
                 </mat-panel-title>
                 </mat-expansion-panel-header>
             <div>
@@ -130,7 +134,7 @@ place-items: center;">
         font-weight: 400;
     }
     .desc__foot h3{
-        display: flex;
+
         font-size: 17px;
         font-weight: bolder;
         color: var(--txt-color-subt);
