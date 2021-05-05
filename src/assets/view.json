@@ -69,10 +69,31 @@
   [
     {
       idSpendingRequest:211,
-      companyInfo:{},
+      companyInfo:{}, //or idCompany
       quatation:{
+          "wayOfPayment" : "as",
+          "garantyTerm" : 12,
+          "deliveryTerm" : 13,
+          "offValidation" : "nadaras",
+          "total" : 12.12,
+          "priceQuotationDetail":[
+               {
+                  "quantity" : 12,
+                  "unit" : "casa",
+                  "description" : "madaswas",
+                  "unitPrice" : 212,
+                  "totalPrice" : 121212
+      
+              },
+              {
+                  "quantity" : 13,
+                  "unit" : "casa____",
+                  "description" : "madaswas---->",
+                  "unitPrice" : 212,
+                  "totalPrice" : 152
+              }
+          ]
 
-        pdf:{},
       }
     }
   ]

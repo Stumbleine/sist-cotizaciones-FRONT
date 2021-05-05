@@ -11,8 +11,9 @@
         </div>
         <mat-divider></mat-divider>
         <div style="text-align: end; margin-top: 15px;" class="btn__search">        
-            <button mat-button (click)="createQuataion()"> ELEGIR </button>
-            <button mat-button> OMITIR </button>
+ 
+            <button mat-button mat-dialog-close (click)="createQuataion2()"  >test</button>
+            <button mat-button mat-dialog-close > OMITIR </button>
         </div>
 
         
@@ -22,12 +23,14 @@
     <button mat-raised-button style="background-color: #1975ff; color: white;" >
         CONTINUAR
     </button>
-
+           <button mat-button mat-dialog-close (click)="createQuataion()"  [routerLink]="['/req-content', idR,'form-quotation']"> CREAR </button>
+            <button mat-button mat-dialog-close (click)="createQuataion()"  *ngIf="send==true"      ng-init="[routerLink]='['/req-content', idR,'form-quotation']'">> ELEGIR </button>
 </div-->
 <style>
-
-
-
+    .snackSuccess{
+        background-color: var(--state-color-5);
+        
+    }
     .search__content{
         width: max-content;
         height: 300px;
@@ -38,4 +41,5 @@
     .btn__search button{
         color: var( --txt-color-title2);
     }
+
 </style>

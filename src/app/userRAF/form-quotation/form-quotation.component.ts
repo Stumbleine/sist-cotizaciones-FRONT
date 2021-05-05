@@ -38,5 +38,8 @@ export class FormQuotationComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  getTotalCost() {
+    return 471;
+  }
 
 }
