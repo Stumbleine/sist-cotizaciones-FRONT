@@ -28,7 +28,7 @@ export class DgCreateCotComponent implements OnInit {
     this.dialogRef.close();
   }
   ngOnInit(): void {
-    console.log("Este es el id de la solicitud:",this.quotationForm);
+    console.log("Este es el id de la solicitud:", this.quotationForm);
 
   }
 
@@ -42,7 +42,7 @@ export class DgCreateCotComponent implements OnInit {
       },
       error:()=>{
         console.log('Ocurrio un error, no se creo la cotizacon.');
-        this.snack.open('Fallo al crear cotizacion.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
+        this.snack.open('Fallo al crear cotizacion.','CERRAR',{duration:5000})
       }
     });
   

@@ -1,3 +1,6 @@
-.snackSuccess {
+::ng-deep .snackSuccess {
   background-color: var(--state-color-5);
+}
+::ng-deep .snackSuccess button {
+  color: white;
 }
