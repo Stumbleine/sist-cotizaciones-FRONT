@@ -43,7 +43,11 @@ import {MatStepperModule} from '@angular/material/stepper'
 import {MatRadioModule} from '@angular/material/radio'
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {SumCardRafComponent} from './userRAF/sum-card-raf/sum-card-raf.component'
-import { FormQuotationComponent } from './userRAF/form-quotation/form-quotation.component'
+import { FormQuotationComponent } from './userRAF/form-quotation/form-quotation.component';
+import { QoatationCardComponent } from './userRAF/qoatation-card/qoatation-card.component';
+import { ComparativeChartComponent } from './userRAF/comparative-chart/comparative-chart.component';
+
+import {MatListModule } from '@angular/material/list'
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +67,8 @@ import { FormQuotationComponent } from './userRAF/form-quotation/form-quotation.
     FormQuotationBusinessComponent,
     DialogValidationSendComponent,
     DialogValidationCancelComponent,
+    QoatationCardComponent,
+    ComparativeChartComponent,
   ],
   imports: [
     HttpClientModule,
@@ -81,7 +87,7 @@ import { FormQuotationComponent } from './userRAF/form-quotation/form-quotation.
     MatPaginatorModule,
     MatDialogModule,
     MatSnackBarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,MatListModule
 
   ],
   providers: [    RequestService,],

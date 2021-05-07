@@ -1,0 +1,126 @@
+mat-expansion-panel {
+  margin-top: 15px;
+}
+table {
+  width: 85%;
+}
+
+.container {
+  margin-top: 50px;
+  margin-bottom: 100px;
+  padding: 15px;
+  background-color: rgb(221, 247, 162);
+  width: 70%;
+  min-width: 900px;
+  min-height: max-content;
+}
+.header__title {
+  text-align: center;
+}
+.header__title h3 {
+  font-weight: lighter;
+  line-height: 0px;
+}
+
+.header__data--n {
+  color: var(--txt-color-error);
+  font-weight: 500;
+}
+.header__data p {
+  line-height: 15px;
+}
+#solicitante {
+  display: flex;
+  font-size: 17px;
+  font-weight: bolder;
+  color: var(--txt-color-subt);
+}
+#solicitante p {
+  margin-left: 10px;
+  font-weight: 400;
+}
+.desc__foot h3 {
+  font-size: 17px;
+  font-weight: bolder;
+  color: var(--txt-color-subt);
+  line-height: 15px;
+}
+.btn-raised-e {
+  background-color: var(--btn-color-error);
+  color: white;
+  margin-right: 20px;
+}
+.btn-raised-s {
+  color: white;
+  background-color: var(--btn-color-scss);
+  margin-right: 20px;
+}
+.btn-raised-p {
+  background-color: var(--btn-color-pri);
+  color: white;
+}
+
+/*Estilos para COTIZACIONES*/
+.quotations-section {
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  padding: 15px;
+  margin-top: 15px;
+}
+.quotation--cards {
+  background-color: thistle;
+}
+
+/*Estilos para CUADROS*/
+.comparative-section {
+  margin-top: 15px;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  padding: 15px;
+}
+.selection-quotation {
+  width: 60%;
+  display: grid;
+  align-items: center;
+  background-color: wheat;
+}
+.comparative__charts {
+  background-color: rgb(145, 255, 244);
+}
+/*DECISION e INFORMES*/
+
+.decisionReports-section {
+  background-color: rgb(182, 214, 216);
+  padding: 15px;
+  margin-top: 15px;
+}
+.report-section {
+  background-color: cornsilk;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  padding: 15px;
+  width: 58%;
+  margin: auto;
+}
+.report--comentary {
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+}
+.report--comentary mat-form-field {
+  width: 60%;
+}
+
+.btn-raised-error {
+  background-color: var(--btn-color-error);
+  color: white;
+}
+.btn-raised-success {
+  background-color: var(--btn-color-scss);
+  color: white;
+}
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+}

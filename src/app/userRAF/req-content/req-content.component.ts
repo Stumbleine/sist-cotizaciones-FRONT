@@ -5,28 +5,27 @@ import {RequestService} from '../../services/request.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 
-/*const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];*/
+
 export interface DialogData {
   animal: string;
   name: string;
 }
-
 export interface Items{
   idRequestDetail: number;
   quantity: number;
   unit: string;
   description:string;
+}
+export interface PDFs{
+  name:String;
+  date:Date;
+}
+
+export interface QuotForm{
+  idQuotation:number;
+  nameCompany:string;
+  status:string;
+  date:Date;
 }
 @Component({
   selector: 'app-req-content',
@@ -37,35 +36,46 @@ export interface Items{
 export class ReqContentComponent implements OnInit {
   panelOpenState = false;
   panelOpenState2=false;
-
+  name: string;
   displayedColumns: string[] = ['index', 'quantity', 'unit', 'description'];
   dataSource =  new MatTableDataSource<Items>([]);
   columnas=[
-    
     {titulo:"CANTIDAD" ,name: "quantity"},
     {titulo:"UNIDAD" ,name: "unit"},
     {titulo:"DETALLE" ,name: "description"}
   ];
 
-  animal: string;
-  name: string;
-
   public reqReceived:any;
   public idReqSpending:any;
   public items:Items[]=[];
+  //Varibles para -quotations-card
+  quotationsCard:QuotForm[]=[
+    {idQuotation:1,nameCompany:'AgataWorks S.A.',status:'IMCOMPLETO',date:new Date('25/07/2021')},
+    {idQuotation:2,nameCompany:'Hemlim HEmlim McGill S.A.',status:'COMPLETO',date:new Date('29/07/2021')},
+    {idQuotation:3,nameCompany:'Enterprise line S.A.',status:'IMCOMPLETO',date:new Date('24/07/2021')},
+    {idQuotation:4,nameCompany:'Inmobiliaria samuel S.R.L.',status:'COMPLETO',date:new Date('26/07/2021')},
+    {idQuotation:5,nameCompany:'Pollos hermano S.A.',status:'CADUCADO',date:new Date('21/07/2021')}
+  ]
+
+  quotationsCompleted:String[]=['NombreEmpresa #4','NombreEmpresa #3','NombreEmpresa #2', 'NombreEmpresa #5'];
+  //variables para reportes
+  reports:PDFs[]=[
+    {name:'Informe de rechazo',date:new Date('02/08/2021')},
+    {name:'Informe de aceptación',date:new Date('02/08/2021')}
+  ]
   constructor(public dialog: MatDialog,private RequestService: RequestService,private rutaActiva: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.idReqSpending= this.rutaActiva.snapshot.params.id,
     this.loadData(this.idReqSpending);
-
   }
+
   openDialog(): void {
     this.dialog.open(DgCreateCotComponent,{
       data:{idSR:this.idReqSpending}
     });
-
   }
+
   loadData(id:any){
     this.RequestService.get('http://localhost:8080/api/request/'+id)
     .subscribe(r  =>{

@@ -60,98 +60,105 @@ place-items: center;">
                 </mat-expansion-panel>
 
                 <!--p> SEGUNDA SECCION</p-->
-                <mat-expansion-panel  (opened)="panelOpenState = true"
-                (closed)="panelOpenState = false" class="section--desc" >
-                <mat-expansion-panel-header style="background-color:  #fafafa;">
-                <mat-panel-title style="font-weight: bold;">
-                COTIZACIONES
-                </mat-panel-title> 
-                </mat-expansion-panel-header>
-            <div>
-          
-                <!--mat-form-field appearance="fill">
-                    <mat-label>Elija una fecha limite</mat-label>
-                    <input matInput [matDatepicker]="picker">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field-->
-                <div>
+                <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" expanded>
+                    <mat-expansion-panel-header style="background-color:  #fafafa;">
+                    <mat-panel-title style="font-weight: bold;">COTIZACIONES</mat-panel-title> 
+                    </mat-expansion-panel-header>
 
+                        <div class="quotations-section">
+                            <div style="text-align: center; padding: 25px;;">
+                                <p>Es necesario elegir una fecha de vencimiento para los formularios.</p>
+                                <mat-form-field  appearance="outline">
+                                <mat-label>Fecha de vencimiento</mat-label>
+                                <input matInput  type="date" placeholder="Ingrese fecha limite *"  > 
+                                <mat-error >campo obligatorio</mat-error>
+                            </mat-form-field></div>
+
+                            <div class="quotation--cards">
+                                <mat-grid-list cols="3"  rowHeight="150px" >
+                                    <mat-grid-tile *ngFor="let quotCard of quotationsCard" >
+                                    <app-qoatation-card [idQ]="quotCard?.name" [nameCompany]="quotCard?.nameCompany" [status]='quotCard?.status' [date]='quotCard?.date'></app-qoatation-card>
+                                </mat-grid-tile>
+                                
+                            </mat-grid-list>
+                            </div>
+
+                            <div style="text-align: center;padding: 15px;">
+                                <button mat-raised-button class="btn-raised-p" (click)="openDialog()" > <mat-icon>add</mat-icon> COTIZACIÓN</button>
+                            </div>
+                        </div>
+                </mat-expansion-panel>
+                        <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" expanded>
+                            <mat-expansion-panel-header style="background-color:  #fafafa;">
+                            <mat-panel-title style="font-weight: bold;">CUADROS COMPARATIVOS</mat-panel-title> 
+                            </mat-expansion-panel-header>
+
+                        <div class="comparative-section">
+                            <div class="selection-quotation">
+                                <p>Cotizaciones completadas</p>
+                                <mat-selection-list #quots>
+                                    <mat-list-option *ngFor="let quot of quotationsCompleted">
+                                        {{quot}}
+                                    </mat-list-option>
+                                </mat-selection-list>
+                                <p> Seleccionados: {{quots.selectedOptions.selected.length}} </p>
+                            </div>
+                            <div class="comparative__charts">
+                                <p>CUADROS COMPARATIVOS</p>
+                                <app-comparative-chart *ngFor="let i of [1,2]"></app-comparative-chart>
+                            </div>
+                            <div style="text-align: center;padding: 15px;">
+                                <button mat-raised-button class="btn-raised-p" >GENERAR CUADRO</button>
+                            </div>
+                            
+                        </div>
+                    
+                </mat-expansion-panel>
+
+                <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" expanded>
+                    <mat-expansion-panel-header style="background-color:  #fafafa;">
+                    <mat-panel-title style="font-weight: bold;">DECISIÓN E INFORMES</mat-panel-title> 
+                    </mat-expansion-panel-header>
+                <div class="decisionReports-section">
+      
+                    <div class="selection-quotation">
+                        <p>EMPRESAS A ELEGIR</p>
+                        <mat-selection-list #quots>
+                            <mat-list-option *ngFor="let quot of quotationsCompleted">
+                                {{quot}}
+                            </mat-list-option>
+                        </mat-selection-list>
+                        <p> Seleccionados: {{quots.selectedOptions.selected.length}} </p>
+                    </div>
+                    <div class="report-section">
+                        <mat-divider></mat-divider>
+                        <mat-list>
+                            <div mat-subheader> archivos</div>
+                            <mat-list-item *ngFor="let report of reports">
+                                <mat-icon mat-list-icon>description</mat-icon>
+                                <div mat-line>report.name</div>
+                                <div mat-line>report.date</div>
+                            </mat-list-item>
+
+                        </mat-list>
+                        <mat-divider></mat-divider>
+                    </div>
+                    <div class="report--comentary">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Comentario</mat-label>
+                            <input matInput >
+                          </mat-form-field>
+                    </div>
+                    <div>
+                        <div style="text-align: center;padding: 15px;">
+                            <button mat-raised-button class="btn-raised-error" >RECHAZAR</button>
+                            <button mat-raised-button class="btn-raised-success" >APROBAR</button>
+                        </div>
+                        
+                    </div>
                 </div>
-                <div style="text-align: center; margin-top: 25px;">
-                    <button mat-raised-button class="btn-raised-p" (click)="openDialog()" > <mat-icon>add</mat-icon> COTIZACIÓN</button>
-                </div>
-            </div>
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
     </div>
 </div>
-<style>
-    mat-expansion-panel{
-        margin-top: 15px;
-    }
-    table {
-        width:85%;
-        overflow: auto;
-
-    }
-
-    .container{
-        margin-top: 50px;
-        margin-bottom: 100px;
-        padding: 0 15px 0 15px;
-
-        background-color: rgb(255, 255, 255);
-        width: 80%;
-        min-width: 800px;
-
-        min-height: max-content;
-    }
-    .header__title{
-        text-align: center;
-    }
-    .header__title h3{
-        font-weight: lighter;
-        line-height: 0px;
-    }
-
-    .header__data--n {
-        color: var(--txt-color-error);
-        font-weight: 500;
-    }
-    .header__data p{
-        line-height: 15px;
-    }
-    #solicitante{
-        display: flex;
-        font-size: 17px;
-        font-weight: bolder;
-        color: var(--txt-color-subt);
-    }
-    #solicitante p{
-        margin-left: 10px;
-        font-weight: 400;
-    }
-    .desc__foot h3{
-
-        font-size: 17px;
-        font-weight: bolder;
-        color: var(--txt-color-subt);
-        line-height: 15px;
-    }
-    .btn-raised-e{
-        background-color: var(--btn-color-error);
-        color:white;
-        margin-right: 20px;
-    }
-    .btn-raised-s{
-        color:white;
-        background-color: var(--btn-color-scss);margin-right: 20px;
-    }
-    .btn-raised-p{
-        background-color: var(--btn-color-pri);
-        color:white;
-
-    }
-</style>

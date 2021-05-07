@@ -1,0 +1,27 @@
+<mat-card class="mat-elevation-z2" >
+    <mat-card-title style="font-size: 20px;">{{nameCompany}}</mat-card-title>
+    <mat-card-content style="background-color: aliceblue;">
+        <p>creado el: {{date}}</p>
+        <p>{{status}}</p>
+    </mat-card-content>
+
+    <div class="btn-icons">        <button mat-button><mat-icon>launch</mat-icon></button>
+        <button mat-button><mat-icon>delete</mat-icon></button></div>
+
+</mat-card>
+<style>
+    mat-card{
+        width: 100%;
+        height: fit-content;
+        min-width: 200px;
+    }
+    
+    p{
+        line-height: 10px;
+    }
+    .btn-icons{
+        display: flex;
+        text-align: end;
+        background-color: antiquewhite;
+    }
+</style>
