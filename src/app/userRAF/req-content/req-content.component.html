@@ -5,12 +5,15 @@ place-items: center;">
             
             <div class="header__title">
                 <h1>{{reqReceived?.type}}</h1>
-                <h3 style="font-style: italic;">Solicitado por proyecto {{reqReceived?.initials}}</h3>
+                <h3 *ngIf="reqReceived?.initials!=null" style="font-style: italic;">Solicitado por proyecto {{reqReceived?.initials}}</h3>
             </div>
             <div class="header__data" style="text-align: end;">
                 <p class="header__data--n">Nro {{reqReceived?.idSpendingUnitRequest}}</p>
-                <p style="font-style: italic;">Emitido el {{reqReceived?.date}}</p>
+                <p [ngStyle]="{'color':getColorSR(reqReceived?.status)}"
+                    style="font-style: italic; font-size: 17px; text-transform: uppercase; font-weight: 600;">
+                    {{reqReceived?.status}}</p>
             </div>
+            <p style="font-style: italic;">Emitido el {{reqReceived?.date}}</p>
             <h3 id="solicitante">Solicitante: <p>{{reqReceived?.username}}</p></h3>
         </div>
         <div class="section" style="width: 100%;">
@@ -59,8 +62,8 @@ place-items: center;">
                   </div>
                 </mat-expansion-panel>
 
-                <!--p> SEGUNDA SECCION</p-->
-                <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" expanded>
+                <!-- COTIZACIONES -->
+                <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" >
                     <mat-expansion-panel-header style="background-color:  #fafafa;">
                     <mat-panel-title style="font-weight: bold;">COTIZACIONES</mat-panel-title> 
                     </mat-expansion-panel-header>
@@ -75,9 +78,9 @@ place-items: center;">
                             </mat-form-field></div>
 
                             <div class="quotation--cards">
-                                <mat-grid-list cols="3"  rowHeight="150px" >
-                                    <mat-grid-tile *ngFor="let quotCard of quotationsCard" >
-                                    <app-qoatation-card [idQ]="quotCard?.name" [nameCompany]="quotCard?.nameCompany" [status]='quotCard?.status' [date]='quotCard?.date'></app-qoatation-card>
+                                <mat-grid-list cols="3"  rowHeight="fit" style="height: 300px;" gutterSize="10px" >
+                                    <mat-grid-tile *ngFor="let quotCard of quotationsCard">
+                                    <app-qoatation-card style="width: 100%;" [idQ]="quotCard?.name" [nameCompany]="quotCard?.nameCompany" [status]='quotCard?.status' [date]='quotCard?.date'></app-qoatation-card>
                                 </mat-grid-tile>
                                 
                             </mat-grid-list>
@@ -87,35 +90,38 @@ place-items: center;">
                                 <button mat-raised-button class="btn-raised-p" (click)="openDialog()" > <mat-icon>add</mat-icon> COTIZACIÓN</button>
                             </div>
                         </div>
+                        <!--CUADROS COMPARATIVOS-->
                 </mat-expansion-panel>
-                        <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" expanded>
+                        <mat-expansion-panel expanded  (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" >
                             <mat-expansion-panel-header style="background-color:  #fafafa;">
                             <mat-panel-title style="font-weight: bold;">CUADROS COMPARATIVOS</mat-panel-title> 
                             </mat-expansion-panel-header>
 
                         <div class="comparative-section">
                             <div class="selection-quotation">
-                                <p>Cotizaciones completadas</p>
+                                <p style="font-size: 17px; font-weight: 500;">Cotizaciones completadas</p>
                                 <mat-selection-list #quots>
                                     <mat-list-option *ngFor="let quot of quotationsCompleted">
-                                        {{quot}}
+                                        {{quot.nameCompany}}
                                     </mat-list-option>
                                 </mat-selection-list>
-                                <p> Seleccionados: {{quots.selectedOptions.selected.length}} </p>
+                                <p style="color: #0a6cff; font-size: 12px;"> Seleccionar al menos 3 cotizaciones </p>
+                            </div> 
+                            <div style="text-align: center;padding: 15px;">
+                                <button mat-raised-button class="btn-raised-p" >GENERAR CUADRO</button>
                             </div>
+
                             <div class="comparative__charts">
                                 <p>CUADROS COMPARATIVOS</p>
                                 <app-comparative-chart *ngFor="let i of [1,2]"></app-comparative-chart>
                             </div>
-                            <div style="text-align: center;padding: 15px;">
-                                <button mat-raised-button class="btn-raised-p" >GENERAR CUADRO</button>
-                            </div>
+
                             
                         </div>
                     
                 </mat-expansion-panel>
 
-                <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" expanded>
+                <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" >
                     <mat-expansion-panel-header style="background-color:  #fafafa;">
                     <mat-panel-title style="font-weight: bold;">DECISIÓN E INFORMES</mat-panel-title> 
                     </mat-expansion-panel-header>
@@ -136,8 +142,8 @@ place-items: center;">
                             <div mat-subheader> archivos</div>
                             <mat-list-item *ngFor="let report of reports">
                                 <mat-icon mat-list-icon>description</mat-icon>
-                                <div mat-line>report.name</div>
-                                <div mat-line>report.date</div>
+                                <div mat-line>{{report.name}}</div>
+                                <div mat-line>{{report.date}}</div>
                             </mat-list-item>
 
                         </mat-list>

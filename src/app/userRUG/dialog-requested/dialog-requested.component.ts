@@ -58,4 +58,19 @@ export class DialogRequestedComponent implements OnInit {
       let desc= this.firstNum-1;
     return desc
   }
+  getColorSR(status){
+    let color:string;
+    if (status=='Pendiente') {
+      color = '#979797';
+    } else if (status=='Autorizado') {
+        color = '#1975ff';
+      }else if(status=='Cotizando'){
+        color= '#ffc400';
+      }else if(status=='Rechazado'){
+        color= '#ff4848';
+      }else if(status=='Aprobado'){
+        color = '#28a745'
+      }
+    return color;
+  }
 }

@@ -16,4 +16,15 @@ export class QoatationCardComponent implements OnInit {
   @Input() date:Date
   @Input() status:string
 
+  getColor(status){
+    let color:string;
+    if (status=='IMCOMPLETO') {
+      color = '#f7f7f7'
+    } else if (status=='COMPLETADO') {
+        color = 'rgb(74 255 70 / 73%)';
+      }else if(status=='EXPIRADO'){
+        color= 'rgb(255 143 133 / 91%)';
+      }
+    return color;
+  }
 }

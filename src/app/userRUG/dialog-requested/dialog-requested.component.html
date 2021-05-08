@@ -4,7 +4,7 @@
         <h1 mat-dialog-title >{{requested.type}}</h1>
         <p>Solicitado por proyecto {{requested.initials}}</p>
     </div>
-    <div class="dialog__state"><p >{{requested.status}} </p></div>
+    <div class="dialog__state" [ngStyle]="{'color':getColorSR(requested.status)}"><p >{{requested.status}} </p></div>
     <div class="dialog__date"> <p>Emitido el {{requested.date | date:'dd/MM/yyyy'}}</p></div>
     <div class="dialog__solicitante"><p>Solicitante: <b>{{requested.username}}</b></p></div>
     <mat-dialog-content class="dialog__content">

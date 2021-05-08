@@ -19,7 +19,7 @@ body {
 
   /*colores para los estados de una solicitud:
   Pendiente, Autorizado, Cotizando, Rechazado, Aprobado*/
-  --state-color-1: #9e9e9e;
+  --state-color-1: #979797;
   --state-color-2: #1975ff;
   --state-color-3: #ffc400;
   --state-color-4: #ff4848;

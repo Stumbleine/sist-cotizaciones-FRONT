@@ -68,9 +68,6 @@ table {
   padding: 15px;
   margin-top: 15px;
 }
-.quotation--cards {
-  background-color: thistle;
-}
 
 /*Estilos para CUADROS*/
 .comparative-section {
@@ -79,12 +76,12 @@ table {
   border: 1px solid;
   border-color: #e0e0e0;
   padding: 15px;
+  display: grid;
+  place-items: center;
 }
 .selection-quotation {
   width: 60%;
-  display: grid;
-  align-items: center;
-  background-color: wheat;
+  background-color: rgba(255, 255, 231, 0.767);
 }
 .comparative__charts {
   background-color: rgb(145, 255, 244);

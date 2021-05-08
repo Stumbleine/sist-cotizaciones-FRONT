@@ -25,7 +25,7 @@ export interface QuotForm{
   idQuotation:number;
   nameCompany:string;
   status:string;
-  date:Date;
+  date:string;
 }
 @Component({
   selector: 'app-req-content',
@@ -50,14 +50,15 @@ export class ReqContentComponent implements OnInit {
   public items:Items[]=[];
   //Varibles para -quotations-card
   quotationsCard:QuotForm[]=[
-    {idQuotation:1,nameCompany:'AgataWorks S.A.',status:'IMCOMPLETO',date:new Date('25/07/2021')},
-    {idQuotation:2,nameCompany:'Hemlim HEmlim McGill S.A.',status:'COMPLETO',date:new Date('29/07/2021')},
-    {idQuotation:3,nameCompany:'Enterprise line S.A.',status:'IMCOMPLETO',date:new Date('24/07/2021')},
-    {idQuotation:4,nameCompany:'Inmobiliaria samuel S.R.L.',status:'COMPLETO',date:new Date('26/07/2021')},
-    {idQuotation:5,nameCompany:'Pollos hermano S.A.',status:'CADUCADO',date:new Date('21/07/2021')}
+    {idQuotation:1,nameCompany:'AgataWorks S.A.',status:'IMCOMPLETO',date:'25/07/2021'},
+    {idQuotation:2,nameCompany:'Hemlim HEmlim McGill S.A.',status:'COMPLETADO',date:'02/07/2021'},
+    {idQuotation:3,nameCompany:'Enterprise line S.A.',status:'IMCOMPLETO',date:'24/07/2021'},
+    {idQuotation:4,nameCompany:'Inmobiliaria samuel S.R.L.',status:'COMPLETADO',date:'26/07/2021'},
+    {idQuotation:5,nameCompany:'Pollos hermano S.A.',status:'EXPIRADO',date:'21/07/2021'}
   ]
+  //variables para cuadros comparativos
 
-  quotationsCompleted:String[]=['NombreEmpresa #4','NombreEmpresa #3','NombreEmpresa #2', 'NombreEmpresa #5'];
+  quotationsCompleted:String[]=[];
   //variables para reportes
   reports:PDFs[]=[
     {name:'Informe de rechazo',date:new Date('02/08/2021')},
@@ -68,6 +69,7 @@ export class ReqContentComponent implements OnInit {
   ngOnInit(): void {
     this.idReqSpending= this.rutaActiva.snapshot.params.id,
     this.loadData(this.idReqSpending);
+    this.filterCompletedQ(this.quotationsCard);
   }
 
   openDialog(): void {
@@ -84,5 +86,28 @@ export class ReqContentComponent implements OnInit {
       this.items=this.reqReceived.requestDetail;
       this.dataSource.data=this.items;
     })
+  }
+  filterCompletedQ(quotationsCard){
+    for (let quot of quotationsCard){
+
+      if(quot.status == 'COMPLETADO'){
+        this.quotationsCompleted.push(quot);
+      }
+    }
+  }
+  getColorSR(status){
+    let color:string;
+    if (status=='Pendiente') {
+      color = '#979797';
+    } else if (status=='Autorizado') {
+        color = '#1975ff';
+      }else if(status=='Cotizando'){
+        color= '#ffc400';
+      }else if(status=='Rechazado'){
+        color= '#ff4848';
+      }else if(status=='Aprobado'){
+        color = '#28a745'
+      }
+    return color;
   }
 }
