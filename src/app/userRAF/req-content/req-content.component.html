@@ -103,14 +103,15 @@ place-items: center;">
                         <div class="comparative-section">
                             <div class="selection-quotation">
                                 <p style="font-size: 17px; font-weight: 500;">Cotizaciones completadas</p>
-                                <mat-selection-list #quots (selectionChange)="onGroupsChange(quots.selectedOptions.selected)">
+                                <mat-selection-list  (selectionChange)="onGroupsChange(quots.selectedOptions.selected)">
                                     <mat-list-option *ngFor="let quot of quotationsCompleted" [value]="quot">
-                                        {{quot.nameBussiness}}
+                                        <div style="display: flex;">
+                                            <mat-icon style="font-size: 14px; margin-top: 3px;" matSuffix [ngStyle]="{'color':getColorQuotation(quot.state)}">circle</mat-icon>
+                                            <p>{{quot.nameBussiness}}</p>
+                                        </div>
                                     </mat-list-option>
                                 </mat-selection-list>
-                                <p style="color: #0a6cff; font-size: 12px;">
-                                    Opciones seleccionadas: {{quots.selectedOptions.selected.length}}
-                                  </p>
+
                             </div> 
                             <div style="text-align: center;padding: 15px;">
                                 <button mat-raised-button class="btn-raised-p" [disabled]="verifyCheck()" (click)="setStateButton()">GENERAR CUADRO</button>
@@ -126,20 +127,22 @@ place-items: center;">
                     
                 </mat-expansion-panel>
 
-                <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" >
-                    <mat-expansion-panel-header style="background-color:  #fafafa;">
+                <mat-expansion-panel expanded (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header style="background-color:  #fafafa;">    
                     <mat-panel-title style="font-weight: bold;">DECISIÓN E INFORMES</mat-panel-title> 
                     </mat-expansion-panel-header>
                 <div class="decisionReports-section">
       
                     <div class="selection-quotation">
                         <p style="font-size: 17px; font-weight: 500;">EMPRESAS A ELEGIR</p>
-                        <mat-selection-list #quots>
-                            <mat-list-option *ngFor="let quot of quotationsCompleted">
-                                {{quot}}
+                        <mat-selection-list #quots  >
+                            <mat-list-option *ngFor="let quot of quotationsCompleted" [value]="quot" >
+                                <div style="display: flex;">
+                                    <mat-icon style="font-size: 14px; margin-top: 3px;" [ngStyle]="{'color':getColorQuotation(quot.state)}">circle</mat-icon>
+                                    <p>{{quot.nameBussiness}}</p>
+                                </div>
                             </mat-list-option>
                         </mat-selection-list>
-                        <p style="color: #0a6cff; font-size: 12px;"> Seleccione una cotizacion.</p>
                     </div>
                     <!--div class="report-section">
                         <mat-divider></mat-divider>
@@ -155,9 +158,9 @@ place-items: center;">
                     </div-->
                     <div class="report--comentary">
                         <mat-form-field appearance="outline">
-                            <mat-label>Comentario</mat-label>
-                            <input matInput >
-                          </mat-form-field>
+                            <mat-label>Comentario/Justificación</mat-label>
+                            <input matInput style="height: 40px;">
+                        </mat-form-field>
                     </div>
                     <div>
                         <div style="text-align: center;padding: 15px;">

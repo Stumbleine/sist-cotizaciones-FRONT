@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import {DgCreateCotComponent} from './../dg-create-cot/dg-create-cot.component'
 import {MatDialog} from '@angular/material/dialog';
 import {RequestService} from '../../services/request.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatListOption } from '@angular/material/list';
-import { FormBuilder, Validators } from '@angular/forms';
 
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatSelectionList, MatSelectionListChange, MatListOption } from '@angular/material/list';
 
 export interface DialogData {
   animal: string;
@@ -81,7 +81,7 @@ export class ReqContentComponent implements OnInit {
     {name:'Informe de aceptación',date:new Date('02/08/2021')}
   ]
   constructor(public dialog: MatDialog,private RequestService: RequestService,private rutaActiva: ActivatedRoute,private formBuilder: FormBuilder,) {}
-
+  @ViewChild(MatSelectionList) quots: MatSelectionList;
   ngOnInit(): void {
     this.idReqSpending= this.rutaActiva.snapshot.params.id,
     this.loadData(this.idReqSpending);
@@ -112,7 +112,7 @@ export class ReqContentComponent implements OnInit {
   filterCompletedQ(quotationsCard){
     for (let quot in quotationsCard){
 
-      if(quotationsCard[quot].state == 'COMPLETADO'){
+      if(quotationsCard[quot].state == 'COTIZADO' || quotationsCard[quot].state == 'INCOMPLETO'){
         this.quotationsCompleted.push(quotationsCard[quot]);
       }
     }
@@ -123,7 +123,7 @@ export class ReqContentComponent implements OnInit {
     .subscribe(r  =>{
       this.quotationsCard=r;
       this.filterCompletedQ(this.quotationsCard);
-      this.loadDataChart(this.idReqSpending)
+      this.loadDataChart(this.idReqSpending)  
     })
   }
   getColorSR(status){
@@ -142,6 +142,17 @@ export class ReqContentComponent implements OnInit {
       }
     return color;
   }
+  getColorQuotation(status){
+    let color:string;
+
+   if (status=='COTIZADO') {
+        color = 'rgb(74 255 70 / 73%)';
+      }else if(status=='INCOMPLETO'){
+        color ='#FFF176';
+      }
+    return color;
+  }
+
   onGroupsChange(options: MatListOption[]) {
       this.selectedBusiness=options.map(o=> o.value);
   }  

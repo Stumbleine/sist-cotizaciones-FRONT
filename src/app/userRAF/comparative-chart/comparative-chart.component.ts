@@ -78,7 +78,7 @@ export class ComparativeChartComponent implements OnInit {
   saveChart(id:any){
     this.RequestService.post('http://localhost:8080/api/quotation_comparative/'+id,this.comparativeChartSend)
     .subscribe( respuesta =>{
-      console.log('Cuadro guardado!!');
+      console.log('Cuadro guardado!!', this.comparativeChartSend);
     })
   }
   loadQuotation(){
