@@ -4,7 +4,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {RequestService} from '../../services/request.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { MatListOption } from '@angular/material/list';
+import { FormBuilder, Validators } from '@angular/forms';
 
 
 export interface DialogData {
@@ -28,6 +29,7 @@ export interface QuotForm{
   status:string;
   date:string;
 }
+
 @Component({
   selector: 'app-req-content',
   templateUrl: './req-content.component.html',
@@ -35,11 +37,13 @@ export interface QuotForm{
 })
 
 export class ReqContentComponent implements OnInit {
-    constructor(public dialog: MatDialog,private RequestService: RequestService,private rutaActiva: ActivatedRoute) {}
-
-  panelOpenState = false;
+  state:string;
+  stateButton=false;
+  panelOpenState =false;
   panelOpenState2=false;
-
+  panelOpenState3=false;
+  panelOpenState4=false;
+  name: string;
   displayedColumns: string[] = ['index', 'quantity', 'unit', 'description'];
   dataSource =  new MatTableDataSource<Items>([]);
   columnas=[
@@ -48,35 +52,41 @@ export class ReqContentComponent implements OnInit {
     {titulo:"DETALLE" ,name: "description"}
   ];
 
+  dateValidation = this.formBuilder.group({
+   date: ['',[Validators.required]],
+    
+});
   public reqReceived:any;
   public idReqSpending:any;
   public items:Items[]=[];
+  public selectedBusiness:QuotForm[]=[];
   //Varibles para -quotations-card
   quotationsCards:QuotForm[]=[
     {idQuotation:1,nameCompany:'AgataWorks S.A.',status:'IMCOMPLETO',date:'25/07/2021'},
     {idQuotation:2,nameCompany:'Hemlim HEmlim McGill S.A.',status:'COMPLETADO',date:'02/07/2021'},
     {idQuotation:3,nameCompany:'Enterprise line S.A.',status:'IMCOMPLETO',date:'24/07/2021'},
     {idQuotation:4,nameCompany:'Inmobiliaria samuel S.R.L.',status:'COMPLETADO',date:'26/07/2021'},
-    {idQuotation:5,nameCompany:'Pollos hermano S.A.',status:'EXPIRADO',date:'21/07/2021'}
+    {idQuotation:5,nameCompany:'La empresita S.R.L', status: 'COMPLETADO', date:'21/07/2021'},
+    {idQuotation:6,nameCompany:'Pollos hermano S.A.',status:'EXPIRADO',date:'21/07/2021'}
   ]
   public quotationsCard:any;
   //variables para cuadros comparativos
-
-  quotationsCompleted=[];
+  public quotReceived:any;
+  public chartReceived:any;
+  public quotationsCompleted:any[]=[];
+ 
   //variables para reportes
   reports:PDFs[]=[
     {name:'Informe de rechazo',date:new Date('02/08/2021')},
     {name:'Informe de aceptación',date:new Date('02/08/2021')}
   ]
-
-
-
+  constructor(public dialog: MatDialog,private RequestService: RequestService,private rutaActiva: ActivatedRoute,private formBuilder: FormBuilder,) {}
 
   ngOnInit(): void {
     this.idReqSpending= this.rutaActiva.snapshot.params.id,
     this.loadData(this.idReqSpending);
     this.loadCardQuotation(this.idReqSpending);
-    this.loadDataCharts();
+    
   }
 
   openDialog(): void {
@@ -91,12 +101,13 @@ export class ReqContentComponent implements OnInit {
   loadData(id:any){
     this.RequestService.get('http://localhost:8080/api/request/'+id)
     .subscribe(r  =>{
-      console.log("request: ",r);
+      console.log(r);
       this.reqReceived = r;
       this.items=this.reqReceived.requestDetail;
       this.dataSource.data=this.items;
     })
   }
+  
   //Cotizaciones HTTPs and functions
   filterCompletedQ(quotationsCard){
     for (let quot in quotationsCard){
@@ -107,37 +118,16 @@ export class ReqContentComponent implements OnInit {
     }
     console.log("completos::::",this.quotationsCompleted);
   }
-
   loadCardQuotation(id:any){
     this.RequestService.get('http://localhost:8080/api/req-content/'+id+'/quotation')
     .subscribe(r  =>{
       this.quotationsCard=r;
       this.filterCompletedQ(this.quotationsCard);
+      this.loadDataChart(this.idReqSpending)
     })
   }
-  //cuadros comparativos HTTP
-  loadDataCharts(){
-    this.RequestService.get('http://localhost:8080/api/charts')
-
-    // get para obtener los cuadros comparativos almacenados
-  }
-  createChartComparative(){
-    this.RequestService.post('http://localhost:8080/api/quotation',{})
-    .subscribe({
-      next:()=>{
-        console.log('Cotizacion creada exitosamente!!');
-        this.loadDataCharts();
-        //this.snack.open('Cuadro compartivo generado exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
-      },
-      error:()=>{
-        console.log('Ocurrio un error, no se creo la cotizacon.');
-        //this.snack.open('Fallo al generar el cuadro comparativo.','CERRAR',{duration:5000})
-      }
-    });
-  }
-
-
   getColorSR(status){
+    this.state=status;
     let color:string;
     if (status=='Pendiente') {
       color = '#979797';
@@ -152,4 +142,58 @@ export class ReqContentComponent implements OnInit {
       }
     return color;
   }
+  onGroupsChange(options: MatListOption[]) {
+      this.selectedBusiness=options.map(o=> o.value);
+  }  
+  verifyCheck():boolean{
+    if(this.quotationsCompleted.length>=3 && this.stateButton==false){
+      return false;
+    }else{
+      return true;
+    } 
+    
+  }
+  disabledButtons(status):boolean{
+    let disabled:boolean;
+    if (status=='Pendiente') {
+      disabled = false;
+    } else if (status=='Autorizado') {
+        disabled=true;
+      }else if(status=='Cotizando'){
+        disabled=true;
+      }else if(status=='Rechazado'){
+        disabled=true;
+      }else if(status=='Aprobado'){
+        disabled=true;
+      }
+    return disabled;
+  }
+  
+  
+  setStateButton(){
+    this.stateButton=true;
+  }
+  setStateFalse(){
+    this.stateButton=false;
+  }
+  activateChart():boolean{
+    return this.stateButton;
+    
+  }
+  loadDataChart(id:any){
+    this.RequestService.get('http://localhost:8080/api/quotation_comparative/'+id)
+    .subscribe(r  =>{
+      this.chartReceived = r;
+      
+      if(this.chartReceived.length!=0){
+        this.setStateButton()
+        console.log("hay cuadro")
+      }else{
+        console.log("no hay cuadro!")
+      }
+      
+    })
+  } 
+
 }
+  
