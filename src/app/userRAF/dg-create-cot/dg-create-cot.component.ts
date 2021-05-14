@@ -37,7 +37,6 @@ export class DgCreateCotComponent implements OnInit {
     details:this.data.items
   };
 
-  
 
 
   onNoClick(): void {
@@ -51,8 +50,12 @@ export class DgCreateCotComponent implements OnInit {
     this.RequestService.get('http://localhost:8080/api/').subscribe(r=>{
       this.Companies=r;
     })
-
   }
+  
+  listCompanies(company){
+    console.log("this es a company selected",company);
+  }
+
   createQuataion2(){
     this.RequestService.post('http://localhost:8080/api/quotation'+this.idR, this.quotationForm)
     .subscribe({

@@ -18,7 +18,7 @@
         <mat-dialog-content style="padding-bottom: 5px; max-height: 400px;">
             <mat-selection-list >
                 <div class="company-card" *ngFor="let company of companies">
-                    <mat-list-option style="height: 75px; " class="mat-primary" >
+                    <mat-list-option style="height: 75px; " class="mat-primary" (click)="listCompanies(company)">
                         <div>
                             <h2>{{company.nameCompany}}</h2>
                             <p>{{company.rubro}}</p>
