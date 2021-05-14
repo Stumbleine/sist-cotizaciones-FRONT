@@ -63,13 +63,13 @@ place-items: center;">
                 </mat-expansion-panel>
 
                 <!-- COTIZACIONES -->
-                <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" >
+                <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded >
                     <mat-expansion-panel-header style="background-color:  #fafafa;">
                     <mat-panel-title style="font-weight: bold;">COTIZACIONES</mat-panel-title> 
                     </mat-expansion-panel-header>
 
                         <div class="quotations-section">
-                            <div style="text-align: center; padding: 25px;;">
+                            <div style="text-align: center; padding: 15px; ">
                                 <p>Es necesario elegir una fecha de vencimiento para los formularios.</p>
                                 <mat-form-field  appearance="outline">
                                 <mat-label>Fecha de vencimiento</mat-label>
@@ -78,9 +78,12 @@ place-items: center;">
                             </mat-form-field></div>
 
                             <div class="quotation--cards">
-                                <mat-grid-list cols="3"  rowHeight="fit" style="height: 300px;" gutterSize="10px" >
-                                    <mat-grid-tile *ngFor="let quotCard of quotationsCard">
-                                    <app-qoatation-card style="width: 100%;" [idQ]="quotCard?.name" [nameCompany]="quotCard?.nameCompany" [status]='quotCard?.status' [date]='quotCard?.date'></app-qoatation-card>
+                                <mat-grid-list cols="3"  rowHeight="160px"  gutterSize="10px"  >
+                                    <mat-grid-tile *ngFor="let quotCard of quotationsCard" >
+                                    <app-qoatation-card style="width: 100%;" [idQ]="quotCard?.idPriceQuotation" 
+                                    [nameCompany]="quotCard?.nameBussiness" 
+                                    [status]='quotCard?.state' 
+                                    [date]='quotCard?.nameArea'></app-qoatation-card>
                                 </mat-grid-tile>
                                 
                             </mat-grid-list>
@@ -92,8 +95,8 @@ place-items: center;">
                         </div>
                         <!--CUADROS COMPARATIVOS-->
                 </mat-expansion-panel>
-                        <mat-expansion-panel expanded  (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" >
-                            <mat-expansion-panel-header style="background-color:  #fafafa;">
+                        <mat-expansion-panel   (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" >
+                            <mat-expansion-panel-header style="background-color:  #fafafa;" >
                             <mat-panel-title style="font-weight: bold;">CUADROS COMPARATIVOS</mat-panel-title> 
                             </mat-expansion-panel-header>
 
@@ -105,7 +108,7 @@ place-items: center;">
                                         {{quot.nameCompany}}
                                     </mat-list-option>
                                 </mat-selection-list>
-                                <p style="color: #0a6cff; font-size: 12px;"> Seleccionar al menos 3 cotizaciones </p>
+                                <p style="color: #0a6cff; font-size: 12px;"> Seleccionar al menos 3 cotizaciones. </p>
                             </div> 
                             <div style="text-align: center;padding: 15px;">
                                 <button mat-raised-button class="btn-raised-p" >GENERAR CUADRO</button>
@@ -128,15 +131,15 @@ place-items: center;">
                 <div class="decisionReports-section">
       
                     <div class="selection-quotation">
-                        <p>EMPRESAS A ELEGIR</p>
+                        <p style="font-size: 17px; font-weight: 500;">EMPRESAS A ELEGIR</p>
                         <mat-selection-list #quots>
                             <mat-list-option *ngFor="let quot of quotationsCompleted">
                                 {{quot}}
                             </mat-list-option>
                         </mat-selection-list>
-                        <p> Seleccionados: {{quots.selectedOptions.selected.length}} </p>
+                        <p style="color: #0a6cff; font-size: 12px;"> Seleccione una cotizacion.</p>
                     </div>
-                    <div class="report-section">
+                    <!--div class="report-section">
                         <mat-divider></mat-divider>
                         <mat-list>
                             <div mat-subheader> archivos</div>
@@ -148,7 +151,7 @@ place-items: center;">
 
                         </mat-list>
                         <mat-divider></mat-divider>
-                    </div>
+                    </div-->
                     <div class="report--comentary">
                         <mat-form-field appearance="outline">
                             <mat-label>Comentario</mat-label>

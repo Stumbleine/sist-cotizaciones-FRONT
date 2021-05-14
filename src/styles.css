@@ -3,13 +3,14 @@
 html,
 body {
   height: 100%;
+  background-color: rgb(250, 250, 250);
 }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 :root {
-  --txt-color-subt: #666666d3;
+  --txt-color-subt: #666666;
   --txt-color-error: #ff4848;
   --txt-color-title2: #700aff;
 

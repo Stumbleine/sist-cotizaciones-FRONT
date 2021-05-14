@@ -7,6 +7,7 @@ import {ReqContentComponent} from './userRAF/req-content/req-content.component';
 import {FormQuotationComponent} from './userRAF/form-quotation/form-quotation.component';
 
 import { FormQuotationBusinessComponent } from './business/form-quotation-business/form-quotation-business.component';
+import {ErrorPageComponent} from './components/error-page/error-page.component'
 const routes: Routes = [
   { path: 'home-rug', component:  HomePageComponent},
   { path: 'form-solicitud', component:  FormRequestComponent},
@@ -15,9 +16,9 @@ const routes: Routes = [
   {path:'req-content/:id',component:ReqContentComponent},
   {path:'req-content/:id/form-quotation',component:FormQuotationComponent},
   {path: 'cotizador/form-quotation', component: FormQuotationBusinessComponent},
-  {path: '', pathMatch: 'full', redirectTo: 'home-rug'}
-];
-
+  {path: '', pathMatch: 'full', redirectTo: 'home-rug'},
+  {path: 'error', component:ErrorPageComponent }
+]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

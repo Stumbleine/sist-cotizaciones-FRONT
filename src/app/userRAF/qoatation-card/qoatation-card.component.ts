@@ -18,12 +18,14 @@ export class QoatationCardComponent implements OnInit {
 
   getColor(status){
     let color:string;
-    if (status=='IMCOMPLETO') {
+    if (status=='SIN COTIZAR') {
       color = '#f7f7f7'
-    } else if (status=='COMPLETADO') {
+    } else if (status=='COTIZADO') {
         color = 'rgb(74 255 70 / 73%)';
       }else if(status=='EXPIRADO'){
-        color= 'rgb(255 143 133 / 91%)';
+        color= 'rgb(255 143 133 / 90%)';
+      }else if(status=='INCOMPLETO'){
+        color ='#FFF176';
       }
     return color;
   }

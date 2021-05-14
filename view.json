@@ -99,3 +99,69 @@
   ]
 
 idSpendingRequest:211,
+
+[
+  {
+    "quantity" : 12,
+    "unit" : "casa",
+    "description" : "madaswas",
+    "unitPrice" : 212,
+    "bussiness":[
+          {
+            "NameBusiness":"nombreCompañia",
+            "Subtotal":
+          },
+
+          ],
+    "totalPrice" : 121212
+  },
+
+
+  {
+
+  }
+]
+
+[
+  {
+    "idComparativeChart":1,
+    "itemsChart":[
+      {
+        "quantity" : 12,
+        "unit" : "casa",
+        "description" : "primera fila",
+        "subtotalQBussines1":2333,
+        "subtotalQBussines2":2333,
+        "subtotalQBussines3":2333,
+        "subtotalQBussines4":2333,
+        "subtotalQBussines5":2333,
+      },
+      {
+        "quantity" : 12,
+        "unit" : "casa",
+        "description" : "segunda fila",
+        "subtotalQBussines1":2333,
+        "subtotalQBussines2":2333,
+        "subtotalQBussines3":2333,
+        "subtotalQBussines4":2333,
+        "subtotalQBussines5":2333,
+      },
+      
+    ],
+  },
+  {
+    "idComparativeChart":1,
+    "itemsChart":[],
+  },
+  {
+    "idComparativeChart":1,
+    "itemsChart":[],
+  },
+
+]
+
+
+{
+  "itemsChart":[],
+
+}

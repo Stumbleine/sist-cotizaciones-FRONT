@@ -1,23 +1,41 @@
-
-    
-    <div class="search">
-        <mat-card-content>
-            <mat-card-title>Elija una empresa</mat-card-title>
-            
-        </mat-card-content>
-        <div class="search__content">
-            <p>Aqui funcionalidad para buscar empresa</p>
-            <button mat-button matTooltip="para buscar empresas" aria-label="Button that displays a tooltip when focused or hovered over"><mat-icon >search</mat-icon></button>
-        </div>
-        <mat-divider></mat-divider>
-        <div style="text-align: end; margin-top: 15px;" class="btn__search">        
- 
-            <button mat-button mat-dialog-close (click)="createQuataion2()"  >ELEGIR</button>
-            <button mat-button mat-dialog-close > OMITIR </button>
-        </div>
-
-        
+<div class="search">
+    <div style="text-align:end; margin-top: -20px; margin-right: -20px;" >
+        <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
     </div>
+        <h1 mat-card-title>Elija una empresa</h1>
+        
+
+    <div  >
+        <div class="search__bar"  >
+                <mat-form-field appearance="outline" >
+                    <input matInput placeholder="buscar por rubro">
+                   <mat-icon matSuffix>search</mat-icon>
+                 </mat-form-field>
+                 <button color="primary" mat-raised-button >BUSCAR</button>
+        </div>
+
+        <div class="search__list">
+        <mat-dialog-content style="padding-bottom: 5px; max-height: 400px;">
+            <mat-selection-list >
+                <div class="company-card" *ngFor="let company of companies">
+                    <mat-list-option style="height: 75px; " class="mat-primary" >
+                        <div>
+                            <h2>{{company.nameCompany}}</h2>
+                            <p>{{company.rubro}}</p>
+                            <p>{{company.eMail}}</p>
+                        </div>
+                    </mat-list-option>
+                </div>
+            </mat-selection-list>
+        </mat-dialog-content>
+        </div>
+    </div>
+        <mat-dialog-actions align="end" class="btn__search" style="margin-top:10px; ">
+            <button class="btn__search--omit" mat-button mat-dialog-close >CREAR SIN ELEGIR</button>
+            <button class="btn__search--choice" mat-raised-button [mat-dialog-close]="true">CREAR</button>
+        </mat-dialog-actions>
+        
+</div>
 
 <!--div style="text-align: end;">
     <button mat-raised-button style="background-color: #1975ff; color: white;" >
@@ -27,19 +45,80 @@
             <button mat-button mat-dialog-close (click)="createQuataion()"  *ngIf="send==true"      ng-init="[routerLink]='['/req-content', idR,'form-quotation']'">> ELEGIR </button>
 </div-->
 <style>
+    .search{
+        width: 500px;
+        align-items: center;
+    }
+    mat-icon{
+        color: #3948ab;
+        font-size: 25px;
+    }
+    .search__bar{
+        text-align: center;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        
+    }
+    .search__bar button{
+        height: fit-content;
+        align-self: center;
+        margin-bottom: 20px;
+        margin-left: 10px;
+        height: 40px;
+    }
+    .search__bar mat-form-field{
+        width: 75%; 
+    }
+    .search__list{
+
+     background-color: #d2b4fc54;        border-radius: 7px; 
+     padding: 5px;
+    }
+ mat-list-option[aria-selected="true"] {
+  background: #3b4bb1;
+  color: white;
+}
+
+    .company-card{
+
+        background-color:#fcfcfc;
+        border-radius:7px;
+        box-shadow: 0 5px 5px rgba(34, 34, 34, 0.247);
+        overflow: hidden;
+        margin-top: 10px;
+        height: 75px;
+        width: 90%;
+        margin-left: 30px;
+    }
+    .company-card h2{
+        font-size: 15px;
+        line-height: 7px;
+
+        font-weight: 500;
+        margin-top: 10px;
+        text-transform: uppercase;
+
+
+    }
+    .company-card p{
+        font-size: 13px;
+        line-height: 5px;
+        font-style: italic;
+    }
     .snackSuccess{
         background-color: var(--state-color-5);
         
     }
-    .search__content{
-        width: max-content;
-        height: 300px;
-        width: 400px;
-        text-align: center;
-    }
 
-    .btn__search button{
-        color: var( --txt-color-title2);
-    }
+    .btn__search--omit{
+        color: var(--btn-color-pri);
 
+        font-size: 17px;
+    }
+    .btn__search--choice{
+        color: white;
+        background-color: var(--btn-color-pri);
+        font-size: 17px;
+    }
 </style>

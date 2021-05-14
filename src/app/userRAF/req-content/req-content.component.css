@@ -9,10 +9,14 @@ table {
   margin-top: 50px;
   margin-bottom: 100px;
   padding: 15px;
-  background-color: rgb(221, 247, 162);
+  padding-bottom: 30px;
   width: 70%;
   min-width: 900px;
   min-height: max-content;
+
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 20px 50px -15px #c2c2c2;
+  border-radius: 10px;
 }
 .header__title {
   text-align: center;
@@ -62,9 +66,6 @@ table {
 
 /*Estilos para COTIZACIONES*/
 .quotations-section {
-  border-radius: 10px;
-  border: 1px solid;
-  border-color: #e0e0e0;
   padding: 15px;
   margin-top: 15px;
 }
@@ -72,26 +73,25 @@ table {
 /*Estilos para CUADROS*/
 .comparative-section {
   margin-top: 15px;
-  border-radius: 10px;
+  /*border-radius: 10px;
   border: 1px solid;
-  border-color: #e0e0e0;
+  border-color: #e0e0e0;*/
   padding: 15px;
   display: grid;
   place-items: center;
 }
 .selection-quotation {
   width: 60%;
-  background-color: rgba(255, 255, 231, 0.767);
+  padding: 15px;
 }
-.comparative__charts {
-  background-color: rgb(145, 255, 244);
-}
+
 /*DECISION e INFORMES*/
 
 .decisionReports-section {
-  background-color: rgb(182, 214, 216);
   padding: 15px;
   margin-top: 15px;
+  display: grid;
+  place-items: center;
 }
 .report-section {
   background-color: cornsilk;
@@ -103,8 +103,9 @@ table {
   margin: auto;
 }
 .report--comentary {
-  background-color: rgb(255, 255, 255);
   text-align: center;
+
+  width: 100%;
 }
 .report--comentary mat-form-field {
   width: 60%;
@@ -113,10 +114,12 @@ table {
 .btn-raised-error {
   background-color: var(--btn-color-error);
   color: white;
+  margin-right: 15px;
 }
 .btn-raised-success {
   background-color: var(--btn-color-scss);
   color: white;
+  margin-left: 15px;
 }
 .mat-list-icon {
   color: rgba(0, 0, 0, 0.54);
