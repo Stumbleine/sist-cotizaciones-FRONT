@@ -1,1 +1,17 @@
-<p>comparative-chart works!</p>
+<div style="  place-items: center;">
+
+  <table mat-table [dataSource]="dataSourceBusiness" class="mat-elevation-z5">
+
+    <ng-container  matColumnDef="{{column}}" *ngFor="let column of displayedColumnsBusiness" >
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 85px;max-height: 85px; font-weight: bold;"> {{getNameColumn(column)}}</th>
+      <td mat-cell *matCellDef="let quotation;let i=index;" style="min-width: 85px;max-height: 85px;text-align: center;"> {{quotation[column]}} </td>
+      <td mat-footer-cell *matFooterCellDef="let quotation"style="min-width: 85px;max-height: 85px;text-align: center;">{{getTotalCost(column)}}</td>
+    </ng-container>
+    
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsBusiness"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsBusiness;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumnsBusiness; sticky: true"></tr>
+  </table>
+  
+</div>

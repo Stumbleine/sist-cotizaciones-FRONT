@@ -57,8 +57,8 @@ place-items: center;">
                         <p style="margin:0 20px 0 20px;">{{reqReceived?.justification}} Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</p>
                   </div>
                   <div  style="text-align: end; margin-bottom: 10px; margin-top: 15px;">
-                        <button mat-raised-button class="btn-raised-e">RECHAZAR</button>
-                        <button mat-raised-button class="btn-raised-s">AUTORIZAR</button>
+                    <button mat-raised-button class="btn-raised-e" [disabled]="disabledButtons(reqReceived?.status)">RECHAZAR</button>
+                    <button mat-raised-button class="btn-raised-s"[disabled]="disabledButtons(reqReceived?.status)">AUTORIZAR</button>
                   </div>
                 </mat-expansion-panel>
 
@@ -68,12 +68,12 @@ place-items: center;">
                     <mat-panel-title style="font-weight: bold;">COTIZACIONES</mat-panel-title> 
                     </mat-expansion-panel-header>
 
-                        <div class="quotations-section">
-                            <div style="text-align: center; padding: 15px; ">
+                        <form class="quotations-section"[formGroup]="dateValidation">
+                            <div style="text-align: center; padding: 25px;;">
                                 <p>Es necesario elegir una fecha de vencimiento para los formularios.</p>
                                 <mat-form-field  appearance="outline">
                                 <mat-label>Fecha de vencimiento</mat-label>
-                                <input matInput  type="date" placeholder="Ingrese fecha limite *"  > 
+                                <input matInput  type="date" placeholder="Ingrese fecha limite" formControlName='date' required > 
                                 <mat-error >campo obligatorio</mat-error>
                             </mat-form-field></div>
 
@@ -90,9 +90,9 @@ place-items: center;">
                             </div>
 
                             <div style="text-align: center;padding: 15px;">
-                                <button mat-raised-button class="btn-raised-p" (click)="openDialog()" > <mat-icon>add</mat-icon> COTIZACIÓN</button>
+                                <button mat-raised-button class="btn-raised-p" (click)="openDialog()" [disabled]="dateValidation.invalid"> <mat-icon>add</mat-icon> COTIZACIÓN</button>
                             </div>
-                        </div>
+                        </form>
                         <!--CUADROS COMPARATIVOS-->
                 </mat-expansion-panel>
                         <mat-expansion-panel   (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" >
@@ -103,20 +103,22 @@ place-items: center;">
                         <div class="comparative-section">
                             <div class="selection-quotation">
                                 <p style="font-size: 17px; font-weight: 500;">Cotizaciones completadas</p>
-                                <mat-selection-list #quots>
-                                    <mat-list-option *ngFor="let quot of quotationsCompleted">
-                                        {{quot.nameCompany}}
+                                <mat-selection-list #quots (selectionChange)="onGroupsChange(quots.selectedOptions.selected)">
+                                    <mat-list-option *ngFor="let quot of quotationsCompleted" [value]="quot">
+                                        {{quot.nameBussiness}}
                                     </mat-list-option>
                                 </mat-selection-list>
-                                <p style="color: #0a6cff; font-size: 12px;"> Seleccionar al menos 3 cotizaciones. </p>
+                                <p style="color: #0a6cff; font-size: 12px;">
+                                    Opciones seleccionadas: {{quots.selectedOptions.selected.length}}
+                                  </p>
                             </div> 
                             <div style="text-align: center;padding: 15px;">
-                                <button mat-raised-button class="btn-raised-p" >GENERAR CUADRO</button>
+                                <button mat-raised-button class="btn-raised-p" [disabled]="verifyCheck()" (click)="setStateButton()">GENERAR CUADRO</button>
                             </div>
 
-                            <div class="comparative__charts">
+                            <div class="comparative__charts" *ngIf="activateChart()">
                                 <p>CUADROS COMPARATIVOS</p>
-                                <app-comparative-chart *ngFor="let i of [1,2]"></app-comparative-chart>
+                                <app-comparative-chart *ngFor="let i of [1]" [quotationsCompleted]="quotationsCompleted"></app-comparative-chart>
                             </div>
 
                             
@@ -148,7 +150,6 @@ place-items: center;">
                                 <div mat-line>{{report.name}}</div>
                                 <div mat-line>{{report.date}}</div>
                             </mat-list-item>
-
                         </mat-list>
                         <mat-divider></mat-divider>
                     </div-->
