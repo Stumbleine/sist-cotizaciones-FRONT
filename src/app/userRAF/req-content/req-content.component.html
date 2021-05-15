@@ -58,7 +58,7 @@ place-items: center;">
                   </div>
                   <div  style="text-align: end; margin-bottom: 10px; margin-top: 15px;">
                     <button mat-raised-button class="btn-raised-e" [disabled]="disabledButtons(reqReceived?.status)">RECHAZAR</button>
-                    <button mat-raised-button class="btn-raised-s"[disabled]="disabledButtons(reqReceived?.status)">AUTORIZAR</button>
+                    <button mat-raised-button class="btn-raised-s" [disabled]="disabledButtons(reqReceived?.status)">AUTORIZAR</button>
                   </div>
                 </mat-expansion-panel>
 
@@ -69,13 +69,18 @@ place-items: center;">
                     </mat-expansion-panel-header>
 
                         <form class="quotations-section"[formGroup]="dateValidation">
-                            <div style="text-align: center; padding: 25px;;">
+                            <div style="text-align: center; padding: 15px;" *ngIf="dateExpiration==null">
                                 <p>Es necesario elegir una fecha de vencimiento para los formularios.</p>
                                 <mat-form-field  appearance="outline">
                                 <mat-label>Fecha de vencimiento</mat-label>
                                 <input matInput  type="date" placeholder="Ingrese fecha limite" formControlName='date' required > 
                                 <mat-error >campo obligatorio</mat-error>
                             </mat-form-field></div>
+                            <div style="text-align: center; padding: 10px;" *ngIf="dateExpiration!=null">
+                                <h2 style="color: #0a6cff; font-size: 17px;" >
+                                    Fecha de expiración de los formularios:  <p style="font-style: italic;">{{dateExpiration}}</p>
+                                </h2>
+                            </div>
 
                             <div class="quotation--cards">
                                 <mat-grid-list cols="3"  rowHeight="160px"  gutterSize="10px"  >
@@ -85,7 +90,6 @@ place-items: center;">
                                     [status]='quotCard?.state' 
                                     [date]='quotCard?.nameArea'></app-qoatation-card>
                                 </mat-grid-tile>
-                                
                             </mat-grid-list>
                             </div>
 
@@ -103,11 +107,12 @@ place-items: center;">
                         <div class="comparative-section">
                             <div class="selection-quotation">
                                 <p style="font-size: 17px; font-weight: 500;">Cotizaciones completadas</p>
-                                <mat-selection-list  (selectionChange)="onGroupsChange(quots.selectedOptions.selected)">
+                                <mat-selection-list #quots (selectionChange)="onGroupsChange(quots.selectedOptions.selected)">
                                     <mat-list-option *ngFor="let quot of quotationsCompleted" [value]="quot">
-                                        <div style="display: flex;">
-                                            <mat-icon style="font-size: 14px; margin-top: 3px;" matSuffix [ngStyle]="{'color':getColorQuotation(quot.state)}">circle</mat-icon>
-                                            <p>{{quot.nameBussiness}}</p>
+                                        <div >
+                                            <p style="line-height: 15px;">{{quot.nameBussiness}}</p>
+                                            <p style="font-size: 12px; font-weight: 500; line-height: 0px; font-style: italic;" [ngStyle]="{'color':getColorQuotation(quot.state)}">{{quot.state}}</p>
+
                                         </div>
                                     </mat-list-option>
                                 </mat-selection-list>
@@ -115,6 +120,8 @@ place-items: center;">
                             </div> 
                             <div style="text-align: center;padding: 15px;">
                                 <button mat-raised-button class="btn-raised-p" [disabled]="verifyCheck()" (click)="setStateButton()">GENERAR CUADRO</button>
+                                <button mat-raised-button class="btn-raised-p"  (click)="openDialogChart()">GENERAR CUADRO</button>
+
                             </div>
 
                             <div class="comparative__charts" *ngIf="activateChart()">
@@ -131,31 +138,22 @@ place-items: center;">
                     <mat-expansion-panel-header style="background-color:  #fafafa;">    
                     <mat-panel-title style="font-weight: bold;">DECISIÓN E INFORMES</mat-panel-title> 
                     </mat-expansion-panel-header>
-                <div class="decisionReports-section">
-      
-                    <div class="selection-quotation">
+                <div class="decisionReports-section" *ngIf="reqReceived?.status=='Cotizando'">
+                    <div class="selection-quotation" >
                         <p style="font-size: 17px; font-weight: 500;">EMPRESAS A ELEGIR</p>
-                        <mat-selection-list #quots  >
-                            <mat-list-option *ngFor="let quot of quotationsCompleted" [value]="quot" >
-                                <div style="display: flex;">
-                                    <mat-icon style="font-size: 14px; margin-top: 3px;" [ngStyle]="{'color':getColorQuotation(quot.state)}">circle</mat-icon>
-                                    <p>{{quot.nameBussiness}}</p>
+                        <mat-radio-group
+                        aria-labelledby="example-radio-group-label"
+                        class="example-radio-group"
+                        [(ngModel)]="quotChoice">
+                            <mat-radio-button class="example-radio-button" *ngFor="let quot of quotationsCompleted" [value]="quot">
+                                <div >
+                                    <p style="line-height: 10px;">{{quot.nameBussiness}}</p>
+                                    <p style="font-size: 12px; font-weight: 500; line-height: 0px; font-style: italic;" [ngStyle]="{'color':getColorQuotation(quot.state)}">{{quot.state}}</p>
                                 </div>
-                            </mat-list-option>
-                        </mat-selection-list>
+                            </mat-radio-button>
+                        </mat-radio-group>
                     </div>
-                    <!--div class="report-section">
-                        <mat-divider></mat-divider>
-                        <mat-list>
-                            <div mat-subheader> archivos</div>
-                            <mat-list-item *ngFor="let report of reports">
-                                <mat-icon mat-list-icon>description</mat-icon>
-                                <div mat-line>{{report.name}}</div>
-                                <div mat-line>{{report.date}}</div>
-                            </mat-list-item>
-                        </mat-list>
-                        <mat-divider></mat-divider>
-                    </div-->
+
                     <div class="report--comentary">
                         <mat-form-field appearance="outline">
                             <mat-label>Comentario/Justificación</mat-label>
@@ -164,10 +162,52 @@ place-items: center;">
                     </div>
                     <div>
                         <div style="text-align: center;padding: 15px;">
-                            <button mat-raised-button class="btn-raised-error" >RECHAZAR</button>
-                            <button mat-raised-button class="btn-raised-success" >APROBAR</button>
+                            <button mat-raised-button class="btn-raised-error" [disabled]="disabledBtnAR(reqReceived?.status)">RECHAZAR</button>
+                            <button mat-raised-button class="btn-raised-success" [disabled]="disabledBtnAR(reqReceived?.status)" >APROBAR</button>
                         </div>
-                        
+                    </div>
+
+
+                </div>
+                <div *ngIf="(reqReceived?.status=='Aprobado'||reqReceived?.status=='Rechazado')" class="decisionReports-section" style="margin-bottom: 15px;">
+                    <div class="decision__quotation" 
+                    *ngIf="reqReceived?.status!='Rechazado'"
+                    style=" text-align: start;" >
+                        <div style="width: 100%; text-align: start;">
+                            <h3 style="font-weight: 500; font-size: 17px;">Cotizacion elegida</h3>
+                        </div>
+                        <div class="decision__card">
+                            
+                            <div style="display: flex; margin-top: 10px; justify-content: space-between;  ">
+                                <h3>{{report?.choice.nameCompany}} Inmobiliaria COCO </h3>
+                                <mat-icon  style="margin-top:-10px; ">check_circle</mat-icon>
+                            </div>
+                            <h4>{{report?.choice.rubro}} Inmuebles</h4>
+                            <h4 style="display: flex;">Total Bs. <p>{{report?.choice.totalPrice}} 5420</p></h4>
+                        </div>
+                    </div>
+                    <div style="width: 60%;  margin-bottom: 10px;">
+                        <h3 style="font-weight: 500; font-size: 17px; line-height: 20px;">Razón de la decision.</h3>
+                        <p style="margin-left: 10px; font-size: 15px;">
+                            {{report?.justification}}
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem, labore modi sed distinctio consectetur maiores nesciunt tempora autem quos placeat in inventore aperiam quo magnam similique natus perferendis nisi consequatur!
+                        </p>
+                    </div>
+                    <div class="report-section">
+
+                        <mat-list>
+                            <div mat-subheader> archivos</div>
+                            <mat-list-item *ngFor="let report of reports" style="display: flex; ">
+                                <img  width="30px" height="30px"  src="./../../../assets/file-pdf-regular.svg" alt="pdf del reporte">
+                                
+                                <div style="margin-left:15px">
+                                    <div mat-line>{{report.name}}</div>
+                                    <div mat-line>{{report.date}}</div>
+                                </div>
+                                
+                            </mat-list-item>
+                        </mat-list>
+
                     </div>
                 </div>
                 </mat-expansion-panel>

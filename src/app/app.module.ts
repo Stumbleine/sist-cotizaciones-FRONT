@@ -47,7 +47,8 @@ import {SumCardRafComponent} from './userRAF/sum-card-raf/sum-card-raf.component
 import { FormQuotationComponent } from './userRAF/form-quotation/form-quotation.component';
 import { QoatationCardComponent } from './userRAF/qoatation-card/qoatation-card.component';
 import { ComparativeChartComponent } from './userRAF/comparative-chart/comparative-chart.component';
-import { ErrorPageComponent } from './components/error-page/error-page.component'
+import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { DgChartValidationComponent } from './userRAF/dg-chart-validation/dg-chart-validation.component'
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
     DialogValidationCancelComponent,
     QoatationCardComponent,
     ComparativeChartComponent,
-    ErrorPageComponent,
+    ErrorPageComponent, 
+    DgChartValidationComponent,
   ],
   imports: [
     HttpClientModule,

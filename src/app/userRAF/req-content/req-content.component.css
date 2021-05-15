@@ -93,15 +93,16 @@ table {
   display: grid;
   place-items: center;
 }
-.report-section {
-  background-color: cornsilk;
-  border-radius: 10px;
-  border: 1px solid;
-  border-color: #e0e0e0;
-  padding: 15px;
-  width: 58%;
-  margin: auto;
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
 }
+
+.example-radio-button {
+  margin: 10px;
+}
+
 .report--comentary {
   text-align: center;
 
@@ -121,6 +122,65 @@ table {
   color: white;
   margin-left: 15px;
 }
+.decision__quotation {
+  width: 60%;
+
+  display: grid;
+  place-items: center;
+}
+.decision__card {
+  border-radius: 7px;
+  box-shadow: 0 5px 5px rgba(68, 68, 68, 0.247);
+  overflow: hidden;
+
+  height: 85px;
+  width: 70%;
+  margin-bottom: 15px;
+  color: white;
+  padding: 10px;
+  background: linear-gradient(148deg, #740aa5, #b01ff3, #1cc3e9);
+  background-size: 600% 600%;
+
+  animation: fluctuant 10s ease infinite;
+}
+
+.decision__card h4 {
+  font-size: 17px;
+  line-height: 10px;
+}
+.decision__card p {
+  color: white;
+  font-weight: 600;
+  margin-left: 5px;
+  letter-spacing: 1px;
+}
+.decision__card h3 {
+  line-height: 15px;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+.report-section {
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  padding: 5px;
+  width: 60%;
+  margin: auto;
+}
+
 .mat-list-icon {
   color: rgba(0, 0, 0, 0.54);
+}
+
+@keyframes fluctuant {
+  0% {
+    background-position: 50% 49%;
+  }
+  50% {
+    background-position: 100% 52%;
+  }
+  100% {
+    background-position: 0% 49%;
+  }
 }
