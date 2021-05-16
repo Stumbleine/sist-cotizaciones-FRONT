@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {RequestService} from 'src/app/services/request.service'
 @Component({
   selector: 'app-dg-chart-validation',
   templateUrl: './dg-chart-validation.component.html',
@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DgChartValidationComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private RequestService: RequestService) { }
+  public createchart=false
   ngOnInit(): void {
   }
-
+  getStatus(){
+    this.createchart=true
+    this.RequestService.disparadorChart.emit(this.createchart)
+  }
 }

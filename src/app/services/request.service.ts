@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output ,EventEmitter } from '@angular/core';
 import{HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequestService {
-
+  @Output() disparadorChart: EventEmitter<any>=new EventEmitter();
   constructor(
     private http: HttpClient
   ) { }

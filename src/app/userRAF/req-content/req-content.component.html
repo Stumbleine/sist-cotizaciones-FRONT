@@ -18,7 +18,7 @@ place-items: center;">
         </div>
         <div class="section" style="width: 100%;">
             <mat-accordion>
-                <mat-expansion-panel expanded  (opened)="panelOpenState = true" 
+                <mat-expansion-panel [expanded]="getPanelState(reqReceived?.status)"  (opened)="panelOpenState = true" 
                                      (closed)="panelOpenState = false" class="section--desc" >
                   <mat-expansion-panel-header style="background-color:  #fafafa;">
                     <mat-panel-title style="font-weight: bold;">
@@ -63,7 +63,7 @@ place-items: center;">
                 </mat-expansion-panel>
 
                 <!-- COTIZACIONES -->
-                <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false" expanded >
+                <mat-expansion-panel [expanded]="getPanelState2(reqReceived?.status)" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [disabled]="getBlocked(reqReceived?.status)" >
                     <mat-expansion-panel-header style="background-color:  #fafafa;">
                     <mat-panel-title style="font-weight: bold;">COTIZACIONES</mat-panel-title> 
                     </mat-expansion-panel-header>
@@ -101,7 +101,7 @@ place-items: center;">
                         </form>
                         <!--CUADROS COMPARATIVOS-->
                 </mat-expansion-panel>
-                        <mat-expansion-panel   (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" >
+                        <mat-expansion-panel   (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" [disabled]="getBlocked(reqReceived?.status)">
                             <mat-expansion-panel-header style="background-color:  #fafafa;" >
                             <mat-panel-title style="font-weight: bold;">CUADROS COMPARATIVOS</mat-panel-title> 
                             </mat-expansion-panel-header>
@@ -121,8 +121,8 @@ place-items: center;">
 
                             </div> 
                             <div style="text-align: center;padding: 15px;">
-                                <button mat-raised-button class="btn-raised-p" [disabled]="verifyCheck()" (click)="setStateButton()">GENERAR CUADRO</button>
-                                <button mat-raised-button class="btn-raised-p"  (click)="openDialogChart()">GENERAR CUADRO</button>
+                                <button mat-raised-button class="btn-raised-p" [disabled]="verifyCheck()" (click)="setStateButtonDialog()">GENERAR CUADRO</button>
+                                
 
                             </div>
 
@@ -136,7 +136,7 @@ place-items: center;">
                     
                 </mat-expansion-panel>
 
-                <mat-expansion-panel expanded (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel [expanded]="getPanelState4(reqReceived?.status)" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [disabled]="getBlockedDecision(reqReceived?.status)">
                     <mat-expansion-panel-header style="background-color:  #fafafa;">    
                     <mat-panel-title style="font-weight: bold;">DECISIÓN E INFORMES</mat-panel-title> 
                     </mat-expansion-panel-header>

@@ -89,6 +89,9 @@ export class ReqContentComponent implements OnInit {
     this.idReqSpending= this.rutaActiva.snapshot.params.id,
     this.loadData(this.idReqSpending);
     this.loadCardQuotation(this.idReqSpending);
+    this.RequestService.disparadorChart.subscribe(data=>{
+      this.stateButton=data;
+    })
   }
 
 //SOLICITUD DE PEDIDO functions and HTTP
@@ -176,11 +179,19 @@ export class ReqContentComponent implements OnInit {
   }  
 
   verifyCheck():boolean{
-    if(this.quotationsCompleted.length>=2 && this.stateButton==false){
+    if(this.quotationsCompleted.length>=1 && this.stateButton==false){
       return false;
     }else{
       return true;
     } 
+  }
+  setStateButtonDialog(){
+    if(this.quotationsCompleted.length>=1 && this.quotationsCompleted.length<=2){
+      this.openDialogChart()
+      
+    }else if(this.quotationsCompleted.length>=3){
+      this.stateButton=true;
+    }
   }
   openDialogChart() {
     this.dialog.open(DgChartValidationComponent);
@@ -206,6 +217,56 @@ export class ReqContentComponent implements OnInit {
       }
     })
   } 
+
+  //ESTADOS DE PANELES
+  getPanelState(status):boolean{
+    let open:boolean;
+    if(status=='Pendiente'|| status=='Rechazado'){
+      open=true
+    }else{
+      open=false
+    }
+    return open;
+  }
+  getPanelState2(status):boolean{
+    let open:boolean;
+    if(status=='Autorizado'|| status=='Cotizando'){
+      open=true
+    }else{
+      open=false
+    }
+    return open;
+  }
+   
+  getPanelState4(status):boolean{
+    let open:boolean;
+    if(status=='Rechazado'||status=='Aprobado'){
+      open=true
+    }else{
+      open=false
+    }
+    return open;
+  }
+  
+  getBlocked(status){
+    let block:boolean;
+    if(status=='Pendiente'){
+      block=true
+    }else{
+      block=false
+    }
+    return block;
+  }
+  
+  getBlockedDecision(status){
+    let block:boolean;
+    if(status=='Pendiente'){
+      block=true
+    }else{
+      block=false
+    }
+    return block;
+  }
 
   //DECISION E INFORMEs
   disabledBtnAR(status):boolean{

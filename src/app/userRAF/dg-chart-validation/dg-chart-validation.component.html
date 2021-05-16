@@ -5,17 +5,14 @@
         Se requiere al menos 3 cotizaciones para generar un cuadro, necesitara una justification.
     </p>
     <p>¿Generar de todos modos?</p>
+</div><div mat-dialog-actions >
+    <button mat-dialog-close mat-button style="color: var(--btn-color-pri);margin-right: 5px;">CANCELAR</button>
+  <button mat-raised-button mat-dialog-close class="raised" (click)="getStatus()">SI, GENERAR</button>
 </div>
-<div mat-dialog-actions align="end" class="btns-actions" >
-    <button mat-button mat-dialog-close>CANCELAR</button>
-    <button class="btns" mat-raised-button >GENERAR</button>
-</div>
-
 <style>
+  .raised{
+    color: white;
+    background-color: var(--btn-color-pri);
 
-    .btns{
-      color: white;
-      background-color: var(--btn-color-pri);
-  
-    }
-  </style>
+  }
+</style>
