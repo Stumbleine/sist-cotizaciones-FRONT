@@ -10,11 +10,18 @@ export class QoatationCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.quot);
+    console.log(this.idQ);
   }
   @Input() idQ:number
   @Input() nameCompany:string
   @Input() date:Date
   @Input() status:string
+  @Input() quot:any;
+
+  sendDataView(){
+    
+  }
 
   getColor(status){
     let color:string;

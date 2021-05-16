@@ -1,12 +1,12 @@
-<mat-card class="mat-elevation-z2" [ngStyle]="{'background-color':getColor(status)}" > 
-    <mat-card-title style="font-size: 18px; color: #585858;">{{nameCompany}}</mat-card-title>
+<mat-card class="mat-elevation-z2" [ngStyle]="{'background-color':getColor(quot?.state)}" > 
+    <mat-card-title style="font-size: 18px; color: #585858;">{{quot?.nameBussiness}}</mat-card-title>
 
-        <p>creado el {{date}}</p>
-        <p >{{status}}</p>
+        <p>creado el {{quot?.nameArea}}</p>
+        <p >{{quot?.state}}</p>
 
 
     <div class="btn-icons">        
-        <button mat-icon-button><mat-icon>launch</mat-icon></button>
+        <button mat-icon-button [routerLink]="['/quot-content', quot?.idPriceQuotation]"><mat-icon>launch</mat-icon></button>
         <button mat-icon-button  ><mat-icon>delete</mat-icon></button>
     </div>
 

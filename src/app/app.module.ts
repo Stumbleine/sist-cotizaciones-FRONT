@@ -48,7 +48,8 @@ import { FormQuotationComponent } from './userRAF/form-quotation/form-quotation.
 import { QoatationCardComponent } from './userRAF/qoatation-card/qoatation-card.component';
 import { ComparativeChartComponent } from './userRAF/comparative-chart/comparative-chart.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
-import { DgChartValidationComponent } from './userRAF/dg-chart-validation/dg-chart-validation.component'
+import { DgChartValidationComponent } from './userRAF/dg-chart-validation/dg-chart-validation.component';
+import { QuotationContentComponent } from './userRAF/quotation-content/quotation-content.component'
 
 @NgModule({
   declarations: [
@@ -72,7 +73,7 @@ import { DgChartValidationComponent } from './userRAF/dg-chart-validation/dg-cha
     QoatationCardComponent,
     ComparativeChartComponent,
     ErrorPageComponent, 
-    DgChartValidationComponent,
+    DgChartValidationComponent, QuotationContentComponent,
   ],
   imports: [
     HttpClientModule,

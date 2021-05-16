@@ -8,6 +8,8 @@ import {FormQuotationComponent} from './userRAF/form-quotation/form-quotation.co
 
 import { FormQuotationBusinessComponent } from './business/form-quotation-business/form-quotation-business.component';
 import {ErrorPageComponent} from './components/error-page/error-page.component'
+import {QuotationContentComponent} from './userRAF/quotation-content/quotation-content.component'
+
 const routes: Routes = [
   { path: 'home-rug', component:  HomePageComponent},
   { path: 'form-solicitud', component:  FormRequestComponent},
@@ -17,7 +19,8 @@ const routes: Routes = [
   {path:'req-content/:id/form-quotation',component:FormQuotationComponent},
   {path: 'cotizador/form-quotation', component: FormQuotationBusinessComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home-rug'},
-  {path: 'error', component:ErrorPageComponent }
+  {path: 'error', component:ErrorPageComponent },
+  {path:'quot-content/:quotID',component:QuotationContentComponent},
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

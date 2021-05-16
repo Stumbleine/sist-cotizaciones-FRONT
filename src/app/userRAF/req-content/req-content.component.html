@@ -69,7 +69,7 @@ place-items: center;">
                     </mat-expansion-panel-header>
 
                         <form class="quotations-section"[formGroup]="dateValidation">
-                            <div style="text-align: center; padding: 15px;" *ngIf="dateExpiration==null">
+                            <div style="text-align: center; padding: 15px;">
                                 <p>Es necesario elegir una fecha de vencimiento para los formularios.</p>
                                 <mat-form-field  appearance="outline">
                                 <mat-label>Fecha de vencimiento</mat-label>
@@ -88,7 +88,9 @@ place-items: center;">
                                     <app-qoatation-card style="width: 100%;" [idQ]="quotCard?.idPriceQuotation" 
                                     [nameCompany]="quotCard?.nameBussiness" 
                                     [status]='quotCard?.state' 
-                                    [date]='quotCard?.nameArea'></app-qoatation-card>
+                                    [date]='quotCard?.nameArea'
+                                    [quot]='quotCard'
+                                    ></app-qoatation-card>
                                 </mat-grid-tile>
                             </mat-grid-list>
                             </div>
