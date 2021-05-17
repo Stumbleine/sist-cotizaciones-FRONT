@@ -1,4 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-qoatation-card',
@@ -10,8 +11,7 @@ export class QoatationCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.quot);
-    console.log(this.idQ);
+
   }
   @Input() idQ:number
   @Input() nameCompany:string

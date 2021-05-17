@@ -89,16 +89,18 @@ export class ReqContentComponent implements OnInit {
     this.idReqSpending= this.rutaActiva.snapshot.params.id,
     this.loadData(this.idReqSpending);
     this.loadCardQuotation(this.idReqSpending);
+    this.getReporte(this.idReqSpending);
     this.RequestService.disparadorChart.subscribe(data=>{
       this.stateButton=data;
     })
+
   }
 
 //SOLICITUD DE PEDIDO functions and HTTP
   loadData(id:any){
     this.RequestService.get('http://localhost:8080/api/request/'+id)
     .subscribe(r  =>{
-      console.log(r);
+      console.log("LOAD DATA",r);
       this.reqReceived = r;
       this.items=this.reqReceived.requestDetail;
       this.dataSource.data=this.items;
@@ -145,7 +147,7 @@ export class ReqContentComponent implements OnInit {
     .subscribe(r  =>{
       this.quotationsCard=r;
       this.filterCompletedQ(this.quotationsCard);
-      console.log("extraendo fecha",this.quotationsCard[1].nameArea);
+      //console.log("extraendo fecha",this.quotationsCard[1].nameArea);
       //this.dateExpiration=this.quotationsCard[1].dateExpiration;
       this.loadDataChart(this.idReqSpending)  
     })
@@ -275,6 +277,16 @@ export class ReqContentComponent implements OnInit {
       disabled = false;
     }else{disabled=true;}
     return disabled;
+  }
+  report:any;
+  document:any;
+  getReporte(id){
+    this.RequestService.get('localhost:8080/api/report/'+id)
+    .subscribe(r  =>{
+      this.report=r;
+      console.log("REPORTE",this.report);
+      this.document=this.report.documentQuotationAtributesOutput;
+    });
   }
 }
   
