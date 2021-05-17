@@ -18,8 +18,8 @@ place-items: center;">
         </div>
         <div class="section" style="width: 100%;">
             <mat-accordion>
-                <mat-expansion-panel [expanded]="getPanelState(reqReceived?.status)"  (opened)="panelOpenState = true" 
-                                     (closed)="panelOpenState = false" class="section--desc" >
+                <mat-expansion-panel [expanded]="getPanelState(reqReceived?.status)"  
+                                      class="section--desc" >
                   <mat-expansion-panel-header style="background-color:  #fafafa;">
                     <mat-panel-title style="font-weight: bold;">
                       DESCRIPCIÓN
@@ -63,13 +63,13 @@ place-items: center;">
                 </mat-expansion-panel>
 
                 <!-- COTIZACIONES -->
-                <mat-expansion-panel [expanded]="getPanelState2(reqReceived?.status)" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [disabled]="getBlocked(reqReceived?.status)" >
+                <mat-expansion-panel [expanded]="getPanelState2(reqReceived?.status)"  [disabled]="getBlockedC(reqReceived?.status)" >
                     <mat-expansion-panel-header style="background-color:  #fafafa;">
                     <mat-panel-title style="font-weight: bold;">COTIZACIONES</mat-panel-title> 
                     </mat-expansion-panel-header>
 
-                        <form class="quotations-section"[formGroup]="dateValidation">
-                            <div style="text-align: center; padding: 15px;">
+                        <form class="quotations-section" [formGroup]="dateValidation">
+                            <div style="text-align: center; padding: 15px;" *ngIf="dateExpiration==null">
                                 <p>Es necesario elegir una fecha de vencimiento para los formularios.</p>
                                 <mat-form-field  appearance="outline">
                                 <mat-label>Fecha de vencimiento</mat-label>
@@ -82,7 +82,7 @@ place-items: center;">
                                 </h2>
                             </div>
 
-                            <div class="quotation--cards">
+                            <div class="quotation--cards" >
                                 <mat-grid-list cols="3"  rowHeight="160px"  gutterSize="10px"  >
                                     <mat-grid-tile *ngFor="let quotCard of quotationsCard" >
                                     <app-qoatation-card style="width: 100%;" [idQ]="quotCard?.idPriceQuotation" 
@@ -96,12 +96,13 @@ place-items: center;">
                             </div>
 
                             <div style="text-align: center;padding: 15px;">
-                                <button mat-raised-button class="btn-raised-p" (click)="openDialog()" [disabled]="dateValidation.invalid"> <mat-icon>add</mat-icon> COTIZACIÓN</button>
+                                <button mat-raised-button class="btn-raised-p" (click)="openDialog()" 
+                                [disabled]="validDate()"> <mat-icon>add</mat-icon> COTIZACIÓN</button>
                             </div>
                         </form>
                         <!--CUADROS COMPARATIVOS-->
                 </mat-expansion-panel>
-                        <mat-expansion-panel   (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="section--desc" [disabled]="getBlocked(reqReceived?.status)">
+                        <mat-expansion-panel   (opened)="panelOpenState = true"   [disabled]="getBlocked(reqReceived?.status)">
                             <mat-expansion-panel-header style="background-color:  #fafafa;" >
                             <mat-panel-title style="font-weight: bold;">CUADROS COMPARATIVOS</mat-panel-title> 
                             </mat-expansion-panel-header>
@@ -159,7 +160,7 @@ place-items: center;">
                     <div class="report--comentary">
                         <mat-form-field appearance="outline">
                             <mat-label>Comentario/Justificación</mat-label>
-                            <input matInput style="height: 40px;">
+                            <input matInput style="height: 40px;" [required]="comentRequired()">
                         </mat-form-field>
                     </div>
                     <div>

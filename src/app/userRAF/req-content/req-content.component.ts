@@ -69,9 +69,20 @@ export class ReqContentComponent implements OnInit {
   dateValidation = this.formBuilder.group({
     date: ['',[Validators.required]],
   });
-  public dateExpiration:Date=new Date('02/08/2021');
-  public quotationsCard:any;
 
+
+  public dateExpiration:any;
+  public quotationsCard:any;
+  validDate(){
+    let res:Boolean;
+    if(this.dateExpiration!=null){
+      res=false;
+    }else{
+      res=this.dateValidation.invalid;
+      //console.log("dV.INVALID..",this.dateValidation.invalid);
+    }
+    return res;
+  }
   //variables para cuadros comparativos
   public quotReceived:any;
   public chartReceived:any;
@@ -147,8 +158,11 @@ export class ReqContentComponent implements OnInit {
     .subscribe(r  =>{
       this.quotationsCard=r;
       this.filterCompletedQ(this.quotationsCard);
-      //console.log("extraendo fecha",this.quotationsCard[1].nameArea);
-      //this.dateExpiration=this.quotationsCard[1].dateExpiration;
+
+      console.log("extraendo fecha",this.quotationsCard);
+
+      this.dateExpiration=this.quotationsCard[1].deadline;
+      console.log(typeof(this.dateExpiration))
       this.loadDataChart(this.idReqSpending)  
     })
   }
@@ -249,20 +263,38 @@ export class ReqContentComponent implements OnInit {
     }
     return open;
   }
-  
-  getBlocked(status){
+  getBlockedC(status){
     let block:boolean;
     if(status=='Pendiente'){
       block=true
     }else{
-      block=false
+      if(status=='Rechazado' &&  this.quotationsCard.length === 0){
+        block=true
+      
+      }else{
+        block=false
+      }
+
+    }
+    return block;
+  }
+  getBlocked(status){
+    let block:boolean;
+    if(status=='Pendiente'|| status=='Autorizado'){
+      block=true
+    }else{
+      if(status=='Rechazado' && this.quotationsCard.length === 0){
+        block=true
+      }else{
+        block=false
+      }
     }
     return block;
   }
   
   getBlockedDecision(status){
     let block:boolean;
-    if(status=='Pendiente'){
+    if(status=='Pendiente' || status=='Autorizado'){
       block=true
     }else{
       block=false
@@ -281,12 +313,21 @@ export class ReqContentComponent implements OnInit {
   report:any;
   document:any;
   getReporte(id){
-    this.RequestService.get('localhost:8080/api/report/'+id)
+    this.RequestService.get('http://localhost:8080/api/report/'+id)
     .subscribe(r  =>{
       this.report=r;
       console.log("REPORTE",this.report);
       this.document=this.report.documentQuotationAtributesOutput;
     });
   }
+  comentRequired(){
+    let required:boolean;
+    console.log("ETTOCOMPLETED",this.quotationsCompleted.length);
+    if(this.quotationsCompleted.length <=2){
+      required=true;
+    }else{
+      required=false;
+    }
+    return required
+  }
 }
-  
