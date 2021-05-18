@@ -96,6 +96,25 @@ h3{
   /* border-radius: 10px; border:  1px solid;
     border-color: #e0e0e0; */
 }
+.form-base__s1{
+  padding: 15px;
+  text-align: center;
+}
+.form-base__s1 div{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  justify-content: center;
+  display: inline-flex;
+}
+
+.form-base__s1--fds div{
+  width: 25%;
+  padding-left: 35px;
+  padding-right: 35px;
+}
+.form-base__s1--fds mat-form-field{
+  width: 100%;
+}
 .form__tableItem {
   display: flex;
   padding: 15px;

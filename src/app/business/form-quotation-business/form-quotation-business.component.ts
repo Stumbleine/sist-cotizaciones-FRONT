@@ -46,6 +46,7 @@ export class FormQuotationBusinessComponent implements OnInit {
   });
 
   quotationForm = this.formBuilder.group({
+      razonSocial:['',],
       wayOfPayment: ['',[Validators.required]],
       garantyTerm:['',],
       deliveryTerm:['',Validators.required],
@@ -74,7 +75,7 @@ export class FormQuotationBusinessComponent implements OnInit {
   ];
   public items:Item[]=[];
   ngOnInit(): void {
-    this.loadDataBusiness();
+    this.loadDataQuotation();
   }
   pressed:boolean;
 
@@ -93,16 +94,19 @@ export class FormQuotationBusinessComponent implements OnInit {
       this.refresh();
 
     }
-    public dataBusiness:any;
+    public dataQuotation:any;
+    public business:any;
     public id:number;
-    nro=3;
+    idQ=14;
 
-    loadDataBusiness(){
-      this.RequestService.get('http://localhost:8080/api/quotation/getIdOfNewQuotation')
+    loadDataQuotation(){
+      this.RequestService.get('http://localhost:8080/api/quotation/getById/'+this.idQ)
       .subscribe(r=>{
         console.log(r);
-        this.dataBusiness = r;
-        this.id =this.dataBusiness.idPriceQuotation;
+        this.dataQuotation = r;
+        //this.business=this.dataQuotation.business
+        this.priceQuotationDetail=this.dataQuotation.priceQuotationDetail
+        this.refresh()
       })
     }
   saveQuotation(quotation,formDirective1: FormGroupDirective){
@@ -155,5 +159,13 @@ getTotalCost() {
 goForm(){
   this.router.navigate(['/cotizador/form-quotation']);
   window.location.reload();
+}
+thereIsBusiness():boolean{
+  if(this.business==null){
+    return true;
+  }else{
+    return false;
+  }
+
 }
 }

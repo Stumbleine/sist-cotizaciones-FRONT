@@ -109,13 +109,13 @@ place-items: center;">
                             <div class="selection-quotation">
                                 <p style="font-size: 17px; font-weight: 500;">Cotizaciones completadas</p>
                                 <mat-selection-list #quots (selectionChange)="onGroupsChange(quots.selectedOptions.selected)">
-                                    <mat-list-option *ngFor="let quot of quotationsCompleted" [value]="quot">
+                                    <mat-list-item *ngFor="let quot of quotationsCompleted" [value]="quot">
                                         <div >
                                             <p style="line-height: 15px;">{{quot.nameBussiness}}</p>
                                             <p style="font-size: 12px; font-weight: 500; line-height: 0px; font-style: italic;" [ngStyle]="{'color':getColorQuotation(quot.state)}">{{quot.state}}</p>
 
                                         </div>
-                                    </mat-list-option>
+                                    </mat-list-item>
                                 </mat-selection-list>
 
                             </div> 
