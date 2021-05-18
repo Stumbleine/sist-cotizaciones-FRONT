@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DialogValidationSendComponent } from 'src/app/business/dialog-validation-send/dialog-validation-send.component';
 import { SnackbarSendRequestComponent } from 'src/app/userRUG/snackbar-send-request/snackbar-send-request.component';
 import { DialogValidationCancelComponent } from 'src/app/business/dialog-validation-cancel/dialog-validation-cancel.component';
+import { DialogGComponent} from '../../components/dialog-g/dialog-g.component'
+
 
 export interface Item{
   quantity : number,
@@ -34,7 +36,8 @@ export class FormQuotationComponent implements OnInit {
     private RequestService: RequestService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private rutaActiva: ActivatedRoute,
   ) { }
   priceQuotationDetail: Item[] = [];
   i=0;
@@ -68,10 +71,25 @@ export class FormQuotationComponent implements OnInit {
     
   ];
   public items:Item[]=[];
-  
+  public idQuot:any;
 
   ngOnInit(): void {
+
+    this.idQuot= this.rutaActiva.snapshot.params.idQ;
+    console.log("asasas",this.idQuot)
   }
+
+  openGLink():void{
+    this.dialog.open(DialogGComponent,{
+      data:{
+        idQuot:this.idQuot,
+
+      }
+    });
+  }
+  
+
+
   pressed:boolean;
 
   refresh() {

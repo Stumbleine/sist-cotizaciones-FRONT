@@ -29,6 +29,7 @@ import {MatRadioModule} from '@angular/material/radio'
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatListModule } from '@angular/material/list';
 import {MatAutocompleteModule } from '@angular/material/autocomplete';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 //componentes propios
 import { HomePageComponent } from './userRUG/home-page/home-page.component';
@@ -49,7 +50,8 @@ import { QoatationCardComponent } from './userRAF/qoatation-card/qoatation-card.
 import { ComparativeChartComponent } from './userRAF/comparative-chart/comparative-chart.component';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { DgChartValidationComponent } from './userRAF/dg-chart-validation/dg-chart-validation.component';
-import { QuotationContentComponent } from './userRAF/quotation-content/quotation-content.component'
+import { QuotationContentComponent } from './userRAF/quotation-content/quotation-content.component';
+import { DialogGComponent } from './components/dialog-g/dialog-g.component'
 
 @NgModule({
   declarations: [
@@ -73,7 +75,7 @@ import { QuotationContentComponent } from './userRAF/quotation-content/quotation
     QoatationCardComponent,
     ComparativeChartComponent,
     ErrorPageComponent, 
-    DgChartValidationComponent, QuotationContentComponent,
+    DgChartValidationComponent, QuotationContentComponent, DialogGComponent,
   ],
   imports: [
     HttpClientModule,
@@ -92,7 +94,7 @@ import { QuotationContentComponent } from './userRAF/quotation-content/quotation
     MatPaginatorModule,
     MatDialogModule,
     MatSnackBarModule,
-    ReactiveFormsModule,MatListModule,MatAutocompleteModule
+    ReactiveFormsModule,MatListModule,MatAutocompleteModule,ClipboardModule
 
   ],
   providers: [    RequestService,],
