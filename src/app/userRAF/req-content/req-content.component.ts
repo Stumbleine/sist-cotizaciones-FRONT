@@ -73,14 +73,18 @@ export class ReqContentComponent implements OnInit {
 
   public dateExpiration:any;
   public quotationsCard:any;
-  validDate(){
-    let res:Boolean;
-    if(this.dateExpiration!=null){
+  validDate(status){
+    let res:boolean;
+    if( status=='Aprobado' || status == 'Rechazado'){
+      res=true;
+    }else{
+    if(this.dateExpiration!=null ){
       res=false;
     }else{
+      
       res=this.dateValidation.invalid;
       //console.log("dV.INVALID..",this.dateValidation.invalid);
-    }
+    }}
     return res;
   }
   //variables para cuadros comparativos

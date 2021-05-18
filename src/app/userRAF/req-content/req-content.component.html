@@ -85,10 +85,8 @@ place-items: center;">
                             <div class="quotation--cards" >
                                 <mat-grid-list cols="3"  rowHeight="160px"  gutterSize="10px"  >
                                     <mat-grid-tile *ngFor="let quotCard of quotationsCard" >
-                                    <app-qoatation-card style="width: 100%;" [idQ]="quotCard?.idPriceQuotation" 
-                                    [nameCompany]="quotCard?.nameBussiness" 
-                                    [status]='quotCard?.state' 
-                                    [date]='quotCard?.nameArea'
+                                    <app-qoatation-card style="width: 100%;" [idSR]="reqReceived?.idSpendingUnitRequest" 
+
                                     [quot]='quotCard'
                                     ></app-qoatation-card>
                                 </mat-grid-tile>
@@ -97,14 +95,14 @@ place-items: center;">
 
                             <div style="text-align: center;padding: 15px;">
                                 <button mat-raised-button class="btn-raised-p" (click)="openDialog()" 
-                                [disabled]="validDate()"> <mat-icon>add</mat-icon> COTIZACIÓN</button>
+                                [disabled]="validDate(reqReceived?.status)"> <mat-icon>add</mat-icon> COTIZACIÓN</button>
                             </div>
                         </form>
                         <!--CUADROS COMPARATIVOS-->
                 </mat-expansion-panel>
                         <mat-expansion-panel   (opened)="panelOpenState = true"   [disabled]="getBlocked(reqReceived?.status)">
                             <mat-expansion-panel-header style="background-color:  #fafafa;" >
-                            <mat-panel-title style="font-weight: bold;">CUADROS COMPARATIVOS</mat-panel-title> 
+                            <mat-panel-title style="font-weight: bold;">CUADROS COMPARATIVO</mat-panel-title> 
                             </mat-expansion-panel-header>
 
                         <div class="comparative-section">
@@ -139,7 +137,7 @@ place-items: center;">
 
                 <mat-expansion-panel [expanded]="getPanelState4(reqReceived?.status)" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [disabled]="getBlockedDecision(reqReceived?.status)">
                     <mat-expansion-panel-header style="background-color:  #fafafa;">    
-                    <mat-panel-title style="font-weight: bold;">DECISIÓN E INFORMES</mat-panel-title> 
+                    <mat-panel-title style="font-weight: bold;">DECISIÓN E INFORME</mat-panel-title> 
                     </mat-expansion-panel-header>
                 <div class="decisionReports-section" *ngIf="reqReceived?.status=='Cotizando'">
                     <div class="selection-quotation" >
@@ -185,7 +183,7 @@ place-items: center;">
                                 <h3>{{report?.nameBusiness}} </h3>
                                 <mat-icon  style="margin-top:-10px; ">check_circle</mat-icon>
                             </div>
-                            <h4>{{report?.nameBusiness}} </h4>
+                            <h4>{{report?.nameArea}} </h4>
                             <h4 style="display: flex;">Total Bs. <p>{{report?.total}} </p></h4>
                         </div>
                     </div>

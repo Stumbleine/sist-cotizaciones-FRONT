@@ -8,19 +8,27 @@ import { Router } from '@angular/router';
 })
 export class QoatationCardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route:Router, ) { }
 
   ngOnInit(): void {
 
   }
-  @Input() idQ:number
-  @Input() nameCompany:string
-  @Input() date:Date
-  @Input() status:string
+  @Input() idSR:any
   @Input() quot:any;
 
-  sendDataView(){
-    
+  routerQuotation(status){
+    if(status == 'SIN COTIZAR'){
+      this.route.navigate(['/req-content', this.idSR ,'form-quotation',this.quot.idPriceQuotation]);
+
+    }else if( status == 'COTIZADO' ){
+      this.route.navigate(['/quot-content', this.quot.idPriceQuotation]);
+    }else if(status == 'INCOMPLETO'){
+      this.route.navigate(['/quot-content', this.quot.idPriceQuotation]);
+    }else if(status == 'EXPIRADO'){
+      this.route.navigate(['/error']);
+    }
+   // [routerLink]="['/quot-content', quot?.idPriceQuotation]"
+
   }
 
   getColor(status){
