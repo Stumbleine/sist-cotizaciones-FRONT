@@ -9,52 +9,72 @@
                     <p >Moneda (Bs)</p>
                 </div>
             </div>
-            <div class="information__business">
+            <div class="information__business" *ngIf="!thereIsBusiness()">
                 
                 <h3>Informacion de la empresa</h3>
                 <div class="info-empresa" style="padding: 15px; ">
-                    <h3 id="solicitante">Razon social: <p> Nombre empresa S.R.L </p></h3>
-                    <h3 id="solicitante">NIT: <p>123456789012</p></h3>
-                    <h3 id="solicitante">e-mail: <p>innovaempresa.srl@gmail.com</p></h3>
-                    <h3 id="solicitante">Teléfono: <p>4862 4813 254</p></h3>
-                    <h3 id="solicitante">Dirección: <p>Cochabamba Av. Oquendo y Venezuela</p></h3>
+                    <h3 id="solicitante">Razon social: <p> {{business?.name}} </p></h3>
+                    <h3 id="solicitante">NIT: <p>{{business?.nit}}</p></h3>
+                    <h3 id="solicitante">e-mail: <p>{{business?.eMail}}</p></h3>
+                    <h3 id="solicitante">Teléfono: <p>{{business?.phone}}</p></h3>
+                    <h3 id="solicitante">Dirección: <p>{{business?.adress}}</p></h3>
                 </div>
             </div>
             <mat-divider></mat-divider>
                 <form class="information__quotation" [formGroup]="quotationForm" #formDirectiveNew="ngForm" (ngSubmit)="saveQuotation(quotationForm.value,formDirectiveNew)">
                     <h3>Información de la cotización</h3>
-                    <div class="form__fields">
-                        <div class="fields__column1">
-                            <mat-form-field  appearance="outline">
-                                <mat-label>Forma de Pago</mat-label>
-                                <mat-select id=""  formControlName='wayOfPayment' required>
-                                    <mat-option value="Crédito">A Crédito</mat-option>
-                                    <mat-option value="Contado">Al Contado</mat-option>
-                                    <mat-option value="Contado y Crédito">Al Contado y a Crédito</mat-option>
-                                </mat-select>
-                                <mat-error >seleccionar forma de pago</mat-error>
+                    <div class="form-base__s1" >
+                        <div class="form-base__s1--fds" style=" width: 100%;">
+                            <div *ngIf="thereIsBusiness()">
+                                <mat-form-field appearance="outline">
+                                <mat-label>Razon social</mat-label>
+                                <input matInput placeholder="Placeholder"formControlName='razonSocial' required>
+                                <mat-error class="form__validation--size">campo razon social es requerido</mat-error>
                               </mat-form-field>
+                            </div>
+                            <div  >
+                                <mat-form-field  appearance="outline">
+                                    <mat-label>Forma de pago</mat-label>
+                                    <mat-select formControlName='wayOfPayment' required>
+                                        <mat-option value="Crédito">A Crédito</mat-option>
+                                        <mat-option value="Contado">Al Contado</mat-option>
+                                        <mat-option value="Contado y Crédito">Al Contado y a Crédito</mat-option>
+                                    </mat-select>
+                                    <mat-error >seleccionar forma de pago</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div>
+
                               <mat-form-field  appearance="outline">
-                                <mat-label>Tiempo de garantía</mat-label>
-                                <input matInput placeholder="Ingrese tiempo de garantia(días)" formControlName='garantyTerm' type="number"
-                                 min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
-                                >
-                                <mat-error class="form__validation--size">campo tiempo de garantía es requerido</mat-error>
-                              </mat-form-field>
-                        </div>
-                        <div class="fields__column2">
-                            <mat-form-field  appearance="outline">
                                 <mat-label>Tiempo de entrega</mat-label>
                                 <input matInput placeholder="Ingrese tiempo de entrega(días)" formControlName='deliveryTerm'required type="number"
                                 min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                 <mat-error class="form__validation--size">campo Tiempo de entrega es requerido</mat-error>
+
                               </mat-form-field>
-                              <mat-form-field  appearance="outline">
-                                <mat-label>Validez de oferta</mat-label>
-                                <input matInput placeholder="Ingrese Validez de oferta"  type="date" formControlName='offValidation'> 
+                            </div>
+
+                        </div >
+                        <div class="form-base__s1--fds"  style=" width: 100%;">
+
+                            
+                            <div>
+                                <mat-form-field  appearance="outline">
+                                    <mat-label>Tiempo de garantia</mat-label>
+                                    <input matInput placeholder="Ingrese tiempo de garantia(días)" formControlName='garantyTerm' type="number"
+                                     min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                <mat-error class="form__validation--size">campo tiempo de garantia es requerido</mat-error>
+                                  </mat-form-field>
+                            </div>
+                            <div  >                           
+                                <mat-form-field  appearance="outline">
+                                    <mat-label>Validez de oferta</mat-label>
+                                    <input matInput placeholder="Ingrese Validez de oferta"  type="date" formControlName='offValidation'> 
                                 <mat-error class="form__validation--size">campo Validez de oferta es requerido</mat-error>
-                              </mat-form-field>
+                                  </mat-form-field>
+                            </div>
                         </div>
+
                     </div>
                     <mat-divider></mat-divider>
                     <h3>Detalle del item/articulo/bien/servicio</h3>
@@ -132,6 +152,10 @@
                 
                 
                 <mat-divider></mat-divider>
+                <div style=" text-align: end;"*ngIf="thereIsBusiness()">
+                    <div style="display: flex; margin-left: 910px;">
+                        <p style="padding-right: 10px;">¿Desea registrar su empresa?</p><a href>  REGISTRAR</a></div>
+                    </div>
                 <div  class="form__buttons">
                     <button mat-button style="color: #ff4848;margin-right: 15px;" (click)="openDialogCancel();" type="button"> CANCELAR</button>
                     <button mat-raised-button class="btn-raised" style="margin-right: 25px;" [disabled]="quotationForm.invalid" type="submit" >

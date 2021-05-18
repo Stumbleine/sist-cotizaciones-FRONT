@@ -322,7 +322,7 @@ export class ReqContentComponent implements OnInit {
   }
   comentRequired(){
     let required:boolean;
-    console.log("ETTOCOMPLETED",this.quotationsCompleted.length);
+   // console.log("ETTOCOMPLETED",this.quotationsCompleted.length);
     if(this.quotationsCompleted.length <=2){
       required=true;
     }else{
