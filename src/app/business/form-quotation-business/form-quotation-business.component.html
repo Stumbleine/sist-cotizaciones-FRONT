@@ -91,12 +91,28 @@
         
                             <ng-container *ngFor="let columna of columnas" matColumnDef="{{columna.name}}" >
                               <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 85px; font-weight: bold;"> {{columna.titulo}}  </th>
+
+
                               <td mat-cell *matCellDef="let element" style="min-width: 85px;text-align: center;"> {{element[columna.name]}} </td>
                               <td mat-footer-cell *matFooterCellDef></td> 
                             </ng-container>
 
+
+                            <ng-container matColumnDef="unitPrice" >
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> PRECIO UNITARIO </th>
+
+                                <td mat-cell *matCellDef="let element" style="text-align: center;" > 
+                                    <input type="number" [(ngModel)]="element.unitPrice" [ngModelOptions]="{standalone: true}"
+                                     [name]="element.idPriceQuotationDetail" (change)="metodo()" > </td>
+                                <td mat-footer-cell *matFooterCellDef> {{ getTotalCost() | currency:"Bs."}}</td>
+                            </ng-container>
+
+
+
+
                             <ng-container matColumnDef="totalPrice" >
                                 <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> SUBTOTAL </th>
+
                                 <td mat-cell *matCellDef="let element" style="text-align: center;" > {{element.totalPrice}} </td>
                                 <td mat-footer-cell *matFooterCellDef> {{ getTotalCost() | currency:"Bs."}}</td>
                             </ng-container>

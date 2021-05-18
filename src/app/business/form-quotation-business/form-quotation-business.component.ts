@@ -9,7 +9,7 @@ import { SnackbarSendRequestComponent } from 'src/app/userRUG/snackbar-send-requ
 import {RequestService} from '../../services/request.service';
 import { DialogValidationCancelComponent } from '../dialog-validation-cancel/dialog-validation-cancel.component';
 import { DialogValidationSendComponent } from '../dialog-validation-send/dialog-validation-send.component';
-
+import { ActivatedRoute } from '@angular/router';
 export interface Item{
   quantity : number,
   unit : string,
@@ -60,7 +60,8 @@ export class FormQuotationBusinessComponent implements OnInit {
     private RequestService: RequestService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private rutaActiva: ActivatedRoute, 
   ) { }
 
   displayedColumns: string[] = ['index', 'quantity', 'unit', 'description','unitPrice','totalPrice'];
@@ -70,12 +71,21 @@ export class FormQuotationBusinessComponent implements OnInit {
     {titulo:"CANTIDAD" ,name: "quantity"},
     {titulo:"UNIDAD" ,name: "unit"},
     {titulo:"DETALLE" ,name: "description"},
-    {titulo:"PRECIO UNIT." ,name: "unitPrice"},
+    //{titulo:"PRECIO UNIT." ,name: "unitPrice"},
     
   ];
+
+  metodo(){
+    console.log("-----",this.dataSource.data);
+    console.log(this.items);
+  }
   public items:Item[]=[];
+  public idQuot:any;
   ngOnInit(): void {
+    this.idQuot= this.rutaActiva.snapshot.params.idQ;
     this.loadDataQuotation();
+    
+    console.log("this is quotID",this.idQuot);
   }
   pressed:boolean;
 
@@ -97,10 +107,11 @@ export class FormQuotationBusinessComponent implements OnInit {
     public dataQuotation:any;
     public business:any;
     public id:number;
-    idQ=14;
+
 
     loadDataQuotation(){
-      this.RequestService.get('http://localhost:8080/api/quotation/getById/'+this.idQ)
+      console.log(this.idQuot);
+      this.RequestService.get('http://localhost:8080/api/quotation/getById/'+this.idQuot)
       .subscribe(r=>{
         console.log(r);
         this.dataQuotation = r;
