@@ -165,7 +165,7 @@ export class ReqContentComponent implements OnInit {
 
       console.log("extraendo fecha",this.quotationsCard);
 
-      this.dateExpiration=this.quotationsCard[1].deadline;
+      this.dateExpiration=this.quotationsCard[0].deadline;
       console.log(typeof(this.dateExpiration))
       this.loadDataChart(this.idReqSpending)  
     })
