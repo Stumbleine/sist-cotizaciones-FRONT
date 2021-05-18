@@ -102,7 +102,7 @@ place-items: center;">
                 </mat-expansion-panel>
                         <mat-expansion-panel   (opened)="panelOpenState = true"   [disabled]="getBlocked(reqReceived?.status)">
                             <mat-expansion-panel-header style="background-color:  #fafafa;" >
-                            <mat-panel-title style="font-weight: bold;">CUADROS COMPARATIVO</mat-panel-title> 
+                            <mat-panel-title style="font-weight: bold;">CUADRO COMPARATIVO</mat-panel-title> 
                             </mat-expansion-panel-header>
 
                         <div class="comparative-section">
@@ -126,7 +126,7 @@ place-items: center;">
                             </div>
 
                             <div class="comparative__charts" *ngIf="activateChart()">
-                                <p>CUADROS COMPARATIVOS</p>
+                                <p>CUADRO COMPARATIVO</p>
                                 <app-comparative-chart *ngFor="let i of [1]" [quotationsCompleted]="quotationsCompleted"></app-comparative-chart>
                             </div>
 
@@ -141,7 +141,7 @@ place-items: center;">
                     </mat-expansion-panel-header>
                 <div class="decisionReports-section" *ngIf="reqReceived?.status=='Cotizando'">
                     <div class="selection-quotation" >
-                        <p style="font-size: 17px; font-weight: 500;">EMPRESAS A ELEGIR</p>
+                        <p style="font-size: 17px; font-weight: 500;">Cotizaciones para elegir</p>
                         <mat-radio-group
                         aria-labelledby="example-radio-group-label"
                         class="example-radio-group"

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-error-page',
   templateUrl: './error-page.component.html',
@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private rutaActiva: ActivatedRoute, ) { }
 
+  idSR:any;
   ngOnInit(): void {
+    this.idSR=this.rutaActiva.snapshot.params.idSR;
   }
 
 }

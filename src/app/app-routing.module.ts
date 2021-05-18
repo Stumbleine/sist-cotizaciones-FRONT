@@ -9,18 +9,23 @@ import {FormQuotationComponent} from './userRAF/form-quotation/form-quotation.co
 import { FormQuotationBusinessComponent } from './business/form-quotation-business/form-quotation-business.component';
 import {ErrorPageComponent} from './components/error-page/error-page.component'
 import {QuotationContentComponent} from './userRAF/quotation-content/quotation-content.component'
+import {ResponseFormComponent} from './components/response-form/response-form.component'
 
 const routes: Routes = [
+  { path: 'home-raf', component:  HomePageRAFComponent},
   { path: 'home-rug', component:  HomePageComponent},
   { path: 'form-solicitud', component:  FormRequestComponent},
-  { path: 'home-raf', component:  HomePageRAFComponent},
+  
   {path: '', pathMatch: 'full', redirectTo: 'home-rug'},
   {path:'req-content/:id',component:ReqContentComponent},
   {path:'req-content/:idSR/form-quotation/:idQ',component:FormQuotationComponent},
   {path: 'cotizador/form-quotation/:idQ', component: FormQuotationBusinessComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home-rug'},
+  {path: 'req-content/:idSR/error', component:ErrorPageComponent },
   {path: 'error', component:ErrorPageComponent },
-  {path:'quot-content/:quotID',component:QuotationContentComponent},
+  {path: 'response-form', component:ResponseFormComponent},
+  {path:'req-content/:idSR/quot-content/:quotID',component:QuotationContentComponent},
+
 ]
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

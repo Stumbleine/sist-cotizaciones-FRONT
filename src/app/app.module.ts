@@ -51,7 +51,8 @@ import { ComparativeChartComponent } from './userRAF/comparative-chart/comparati
 import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { DgChartValidationComponent } from './userRAF/dg-chart-validation/dg-chart-validation.component';
 import { QuotationContentComponent } from './userRAF/quotation-content/quotation-content.component';
-import { DialogGComponent } from './components/dialog-g/dialog-g.component'
+import { DialogGComponent } from './components/dialog-g/dialog-g.component';
+import { ResponseFormComponent } from './components/response-form/response-form.component'
 
 @NgModule({
   declarations: [
@@ -75,7 +76,7 @@ import { DialogGComponent } from './components/dialog-g/dialog-g.component'
     QoatationCardComponent,
     ComparativeChartComponent,
     ErrorPageComponent, 
-    DgChartValidationComponent, QuotationContentComponent, DialogGComponent,
+    DgChartValidationComponent, QuotationContentComponent, DialogGComponent, ResponseFormComponent,
   ],
   imports: [
     HttpClientModule,

@@ -301,7 +301,12 @@ export class ReqContentComponent implements OnInit {
     if(status=='Pendiente' || status=='Autorizado'){
       block=true
     }else{
-      block=false
+      if(this.quotationsCompleted.length==0){
+        block=true
+      }else{
+        block=false
+      }
+      
     }
     return block;
   }

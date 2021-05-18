@@ -114,10 +114,24 @@ export class FormQuotationBusinessComponent implements OnInit {
       this.RequestService.get('http://localhost:8080/api/quotation/getById/'+this.idQuot)
       .subscribe(r=>{
         console.log(r);
+
+
         this.dataQuotation = r;
+        let state=this.dataQuotation.state
+
+
+        if(state == 'SIN COTIZAR'){
+          this.priceQuotationDetail=this.dataQuotation.priceQuotationDetail
+          this.refresh()
+        }else if( state == 'COTIZADO' ){
+         this.router.navigate(['/response-form']);
+        }else if(state == 'INCOMPLETO'){
+          this.router.navigate(['/response-form']);
+        }else if(state == 'EXPIRADO'){
+          this.router.navigate(['/error']);
+        }
         //this.business=this.dataQuotation.business
-        this.priceQuotationDetail=this.dataQuotation.priceQuotationDetail
-        this.refresh()
+
       })
     }
   saveQuotation(quotation,formDirective1: FormGroupDirective){
