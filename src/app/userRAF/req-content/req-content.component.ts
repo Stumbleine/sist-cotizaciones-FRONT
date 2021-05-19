@@ -168,7 +168,7 @@ export class ReqContentComponent implements OnInit {
 
       console.log("extraendo fecha",this.quotationsCard);
 
-      this.dateExpiration=this.quotationsCard[0].deadline;
+      this.dateExpiration=this.quotationsCard[0]?.deadline;
       console.log(typeof(this.dateExpiration))
       this.loadDataChart(this.idReqSpending)  
     })
@@ -195,6 +195,18 @@ export class ReqContentComponent implements OnInit {
         }else if(status=='INCOMPLETO'){color ='#FFC400'; }
       return color;
   }
+  dateExpired:any;
+
+  saveDateExpiration(id){
+    let dateee:{}={
+      "deadline":this.dateExpired
+      }
+    console.log(typeof(dateee),dateee);
+    this.RequestService.put('http://localhost:8080/api/req-content/updateDeadLine/'+id,dateee)
+    .subscribe(r=>{
+      console.log("Fecha actualizada");
+    })
+  }
 
   //Cuadros comparativos functions.
   onGroupsChange(options: MatListOption[]) {
@@ -202,7 +214,7 @@ export class ReqContentComponent implements OnInit {
   }  
 
   verifyCheck():boolean{
-    if(this.quotationsCompleted.length>=1 && this.stateButton==false){
+    if(this.quotationsCompleted.length>1 && this.stateButton==false){
       return false;
     }else{
       return true;
@@ -320,7 +332,12 @@ export class ReqContentComponent implements OnInit {
     if(status=='Pendiente' || status=='Autorizado'){
       block=true
     }else{
-      block=false
+      if(this.quotationsCompleted.length==0){
+        block=true
+      }else{
+        block=false
+      }
+      
     }
     return block;
   }
@@ -330,7 +347,11 @@ export class ReqContentComponent implements OnInit {
     let disabled:boolean;
     if (status=='Cotizando' && this.quotationsCompleted.length>=1) {
       disabled = false;
-    }else{disabled=true;}
+    }else{
+      
+      disabled=true;
+    
+    }
     return disabled;
   }
   report:any;

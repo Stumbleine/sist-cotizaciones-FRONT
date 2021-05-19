@@ -40,7 +40,7 @@
 
             </div>
             <div class="info__quot">
-                <h2>Informacion</h2>
+                <h2>Información</h2>
                 <div class="quot__line" >
                     <div style="width: 50%;">
                         <h3>Forma de pago</h3>
@@ -61,7 +61,7 @@
                         <p> {{quotation?.offValidation}}</p>
                      </div> 
                 </div>
-                <div  style="width: 90%; text-align: start; margin-top: 22px;">
+                <!--div  style="width: 90%; text-align: start; margin-top: 22px;">
                     <div style=" display: flex; ">
                         <button mat-icon-button c  matTooltip="ver documento escaneado">                                
                             <img  width="30px" height="30px"  src="./../../../assets/file-pdf-regular.svg" alt="pdf del reporte">
@@ -122,140 +122,7 @@
 
         <mat-divider style="margin-top: 15px; margin-bottom: 15px;"></mat-divider>
         <div class="section__actions">
-            <button mat-button > VOLVER</button>
+            <button mat-button [routerLink]="['/req-content', idSR]" > VOLVER</button>
         </div>
     </div>
 </div>
-<style>
-    .container{
-        width: 80%;
-        min-width: 950px;
-        max-width: 1100px;
-        background-color: rgb(252, 252, 252);
-        box-shadow: 0px 20px 50px -15px #c2c2c2;
-        height: 100%;
-        border-radius: 10px;
-            margin-top: 50px;
-            margin-bottom: 100px;
-            padding: 15px;
-
-    }
-    .title{
-        width: 100%;
-        text-align: center;
-        margin-top: 15px;
-    }
-    .title h1{
-        font-size: 22px;
-                font-weight: 600;
-                letter-spacing: 0.5px;
-                color:  rgb(43, 43, 43)
-    }
-    .section__info{
-       border: 1px;
-        display: flex;
-        padding: 10px;
-    }
-
-    .section__info h2{
-        font-size: 18px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        color:  rgb(62, 62, 63);
-    }
-    .section__info h3{
-
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 10px;
-        color: rgb(74, 74, 75);
-    }
-    .section__info p{
-        color: rgb(67, 66, 70);
-        font-size: 15px;
-
-         line-height: 10px;
-    }
-    .info__company{
-        background-color: #A9C9FF;
-        background-image: linear-gradient(310deg, #A9C9FF 0%, #FFBBEC 100%);
-        /*background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);*/  
-        box-shadow: 0px 5px 5px -1px #c0c0c0;
-        padding: 15px;        
-        width: 50%;
-        border-radius: 15px;
-        max-width: 470px;
-
-    }
-    .company__line{
-        display: inline-flex;
-        width: 100%;
-        margin-top: 5px;
-    }
-    .company__line div{
-        padding: 5px;
-    }
-
-
-    .info__quot{
-        padding: 15px;        
-        width: 55%;
-
-        margin-left: 25px;
-
-    }
-    .quot__line{
-        display: inline-flex;
-        width: 100%;
-        margin-bottom: 2px;
-    }
-    .quot__line div{
-        padding: 5px;
-    }
-
-    .chart__TOTAL{
-        background-color: #ffab1d;
-        background-image: linear-gradient(121deg, #ffab1d 14%, #ffca00 50%, #fdf435 100%);
-        
-        margin-top: 15px;
-        padding: 5px;
-        width: 150px;
-        height: 50px;
-        text-align: center;
-        border-radius: 10px;
-        align-self: auto;
-    }
-    .chart__TOTAL h3{
-        margin-top: 10px;
-        font-size: 20px;
-        font-weight: bolder;
-    }
-    .chart__coment{
-
-        padding: 10px;
-        margin-top: 15px;
-        align-self: auto;
-        width: 70%;
-    }
-    .chart__coment h3{
-        font-size: 16px;
-        font-weight: 600;
-        color: rgb(48, 40, 48);
-    }
-    .chart__coment p{
-        color: rgb(54, 57, 61);
-        font-size: 15px;
-
-    }
-    .section__actions{
-        width: 100%;
-
-        text-align: end;
- 
-        margin-right: 25px;
-        color: var(--btn-color-pri);
-    }
-        
-    
-
-</style>

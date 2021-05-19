@@ -16,16 +16,17 @@ export class QoatationCardComponent implements OnInit {
   @Input() idSR:any
   @Input() quot:any;
 
+  
   routerQuotation(status){
     if(status == 'SIN COTIZAR'){
       this.route.navigate(['/req-content', this.idSR ,'form-quotation',this.quot.idPriceQuotation]);
 
     }else if( status == 'COTIZADO' ){
-      this.route.navigate(['/quot-content', this.quot.idPriceQuotation]);
+      this.route.navigate(['/req-content',this.idSR,'quot-content', this.quot.idPriceQuotation]);
     }else if(status == 'INCOMPLETO'){
-      this.route.navigate(['/quot-content', this.quot.idPriceQuotation]);
+      this.route.navigate(['/req-content',this.idSR,'quot-content', this.quot.idPriceQuotation]);
     }else if(status == 'EXPIRADO'){
-      this.route.navigate(['/error']);
+      this.route.navigate(['/req-content',this.idSR,'error']);
     }
    // [routerLink]="['/quot-content', quot?.idPriceQuotation]"
 

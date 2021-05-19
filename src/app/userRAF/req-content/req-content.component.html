@@ -54,7 +54,9 @@ place-items: center;">
                             </h3>
                         </div>
                         <h3 >Justificación:</h3>
-                        <p style="margin:0 20px 0 20px;">{{reqReceived?.justification}} Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</p>
+                        <p style="margin:0 20px 0 20px;">
+                            {{reqReceived?.justification}} 
+                        </p>
                   </div>
                   <div  style="text-align: end; margin-bottom: 10px; margin-top: 15px;">
                     <button mat-raised-button class="btn-raised-e" [disabled]="disabledButtons(reqReceived?.status)">RECHAZAR</button>
@@ -71,15 +73,24 @@ place-items: center;">
                         <form class="quotations-section" [formGroup]="dateValidation">
                             <div style="text-align: center; padding: 15px;" *ngIf="dateExpiration==null">
                                 <p>Es necesario elegir una fecha de vencimiento para los formularios.</p>
-                                <mat-form-field  appearance="outline">
-                                <mat-label>Fecha de vencimiento</mat-label>
-                                <input matInput  type="date" placeholder="Ingrese fecha limite" formControlName='date' required > 
-                                <mat-error >campo obligatorio</mat-error>
-                            </mat-form-field></div>
+                                <div style="display: inline-flex; align-items: center;">
+                                    <mat-form-field  appearance="outline">
+                                        <mat-label>Fecha de vencimiento</mat-label>
+                                        <input matInput  [(ngModel)]="dateExpired" type="date" placeholder="Ingrese fecha limite" formControlName='date' required > 
+                                        <mat-error >campo obligatorio</mat-error>
+                                    </mat-form-field>
+                                    <div style=" margin-bottom: 15px; margin-left: 15px;">
+                                        <button mat-mini-fab color="primary" (click)="saveDateExpiration(reqReceived?.idSpendingUnitRequest)"><mat-icon>save</mat-icon></button>
+                                    </div>
+                                </div>
+                            </div>
                             <div style="text-align: center; padding: 10px;" *ngIf="dateExpiration!=null">
                                 <h2 style="color: #0a6cff; font-size: 17px;" >
                                     Fecha de expiración de los formularios:  <p style="font-style: italic;">{{dateExpiration}}</p>
                                 </h2>
+                                <!--div>
+                                    <button mat-mini-fab color="mat-grey"><mat-icon>edit</mat-icon></button>
+                                </div-->
                             </div>
 
                             <div class="quotation--cards" >
@@ -102,7 +113,7 @@ place-items: center;">
                 </mat-expansion-panel>
                         <mat-expansion-panel   (opened)="panelOpenState = true"   [disabled]="getBlocked(reqReceived?.status)">
                             <mat-expansion-panel-header style="background-color:  #fafafa;" >
-                            <mat-panel-title style="font-weight: bold;">CUADROS COMPARATIVO</mat-panel-title> 
+                            <mat-panel-title style="font-weight: bold;">CUADRO COMPARATIVO</mat-panel-title> 
                             </mat-expansion-panel-header>
 
                         <div class="comparative-section">
@@ -126,7 +137,7 @@ place-items: center;">
                             </div>
 
                             <div class="comparative__charts" *ngIf="activateChart()">
-                                <p>CUADROS COMPARATIVOS</p>
+                                <p>CUADRO COMPARATIVO</p>
                                 <app-comparative-chart *ngFor="let i of [1]" [quotationsCompleted]="quotationsCompleted"[status]="status"></app-comparative-chart>
                             </div>
 
@@ -141,7 +152,7 @@ place-items: center;">
                     </mat-expansion-panel-header>
                 <div class="decisionReports-section" *ngIf="reqReceived?.status=='Cotizando'">
                     <div class="selection-quotation" >
-                        <p style="font-size: 17px; font-weight: 500;">EMPRESAS A ELEGIR</p>
+                        <p style="font-size: 17px; font-weight: 500;">Cotizaciones para elegir</p>
                         <mat-radio-group
                         aria-labelledby="example-radio-group-label"
                         class="example-radio-group"

@@ -26,6 +26,7 @@ export class QuotationContentComponent implements OnInit {
     ) { }
 
   idQuot:any;
+  idSR:any;
   quotation:any;
   business:any;
 
@@ -43,6 +44,7 @@ export class QuotationContentComponent implements OnInit {
   
   ngOnInit(): void {
     this.idQuot= this.rutaActiva.snapshot.params.quotID;
+    this.idSR=this.rutaActiva.snapshot.params.idSR;
     this.getQuot(); 
   }
   getQuot(){

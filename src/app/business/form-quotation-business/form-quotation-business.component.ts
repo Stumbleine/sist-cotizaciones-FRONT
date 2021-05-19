@@ -124,10 +124,21 @@ export class FormQuotationBusinessComponent implements OnInit {
         this.load=true;
         console.log(r);
         this.dataQuotation = r;
-        this.business=this.dataQuotation.business
-        console.log(this.business)
-        this.priceQuotationDetail=this.dataQuotation.priceQuotationDetail
-        this.refresh()
+        let state=this.dataQuotation.state
+        if(state == 'SIN COTIZAR'){
+          this.business=this.dataQuotation.business
+          console.log(this.business)
+          this.priceQuotationDetail=this.dataQuotation.priceQuotationDetail
+          this.refresh()
+        }else if( state == 'COTIZADO' ){
+         this.router.navigate(['/response-form']);
+        }else if(state == 'INCOMPLETO'){
+          this.router.navigate(['/response-form']);
+        }else if(state == 'EXPIRADO'){
+          this.router.navigate(['/error']);
+        }
+        //this.business=this.dataQuotation.business
+
       })
     }
   saveQuotation(quotation,formDirective1: FormGroupDirective){
