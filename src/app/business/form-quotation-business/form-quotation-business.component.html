@@ -61,7 +61,7 @@
                             <div>
                                 <mat-form-field  appearance="outline">
                                     <mat-label>Tiempo de garantia</mat-label>
-                                    <input matInput placeholder="Ingrese tiempo de garantia(días)" formControlName='garantyTerm' type="number"
+                                    <input matInput placeholder="Ingrese tiempo de garantia(meses)" formControlName='garantyTerm' type="number"
                                      min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                                 <mat-error class="form__validation--size">campo tiempo de garantia es requerido</mat-error>
                                   </mat-form-field>
@@ -185,8 +185,7 @@
                        
                 </div>
                 <div  class="form__buttons">
-                    <button mat-button style="color: #ff4848;margin-right: 15px;" (click)="openDialogCancel();" type="button"> CANCELAR</button>
-                    <button mat-raised-button class="btn-raised" style="margin-right: 25px;" [disabled]="quotationForm.invalid" type="submit" >
+                    <button mat-raised-button class="btn-raised" style="margin-right: 25px; font-size: 17px;" [disabled]="quotationForm.invalid" type="submit" >
                         ENVIAR 
                     </button>
                 </div>

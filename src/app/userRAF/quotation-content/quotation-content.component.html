@@ -10,7 +10,10 @@
         </div>
         <div class="section__info">
             <div class="info__company">
-                <div>
+                <div *ngIf="business?.nit==null">
+                    <h2 class="subtitle">{{business?.name}}</h2>
+                </div>
+                <div *ngIf="business?.nit!=null">
                     <h2 class="subtitle">{{business?.name}}</h2>
                     <div class="company__line" >
                         <div style="width: 60%;">
@@ -48,20 +51,20 @@
                     </div>
                     <div style="width: 50%;">
                         <h3>Tiempo de garantia</h3>
-                        <p>{{quotation?.garantyTerm}}</p>
+                        <p>{{quotation?.garantyTerm}} meses</p>
                     </div>
                 </div>
                 <div class="quot__line"  >
                     <div style="width: 50%;">
                         <h3>Tiempo de entrega</h3>
-                        <p>{{quotation?.deliveryTerm}}</p> 
+                        <p>{{quotation?.deliveryTerm}} dias</p> 
                     </div>
                     <div style="width: 50%;">
                         <h3>Validez de oferta</h3>
                         <p> {{quotation?.offValidation}}</p>
                      </div> 
                 </div>
-                <!--div  style="width: 90%; text-align: start; margin-top: 22px;">
+                <div  style="width: 90%; text-align: start; margin-top: 22px;" *ngIf="(quotation?.idPriceQuotation==11 ||quotation?.idPriceQuotation==10 )">
                     <div style=" display: flex; ">
                         <button mat-icon-button c  matTooltip="ver documento escaneado">                                
                             <img  width="30px" height="30px"  src="./../../../assets/file-pdf-regular.svg" alt="pdf del reporte">
