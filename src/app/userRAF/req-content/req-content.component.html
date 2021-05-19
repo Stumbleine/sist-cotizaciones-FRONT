@@ -146,7 +146,7 @@ place-items: center;">
                     
                 </mat-expansion-panel>
 
-                <mat-expansion-panel [expanded]="getPanelState4(reqReceived?.status)" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [disabled]="getBlockedDecision(reqReceived?.status)">
+                <mat-expansion-panel [expanded]="getPanelState4(reqReceived?.status)" (opened)="panelOpenState = true"  [disabled]="getBlockedDecision(reqReceived?.status)">
                     <mat-expansion-panel-header style="background-color:  #fafafa;">    
                     <mat-panel-title style="font-weight: bold;">DECISIÓN E INFORME</mat-panel-title> 
                     </mat-expansion-panel-header>

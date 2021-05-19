@@ -329,15 +329,11 @@ export class ReqContentComponent implements OnInit {
   
   getBlockedDecision(status){
     let block:boolean;
-    if(status=='Pendiente' || status=='Autorizado'){
+    if(status=='Pendiente' || status=='Autorizado' || this.quotationsCompleted.length==0){
       block=true
-    }else{
-      if(this.quotationsCompleted.length==0){
-        block=true
-      }else{
-        block=false
-      }
-      
+    }
+    if(status=='Rechazado'){
+      block=false
     }
     return block;
   }
@@ -345,13 +341,19 @@ export class ReqContentComponent implements OnInit {
   //DECISION E INFORMEs
   disabledBtnAR(status):boolean{
     let disabled:boolean;
-    if (status=='Cotizando' && this.quotationsCompleted.length>=1) {
-      disabled = false;
+
+    if(status=='Cotizando' && this.quotationsCompleted.length>=2){
+      if(this.chartReceived.length==0){
+        disabled=true;
+      }
     }else{
-      
-      disabled=true;
-    
+      if (status=='Cotizando' && this.quotationsCompleted.length>=1) {
+        disabled = false;
+      }else{  
+        disabled=true;
+      }
     }
+
     return disabled;
   }
   report:any;
