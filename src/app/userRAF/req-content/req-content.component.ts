@@ -93,6 +93,7 @@ export class ReqContentComponent implements OnInit {
   public chartReceived:any;
   public quotationsCompleted:any[]=[];
   public status:any;
+  public pressedNew=false;
 
  
   //variables para reportes
@@ -225,11 +226,11 @@ export class ReqContentComponent implements OnInit {
       this.openDialogChart()
       
     }else if(this.quotationsCompleted.length>=3){
-      if(this.status=='COTIZANDO'){
+      /* if(this.status=='Cotizando'){
         this.stateButton=false;
-      }else{
+      }else{ */
         this.stateButton=true;
-      }
+      //}
       
     }
   }
@@ -240,15 +241,17 @@ export class ReqContentComponent implements OnInit {
     this.stateButton=true;
   }
   setStateFalse(){
+    this.pressedNew=true;
     this.stateButton=false;
   }
   activateChart():boolean{
+    /* console.log(this.stateButton)
     if(this.status=='Cotizando'){
       return !this.stateButton
     }else{
       return this.stateButton;
-    }
-    
+    }  */
+    return this.stateButton;
   }
   loadDataChart(id:any){
     this.RequestService.get('http://localhost:8080/api/quotation_comparative/'+id)
@@ -256,12 +259,13 @@ export class ReqContentComponent implements OnInit {
       this.chartReceived = r;
       if(this.chartReceived.length!=0){
         console.log(this.status)
-        if(this.status=='Cotizando'){
+        /* if(this.status=='Cotizando'){
+          this.setStateButton()
           this.setStateFalse()
-        }else{
+        }else{ */ 
           this.setStateButton()
         console.log("hay cuadro")
-        }
+       // }
         
       }else{
         console.log("no hay cuadro!")

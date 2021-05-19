@@ -85,9 +85,11 @@ getQuotationForm(){
            this.RequestService.put('http://localhost:8080/api/quotation/RelatingPriceQuotationToDetails',{})
             .subscribe( respuesta =>{
              console.log('put enviada!!');
+             window.location.reload();
         })
            this.route.navigate(['/req-content', this.idR,'form-quotation']);
            this.snack.open('Cotizacion creada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
+           
            
          },
          error:()=>{
@@ -119,6 +121,7 @@ getQuotationForm(){
              this.RequestService.put('http://localhost:8080/api/quotation/RelatingPriceQuotationToDetails',{})
              .subscribe( respuesta =>{
               console.log('put enviada!!');
+              window.location.reload();
             })
              this.route.navigate(['/req-content', this.idR,'form-quotation']);
              this.snack.open('Cotizacion creada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})

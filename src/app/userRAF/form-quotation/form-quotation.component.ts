@@ -157,7 +157,7 @@ export class FormQuotationComponent implements OnInit {
             .subscribe( respuesta =>{
               this.idLastBusiness=respuesta;
               console.log('actualizando idBusiness!!');
-              
+              window.location.reload();
               
             })
        })
@@ -203,7 +203,7 @@ export class FormQuotationComponent implements OnInit {
                  .subscribe( respuesta =>{
                    this.idLastBusiness=respuesta;
                    console.log('actualizando idBusiness!!');
-                   
+                   window.location.reload();
                    
                  })
             })
@@ -241,7 +241,7 @@ export class FormQuotationComponent implements OnInit {
   }
   
   goForm(){
-    this.router.navigate(['/req-content/:id/form-quotation']);
+    this.router.navigate(['/req-content/:id']);
     window.location.reload();
   }
   thereIsBusiness():boolean{

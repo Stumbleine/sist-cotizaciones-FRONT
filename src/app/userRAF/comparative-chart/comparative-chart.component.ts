@@ -21,6 +21,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ComparativeChartComponent implements OnInit {
   @Input()quotationsCompleted:any;
+  @Input()status:any;
+  @Input()pressedNew:any;
   constructor(
     private RequestService: RequestService,private rutaActiva: ActivatedRoute
   ) { }
@@ -43,7 +45,7 @@ export class ComparativeChartComponent implements OnInit {
   ngOnInit(): void {
     this.idReqSpending= this.rutaActiva.snapshot.params.id,
     this.loadDataChart(this.idReqSpending);
-    
+    console.log(this.status)
     
   }
   refresh() {
@@ -68,8 +70,19 @@ export class ComparativeChartComponent implements OnInit {
         this.loadQuotation();
         this.refresh();
       }else{
-        this.loadQuotationGet();
+        console.log(this.status)
+       if(this.status=='Cotizando'&& this.pressedNew==true){
+         this.dataSourceBusiness.data=[]
+          this.detailsQuotation=this.quotationsCompleted[0].priceQuotationDetail
+        this.sizeDetails=this.detailsQuotation.length
+          this.updateQuotation();
+          this.refresh()
+          console.log(this.comparativeChartSend)
+        }else{
+          this.loadQuotationGet();
         this.refreshGet();
+        } 
+        
       }
       
     })
@@ -79,6 +92,12 @@ export class ComparativeChartComponent implements OnInit {
     this.RequestService.post('http://localhost:8080/api/quotation_comparative/'+id,this.comparativeChartSend)
     .subscribe( respuesta =>{
       console.log('Cuadro guardado!!', this.comparativeChartSend);
+    })
+  }
+  changeChart(id:any){
+    this.RequestService.put('http://localhost:8080/api/quotation_comparative/'+id,this.comparativeChartSend)
+    .subscribe( respuesta =>{
+      console.log('Cuadro reemplazado!!', this.comparativeChartSend);
     })
   }
   loadQuotation(){
@@ -112,6 +131,39 @@ export class ComparativeChartComponent implements OnInit {
         id++;   
     } 
     this.saveChart(this.idReqSpending); 
+  }
+  updateQuotation(){
+    console.log(this.quotationsCompleted)
+    let id=0
+    console.log(this.sizeDetails)
+    while(id< this.sizeDetails){
+      var result={}
+      var quantity={};var unit={};var description={};var company={};
+      var itemChartComplete={};var quotDetail={};this.quotatioBusiness=[]
+          quantity['quantity']=this.quotationsCompleted[0].priceQuotationDetail[id].quantity
+          unit['unit']=this.quotationsCompleted[0].priceQuotationDetail[id].unit
+          description['description']=this.quotationsCompleted[0].priceQuotationDetail[id].description
+          quotDetail=Object.assign(quantity,unit,description)
+      this.quotationsCompleted.forEach(i=> {
+         var loadBusiness={};var name={}; var subtotal={}
+          result[i.nameBussiness]=i.priceQuotationDetail[id].totalPrice
+          result=Object.assign(result)
+
+          name['nameBusiness']=i.nameBussiness
+          subtotal['subtotal']=i.priceQuotationDetail[id].totalPrice
+          loadBusiness=Object.assign(name,subtotal)
+          this.quotatioBusiness.push(loadBusiness)
+          
+      })
+        company['quotationBusiness']=this.quotatioBusiness
+        itemChartComplete=Object.assign(quotDetail,company)
+        this.comparativeChartSend.push(itemChartComplete)
+        this.nuevaTabla=Object.assign(this.detailsQuotation[id],result)
+        this.comparativeChart.push(this.nuevaTabla)
+        this.businessList.push(result)
+        id++;   
+    } 
+    this.changeChart(this.idReqSpending)
   }
   loadQuotationGet(){
     var result={}
