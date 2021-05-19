@@ -104,7 +104,7 @@
                                 <td mat-cell *matCellDef="let element" style="text-align: center;" > 
                                     <input type="number" [(ngModel)]="element.unitPrice" [ngModelOptions]="{standalone: true}"
                                      [name]="element.idPriceQuotationDetail" (change)="metodo()" > </td>
-                                <td mat-footer-cell *matFooterCellDef> {{ getTotalCost() | currency:"Bs."}}</td>
+                                <td mat-footer-cell *matFooterCellDef></td>
                             </ng-container>
 
 
@@ -123,7 +123,7 @@
                           </table>
                         </div>
                        
-                        <form class="item__fields" [formGroup]="itemForm" #formDirective="ngForm"  (ngSubmit)="saveItem(itemForm.value, formDirective)">
+                        <!-- <form class="item__fields" [formGroup]="itemForm" #formDirective="ngForm"  (ngSubmit)="saveItem(itemForm.value, formDirective)">
 
                               <div >
                                 <mat-form-field  appearance="outline">
@@ -163,15 +163,27 @@
                                     AÑADIR ITEM
                                 </button>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                 
-                
+                <div style="padding-left: 50px;padding-top: 20px;padding-bottom: 25px;">
+                    <p>Ingrese un comentario:</p>
+                    <mat-form-field appearance="outline" style="width: 70%; height: 40%;">
+                        <mat-label>Comentario</mat-label>
+                        <input matInput placeholder="Ingrese un comentario" formControlName='commentary' >
+                        <mat-error class="form__validation--size">campo comentario es requerido</mat-error>
+                      </mat-form-field>
+                </div>
                 <mat-divider></mat-divider>
-                <div style=" text-align: end;"*ngIf="thereIsBusiness()">
-                    <div style="display: flex; margin-left: 910px;">
-                        <p style="padding-right: 10px;">¿Desea registrar su empresa?</p><a href>  REGISTRAR</a></div>
+                <div style=" text-align: right;"*ngIf="thereIsBusiness()">
+                    <div style="text-align: center; ">
+                        <div style="display: flex ">
+                            <div style="width: 87%; text-align: end;"><p >¿Desea registrar su empresa?</p></div>
+                            <div style="width: 8%; "><a style="color: var(--btn-color-pri);" href="false">  REGISTRAR</a></div>
+                        </div>
                     </div>
+                       
+                </div>
                 <div  class="form__buttons">
                     <button mat-button style="color: #ff4848;margin-right: 15px;" (click)="openDialogCancel();" type="button"> CANCELAR</button>
                     <button mat-raised-button class="btn-raised" style="margin-right: 25px;" [disabled]="quotationForm.invalid" type="submit" >

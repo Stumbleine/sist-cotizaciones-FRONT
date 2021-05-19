@@ -52,6 +52,8 @@ export class FormQuotationBusinessComponent implements OnInit {
       deliveryTerm:['',Validators.required],
       offValidation: ['',],
       total: ['',],
+      commentary:['',],
+      state:['COTIZADO'],
       priceQuotationDetail: [this.priceQuotationDetail,],
   });
 
@@ -76,8 +78,12 @@ export class FormQuotationBusinessComponent implements OnInit {
   ];
 
   metodo(){
-    console.log("-----",this.dataSource.data);
-    console.log(this.items);
+    //console.log("-----",this.dataSource.data);
+    this.priceQuotationDetail=this.dataSource.data
+    this.priceQuotationDetail.map(i=>{
+      i.totalPrice=i.quantity*i.unitPrice
+    })
+    this.refresh()
   }
   public items:Item[]=[];
   public idQuot:any;
@@ -107,49 +113,116 @@ export class FormQuotationBusinessComponent implements OnInit {
     public dataQuotation:any;
     public business:any;
     public id:number;
+    public load=false;
+    public idLastBusiness:any;
 
 
     loadDataQuotation(){
       console.log(this.idQuot);
       this.RequestService.get('http://localhost:8080/api/quotation/getById/'+this.idQuot)
       .subscribe(r=>{
+        this.load=true;
         console.log(r);
         this.dataQuotation = r;
-        //this.business=this.dataQuotation.business
+        this.business=this.dataQuotation.business
+        console.log(this.business)
         this.priceQuotationDetail=this.dataQuotation.priceQuotationDetail
         this.refresh()
       })
     }
   saveQuotation(quotation,formDirective1: FormGroupDirective){
     this.Quotation=quotation;
+    
+    quotation.priceQuotationDetail=this.priceQuotationDetail
+    quotation.total= this.getTotalCost(); 
     console.log(quotation);
-      if(this.pressed){  
-        quotation.total= this.getTotalCost();  
+    if(quotation.razonSocial!=""){
+      this.saveQuotationSinBusiness(quotation,formDirective1)
+    }else{
+        //if(this.pressed){  
+       // quotation.total= this.getTotalCost();  
        // this.RequestService.post('http://localhost:8080/api/quotation',quotation)
-        this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation',quotation)
+       this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
+       .subscribe( respuesta =>{
+         console.log('Solicitud enviada!!');
+         this.openSnackBar();
+         console.log({"idBusiness":this.business.idBusiness})
+         this.RequestService.put('http://localhost:8080/api/quotation/updateQuotationAddingBusiness/'+this.idQuot,{"idBusiness":this.business.idBusiness})
+            .subscribe( respuesta =>{
+              this.idLastBusiness=respuesta;
+              console.log('actualizando idBusiness!!');
+              
+              
+            })
+       })
+       formDirective1.resetForm();
+       this.quotationForm.reset();
+       this.quotationForm.reset();
+       this.quotationForm.get('wayOfPayment').setValue("");
+       this.quotationForm.get('garantyTerm').setValue("");
+       this.quotationForm.get('deliveryTerm').setValue("");
+       this.quotationForm.get('offValidation').setValue("");
+       this.quotationForm.get('total').setValue("");
+       this.i=0;
+       this.priceQuotationDetail=[];
+       this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
+       this.pressed=false;
+       this.refresh();
+       
+   /* }
+   else{
+       console.log("Por lo menos un item!!!")
+       this.openDialog()
+   }; */
+    }
+      
+}
+saveQuotationSinBusiness(quotation,formDirective1: FormGroupDirective){
+    var name={};var area={}
+    name['nameBusiness']=quotation.razonSocial
+    area['nameArea']='Inmuebles'
+    name=Object.assign(name,area)
+    console.log(name)
+     this.RequestService.post('http://localhost:8080/api/business/createEmpresa',name)
           .subscribe( respuesta =>{
-            console.log('Solicitud enviada!!');
-            this.openSnackBar();
+            console.log('Empresa registrada!!');
+            
+
+            this.RequestService.get(' http://localhost:8080/api/business/getLastBusiness')
+          .subscribe( respuesta =>{
+            this.idLastBusiness=respuesta;
+            this.idLastBusiness=this.idLastBusiness.idBusiness
+            console.log('get id business!!');
+
+            this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
+            .subscribe( respuesta =>{
+              console.log('Solicitud enviada!!');
+              this.openSnackBar();
+              console.log({"idBusiness":this.idLastBusiness})
+              this.RequestService.put('http://localhost:8080/api/quotation/updateQuotationAddingBusiness/'+this.idQuot,{"idBusiness":this.idLastBusiness})
+                 .subscribe( respuesta =>{
+                   this.idLastBusiness=respuesta;
+                   console.log('actualizando idBusiness!!');
+                   
+                   
+                 })
+            })
+            
+          })
           })
           formDirective1.resetForm();
-          this.quotationForm.reset();
-          this.quotationForm.reset();
-          this.quotationForm.get('wayOfPayment').setValue("");
-          this.quotationForm.get('garantyTerm').setValue("");
-          this.quotationForm.get('deliveryTerm').setValue("");
-          this.quotationForm.get('offValidation').setValue("");
-          this.quotationForm.get('total').setValue("");
-          this.i=0;
-          this.priceQuotationDetail=[];
-          this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
-          this.pressed=false;
-          this.refresh();
-          
-      }
-      else{
-          console.log("Por lo menos un item!!!")
-          this.openDialog()
-      };
+       this.quotationForm.reset();
+       this.quotationForm.reset();
+       this.quotationForm.get('wayOfPayment').setValue("");
+       this.quotationForm.get('garantyTerm').setValue("");
+       this.quotationForm.get('deliveryTerm').setValue("");
+       this.quotationForm.get('offValidation').setValue("");
+       this.quotationForm.get('total').setValue("");
+       this.i=0;
+       this.priceQuotationDetail=[];
+       this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
+       this.pressed=false;
+       this.refresh(); 
 }
 openDialog() {
   this.dialog.open(DialogValidationSendComponent);
@@ -168,15 +241,18 @@ getTotalCost() {
 }
 
 goForm(){
-  this.router.navigate(['/cotizador/form-quotation']);
+  this.router.navigate(['/cotizador/form-quotation/:id']);
   window.location.reload();
 }
 thereIsBusiness():boolean{
-  if(this.business==null){
-    return true;
-  }else{
-    return false;
+  if(this.load==true){
+    if(this.business==null){
+      return true;
+    }else{
+      return false;
+    }
   }
-
+  
 }
+
 }

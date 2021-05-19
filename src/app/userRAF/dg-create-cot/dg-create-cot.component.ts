@@ -82,14 +82,20 @@ getQuotationForm(){
        .subscribe({
          next:()=>{
            console.log('Cotizacion creada exitosamente!!');
+           this.RequestService.put('http://localhost:8080/api/quotation/RelatingPriceQuotationToDetails',{})
+            .subscribe( respuesta =>{
+             console.log('put enviada!!');
+        })
            this.route.navigate(['/req-content', this.idR,'form-quotation']);
            this.snack.open('Cotizacion creada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
+           
          },
          error:()=>{
            console.log('Ocurrio un error, no se creo la cotizacon.');
            this.snack.open('Fallo al crear cotizacion.','CERRAR',{duration:5000})
          }
        });
+       
   }else{
     this.listBusinessSelected.map(i=>{
       var id={};var list=[];var details={};
@@ -110,9 +116,14 @@ getQuotationForm(){
          .subscribe({
            next:()=>{
              console.log('Cotizacion creada exitosamente!!');
+             this.RequestService.put('http://localhost:8080/api/quotation/RelatingPriceQuotationToDetails',{})
+             .subscribe( respuesta =>{
+              console.log('put enviada!!');
+            })
              this.route.navigate(['/req-content', this.idR,'form-quotation']);
              this.snack.open('Cotizacion creada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
-           },
+             
+            },
            error:()=>{
              console.log('Ocurrio un error, no se creo la cotizacon.');
              this.snack.open('Fallo al crear cotizacion.','CERRAR',{duration:5000})

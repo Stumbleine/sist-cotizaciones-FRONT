@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, Validators } from '@angular/forms';
 import {  MatListOption } from '@angular/material/list';
 import {DgChartValidationComponent} from '../dg-chart-validation/dg-chart-validation.component'
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export interface DialogData {
   animal: string;
@@ -91,6 +92,7 @@ export class ReqContentComponent implements OnInit {
   public quotReceived:any;
   public chartReceived:any;
   public quotationsCompleted:any[]=[];
+  public status:any;
 
  
   //variables para reportes
@@ -142,6 +144,7 @@ export class ReqContentComponent implements OnInit {
 //PENDIENTE functions
   disabledButtons(status):boolean{
     let disabled:boolean;
+    this.status=status;
     if (status=='Pendiente') {
       disabled = false;
     } else if (status=='Autorizado') {
@@ -210,7 +213,12 @@ export class ReqContentComponent implements OnInit {
       this.openDialogChart()
       
     }else if(this.quotationsCompleted.length>=3){
-      this.stateButton=true;
+      if(this.status=='COTIZANDO'){
+        this.stateButton=false;
+      }else{
+        this.stateButton=true;
+      }
+      
     }
   }
   openDialogChart() {
@@ -223,15 +231,26 @@ export class ReqContentComponent implements OnInit {
     this.stateButton=false;
   }
   activateChart():boolean{
-    return this.stateButton;
+    if(this.status=='Cotizando'){
+      return !this.stateButton
+    }else{
+      return this.stateButton;
+    }
+    
   }
   loadDataChart(id:any){
     this.RequestService.get('http://localhost:8080/api/quotation_comparative/'+id)
     .subscribe(r  =>{
       this.chartReceived = r;
       if(this.chartReceived.length!=0){
-        this.setStateButton()
+        console.log(this.status)
+        if(this.status=='Cotizando'){
+          this.setStateFalse()
+        }else{
+          this.setStateButton()
         console.log("hay cuadro")
+        }
+        
       }else{
         console.log("no hay cuadro!")
       }
