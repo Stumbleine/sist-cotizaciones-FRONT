@@ -54,7 +54,9 @@ place-items: center;">
                             </h3>
                         </div>
                         <h3 >Justificación:</h3>
-                        <p style="margin:0 20px 0 20px;">{{reqReceived?.justification}} Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet</p>
+                        <p style="margin:0 20px 0 20px;">
+                            {{reqReceived?.justification}} 
+                        </p>
                   </div>
                   <div  style="text-align: end; margin-bottom: 10px; margin-top: 15px;">
                     <button mat-raised-button class="btn-raised-e" [disabled]="disabledButtons(reqReceived?.status)">RECHAZAR</button>
@@ -86,6 +88,9 @@ place-items: center;">
                                 <h2 style="color: #0a6cff; font-size: 17px;" >
                                     Fecha de expiración de los formularios:  <p style="font-style: italic;">{{dateExpiration}}</p>
                                 </h2>
+                                <!--div>
+                                    <button mat-mini-fab color="mat-grey"><mat-icon>edit</mat-icon></button>
+                                </div-->
                             </div>
 
                             <div class="quotation--cards" >
