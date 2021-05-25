@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, Validators } from '@angular/forms';
 import {  MatListOption } from '@angular/material/list';
 import {DgChartValidationComponent} from '../dg-chart-validation/dg-chart-validation.component'
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 export interface DialogData {
   animal: string;
@@ -45,6 +45,7 @@ export class ReqContentComponent implements OnInit {
     private rutaActiva: ActivatedRoute,
     private formBuilder: FormBuilder,) {}
 
+  
   state:string;
   stateButton=false;
   panelOpenState =false;
@@ -73,7 +74,7 @@ export class ReqContentComponent implements OnInit {
 
 
   public dateExpiration:any;
-  public quotationsCard:any;
+  public quotationsCard=null;
   validDate(status){
     let res:boolean;
     if( status=='Aprobado' || status == 'Rechazado'){
@@ -118,7 +119,7 @@ export class ReqContentComponent implements OnInit {
   loadData(id:any){
     this.RequestService.get('http://localhost:8080/api/request/'+id)
     .subscribe(r  =>{
-      console.log("LOAD DATA",r);
+      console.log("LOAD DATA PEDIDO",r);
       this.reqReceived = r;
       this.items=this.reqReceived.requestDetail;
       this.dataSource.data=this.items;
@@ -159,19 +160,21 @@ export class ReqContentComponent implements OnInit {
       }
     return disabled;
   }
+  DecisionDescripcion:boolean=false;
+  rechazarPendiente(){
+    this.DecisionDescripcion=!this.DecisionDescripcion;
+  }
 
   //COTIZACIONES
   loadCardQuotation(id:any){
     this.RequestService.get('http://localhost:8080/api/req-content/'+id+'/quotation')
-    .subscribe(r  =>{
-      this.quotationsCard=r;
-      this.filterCompletedQ(this.quotationsCard);
+    .subscribe(r =>{
+        this.quotationsCard=r;
+        console.log("TARJETAS QuotS .... ",this.quotationsCard);
+        this.filterCompletedQ(this.quotationsCard);
+        this.dateExpiration=this.quotationsCard[0]?.deadline;
 
-      console.log("extraendo fecha",this.quotationsCard);
-
-      this.dateExpiration=this.quotationsCard[0]?.deadline;
-      console.log(typeof(this.dateExpiration))
-      this.loadDataChart(this.idReqSpending)  
+        this.loadDataChart(this.idReqSpending)  
     })
   }
   filterCompletedQ(quotationsCard){
@@ -186,6 +189,7 @@ export class ReqContentComponent implements OnInit {
       data:{
         idSR:this.idReqSpending,
         items:this.items,
+        cards:this.quotationsCard,
       }
     });
   }
@@ -202,10 +206,9 @@ export class ReqContentComponent implements OnInit {
     let dateee:{}={
       "deadline":this.dateExpired
       }
-    console.log(typeof(dateee),dateee);
     this.RequestService.put('http://localhost:8080/api/req-content/updateDeadLine/'+id,dateee)
     .subscribe(r=>{
-      console.log("Fecha actualizada");
+      console.log("Fecha actualizada !!!!");
     })
   }
 
@@ -258,7 +261,7 @@ export class ReqContentComponent implements OnInit {
     .subscribe(r  =>{
       this.chartReceived = r;
       if(this.chartReceived.length!=0){
-        console.log(this.status)
+        console.log("?????????",this.status)
         /* if(this.status=='Cotizando'){
           this.setStateButton()
           this.setStateFalse()
@@ -274,15 +277,17 @@ export class ReqContentComponent implements OnInit {
   } 
 
   //ESTADOS DE PANELES
+  //expanded
   getPanelState(status):boolean{
     let open:boolean;
-    if(status=='Pendiente'|| status=='Rechazado'){
+    if(status=='Pendiente'){
       open=true
     }else{
       open=false
     }
     return open;
   }
+  //expanded
   getPanelState2(status):boolean{
     let open:boolean;
     if(status=='Autorizado'|| status=='Cotizando'){
@@ -292,7 +297,7 @@ export class ReqContentComponent implements OnInit {
     }
     return open;
   }
-   
+   //expanded Decision
   getPanelState4(status):boolean{
     let open:boolean;
     if(status=='Rechazado'||status=='Aprobado'){
@@ -302,22 +307,23 @@ export class ReqContentComponent implements OnInit {
     }
     return open;
   }
+  //Blocked COTIZACIONES
   getBlockedC(status){
+ //   console.log("TARJETAS EN EL panel COTIZACIONES",this.quotationsCard);
     let block:boolean;
     if(status=='Pendiente'){
       block=true
     }else{
       if(status=='Rechazado' &&  this.quotationsCard.length === 0){
         block=true
-      
       }else{
         block=false
       }
-
     }
     return block;
   }
-  getBlocked(status){
+  getBlockedCuadros(status){
+    //console.log("TARJETAS EN EL panel CUADROS",this.quotationsCard);
     let block:boolean;
     if(status=='Pendiente'|| status=='Autorizado'){
       block=true
@@ -333,12 +339,14 @@ export class ReqContentComponent implements OnInit {
   
   getBlockedDecision(status){
     let block:boolean;
+    if(status=='Rechazado'){
+      return false
+    }
     if(status=='Pendiente' || status=='Autorizado' || this.quotationsCompleted.length==0){
       block=true
     }
-    if(status=='Rechazado'){
-      block=false
-    }
+    
+
     return block;
   }
 
@@ -372,7 +380,7 @@ export class ReqContentComponent implements OnInit {
   }
   comentRequired(){
     let required:boolean;
-   // console.log("ETTOCOMPLETED",this.quotationsCompleted.length);
+
     if(this.quotationsCompleted.length <=2){
       required=true;
     }else{
@@ -380,4 +388,39 @@ export class ReqContentComponent implements OnInit {
     }
     return required
   }
+
+  downloadPDF(){
+
+
+      //saveAs(blob, this.document?.nameDocumenQuotaion);
+      const fileURL = URL.createObjectURL(this.document);
+      window.open(fileURL, '_blank');
+    
+  }
+
+
+//SDC42 estados del pedido
+
+  changeState(idSR,state:string){
+    const formData:any = new FormData();
+    formData.append("state", state);
+    formData.append("comentary", "Comentario predeterminado..");
+    formData.append("document", null);
+
+    this.RequestService.put('http://localhost:8080/api/request/'+idSR,formData)
+    .subscribe({
+        next(){
+          console.log("Estado actualizado.", state)
+          window.location.reload();
+        },
+        error(){
+          console.log("Error al actualizar estado.",state)
+        }
+      });
+  }
+
+  generateReport(){
+
+  }
+
 }

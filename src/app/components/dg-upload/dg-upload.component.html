@@ -1,0 +1,81 @@
+<div style="width:450px ;">
+    <h2>
+        Insertar cotizacion escaneado 
+    </h2>
+    <div class="container" >
+        <div style="width: 100%;">
+            <mat-form-field class="container__field" appearance="outline" >
+                <ngx-mat-file-input [accept]="'.pdf'" (change)="onFileSelected($event)" 
+                #removableInput  formControlName="removablefile" placeholder="ingrese un pdf">
+                </ngx-mat-file-input>
+                <button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
+                  <mat-icon>clear</mat-icon>
+                </button>
+                <mat-hint>buscar archivo pdf.</mat-hint>
+              </mat-form-field>
+        </div>
+        <div style="text-align: end; width: 100%; margin-right: 45px;">
+            <button mat-raised-button class="btn-raised" (click)="postFile(idQuot)">GUARDAR</button>
+        </div>
+    </div>
+
+
+
+
+        <div class="report-section"  >
+            <mat-list >
+                <div mat-subheader> archivos</div>
+                <mat-list-item class="item__line" >
+                    <button mat-icon-button (click)="getPDFScaned()" >
+                        <img  width="30px" height="30px"  src="./../../../assets/file-pdf-regular.svg" alt="pdf del reporte">
+                    </button>            
+                    <div style="margin-left:15px; " >
+                        <div mat-line><p style="margin-top: 15px;">{{dataFile?.nameDocumenQuotaion}}</p></div>
+                    </div>
+                    <span class="example-spacer"></span>
+                    <div >
+                        <button mat-icon-button><mat-icon>clear</mat-icon></button>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+</div>
+<style>
+        .example-spacer {
+        flex: 1 1 auto;
+    }
+    .container{
+
+        
+        text-align: center;
+        padding: 10px;
+        height: 150px;
+        display: grid;
+        place-items: center;
+    }
+    .container__field{
+        width: 90%;
+        height: 50px;
+    }
+    .btn-raised{
+        background-color:var(--btn-color-pri);
+        color: white;
+        font-size: 16px;
+    }
+    .report-section {
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  padding: 5px;
+
+  margin: auto;
+}
+    .item__line{
+        display: flex; 
+        background-color: rgb(239, 236, 255);
+
+
+    }
+
+</style>

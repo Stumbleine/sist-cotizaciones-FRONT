@@ -1,0 +1,51 @@
+<div class="report-section" *ngIf="code=='reportPedido'">
+
+    <mat-list>
+        <div mat-subheader> archivos</div>
+        <mat-list-item  style="display: flex; ">
+            <button mat-icon-button  (click)="getPDF_blob()">
+                <img  width="30px" height="30px"  src="./../../../assets/file-pdf-regular.svg" alt="pdf del reporte">
+
+            </button>            
+            <div style="margin-left:15px">
+                <div mat-line>{{data?.nameDocumenQuotaion}}</div>
+            </div>
+            
+            
+        </mat-list-item>
+    </mat-list>
+</div>
+
+
+<div class="report-section" *ngIf="code=='documentQuot'" >
+
+    <mat-list>
+        <div mat-subheader> archivos</div>
+        <mat-list-item  style="display: flex; ">
+            <button mat-icon-button (click)="getQuotPDF_blob()" >
+                <img  width="30px" height="30px"  src="./../../../assets/file-pdf-regular.svg" alt="pdf del reporte">
+
+            </button>            
+            <div style="margin-left:15px">
+                <div mat-line>{{dataFile?.nameDocumenQuotaion}}</div>
+            </div>
+        </mat-list-item>
+    </mat-list>
+</div>
+
+<style>
+
+.report-section {
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  padding: 5px;
+  width: 60%;
+  margin: auto;
+}
+
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+</style>

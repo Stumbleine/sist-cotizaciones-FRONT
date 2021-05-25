@@ -11,8 +11,12 @@
                 </div>
                 <span class="example-spacer"></span>
                 <div class="header--actions">
-                    <button mat-button matTooltip="Subir cotizacion escaneado" class="btn-icons"><mat-icon >upload_file</mat-icon></button>
-                    <button mat-button matTooltip="Imprimir formulario" class="btn-icons" ><mat-icon >print</mat-icon></button>
+                    <button mat-button matTooltip="Subir cotizacion escaneado" class="btn-icons" (click)="openUploader()">
+                        <mat-icon >upload_file</mat-icon>
+                    </button>
+                    <button mat-button matTooltip="Imprimir formulario" class="btn-icons" >
+                        <mat-icon >print</mat-icon>
+                    </button>
                     <button mat-raised-button style="margin-right: 25px; margin-left: 15px;" (click)="openGLink()"> ENVIAR </button>
                 </div>
             </div>
@@ -32,7 +36,7 @@
                     </div>
                 </div>
 
-                <mat-divider></mat-divider>
+                <mat-divider *ngIf="!thereIsBusiness()"></mat-divider>
 
                 <form class="form-base" [formGroup]="quotationForm" #formDirectiveNew="ngForm" (ngSubmit)="saveQuotation(quotationForm.value,formDirectiveNew)">
                     
@@ -193,15 +197,7 @@
                           </mat-form-field>
                     </div>
                     <mat-divider></mat-divider>
-                    <div style=" text-align: right;"*ngIf="thereIsBusiness()">
-                        <div style="text-align: center; ">
-                            <div style="display: flex ">
-                                <div style="width: 87%; text-align: end;"><p >¿Desea registrar su empresa?</p></div>
-                                <div style="width: 8%; "><a style="color: var(--btn-color-pri);" href="false">  REGISTRAR</a></div>
-                            </div>
-                        </div>
-                           
-                    </div>
+
                 <div  class="form-actions">
                     <button mat-button style="color: #ff4848;margin-right: 15px;" (click)="openDialogCancel();" type="button"> CANCELAR</button>
                     <button mat-raised-button class="btn-raised" style="margin-right: 25px;" [disabled]="quotationForm.invalid" type="submit" >

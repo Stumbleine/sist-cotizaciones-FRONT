@@ -10,6 +10,7 @@ import { FormQuotationBusinessComponent } from './business/form-quotation-busine
 import {ErrorPageComponent} from './components/error-page/error-page.component'
 import {QuotationContentComponent} from './userRAF/quotation-content/quotation-content.component'
 import {ResponseFormComponent} from './components/response-form/response-form.component'
+import {FilesComponent} from './components/file/files.component'
 
 const routes: Routes = [
   { path: 'home-raf', component:  HomePageRAFComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'error', component:ErrorPageComponent },
   {path: 'response-form', component:ResponseFormComponent},
   {path:'req-content/:idSR/quot-content/:quotID',component:QuotationContentComponent},
+{ path: 'home-raf/file',component:FilesComponent}
 
 ]
 @NgModule({

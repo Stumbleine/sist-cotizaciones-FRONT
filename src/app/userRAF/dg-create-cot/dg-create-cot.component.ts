@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {RequestService} from '../../services/request.service';
 import {Router} from '@angular/router'
@@ -21,26 +21,14 @@ export class DgCreateCotComponent implements OnInit {
 
   //buscador de empresas
   
-  companies=[
-    {nameCompany:"Empresa Moderna de Electrónica",rubro:"Electronica",eMail:"modernElectronics@gmail.com"},
-    {nameCompany:"TecBolivia",rubro:"Electrónica",eMail:"tecBolivia@gmail.com"},
-    {nameCompany:"servicentro electrónica",rubro:"Electrónica",eMail:"servicentro_electro@gmail.com"},
-    {nameCompany:"Altaix Electrónica",rubro:"Electrónica",eMail:"altaix234@gmail.com"},
-    {nameCompany:"Altaix Electrónica",rubro:"Electrónica",eMail:"altaix234@gmail.com"},
-    {nameCompany:"Altaix Electrónica",rubro:"Electrónica",eMail:"altaix234@gmail.com"},
-    ]
+
   public Companies:any;
   //variables creacion de cotizacion
   public nameArea:string="Inmuebles"
   public listBusinessSelected:any[]=[]
   public quotationForm:any;
   idR=this.data.idSR;
-  /* quotationForm={
-    company:{nameCompany:"Empresa Moderna de Electrónica",rubro:"Electronica",eMail:"modernElectronics@gmail.com"},
-    details:this.data.items
-  }; */
-
-
+  cardsQuotations=this.data.cards;
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -55,10 +43,6 @@ export class DgCreateCotComponent implements OnInit {
     })
   }
   
-  /* listCompanies(company){
-    console.log("this es a company selected",company);
-    
-  } */
   getListBusiness(options: MatListOption[]) {
     this.listBusinessSelected=options.map(o=> o.value);
     console.log(this.listBusinessSelected)
@@ -85,11 +69,14 @@ getQuotationForm(){
            this.RequestService.put('http://localhost:8080/api/quotation/RelatingPriceQuotationToDetails',{})
             .subscribe( respuesta =>{
              console.log('put enviada!!');
-             window.location.reload();
+             //window.location.reload();
         })
-           this.route.navigate(['/req-content', this.idR,'form-quotation']);
+           //this.route.navigate(['/req-content', this.idR,'form-quotation']);
            this.snack.open('Cotizacion creada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
            
+           if(this.cardsQuotations.length===0){
+            this.changeState(this.idR);
+           }
            
          },
          error:()=>{
@@ -123,7 +110,11 @@ getQuotationForm(){
               console.log('put enviada!!');
               window.location.reload();
             })
-             this.route.navigate(['/req-content', this.idR,'form-quotation']);
+
+            if(this.cardsQuotations.length===0){
+              this.changeState(this.idR);
+             }
+
              this.snack.open('Cotizacion creada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
              
             },
@@ -152,6 +143,22 @@ getQuotationForm(){
     });
   
   }
+changeState(idSR){
+    const formData:any = new FormData();
+    formData.append("state", 'Cotizando');
+    formData.append("comentary", "Comentario predeterminado..");
+    formData.append("document", null);
 
+    this.RequestService.put('http://localhost:8080/api/request/'+idSR,formData)
+    .subscribe({
+        next(){
+          console.log("Estado actualizado.")
+          window.location.reload();
+        },
+        error(){
+          console.log("Error al actualizar estado.")
+        }
+      });
+  }
 
 }

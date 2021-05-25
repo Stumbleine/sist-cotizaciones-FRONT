@@ -64,15 +64,11 @@
                         <p> {{quotation?.offValidation}}</p>
                      </div> 
                 </div>
-                <div  style="width: 90%; text-align: start; margin-top: 22px;" *ngIf="(quotation?.idPriceQuotation==11 ||quotation?.idPriceQuotation==10 )">
-                    <div style=" display: flex; ">
-                        <button mat-icon-button c  matTooltip="ver documento escaneado">                                
-                            <img  width="30px" height="30px"  src="./../../../assets/file-pdf-regular.svg" alt="pdf del reporte">
-                            
-                        </button>
-                        <p style="margin-top: 15px; font-style: italic;">documento escaneado</p>
-                    </div>
-                </div>
+                
+
+                <app-files [idQuot]="idQuot" [code]="'documentQuot'"
+                style="width: 100%;"   >
+                </app-files>
                 <!--div style="width: 90%; text-align: end; margin-top: 25px;">
                     <h3 style="text-transform: uppercase;" [ngStyle]="{'color':getColorSR(quotation.state)}">{{quotation?.state}}</h3></div-->
             </div>

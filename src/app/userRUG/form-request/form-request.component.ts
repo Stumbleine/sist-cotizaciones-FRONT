@@ -45,7 +45,7 @@ export class FormRequestComponent implements OnInit {
   requestForm = this.formBuilder.group({
     initials: ['',],
     date:[this.date,],
-    status: ['pendiente',],
+    status: ['Pendiente',],
     type:['',],
     estimatedAmount: ['',[Validators.required]],
     justification: ['',[Validators.required]],
@@ -105,7 +105,7 @@ export class FormRequestComponent implements OnInit {
           this.requestForm.reset();
           this.productForm.reset();
           this.requestForm.get('date').setValue(this.date);
-          this.requestForm.get('status').setValue("pendiente");
+          this.requestForm.get('status').setValue("Pendiente");
           this.requestForm.get('estimatedAmount').setValue("");
           this.requestForm.get('type').setValue("");
           this.requestForm.get('initials').setValue("");

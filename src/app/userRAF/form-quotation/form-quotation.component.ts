@@ -9,7 +9,7 @@ import { DialogValidationSendComponent } from 'src/app/business/dialog-validatio
 import { SnackbarSendRequestComponent } from 'src/app/userRUG/snackbar-send-request/snackbar-send-request.component';
 import { DialogValidationCancelComponent } from 'src/app/business/dialog-validation-cancel/dialog-validation-cancel.component';
 import { DialogGComponent} from '../../components/dialog-g/dialog-g.component'
-
+import { DgUploadComponent} from '../../components/dg-upload/dg-upload.component'
 
 export interface Item{
   quantity : number,
@@ -93,6 +93,14 @@ export class FormQuotationComponent implements OnInit {
 
   openGLink():void{
     this.dialog.open(DialogGComponent,{
+      data:{
+        idQuot:this.idQuot,
+
+      }
+    });
+  }
+  openUploader(){
+    this.dialog.open(DgUploadComponent,{
       data:{
         idQuot:this.idQuot,
 

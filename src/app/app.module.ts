@@ -52,12 +52,17 @@ import { ErrorPageComponent } from './components/error-page/error-page.component
 import { DgChartValidationComponent } from './userRAF/dg-chart-validation/dg-chart-validation.component';
 import { QuotationContentComponent } from './userRAF/quotation-content/quotation-content.component';
 import { DialogGComponent } from './components/dialog-g/dialog-g.component';
-import { ResponseFormComponent } from './components/response-form/response-form.component'
+import { ResponseFormComponent } from './components/response-form/response-form.component';
+import { FilesComponent } from './components/file/files.component';
 
+import { DgUploadComponent } from './components/dg-upload/dg-upload.component'
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+
+import { FileSaverModule } from 'ngx-filesaver';
 @NgModule({
-  declarations: [
+  declarations: [ 
     AppComponent,
-
+  
     HomePageComponent,
     SummaryCardComponent,
     UserBarComponent,
@@ -65,7 +70,7 @@ import { ResponseFormComponent } from './components/response-form/response-form.
     HomePageRAFComponent,
     FormRequestComponent,
     DialogValidationComponent,
-    SnackbarSendRequestComponent,
+    SnackbarSendRequestComponent, 
     ReqContentComponent,
     DgCreateCotComponent,
     SumCardRafComponent,
@@ -76,9 +81,12 @@ import { ResponseFormComponent } from './components/response-form/response-form.
     QoatationCardComponent,
     ComparativeChartComponent,
     ErrorPageComponent, 
-    DgChartValidationComponent, QuotationContentComponent, DialogGComponent, ResponseFormComponent,
+    DgChartValidationComponent, QuotationContentComponent, DialogGComponent, ResponseFormComponent, FilesComponent,
+     DgUploadComponent,
   ],
   imports: [
+    MaterialFileInputModule,FileSaverModule,
+
     HttpClientModule,
     CommonModule,     
     BrowserModule,

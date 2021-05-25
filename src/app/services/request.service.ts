@@ -1,5 +1,5 @@
 import { Injectable, Output ,EventEmitter } from '@angular/core';
-import{HttpClient, HttpHeaders} from '@angular/common/http';
+import{HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import{HttpClient, HttpHeaders} from '@angular/common/http';
 export class RequestService {
   @Output() disparadorChart: EventEmitter<any>=new EventEmitter();
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   public post(url:string, body){
@@ -18,6 +18,20 @@ export class RequestService {
   }
   public put(url:string, body){
     return this.http.put(url,body);
+  }
+  public putState(url:string, body){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'multipart/form-data'
+      })
+    }
+    return this.http.put(url,body,httpOptions);
+  }
+
+  public getFile(url:string){
+    return this.http.get(url, {
+      responseType: 'blob'
+    });
   }
 
 }
