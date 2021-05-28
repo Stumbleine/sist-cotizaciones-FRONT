@@ -67,6 +67,16 @@ export class DgUploadComponent implements OnInit {
           console.log('Archivo no guardado')
         }
       }
-    )
-  }
+    )};
+      replace:boolean=false;
+    disalbedInput(){
+      let disabled:boolean=false;
+      if(this.dataFile!=null){
+        disabled=true;
+      }
+      if(this.replace==true){
+        disabled=false;
+      }
+      return disabled;
+    }
 }

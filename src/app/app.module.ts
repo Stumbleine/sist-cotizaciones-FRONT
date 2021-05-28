@@ -17,7 +17,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSelectModule} from '@angular/material/select'
 import {MatDividerModule} from '@angular/material/divider';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http' 
 import {RequestService} from '../app/services/request.service';
 import {CommonModule} from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -58,7 +58,6 @@ import { FilesComponent } from './components/file/files.component';
 import { DgUploadComponent } from './components/dg-upload/dg-upload.component'
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 
-import { FileSaverModule } from 'ngx-filesaver';
 @NgModule({
   declarations: [ 
     AppComponent,
@@ -85,7 +84,7 @@ import { FileSaverModule } from 'ngx-filesaver';
      DgUploadComponent,
   ],
   imports: [
-    MaterialFileInputModule,FileSaverModule,
+    MaterialFileInputModule,
 
     HttpClientModule,
     CommonModule,     

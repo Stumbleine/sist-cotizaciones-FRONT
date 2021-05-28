@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {RequestService} from '../../services/request.service';
-import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-files',
   templateUrl: './files.component.html',
