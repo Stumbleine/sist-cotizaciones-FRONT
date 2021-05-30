@@ -400,8 +400,17 @@ export class ReqContentComponent implements OnInit {
     formData.append("state", state);
     formData.append("comentary", "Comentario predeterminado..");
     let pdf2 = new Blob([],{type: 'application/pdf'});
-
-    state==('Autorizado') ? formData.append("document", pdf2):formData.append("document", pdf);
+    
+    if(state=='Autorizado'){
+      formData.append("document", pdf2)
+    }else{
+      if(state=='Rechazado'){
+        formData.append("document", pdf,"Informe de rechazo");
+      }
+      if(state=='Aprobado'){
+        formData.append("document", pdf,"Informe de aprobacion");
+      }
+    }
     //console.log(this.quotationsCompleted[0].idPriceQuotation)
     state==("Aprobado") ? formData.append("idQuotation", this.quotationsCompleted[0].idPriceQuotation):formData.append("idQuotation", 0);
 
@@ -441,8 +450,8 @@ export class ReqContentComponent implements OnInit {
     pdf.add(new Canvas([new Line([0,0], [500, 0]).end]).end );
     //decripcion
 
-    //cotizaciones
-
+    //cotizaciones   
+      
     //cuadro
 
     //decision
