@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormBuilder, Validators } from '@angular/forms';
 import {  MatListOption } from '@angular/material/list';
 import {DgChartValidationComponent} from '../dg-chart-validation/dg-chart-validation.component'
-
+import {PdfMakeWrapper, Txt, Table, Columns,DocumentDefinition, Canvas, Line} from 'pdfmake-wrapper'
 
 export interface DialogData {
   animal: string;
@@ -107,8 +107,10 @@ export class ReqContentComponent implements OnInit {
   ngOnInit(): void {
     this.idReqSpending= this.rutaActiva.snapshot.params.id,
     this.loadData(this.idReqSpending);
+
     this.loadCardQuotation(this.idReqSpending);
-    this.getReporte(this.idReqSpending);
+    //this.reqReceived.status == ('Aprobado' || 'Rechazado')? this.getReporte(this.idReqSpending):
+    this.getReporte(this.idReqSpending)
     this.RequestService.disparadorChart.subscribe(data=>{
       this.stateButton=data;
     })
@@ -389,38 +391,71 @@ export class ReqContentComponent implements OnInit {
     return required
   }
 
-  downloadPDF(){
-
-
-      //saveAs(blob, this.document?.nameDocumenQuotaion);
-      const fileURL = URL.createObjectURL(this.document);
-      window.open(fileURL, '_blank');
-    
-  }
 
 
 //SDC42 estados del pedido
 
-  changeState(idSR,state:string){
+  changeState(idSR,state:string,pdf:any){
     const formData:any = new FormData();
     formData.append("state", state);
     formData.append("comentary", "Comentario predeterminado..");
-    formData.append("document", null);
+    let pdf2 = new Blob([],{type: 'application/pdf'});
+
+    state==('Autorizado') ? formData.append("document", pdf2):formData.append("document", pdf);
+    //console.log(this.quotationsCompleted[0].idPriceQuotation)
+    state==("Aprobado") ? formData.append("idQuotation", this.quotationsCompleted[0].idPriceQuotation):formData.append("idQuotation", 0);
+
+
+    
 
     this.RequestService.put('http://localhost:8080/api/request/'+idSR,formData)
     .subscribe({
         next(){
+          for (var pair of formData.entries()) {
+            console.log(pair[0]+ ': ' + pair[1]); 
+          }
           console.log("Estado actualizado.", state)
           window.location.reload();
         },
         error(){
+          for (var pair of formData.entries()) {
+            console.log(pair[0]+ ': ' + pair[1]); 
+          }
           console.log("Error al actualizar estado.",state)
         }
       });
   }
+  generateReport(state:string){
+    const pdf = new PdfMakeWrapper();
 
-  generateReport(){
 
+    pdf.defaultStyle({
+      fontSize:12
+    })
+    pdf.add(new Txt(this.reqReceived?.type).bold().alignment('center').end);
+    pdf.add(new Txt('Solicitante:                             ' +  this.reqReceived?.username).end); 
+    pdf.add(new Txt('Solicitado por proyecto:       ' + this.reqReceived?.initials).end);
+    pdf.add(new Txt('Estado:                                    ' + this.reqReceived?.status).end);
+    pdf.add(new Txt('Fecha de emision:                 ' + this.reqReceived?.date).end);
+    pdf.add(pdf.ln(1));
+    pdf.add(new Canvas([new Line([0,0], [500, 0]).end]).end );
+    //decripcion
+
+    //cotizaciones
+
+    //cuadro
+
+    //decision
+
+
+    //generate
+    pdf.create().open()
+    pdf.create().getBlob(
+      b=>{
+        console.log("Este es el pdf",b)
+        this.changeState(this.idReqSpending,state,b);
+      }
+    );
   }
 
 }

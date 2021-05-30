@@ -146,8 +146,10 @@ getQuotationForm(){
 changeState(idSR){
     const formData:any = new FormData();
     formData.append("state", 'Cotizando');
-    formData.append("comentary", "Comentario predeterminado..");
-    formData.append("document", null);
+    formData.append("comentary", null);
+    let pdf2 = new Blob([],{type: 'application/pdf'});
+    formData.append("document", pdf2);
+    formData.append("idQuotation", 0);
 
     this.RequestService.put('http://localhost:8080/api/request/'+idSR,formData)
     .subscribe({

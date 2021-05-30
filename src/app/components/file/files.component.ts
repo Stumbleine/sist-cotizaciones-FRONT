@@ -51,6 +51,7 @@ export class FilesComponent implements OnInit {
       let fileData = new File([pdf], "name", {type: 'application/pdf'});
       let fileURL = window.URL.createObjectURL(fileData);
       window.open(fileURL,"_blank")
+      console.log("THIS IS BLOB",blob)
       //saveAs(blob, data?.nameDocumenQuotaion);
       })
     }

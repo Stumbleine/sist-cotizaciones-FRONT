@@ -73,7 +73,7 @@ place-items: center;">
                         margin-right: 20px;"  
                         (click)="rechazarPendiente()">CANCELAR</button>
                         <button mat-raised-button class="btn-raised-e"  
-                        (click)="changeState(reqReceived?.idSpendingUnitRequest,'Rechazado')">CONFIRMAR RECHAZO</button>
+                        (click)="generateReport('Rechazado')" >CONFIRMAR RECHAZO</button>
                     </div>
                     
                     <div  style="text-align: end; margin-bottom: 10px; margin-top: 15px;"  
@@ -81,7 +81,7 @@ place-items: center;">
                         <button mat-raised-button class="btn-raised-e" [disabled]="disabledButtons(reqReceived?.status)" 
                         (click)="rechazarPendiente()">RECHAZAR</button>
                         <button mat-raised-button class="btn-raised-s" [disabled]="disabledButtons(reqReceived?.status)" 
-                        (click)="changeState(reqReceived?.idSpendingUnitRequest,'Autorizado')">AUTORIZAR</button>
+                        (click)="changeState(reqReceived?.idSpendingUnitRequest,'Autorizado',null)">AUTORIZAR</button>
                   </div>
                 </mat-expansion-panel>
 
@@ -198,8 +198,16 @@ place-items: center;">
                     </div>
                     <div>
                         <div style="text-align: center;padding: 15px;">
-                            <button mat-raised-button class="btn-raised-error" [disabled]="disabledBtnAR(reqReceived?.status)"  >RECHAZAR</button>
-                            <button mat-raised-button class="btn-raised-success" [disabled]="disabledBtnAR(reqReceived?.status)"  >APROBAR</button>
+                            <button mat-raised-button class="btn-raised-error" 
+                                [disabled]="disabledBtnAR(reqReceived?.status)"  
+                                (click)="generateReport('Rechazado')"
+                                >RECHAZAR</button>
+                            <button mat-raised-button class="btn-raised-success" 
+                                [disabled]="disabledBtnAR(reqReceived?.status)"
+                                (click)="generateReport('Aprobado')"  
+                                >APROBAR</button>
+
+                            <app-generate-pdf></app-generate-pdf>
                         </div>
                     </div>
 
