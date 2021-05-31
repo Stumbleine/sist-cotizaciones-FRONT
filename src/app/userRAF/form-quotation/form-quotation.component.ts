@@ -155,7 +155,11 @@ export class FormQuotationComponent implements OnInit {
     if(quotation.razonSocial!=""){
       this.saveQuotationSinBusiness(quotation,formDirective1)
     }else{
-        
+      quotation.priceQuotationDetail.map(detail=>{
+        if(detail.unitPrice == null){
+           quotation.state='INCOMPLETO'
+        }
+      })
        this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
        .subscribe( respuesta =>{
          console.log('Solicitud enviada!!');
@@ -186,6 +190,11 @@ export class FormQuotationComponent implements OnInit {
     }
   }
   saveQuotationSinBusiness(quotation,formDirective1: FormGroupDirective){
+    quotation.priceQuotationDetail.map(detail=>{
+      if(detail.unitPrice == null){
+         quotation.state='INCOMPLETO'
+      }
+    })
     var name={};var area={}
     name['nameBusiness']=quotation.razonSocial
     area['nameArea']='Inmuebles'
