@@ -58,23 +58,26 @@ place-items: center;">
                             {{reqReceived?.justification}} 
                         </p>
                   </div>
-
+                  <div [formGroup]="justificationReject">
                     <div class="report--comentary" style="margin-top: 25px;" *ngIf="DecisionDescripcion==true">
                         <mat-form-field appearance="outline">
                             <mat-label>Justificación</mat-label>
-                            <input placeholder="Justifique su decision" matInput style="height: 40px;" required>
-                            
+                            <input placeholder="Justifique su decision" matInput style="height: 40px;" formControlName='justify' required>
+                            <mat-error >campo obligatorio</mat-error>
                         </mat-form-field>
                     </div>
 
                     <div  style="text-align: end;"  
-                        *ngIf="DecisionDescripcion==true">
+                        *ngIf="DecisionDescripcion==true" >
                         <button mat-button style="  color: #0a6cff;
                         margin-right: 20px;"  
                         (click)="rechazarPendiente()">CANCELAR</button>
                         <button mat-raised-button class="btn-raised-e"  
-                        (click)="generateReport('Rechazado')" >CONFIRMAR RECHAZO</button>
+                        (click)="generateReport('Rechazado')" [disabled]='justificationReject.invalid'>CONFIRMAR RECHAZO</button>
                     </div>
+                  
+                  </div>
+
                     
                     <div  style="text-align: end; margin-bottom: 10px; margin-top: 15px;"  
                         *ngIf="DecisionDescripcion==false">
@@ -181,19 +184,21 @@ place-items: center;">
                         aria-labelledby="example-radio-group-label"
                         class="example-radio-group"
                         [(ngModel)]="quotChoice">
-                            <mat-radio-button class="example-radio-button" *ngFor="let quot of quotationsCompleted" [value]="quot">
+                            <mat-radio-button class="example-radio-button" *ngFor="let quot of quotationsCompleted" [value]="quot" >
                                 <div >
                                     <p style="line-height: 10px;">{{quot.nameBussiness}}</p>
                                     <p style="font-size: 12px; font-weight: 500; line-height: 0px; font-style: italic;" [ngStyle]="{'color':getColorQuotation(quot.state)}">{{quot.state}}</p>
                                 </div>
                             </mat-radio-button>
+                            <mat-error *ngIf="selectedButton()"><mat-icon>report_problem</mat-icon> Seleccione una cotizacion</mat-error>
                         </mat-radio-group>
                     </div>
 
-                    <div class="report--comentary">
+                    <div class="report--comentary"[formGroup]='justificationReject'>
                         <mat-form-field appearance="outline">
                             <mat-label>Comentario/Justificación</mat-label>
-                            <input matInput style="height: 40px;" [required]="comentRequired()">
+                            <input matInput style="height: 40px;" [required]="comentRequired()|| rechazar()" formControlName='justify'>
+                            <mat-error >Este campo es obligatorio</mat-error>
                         </mat-form-field>
                     </div>
                     <div>

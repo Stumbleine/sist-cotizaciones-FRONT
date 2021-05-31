@@ -67,11 +67,18 @@ export class ReqContentComponent implements OnInit {
     {titulo:"DETALLE" ,name: "description"}
   ];
 
+  //validacion de comentario Rechazado
+  justificationReject=this.formBuilder.group({
+    justify:['',[]]
+  })
+  //variable cotizacion elegida
+  quotChoice:any;
+  requiredComment:boolean;
   //Varibles para -quotations-card
   dateValidation = this.formBuilder.group({
     date: ['',[Validators.required]],
   });
-
+  
 
   public dateExpiration:any;
   public quotationsCard=null;
@@ -114,7 +121,7 @@ export class ReqContentComponent implements OnInit {
     this.RequestService.disparadorChart.subscribe(data=>{
       this.stateButton=data;
     })
-
+    
   }
 
 //SOLICITUD DE PEDIDO functions and HTTP
@@ -231,12 +238,7 @@ export class ReqContentComponent implements OnInit {
       this.openDialogChart()
       
     }else if(this.quotationsCompleted.length>=3){
-      /* if(this.status=='Cotizando'){
-        this.stateButton=false;
-      }else{ */
         this.stateButton=true;
-      //}
-      
     }
   }
   openDialogChart() {
@@ -250,12 +252,6 @@ export class ReqContentComponent implements OnInit {
     this.stateButton=false;
   }
   activateChart():boolean{
-    /* console.log(this.stateButton)
-    if(this.status=='Cotizando'){
-      return !this.stateButton
-    }else{
-      return this.stateButton;
-    }  */
     return this.stateButton;
   }
   loadDataChart(id:any){
@@ -264,13 +260,8 @@ export class ReqContentComponent implements OnInit {
       this.chartReceived = r;
       if(this.chartReceived.length!=0){
         console.log("?????????",this.status)
-        /* if(this.status=='Cotizando'){
-          this.setStateButton()
-          this.setStateFalse()
-        }else{ */ 
           this.setStateButton()
         console.log("hay cuadro")
-       // }
         
       }else{
         console.log("no hay cuadro!")
@@ -388,9 +379,18 @@ export class ReqContentComponent implements OnInit {
     }else{
       required=false;
     }
+    this.requiredComment=required;
     return required
   }
-
+  autorizadoPressed:boolean=false;
+  rechazadoPressed:boolean=false;
+  selectedButton(){
+    if( this.quotChoice==undefined && this.autorizadoPressed){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
 
 //SDC42 estados del pedido
@@ -398,7 +398,7 @@ export class ReqContentComponent implements OnInit {
   changeState(idSR,state:string,pdf:any){
     const formData:any = new FormData();
     formData.append("state", state);
-    formData.append("comentary", "Comentario predeterminado..");
+    formData.append("comentary", this.justificationReject.value.justify);
     let pdf2 = new Blob([],{type: 'application/pdf'});
     
     if(state=='Autorizado'){
@@ -412,7 +412,7 @@ export class ReqContentComponent implements OnInit {
       }
     }
     //console.log(this.quotationsCompleted[0].idPriceQuotation)
-    state==("Aprobado") ? formData.append("idQuotation", this.quotationsCompleted[0].idPriceQuotation):formData.append("idQuotation", 0);
+    state==("Aprobado") ? formData.append("idQuotation", this.quotChoice.idPriceQuotation):formData.append("idQuotation", 0);
 
 
     
@@ -434,37 +434,70 @@ export class ReqContentComponent implements OnInit {
         }
       });
   }
+
   generateReport(state:string){
-    const pdf = new PdfMakeWrapper();
-
-
-    pdf.defaultStyle({
-      fontSize:12
-    })
-    pdf.add(new Txt(this.reqReceived?.type).bold().alignment('center').end);
-    pdf.add(new Txt('Solicitante:                             ' +  this.reqReceived?.username).end); 
-    pdf.add(new Txt('Solicitado por proyecto:       ' + this.reqReceived?.initials).end);
-    pdf.add(new Txt('Estado:                                    ' + this.reqReceived?.status).end);
-    pdf.add(new Txt('Fecha de emision:                 ' + this.reqReceived?.date).end);
-    pdf.add(pdf.ln(1));
-    pdf.add(new Canvas([new Line([0,0], [500, 0]).end]).end );
-    //decripcion
-
-    //cotizaciones   
+    
+    if(state=='Rechazado' && this.justificationReject.invalid ){
+      this.quotChoice=undefined
+      this.rechazadoPressed=true;
+      this.autorizadoPressed=false
+      this.justificationReject.controls.justify.markAsTouched({onlySelf: true});
       
-    //cuadro
+    }else{
+      
+      if(state=='Aprobado'&& this.quotChoice==undefined || this.justificationReject.invalid){
+        if(this.requiredComment){
+          this.rechazadoPressed=false
+          this.autorizadoPressed=true;
+          this.justificationReject.controls.justify.markAsTouched({onlySelf: true});
+        }else{
+          this.autorizadoPressed=true;
+          this.rechazadoPressed=false
+          this.justificationReject.controls.justify.markAsUntouched({onlySelf: true});
+        }
+        
+      }else{
+        if(state=='Rechazado' && !this.requiredComment && !this.rechazadoPressed){
+          this.rechazadoPressed=true;
+          this.justificationReject.controls.justify.markAsTouched({onlySelf: true});
+        }else{
+          const pdf = new PdfMakeWrapper();
 
-    //decision
 
-
-    //generate
-    pdf.create().open()
-    pdf.create().getBlob(
-      b=>{
-        console.log("Este es el pdf",b)
-        this.changeState(this.idReqSpending,state,b);
+          pdf.defaultStyle({
+            fontSize:12
+          })
+          pdf.add(new Txt(this.reqReceived?.type).bold().alignment('center').end);
+          pdf.add(new Txt('Solicitante:                             ' +  this.reqReceived?.username).end); 
+          pdf.add(new Txt('Solicitado por proyecto:       ' + this.reqReceived?.initials).end);
+          pdf.add(new Txt('Estado:                                    ' + this.reqReceived?.status).end);
+          pdf.add(new Txt('Fecha de emision:                 ' + this.reqReceived?.date).end);
+          pdf.add(pdf.ln(1));
+          pdf.add(new Canvas([new Line([0,0], [500, 0]).end]).end );
+          //decripcion
+      
+          //cotizaciones   
+            
+          //cuadro
+      
+          //decision
+      
+      
+          //generate
+          pdf.create().open()
+          pdf.create().getBlob(
+            b=>{
+              console.log("Este es el pdf",b)
+              this.changeState(this.idReqSpending,state,b);
+            }
+          );
+        }
+        
       }
-    );
   }
-
+    
+  }
+  rechazar(){
+    return this.rechazadoPressed;
+  }
 }
