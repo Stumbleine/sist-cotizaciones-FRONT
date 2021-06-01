@@ -32,6 +32,7 @@ export interface ItemsQuot{
 type TableRow=[number,number,string,string]
 
 type TableRowQuot=[number,number,string,string,number,number]
+
 export interface PDFs{
   name:String;
   date:Date;
@@ -281,7 +282,7 @@ export class ReqContentComponent implements OnInit {
       }
     })
   } 
-  chartData:[];
+  chartData:any;
   comparativeChartRec(chartData:any){
     this.chartData=chartData;
   }
@@ -537,7 +538,8 @@ export class ReqContentComponent implements OnInit {
         //cuadro comparativo
     pdf.add(new Txt('3.  CUADRO COMPARATIVO').bold().fontSize(13).end);
     pdf.add(pdf.ln(1));
-      console.log('Cuadro comparativo',this.chartData)
+    pdf.add(this.createTableChart(this.chartData.data))
+     // console.log('Cuadro comparativo',this.chartData.data)
 
 
     //decision
@@ -583,7 +585,29 @@ export class ReqContentComponent implements OnInit {
       })
     }).end;
   }
-  
+  createTableChart(data:[]):ITable{
+    [{}]
+    var header=[]=['Nro','CANTIDAD','UNIDAD','DETALLE']
+    var foot=[]
+    header.concat(this.quotationsCompleted.map(x=>x.nameBussiness)).map(column=>{
+      foot.push(this.getTotalCost(column))
+    })
+
+    return new Table([
+      ['Nro','CANTIDAD','UNIDAD','DETALLE'].concat(this.quotationsCompleted.map(x=>x.nameBussiness)),
+      ...this.extractDataChart(data),foot])
+    .margin([20,10]).alignment('center').fontSize(10)
+    .layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
+        return  '#c2c2c2';
+      },vLineColor:((rowIndex:number,node:any,columnIndex:number)=>{
+        return  '#c2c2c2';
+      }),fillColor:((rowIndex:number,node:any,columnIndex:number)=>{
+        return  rowIndex===0?'#c2c2c2':'';
+      })
+    }).end;
+    
+  }
+ 
   extractData(data:Items[]):TableRow[]{
     var index=1
     return data.map(row=>[index++,row.quantity,row.unit,row.description])
@@ -592,6 +616,32 @@ export class ReqContentComponent implements OnInit {
     var index=1
     return data.map(row=>[index++,row.quantity,row.unit,row.description,row.unitPrice,row.totalPrice])
     
+  }
+  extractDataChart(data:any[]):any[]{
+    var index=1
+    var listBusiness=[]
+    listBusiness= listBusiness.concat(this.quotationsCompleted.map(x=>x.nameBussiness))
+    
+    return data.map(row=>{
+            var rowNew=[index++,row.quantity,row.unit,row.description]
+            listBusiness.map(business=>{
+              rowNew.push(row[business])
+            })
+            return rowNew
+    })
+    
+  }
+  getTotalCost(nameColumn) {
+    var total:any;
+    if(nameColumn=='Nro'){
+      total="TOTALES"
+    }else{if(nameColumn=='UNIDAD'|| nameColumn=='DETALLE' || nameColumn=='CANTIDAD'){
+      total=""
+    }else{
+      total=this.chartData.data.map(t => t[nameColumn]).reduce((acc, value) => acc + value, 0);
+    }
+  }
+    return total
   }
   rechazar(){
     return this.rechazadoPressed;
