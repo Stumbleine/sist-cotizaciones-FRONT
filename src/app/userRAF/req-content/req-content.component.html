@@ -119,7 +119,7 @@ place-items: center;">
                                 <mat-grid-list cols="3"  rowHeight="160px"  gutterSize="10px"  >
                                     <mat-grid-tile *ngFor="let quotCard of quotationsCard" >
                                     <app-qoatation-card style="width: 100%;" [idSR]="reqReceived?.idSpendingUnitRequest" 
-
+                                    
                                     [quot]='quotCard'
                                     ></app-qoatation-card>
                                 </mat-grid-tile>
@@ -161,7 +161,10 @@ place-items: center;">
 
                             <div class="comparative__charts" *ngIf="activateChart()">
                                 <p>CUADRO COMPARATIVO</p><button mat-raised-button class="btn-raised-p"  (click)="setStateFalse()" *ngIf="reqReceived?.status=='Cotizando'"><mat-icon>refresh</mat-icon> NUEVO</button>
-                                <app-comparative-chart *ngFor="let i of [1]" [quotationsCompleted]="quotationsCompleted"[status]="status" [pressedNew]="pressedNew"></app-comparative-chart>
+                                <app-comparative-chart *ngFor="let i of [1]" [quotationsCompleted]="quotationsCompleted"
+                                [status]="status"  [pressedNew]="pressedNew"
+                                (chartComp)="comparativeChartRec($event)"
+                                ></app-comparative-chart>
                             </div>
 
                             
@@ -207,7 +210,10 @@ place-items: center;">
                                 (click)="generateReport('Aprobado')"  
                                 >APROBAR</button>
 
-                            <app-generate-pdf></app-generate-pdf>
+                                <button mat-raised-button class="btn-raised-success" 
+                                [disabled]="disabledBtnAR(reqReceived?.status)"
+                                (click)="generateReport('Aprobado')"  
+                                >APROBAR</button>
                         </div>
                     </div>
 

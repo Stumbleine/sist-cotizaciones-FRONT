@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import {RequestService} from '../../services/request.service';
 import { ActivatedRoute } from '@angular/router';
@@ -20,6 +20,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./comparative-chart.component.css']
 })
 export class ComparativeChartComponent implements OnInit {
+  @Output() chartComp = new EventEmitter<any>();
   @Input()quotationsCompleted:any;
   @Input()status:any;
   @Input()pressedNew:any;
@@ -46,8 +47,12 @@ export class ComparativeChartComponent implements OnInit {
     this.idReqSpending= this.rutaActiva.snapshot.params.id,
     this.loadDataChart(this.idReqSpending);
     console.log(this.status)
-    
+    this.sendChartToRequest(this.dataSourceBusiness)
   }
+  public sendChartToRequest(agreed:any) {
+    this.chartComp.emit(agreed);
+  }
+
   refresh() {
   this.displayedColumnsBusiness=this.displayedColumns.concat(this.quotationsCompleted.map(x=>x.nameBussiness))
    this.dataSourceBusiness.data = this.comparativeChart;
@@ -98,6 +103,7 @@ export class ComparativeChartComponent implements OnInit {
     this.RequestService.put('http://localhost:8080/api/quotation_comparative/'+id,this.comparativeChartSend)
     .subscribe( respuesta =>{
       console.log('Cuadro reemplazado!!', this.comparativeChartSend);
+      console.log(this.dataSourceBusiness,'DATA')
     })
   }
   loadQuotation(){

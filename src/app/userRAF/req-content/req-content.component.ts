@@ -9,7 +9,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import {  MatListOption } from '@angular/material/list';
 import {DgChartValidationComponent} from '../dg-chart-validation/dg-chart-validation.component'
 import {PdfMakeWrapper, Txt, Table, Columns,DocumentDefinition, Canvas, Line} from 'pdfmake-wrapper'
-
+import {ITable} from 'pdfmake-wrapper/lib/interfaces'
 export interface DialogData {
   animal: string;
   name: string;
@@ -20,6 +20,18 @@ export interface Items{
   unit: string;
   description:string;
 }
+
+export interface ItemsQuot{
+  
+  quantity: number;
+  unit: string;
+  description:string;
+  unitPrice:number;
+  totalPrice:number;
+}
+type TableRow=[number,number,string,string]
+
+type TableRowQuot=[number,number,string,string,number,number]
 export interface PDFs{
   name:String;
   date:Date;
@@ -57,6 +69,7 @@ export class ReqContentComponent implements OnInit {
   public idReqSpending:any;
   public items:Items[]=[];
   public selectedBusiness:QuotForm[]=[];
+  public itemsQuot:ItemsQuot[]=[];
 
   //PENDIENTE
   displayedColumns: string[] = ['index', 'quantity', 'unit', 'description'];
@@ -277,6 +290,10 @@ export class ReqContentComponent implements OnInit {
       }
     })
   } 
+  chartData:[];
+  comparativeChartRec(chartData:any){
+    this.chartData=chartData;
+  }
 
   //ESTADOS DE PANELES
   //expanded
@@ -354,9 +371,10 @@ export class ReqContentComponent implements OnInit {
 
   //DECISION E INFORMEs
   disabledBtnAR(status):boolean{
-    let disabled:boolean;
+    let disabled:boolean=false;
 
     if(status=='Cotizando' && this.quotationsCompleted.length>=2){
+
       if(this.chartReceived.length==0){
         disabled=true;
       }
@@ -441,22 +459,68 @@ export class ReqContentComponent implements OnInit {
     pdf.defaultStyle({
       fontSize:12
     })
-    pdf.add(new Txt(this.reqReceived?.type).bold().alignment('center').end);
+    pdf.add(new Txt(this.reqReceived?.type).fontSize(13).bold().alignment('center').end);
+    pdf.add(pdf.ln(1));
     pdf.add(new Txt('Solicitante:                             ' +  this.reqReceived?.username).end); 
     pdf.add(new Txt('Solicitado por proyecto:       ' + this.reqReceived?.initials).end);
     pdf.add(new Txt('Estado:                                    ' + this.reqReceived?.status).end);
     pdf.add(new Txt('Fecha de emision:                 ' + this.reqReceived?.date).end);
     pdf.add(pdf.ln(1));
-    pdf.add(new Canvas([new Line([0,0], [500, 0]).end]).end );
+    pdf.add(new Canvas([new Line([0,0], [520, 0]).end]).end );
     //decripcion
+    pdf.add(pdf.ln(1));
+    pdf.add(new Txt('1.  SOLICITADO').bold().fontSize(13).end); 
+    pdf.add(new Txt('Lista de articulos/servicios').margin([18,0]).end);
 
-    //cotizaciones   
+    
+    pdf.add(this.createTable(this.items))
+    pdf.add(new Txt('Total estimado:  Bs.' + this.reqReceived?.estimatedAmount).margin([18,0]).end);
+    pdf.add(new Txt('Justificación:').margin([18,5]).end);
+    pdf.add(new Txt(this.reqReceived?.justification).margin([18,0]).end);
+    pdf.add(pdf.ln(1));
+    pdf.add(new Txt('2.  COTIZACIONES').bold().fontSize(13).end); 
+    
+    //cotizaciones 
+
+    for (let quot in this.quotationsCompleted){
+      this.itemsQuot=this.quotationsCompleted[quot].priceQuotationDetail;
+      pdf.add(pdf.ln(1));
+      pdf.add(new Txt(this.quotationsCompleted[quot].nameBussiness).margin([18,0]).bold().end);
+      pdf.add(new Txt('Forma de pago:               '+this.quotationsCompleted[quot].wayOfPayment).margin([35,0]).end);
+      pdf.add(new Txt('Tiempo de garantia:       '+this.quotationsCompleted[quot].garantyTerm).margin([35,0]).end);
+      pdf.add(new Txt('Tiempo de entrega:        '+this.quotationsCompleted[quot].deliveryTerm).margin([35,0]).end);
+      pdf.add(new Txt('Validez de oferta:            '+this.quotationsCompleted[quot].offValidation).margin([35,0]).end);
       
-    //cuadro
+      pdf.add(pdf.ln(1));
+      pdf.add(new Txt('Detalles de articulos/servicios').margin([18,0]).end);
+      pdf.add(this.createTableQ(this.itemsQuot))
+      pdf.add(new Txt('TOTAL:  Bs. '+this.quotationsCompleted[quot].total).margin([35,0]).alignment('right').end);
+      pdf.add(new Txt('Comentarios:').margin([18,0]).end);
+      pdf.add(new Txt(this.quotationsCompleted[quot].commentary).margin([18,0]).end);
+      pdf.add(pdf.ln(1));
+      pdf.add(new Canvas([new Line([20  ,0], [480, 0]).end]).end );
+    }
+    pdf.add(pdf.ln(1));
+    let sc=0; let exp=0;
+    for (let quot in this.quotationsCard){
+      if(this.quotationsCard[quot].state == 'SIN COTIZAR'){sc++;}
+      if(this.quotationsCard[quot].state == 'EXPIRADO' ){exp++;}
+    }
+    pdf.add(new Txt('Cotizaciones sin cotizar:     '+sc).margin([18,0]).end);
+    pdf.add(new Txt('Cotizaciones expiradas:      ' +exp).margin([18,0]).end);
+    pdf.add(pdf.ln(1));
+
+        //cuadro comparativo
+    pdf.add(new Txt('3.  CUADRO COMPARATIVO').bold().fontSize(13).end);
+    pdf.add(pdf.ln(1));
+      console.log('Cuadro comparativo',this.chartData)
+
 
     //decision
-
-
+    pdf.add(new Txt('3.  DECISIÓN').bold().fontSize(13).end);
+    pdf.add(pdf.ln(1));
+    pdf.add(new Txt('Cotización elegida:           '+'MUEBLES JSON S.R.L').margin([50,0]).end);
+    pdf.add(new Txt('TOTAL.                               Bs. '+'14528').margin([50,0]).end);
     //generate
     pdf.create().open()
     pdf.create().getBlob(
@@ -467,4 +531,41 @@ export class ReqContentComponent implements OnInit {
     );
   }
 
+  createTable(data: Items[]):ITable{
+    [{}]
+    return new Table([[ 'Nro', 'CANTIDAD','UNIDAD','DETALLE'],...this.extractData(data),])
+    .margin([20,10]).alignment('center').fontSize(10)
+    .layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
+        return  '#c2c2c2';
+      },vLineColor:((rowIndex:number,node:any,columnIndex:number)=>{
+        return  '#c2c2c2';
+      }),fillColor:((rowIndex:number,node:any,columnIndex:number)=>{
+        return  rowIndex===0?'#c2c2c2':'';
+      })
+    }).end;
+  }
+
+
+  createTableQ(data: ItemsQuot[]):ITable{
+    [{}]
+    return new Table([[ 'Nro', 'CANTIDAD','UNIDAD','DETALLE','PRECIO UNIT','SUBTOTAL'],...this.extractDataQ(data),])
+    .margin([20,10]).alignment('center').fontSize(10)
+    .layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
+        return  '#c2c2c2';
+      },vLineColor:((rowIndex:number,node:any,columnIndex:number)=>{
+        return  '#c2c2c2';
+      }),fillColor:((rowIndex:number,node:any,columnIndex:number)=>{
+        return  rowIndex===0?'#c2c2c2':'';
+      })
+    }).end;
+  }
+  
+  extractData(data:Items[]):TableRow[]{
+    var index=1
+    return data.map(row=>[index++,row.quantity,row.unit,row.description])
+  }
+  extractDataQ(data:ItemsQuot[]):TableRowQuot[]{
+    var index=1
+    return data.map(row=>[index++,row.quantity,row.unit,row.description,row.unitPrice,row.totalPrice])
+  }
 }
