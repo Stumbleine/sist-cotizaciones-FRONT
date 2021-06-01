@@ -19,8 +19,8 @@
               
         </div>
         <div style="text-align: end; width: 100%; margin-right: 15px;" >
-                <button mat-raised-button class="btn-raised" (click)="postFile(idQuot)" *ngIf="replace==true">GUARDAR</button>
-                <button mat-raised-button class="btn-raised" (click)="replace=true" *ngIf="replace==false">Si, reemplazar</button>
+                <button mat-raised-button class="btn-raised" (click)="postFile(idQuot)" *ngIf="replace==true || dataFile==null">GUARDAR</button>
+                <button mat-raised-button class="btn-raised" (click)="replace=true" *ngIf="replace==false && dataFile !=null ">Si, reemplazar</button>
         </div>
 
 

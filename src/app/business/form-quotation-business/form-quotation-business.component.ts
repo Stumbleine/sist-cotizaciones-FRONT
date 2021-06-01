@@ -25,6 +25,7 @@ export interface Quotation{
     offValidation: number,
     total: string,
     priceQuotationDetail: Item[],
+    businessCompanyName:string,
 }
 
 @Component({
@@ -46,7 +47,7 @@ export class FormQuotationBusinessComponent implements OnInit {
   });
 
   quotationForm = this.formBuilder.group({
-      razonSocial:['',],
+      businessCompanyName:['',],
       wayOfPayment: ['',[Validators.required]],
       garantyTerm:['',],
       deliveryTerm:['',Validators.required],
@@ -147,12 +148,20 @@ export class FormQuotationBusinessComponent implements OnInit {
     quotation.priceQuotationDetail=this.priceQuotationDetail
     quotation.total= this.getTotalCost(); 
     console.log(quotation);
-    if(quotation.razonSocial!=""){
+    if(quotation.businessCompanyName!=""){
       this.saveQuotationSinBusiness(quotation,formDirective1)
     }else{
         //if(this.pressed){  
        // quotation.total= this.getTotalCost();  
        // this.RequestService.post('http://localhost:8080/api/quotation',quotation)
+       
+       quotation.priceQuotationDetail.map(detail=>{
+         if(detail.unitPrice == null){
+            quotation.state='INCOMPLETO'
+         }
+        
+       })
+       console.log(quotation)
        this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
        .subscribe( respuesta =>{
          console.log('Solicitud enviada!!');
@@ -179,7 +188,7 @@ export class FormQuotationBusinessComponent implements OnInit {
        this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
        this.pressed=false;
        this.refresh();
-       
+       window.location.reload();
    /* }
    else{
        console.log("Por lo menos un item!!!")
@@ -189,38 +198,19 @@ export class FormQuotationBusinessComponent implements OnInit {
       
 }
 saveQuotationSinBusiness(quotation,formDirective1: FormGroupDirective){
-    var name={};var area={}
-    name['nameBusiness']=quotation.razonSocial
-    area['nameArea']='Inmuebles'
-    name=Object.assign(name,area)
-    console.log(name)
-     this.RequestService.post('http://localhost:8080/api/business/createEmpresa',name)
-          .subscribe( respuesta =>{
-            console.log('Empresa registrada!!');
-            
-
-            this.RequestService.get(' http://localhost:8080/api/business/getLastBusiness')
-          .subscribe( respuesta =>{
-            this.idLastBusiness=respuesta;
-            this.idLastBusiness=this.idLastBusiness.idBusiness
-            console.log('get id business!!');
-
-            this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
+  quotation.priceQuotationDetail.map(detail=>{
+    if(detail.unitPrice == null){
+       quotation.state='INCOMPLETO'
+    }
+  })
+  //console.log(quotation)
+  this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
             .subscribe( respuesta =>{
               console.log('Solicitud enviada!!');
               this.openSnackBar();
-              console.log({"idBusiness":this.idLastBusiness})
-              this.RequestService.put('http://localhost:8080/api/quotation/updateQuotationAddingBusiness/'+this.idQuot,{"idBusiness":this.idLastBusiness})
-                 .subscribe( respuesta =>{
-                   this.idLastBusiness=respuesta;
-                   console.log('actualizando idBusiness!!');
-                   
-                   
-                 })
+              
             })
-            
-          })
-          })
+   
           formDirective1.resetForm();
        this.quotationForm.reset();
        this.quotationForm.reset();
@@ -234,6 +224,7 @@ saveQuotationSinBusiness(quotation,formDirective1: FormGroupDirective){
        this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
        this.pressed=false;
        this.refresh(); 
+       window.location.reload();
 }
 openDialog() {
   this.dialog.open(DialogValidationSendComponent);

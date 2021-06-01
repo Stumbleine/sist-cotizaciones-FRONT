@@ -1,4 +1,4 @@
-<div class="page__form" *ngIf="dataQuotation.state=='SIN COTIZAR'">
+<div class="page__form" *ngIf="dataQuotation?.state=='SIN COTIZAR'">
     <div class="form__quotation">
 
             <div class="form__header">
@@ -28,7 +28,7 @@
                             <div *ngIf="thereIsBusiness()">
                                 <mat-form-field appearance="outline">
                                 <mat-label>Razon social</mat-label>
-                                <input matInput placeholder="Placeholder"formControlName='razonSocial' required>
+                                <input matInput placeholder="Placeholder"formControlName='businessCompanyName' required>
                                 <mat-error class="form__validation--size">campo razon social es requerido</mat-error>
                               </mat-form-field>
                             </div>
