@@ -545,10 +545,12 @@ generateReport(state:string){
               //cuadro comparativo
           pdf.add(new Txt('3.  CUADRO COMPARATIVO').bold().fontSize(13).end);
           pdf.add(pdf.ln(1));
-          if(this.quotationsCard.length>1){
-            pdf.add(this.createTableChart(this.chartData.data))
-          }else{
-            pdf.add(new Txt('No se ha creado cuadro comparativo.').margin([100,0]).italics().end);
+          if(this.reqReceived.status == 'Cotizando'){
+            if(this.quotationsCard.length>1 ){
+              pdf.add(this.createTableChart(this.chartData.data))
+            }else{
+              pdf.add(new Txt('No se ha creado cuadro comparativo.').margin([100,0]).italics().end);
+            }
           }
           pdf.add(pdf.ln(1));
           // console.log('Cuadro comparativo',this.chartData.data)
