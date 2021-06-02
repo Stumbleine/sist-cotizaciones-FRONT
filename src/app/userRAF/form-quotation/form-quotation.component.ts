@@ -57,7 +57,7 @@ export class FormQuotationComponent implements OnInit {
   });
 
   quotationForm = this.formBuilder.group({
-    razonSocial:['',],
+    businessCompanyName:['',],
     wayOfPayment: ['',[Validators.required]],
     garantyTerm:['',],
     deliveryTerm:['',Validators.required],
@@ -159,7 +159,7 @@ export class FormQuotationComponent implements OnInit {
     quotation.priceQuotationDetail=this.priceQuotationDetail
     quotation.total= this.getTotalCost(); 
     console.log(quotation);
-    if(quotation.razonSocial!=""){
+    if(quotation.businessCompanyName!=""){
       this.saveQuotationSinBusiness(quotation,formDirective1)
     }else{
       quotation.priceQuotationDetail.map(detail=>{
