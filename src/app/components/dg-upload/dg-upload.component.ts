@@ -20,7 +20,7 @@ export class DgUploadComponent implements OnInit {
     this.getFiles();
   }
   dataFile:any;
-  getFiles(){
+  public getFiles(){
     this.RequestService.get('http://localhost:8080/api/Document/Quotation/'+this.idQuot)
     .subscribe(file=>{
         this.dataFile=file;
@@ -62,12 +62,14 @@ export class DgUploadComponent implements OnInit {
       {
         next(){
           console.log('Archivo guardado')
+          
         },
         error(){
           console.log('Archivo no guardado')
-        }
-      }
-    )};
+        },
+      })
+    }
+
       replace:boolean=false;
     disalbedInput(){
       let disabled:boolean=false;
@@ -79,4 +81,23 @@ export class DgUploadComponent implements OnInit {
       }
       return disabled;
     }
+    deleteDoc(){
+      
+      this.RequestService.delete('http://localhost:8080/api/Document/delete/'+this.idQuot).subscribe(
+      {
+        next(){
+          
+          console.log('Archivo eliminado')
+          
+        },
+        error(){
+          console.log('Archivo no eliminado')
+        },
+      })
+      this.getFiles();
+      this.dialogRef.close();
+      
+
+    }
+    
 }

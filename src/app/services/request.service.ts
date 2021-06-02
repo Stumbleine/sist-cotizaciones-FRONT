@@ -33,5 +33,9 @@ export class RequestService {
       responseType: 'blob'
     });
   }
+  public delete(url:string){
 
+      return this.http.delete(url);
+    
+  }
 }
