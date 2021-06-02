@@ -551,6 +551,8 @@ generateReport(state:string){
             }else{
               pdf.add(new Txt('No se ha creado cuadro comparativo.').margin([100,0]).italics().end);
             }
+          }else{
+            if(this.reqReceived.status == 'Pendiente'){pdf.add(new Txt('No se ha creado cuadro comparativo.').margin([100,0]).italics().end);}
           }
           pdf.add(pdf.ln(1));
           // console.log('Cuadro comparativo',this.chartData.data)
@@ -571,7 +573,7 @@ generateReport(state:string){
           pdf.create().getBlob(
             b=>{
               console.log("Este es el pdf",b)
-              //this.changeState(this.idReqSpending,state,b);
+              this.changeState(this.idReqSpending,state,b);
             });
         }
       }
