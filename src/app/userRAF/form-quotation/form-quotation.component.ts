@@ -25,12 +25,7 @@ export interface Item{
 }
 type TableRow=[number,number,string,string,number,number]
 
-const  Items=[
-  {quantity: 1, unit: 'Hydrogen', description: 1.0079},
-  {quantity: 1, unit: 'Hydrogen', description: 1.0079},
-  {quantity: 1, unit: 'Hydrogen', description: 1.0079},
-  {quantity: 1, unit: 'Hydrogen', description: 1.0079},
-];
+
 
 @Component({
   selector: 'app-form-quotation',
@@ -95,7 +90,16 @@ export class FormQuotationComponent implements OnInit {
 
     this.idQuot= this.rutaActiva.snapshot.params.idQ;
     this.loadDataQuotation();
+    this.getFiles()
     console.log("asasas",this.idQuot)
+  }
+  dataFile:any;
+  getFiles(){
+    this.RequestService.get('http://localhost:8080/api/Document/Quotation/'+this.idQuot)
+    .subscribe(file=>{
+        this.dataFile=file;
+        console.log('FILE :', this.dataFile);
+    })
   }
 
   openGLink():void{
@@ -113,9 +117,14 @@ export class FormQuotationComponent implements OnInit {
 
       }
     });
+    
   }
   
-
+  reOpen(agreed:boolean){
+    if(agreed==true){    
+      this.openUploader()  
+    }
+  }
 
   pressed:boolean;
 

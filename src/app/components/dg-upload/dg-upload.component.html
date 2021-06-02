@@ -3,20 +3,20 @@
         Insertar cotizacion escaneado 
     </h2>
     <div class="container" >
-
+        
         <div style="width: 100%;" >
             <p *ngIf="dataFile!=null && replace==false" >Ya se subio un archivo.</p>
             <mat-form-field class="container__field" appearance="outline"  >
                 <ngx-mat-file-input [disabled]="disalbedInput()" [accept]="'.pdf'" (change)="onFileSelected($event)" 
                 #removableInput  formControlName="removablefile" placeholder="ingrese un pdf">
                 </ngx-mat-file-input>
-                <button mat-icon-button  matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
+                <button mat-icon-button  matSuffix *ngIf="!removableInput.empty " (click)="removableInput.clear($event)">
                   <mat-icon >clear</mat-icon>
                 </button>
                 <mat-hint>buscar archivo pdf.</mat-hint>
               </mat-form-field>
 
-              
+            
         </div>
         <div style="text-align: end; width: 100%; margin-right: 15px;" >
                 <button mat-raised-button class="btn-raised" (click)="postFile(idQuot)"  [disabled]="disalbedInput()">GUARDAR</button>
@@ -41,7 +41,7 @@
                     </div>
                     <span class="example-spacer"></span>
                     <div >
-                        <button mat-icon-button  (click)="deleteDoc()"  ><mat-icon style="color: #ff4848;" >delete</mat-icon></button>
+                        <button mat-icon-button  (click)="deleteDoc()"  ><mat-icon style="color: #ff4848;">delete</mat-icon></button>
                     </div>
                 </mat-list-item>
             </mat-list>
@@ -84,8 +84,12 @@
     .item__line{
         display: flex; 
         background-color: rgb(239, 236, 255);
-
-
     }
  
+    ::ng-deep .snackSuccess {
+  background-color: var(--state-color-5);
+}
+::ng-deep .snackSuccess button {
+  color: white;
+}
 </style>

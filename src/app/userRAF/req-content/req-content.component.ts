@@ -453,7 +453,7 @@ export class ReqContentComponent implements OnInit {
         }
       });
   }
-  generateReport(state:string){
+generateReport(state:string){
     
     if(state=='Rechazado' && this.justificationReject.invalid ){
       this.quotChoice=undefined
@@ -481,81 +481,88 @@ export class ReqContentComponent implements OnInit {
         }else{
           const pdf = new PdfMakeWrapper();
 
-    pdf.defaultStyle({
-      fontSize:12
-    })
-    pdf.add(new Txt(this.reqReceived?.type).fontSize(13).bold().alignment('center').end);
-    pdf.add(pdf.ln(1));
-    pdf.add(new Txt('Solicitante:                             ' +  this.reqReceived?.username).end); 
-    pdf.add(new Txt('Solicitado por proyecto:       ' + this.reqReceived?.initials).end);
-    pdf.add(new Txt('Estado:                                    ' + this.reqReceived?.status).end);
-    pdf.add(new Txt('Fecha de emision:                 ' + this.reqReceived?.date).end);
-    pdf.add(pdf.ln(1));
-    pdf.add(new Canvas([new Line([0,0], [520, 0]).end]).end );
-    //decripcion
-    pdf.add(pdf.ln(1));
-    pdf.add(new Txt('1.  SOLICITADO').bold().fontSize(13).end); 
-    pdf.add(new Txt('Lista de articulos/servicios').margin([18,0]).end);
+          pdf.defaultStyle({
+            fontSize:12
+          })
+          pdf.add(new Txt(this.reqReceived?.type).fontSize(13).bold().alignment('center').end);
+          pdf.add(pdf.ln(1));
+          pdf.add(new Txt('Solicitante:                             ' +  this.reqReceived?.username).end); 
+  
+          pdf.add(new Txt('Solicitante:                             ' +  this.reqReceived?.username).end); 
+          pdf.add(new Txt('Solicitado por proyecto:       ' + this.reqReceived?.initials).end);
+          pdf.add(new Txt('Estado:                                    ' + this.reqReceived?.status).end);
+          pdf.add(new Txt('Fecha de emision:                 ' + this.reqReceived?.date).end);
+          pdf.add(pdf.ln(1));
+          pdf.add(new Canvas([new Line([0,0], [520, 0]).end]).end );
+          //decripcion
+          pdf.add(pdf.ln(1));
+          pdf.add(new Txt('1.  SOLICITADO').bold().fontSize(13).end); 
 
-    
-    pdf.add(this.createTable(this.items))
-    pdf.add(new Txt('Total estimado:  Bs.' + this.reqReceived?.estimatedAmount).margin([18,0]).end);
-    pdf.add(new Txt('Justificación:').margin([18,5]).end);
-    pdf.add(new Txt(this.reqReceived?.justification).margin([18,0]).end);
-    pdf.add(pdf.ln(1));
-    pdf.add(new Txt('2.  COTIZACIONES').bold().fontSize(13).end); 
-    
-    //cotizaciones 
+          pdf.add(new Txt('Lista de articulos/servicios').margin([18,0]).end);
 
-    for (let quot in this.quotationsCompleted){
-      this.itemsQuot=this.quotationsCompleted[quot].priceQuotationDetail;
-      pdf.add(pdf.ln(1));
-      pdf.add(new Txt(this.quotationsCompleted[quot].nameBussiness).margin([18,0]).bold().end);
-      pdf.add(new Txt('Forma de pago:               '+this.quotationsCompleted[quot].wayOfPayment).margin([35,0]).end);
-      pdf.add(new Txt('Tiempo de garantia:       '+this.quotationsCompleted[quot].garantyTerm).margin([35,0]).end);
-      pdf.add(new Txt('Tiempo de entrega:        '+this.quotationsCompleted[quot].deliveryTerm).margin([35,0]).end);
-      pdf.add(new Txt('Validez de oferta:            '+this.quotationsCompleted[quot].offValidation).margin([35,0]).end);
-      
-      pdf.add(pdf.ln(1));
-      pdf.add(new Txt('Detalles de articulos/servicios').margin([18,0]).end);
-      pdf.add(this.createTableQ(this.itemsQuot))
-      pdf.add(new Txt('TOTAL:  Bs. '+this.quotationsCompleted[quot].total).margin([35,0]).alignment('right').end);
-      pdf.add(new Txt('Comentarios:').margin([18,0]).end);
-      pdf.add(new Txt(this.quotationsCompleted[quot].commentary).margin([18,0]).end);
-      pdf.add(pdf.ln(1));
-      pdf.add(new Canvas([new Line([20  ,0], [480, 0]).end]).end );
-    }
-    pdf.add(pdf.ln(1));
-    let sc=0; let exp=0;
-    for (let quot in this.quotationsCard){
-      if(this.quotationsCard[quot].state == 'SIN COTIZAR'){sc++;}
-      if(this.quotationsCard[quot].state == 'EXPIRADO' ){exp++;}
-    }
-    pdf.add(new Txt('Cotizaciones sin cotizar:     '+sc).margin([18,0]).end);
-    pdf.add(new Txt('Cotizaciones expiradas:      ' +exp).margin([18,0]).end);
-    pdf.add(pdf.ln(1));
+          
+          pdf.add(this.createTable(this.items))
+          pdf.add(new Txt('Total estimado:  Bs.' + this.reqReceived?.estimatedAmount).margin([18,0]).end);
+          pdf.add(new Txt('Justificación:').margin([18,5]).end);
+          pdf.add(new Txt(this.reqReceived?.justification).margin([18,0]).end);
+          pdf.add(pdf.ln(1));
+          pdf.add(new Txt('2.  COTIZACIONES').bold().fontSize(13).end); 
 
-        //cuadro comparativo
-    pdf.add(new Txt('3.  CUADRO COMPARATIVO').bold().fontSize(13).end);
-    pdf.add(pdf.ln(1));
-    pdf.add(this.createTableChart(this.chartData.data))
-     // console.log('Cuadro comparativo',this.chartData.data)
+          
+
+          //cotizaciones 
+
+          for (let quot in this.quotationsCompleted){
+            this.itemsQuot=this.quotationsCompleted[quot].priceQuotationDetail;
+            pdf.add(pdf.ln(1));
+            pdf.add(new Txt(this.quotationsCompleted[quot].nameBussiness).margin([18,0]).bold().end);
+            pdf.add(new Txt('Forma de pago:               '+this.quotationsCompleted[quot].wayOfPayment).margin([35,0]).end);
+            pdf.add(new Txt('Tiempo de garantia:       '+this.quotationsCompleted[quot].garantyTerm).margin([35,0]).end);
+            pdf.add(new Txt('Tiempo de entrega:        '+this.quotationsCompleted[quot].deliveryTerm).margin([35,0]).end);
+            pdf.add(new Txt('Validez de oferta:            '+this.quotationsCompleted[quot].offValidation).margin([35,0]).end);
+            
+            pdf.add(pdf.ln(1));
+            pdf.add(new Txt('Detalles de articulos/servicios').margin([18,0]).end);
+            pdf.add(this.createTableQ(this.itemsQuot))
+            pdf.add(new Txt('TOTAL:  Bs. '+this.quotationsCompleted[quot].total).margin([35,0]).alignment('right').end);
+            pdf.add(new Txt('Comentarios:').margin([18,0]).end);
+            pdf.add(new Txt(this.quotationsCompleted[quot].commentary).margin([18,0]).end);
+            pdf.add(pdf.ln(1));
+            pdf.add(new Canvas([new Line([20  ,0], [480, 0]).end]).end );
+          }
+          pdf.add(pdf.ln(1));
+          let sc=0; let exp=0;
+          for (let quot in this.quotationsCard){
+            if(this.quotationsCard[quot].state == 'SIN COTIZAR'){sc++;}
+            if(this.quotationsCard[quot].state == 'EXPIRADO' ){exp++;}
+          }
+          pdf.add(new Txt('Cotizaciones sin cotizar:     '+sc).margin([18,0]).end);
+          pdf.add(new Txt('Cotizaciones expiradas:      ' +exp).margin([18,0]).end);
+          pdf.add(pdf.ln(1));
+
+              //cuadro comparativo
+          pdf.add(new Txt('3.  CUADRO COMPARATIVO').bold().fontSize(13).end);
+          pdf.add(pdf.ln(1));
+          pdf.add(this.createTableChart(this.chartData.data))
+          // console.log('Cuadro comparativo',this.chartData.data)
 
 
-    //decision
-    pdf.add(new Txt('3.  DECISIÓN').bold().fontSize(13).end);
-    pdf.add(pdf.ln(1));
-    pdf.add(new Txt('Cotización elegida:           '+'MUEBLES JSON S.R.L').margin([50,0]).end);
-    pdf.add(new Txt('TOTAL.                               Bs. '+'14528').margin([50,0]).end);
-    //generate
-    pdf.create().open()
-    pdf.create().getBlob(
-      b=>{
-        console.log("Este es el pdf",b)
-        this.changeState(this.idReqSpending,state,b);
-      });
-  }
-}}}
+          //decision
+          pdf.add(new Txt('3.  DECISIÓN').bold().fontSize(13).end);
+          pdf.add(pdf.ln(1));
+          pdf.add(new Txt('Cotización elegida:           '+'MUEBLES JSON S.R.L').margin([50,0]).end);
+          pdf.add(new Txt('TOTAL.                               Bs. '+'14528').margin([50,0]).end);
+          //generate
+          pdf.create().open()
+          pdf.create().getBlob(
+            b=>{
+              console.log("Este es el pdf",b)
+              this.changeState(this.idReqSpending,state,b);
+            });
+        }
+      }
+    } 
+}
 
   createTable(data: Items[]):ITable{
     [{}]
@@ -607,7 +614,7 @@ export class ReqContentComponent implements OnInit {
     }).end;
     
   }
- 
+  
   extractData(data:Items[]):TableRow[]{
     var index=1
     return data.map(row=>[index++,row.quantity,row.unit,row.description])

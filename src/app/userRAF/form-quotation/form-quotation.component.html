@@ -12,7 +12,8 @@
                 <span class="example-spacer"></span>
                 <div class="header--actions">
                     <button mat-button matTooltip="Subir cotizacion escaneado" class="btn-icons" (click)="openUploader()">
-                        <mat-icon >upload_file</mat-icon>
+                        <mat-icon *ngIf="dataFile==null">upload_file</mat-icon>
+                        <mat-icon *ngIf="dataFile!=null">task</mat-icon>
                     </button>
                     <button mat-button matTooltip="Imprimir formulario" class="btn-icons" (click)="printForm()">
                         <mat-icon >print</mat-icon>
@@ -208,6 +209,7 @@
                 
             </div>
     </div>
+    
 </div>
 
 <style>

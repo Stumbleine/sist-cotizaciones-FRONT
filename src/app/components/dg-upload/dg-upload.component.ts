@@ -1,7 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject,Output,EventEmitter } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FilesComponent} from '../file/files.component'
 import {RequestService} from 'src/app/services/request.service'
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { FormBuilder,} from '@angular/forms';
 @Component({
   selector: 'app-dg-upload',
   templateUrl: './dg-upload.component.html',
@@ -9,9 +11,13 @@ import {RequestService} from 'src/app/services/request.service'
 })
 export class DgUploadComponent implements OnInit {
 
-  constructor(    public dialogRef: MatDialogRef<DgUploadComponent>,
+  constructor(   
+    public dialogRef: MatDialogRef<DgUploadComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-  private RequestService: RequestService,) { }
+    private RequestService: RequestService,
+    private formBuilder: FormBuilder,
+    private snack:MatSnackBar
+    ) { }
 
   public idQuot=this.data.idQuot;
   code:string="uploader";
@@ -56,18 +62,27 @@ export class DgUploadComponent implements OnInit {
      }
 
   }
-
+  quotationForm = this.formBuilder.group({
+    removablefile:['',],})
   postFile(id){
     this.RequestService.post('http://localhost:8080/api/Document/'+id,this.formData).subscribe(
       {
-        next(){
+        next:()=>{
           console.log('Archivo guardado')
+          this.snack.open('Archivo agregado exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
+
+            window.location.reload();
+
           
+             
         },
-        error(){
+        error:()=>{
           console.log('Archivo no guardado')
+          this.snack.open('error, el archivo no se subio.','CERRAR',{duration:5000})
         },
       })
+      
+      
     }
 
       replace:boolean=false;
@@ -85,19 +100,24 @@ export class DgUploadComponent implements OnInit {
       
       this.RequestService.delete('http://localhost:8080/api/Document/delete/'+this.idQuot).subscribe(
       {
-        next(){
+        next:()=>{
           
           console.log('Archivo eliminado')
-          
+          this.snack.open('Archivo eliminado','CERRAR',{duration:5000})
         },
-        error(){
+        error:()=>{
           console.log('Archivo no eliminado')
         },
       })
-      this.getFiles();
-      this.dialogRef.close();
-      
+     // this.getFiles();
+      //this.dialogRef.close();
+     // this.reopen.emit(true);
+     setTimeout(() => {
+      this.ngOnInit()
+
+    }, 3000);
 
     }
+    
     
 }
