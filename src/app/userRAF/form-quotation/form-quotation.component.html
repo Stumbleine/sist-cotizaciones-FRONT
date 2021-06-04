@@ -200,6 +200,11 @@
                     <mat-divider></mat-divider>
 
                 <div  class="form-actions">
+                    <div *ngIf="validPDFupload==true">
+                        <p style="color: #ff4848; margin-right: 15px;">
+                            Aun no se subio un documento escaneado de la cotización.
+                        </p>
+                    </div>
                     <button mat-button style="color: #ff4848;margin-right: 15px;" (click)="openDialogCancel();" type="button"> CANCELAR</button>
                     <button mat-raised-button class="btn-raised" style="margin-right: 25px;" [disabled]="quotationForm.invalid" type="submit" >
                         GUARDAR

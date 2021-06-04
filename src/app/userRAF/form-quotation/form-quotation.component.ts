@@ -40,6 +40,7 @@ export class FormQuotationComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private router: Router,
     private rutaActiva: ActivatedRoute,
+    private route:Router,
   ) { }
   priceQuotationDetail: Item[] = [];
   i=0;
@@ -85,10 +86,11 @@ export class FormQuotationComponent implements OnInit {
   }
   public items:Item[]=[];
   public idQuot:any;
-
+  public idSR:any;
   ngOnInit(): void {
 
     this.idQuot= this.rutaActiva.snapshot.params.idQ;
+    this.idSR= this.rutaActiva.snapshot.params.idSR;
     this.loadDataQuotation();
     this.getFiles()
     console.log("asasas",this.idQuot)
@@ -162,76 +164,93 @@ export class FormQuotationComponent implements OnInit {
         this.refresh()
       })
     }
+    validPDFupload=false;
+  saveQuotation(quotation,formDirective1: FormGroupDirective){
+    if(this.dataFile!=null){
+      quotation.priceQuotationDetail=this.priceQuotationDetail
+      quotation.total= this.getTotalCost(); 
+      console.log(quotation);
+      if(quotation.businessCompanyName!=""){
+        this.saveQuotationSinBusiness(quotation,formDirective1)
+      }else{
+          quotation.priceQuotationDetail.map(detail=>{
+            if(detail.unitPrice == null){
+              quotation.state='INCOMPLETO'
+            }
+          })
 
-   saveQuotation(quotation,formDirective1: FormGroupDirective){
-    
-    quotation.priceQuotationDetail=this.priceQuotationDetail
-    quotation.total= this.getTotalCost(); 
-    console.log(quotation);
-    if(quotation.businessCompanyName!=""){
-      this.saveQuotationSinBusiness(quotation,formDirective1)
-    }else{
-      quotation.priceQuotationDetail.map(detail=>{
-        if(detail.unitPrice == null){
-           quotation.state='INCOMPLETO'
-        }
-      })
-       this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
-       .subscribe( respuesta =>{
-         console.log('Solicitud enviada!!');
-         this.openSnackBar();
-         console.log({"idBusiness":this.business.idBusiness})
-         this.RequestService.put('http://localhost:8080/api/quotation/updateQuotationAddingBusiness/'+this.idQuot,{"idBusiness":this.business.idBusiness})
-            .subscribe( respuesta =>{
-              this.idLastBusiness=respuesta;
-              console.log('actualizando idBusiness!!');
-              window.location.reload();
-              
-            })
-       })
-       formDirective1.resetForm();
-       this.quotationForm.reset();
-       this.quotationForm.reset();
-       this.quotationForm.get('wayOfPayment').setValue("");
-       this.quotationForm.get('garantyTerm').setValue("");
-       this.quotationForm.get('deliveryTerm').setValue("");
-       this.quotationForm.get('offValidation').setValue("");
-       this.quotationForm.get('total').setValue("");
-       this.i=0;
-       this.priceQuotationDetail=[];
-       this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
-       this.pressed=false;
-       this.refresh();
-    
-    }
+        this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
+        .subscribe( respuesta =>{
+          console.log('Solicitud enviada!!');
+          this.openSnackBar();
+          console.log({"idBusiness":this.business.idBusiness})
+          this.RequestService.put('http://localhost:8080/api/quotation/updateQuotationAddingBusiness/'+this.idQuot,{"idBusiness":this.business.idBusiness})
+              .subscribe( respuesta =>{
+                this.idLastBusiness=respuesta;
+                console.log('actualizando idBusiness!!');
+                window.location.reload();
+                setTimeout(()=>{
+                  this.route.navigate(['/req-content',this.idSR]);
+                },3000)
+              })
+        })
+        formDirective1.resetForm();
+        this.quotationForm.reset();
+        this.quotationForm.reset();
+        this.quotationForm.get('wayOfPayment').setValue("");
+        this.quotationForm.get('garantyTerm').setValue("");
+        this.quotationForm.get('deliveryTerm').setValue("");
+        this.quotationForm.get('offValidation').setValue("");
+        this.quotationForm.get('total').setValue("");
+        this.i=0;
+        this.priceQuotationDetail=[];
+        this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
+        this.pressed=false;
+
+        this.refresh();
+        
+      }
+  }else{
+    this.validPDFupload=true;
+  }
   }
   saveQuotationSinBusiness(quotation,formDirective1: FormGroupDirective){
-    quotation.priceQuotationDetail.map(detail=>{
-      if(detail.unitPrice == null){
-         quotation.state='INCOMPLETO'
-      }
-    })
-    this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
-    .subscribe( respuesta =>{
-      console.log('Solicitud enviada!!');
-      this.openSnackBar();
-      
-    })
-          formDirective1.resetForm();
-       this.quotationForm.reset();
-       this.quotationForm.reset();
-       this.quotationForm.get('wayOfPayment').setValue("");
-       this.quotationForm.get('garantyTerm').setValue("");
-       this.quotationForm.get('deliveryTerm').setValue("");
-       this.quotationForm.get('offValidation').setValue("");
-       this.quotationForm.get('total').setValue("");
-       this.i=0;
-       this.priceQuotationDetail=[];
-       this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
-       this.pressed=false;
-       this.refresh(); 
-       window.location.reload();
-}
+    
+    if(this.dataFile!=null){
+
+    
+      quotation.priceQuotationDetail.map(detail=>{
+        if(detail.unitPrice == null){
+          quotation.state='INCOMPLETO'
+        }
+      })
+      this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
+      .subscribe( respuesta =>{
+        console.log('Solicitud enviada!!');
+        this.openSnackBar();
+        setTimeout(()=>{
+          this.route.navigate(['/req-content',this.idSR]);
+        },3000)
+        
+      })
+            formDirective1.resetForm();
+        this.quotationForm.reset();
+        this.quotationForm.reset();
+        this.quotationForm.get('wayOfPayment').setValue("");
+        this.quotationForm.get('garantyTerm').setValue("");
+        this.quotationForm.get('deliveryTerm').setValue("");
+        this.quotationForm.get('offValidation').setValue("");
+        this.quotationForm.get('total').setValue("");
+        this.i=0;
+        this.priceQuotationDetail=[];
+        this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
+        this.pressed=false;
+        this.refresh(); 
+        //window.location.reload();    
+    }else{
+      this.validPDFupload=true;
+    }  
+  }
   openDialog() {
     this.dialog.open(DialogValidationSendComponent);
   }

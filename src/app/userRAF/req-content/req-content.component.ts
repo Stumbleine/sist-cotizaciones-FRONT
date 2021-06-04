@@ -207,6 +207,18 @@ export class ReqContentComponent implements OnInit {
       }
     }
   }
+  allQuotsExpired(quotationsCard){
+    let res=false; 
+
+    for (let quot in quotationsCard){
+      if(quotationsCard[quot].state == 'EXPIRADO'){
+        res=true;
+      }else{
+        return res;
+      }
+    }
+    return res;
+  }
   openDialog(): void {
     this.dialog.open(DgCreateCotComponent,{
       data:{
@@ -347,6 +359,7 @@ export class ReqContentComponent implements OnInit {
     return block;
   }
   
+
   getBlockedDecision(status){
     let block:boolean;
     if(status=='Rechazado'){
@@ -355,7 +368,9 @@ export class ReqContentComponent implements OnInit {
     if(status=='Pendiente' || status=='Autorizado' || this.quotationsCompleted.length==0){
       block=true
     }
-    
+    if(this.allQuotsExpired(this.quotationsCard)){
+      block=false;
+    }
 
     return block;
   }
@@ -376,7 +391,9 @@ export class ReqContentComponent implements OnInit {
         disabled=true;
       }
     }
-
+    if(this.allQuotsExpired(this.quotationsCard)){
+      disabled=false;
+    }
     return disabled;
   }
   report:any;

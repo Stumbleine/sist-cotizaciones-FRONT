@@ -1,8 +1,11 @@
 <div style="        display: grid;
 place-items: center;">
     <div class="container">
-        <div class="header" style="margin-top: 30px; width: 100%;">
-            
+        <div>
+            <button mat-stroked-button [routerLink]="['/home-raf']"> <mat-icon matSuffix>arrow_back</mat-icon> Volver</button>
+        </div>
+        <div class="header" style="margin-top: 10px; width: 100%;">
+
             <div class="header__title">
                 <h1>{{reqReceived?.type}}</h1>
                 <h3 *ngIf="reqReceived?.initials!=null" style="font-style: italic;">Solicitado por proyecto {{reqReceived?.initials}}</h3>
@@ -181,7 +184,7 @@ place-items: center;">
                     <mat-panel-title style="font-weight: bold;">DECISIÓN E INFORME</mat-panel-title> 
                     </mat-expansion-panel-header>
                 <div class="decisionReports-section" *ngIf="reqReceived?.status=='Cotizando'">
-                    <div class="selection-quotation" >
+                    <div class="selection-quotation"  *ngIf="quotationsCompleted!=null">
                         <p style="font-size: 17px; font-weight: 500;">Cotizaciones para elegir</p>
                         <mat-radio-group
                         aria-labelledby="example-radio-group-label"
