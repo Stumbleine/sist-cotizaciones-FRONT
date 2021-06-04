@@ -57,7 +57,7 @@ import { FilesComponent } from './components/file/files.component';
 
 import { DgUploadComponent } from './components/dg-upload/dg-upload.component'
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { GeneratePdfComponent } from './components/generate-pdf/generate-pdf.component';
+
 import {PdfMakeWrapper} from 'pdfmake-wrapper'
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
@@ -86,7 +86,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
     ErrorPageComponent,  
     DgChartValidationComponent, QuotationContentComponent, DialogGComponent, ResponseFormComponent, FilesComponent,
      DgUploadComponent,
-     GeneratePdfComponent,
+
   ],
   imports: [
     MaterialFileInputModule,

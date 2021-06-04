@@ -24,7 +24,7 @@ const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'home-rug'},
   {path: 'req-content/:idSR/error', component:ErrorPageComponent },
   {path: 'error', component:ErrorPageComponent },
-  {path: 'response-form', component:ResponseFormComponent},
+  {path: 'response-form', component:ResponseFormComponent}, 
   {path:'req-content/:idSR/quot-content/:quotID',component:QuotationContentComponent},
 { path: 'home-raf/file',component:FilesComponent}
 
