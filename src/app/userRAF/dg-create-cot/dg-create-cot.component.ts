@@ -49,43 +49,8 @@ export class DgCreateCotComponent implements OnInit {
 }
 getQuotationForm(){
   var list=[];var details={};
-  if(this.listBusinessSelected.length==0){
-    this.data.items.map(d=>{
-      var detail={};var description={};var unit={};var quantity={}
-      quantity['quantity']=d.quantity
-      unit['unit']=d.unit
-      description['description']=d.description
-      detail=Object.assign(quantity,unit,description,{"unitPrice":null,"totalPrice":null})
-      list.push(detail)
-    })
-      details['priceQuotationDetail']=list
-       this.quotationForm =Object.assign({"idBusiness":null,"wayOfPayment" : "","garantyTerm" :null ,"deliveryTerm" :null ,"offValidation" : "","total" : null,"state":"SIN COTIZAR","commentary":"","idSpendingUnitRequest":this.idR},details)
-       console.log(this.quotationForm)
-
-       this.RequestService.post('http://localhost:8080/api/quotation/createQuotation/'+this.idR, this.quotationForm)
-       .subscribe({
-         next:()=>{
-           console.log('Cotizacion creada exitosamente!!');
-           this.RequestService.put('http://localhost:8080/api/quotation/RelatingPriceQuotationToDetails',{})
-            .subscribe( respuesta =>{
-             console.log('put enviada!!');
-             window.location.reload();
-        })
-           //this.route.navigate(['/req-content', this.idR,'form-quotation']);
-           this.snack.open('Cotizacion creada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
-           
-           if(this.cardsQuotations.length===0){
-            this.changeState(this.idR);
-           }
-           
-         },
-         error:()=>{
-           console.log('Ocurrio un error, no se creo la cotizacon.');
-           this.snack.open('Fallo al crear cotizacion.','CERRAR',{duration:5000})
-         }
-       });
-       
-  }else{
+  if(this.listBusinessSelected.length!=0){
+ 
     this.listBusinessSelected.map(i=>{
       var id={};var list=[];var details={};
       id['idBusiness']=i.idBusiness
@@ -127,6 +92,46 @@ getQuotationForm(){
     })
   }
   
+}
+getQuotationFormEmpty(){
+  var list=[];var details={};
+  this.listBusinessSelected=[]
+  if(this.listBusinessSelected.length==0){
+    this.data.items.map(d=>{
+      var detail={};var description={};var unit={};var quantity={}
+      quantity['quantity']=d.quantity
+      unit['unit']=d.unit
+      description['description']=d.description
+      detail=Object.assign(quantity,unit,description,{"unitPrice":null,"totalPrice":null})
+      list.push(detail)
+    })
+      details['priceQuotationDetail']=list
+       this.quotationForm =Object.assign({"idBusiness":null,"wayOfPayment" : "","garantyTerm" :null ,"deliveryTerm" :null ,"offValidation" : "","total" : null,"state":"SIN COTIZAR","commentary":"","idSpendingUnitRequest":this.idR},details)
+       console.log(this.quotationForm)
+
+       this.RequestService.post('http://localhost:8080/api/quotation/createQuotation/'+this.idR, this.quotationForm)
+       .subscribe({
+         next:()=>{
+           console.log('Cotizacion creada exitosamente!!');
+           this.RequestService.put('http://localhost:8080/api/quotation/RelatingPriceQuotationToDetails',{})
+            .subscribe( respuesta =>{
+             console.log('put enviada!!');
+             window.location.reload();
+        })
+           //this.route.navigate(['/req-content', this.idR,'form-quotation']);
+           this.snack.open('Cotizacion creada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
+           
+           if(this.cardsQuotations.length===0){
+            this.changeState(this.idR);
+           }
+           
+         },
+         error:()=>{
+           console.log('Ocurrio un error, no se creo la cotizacon.');
+           this.snack.open('Fallo al crear cotizacion.','CERRAR',{duration:5000})
+         }
+       });
+      }
 }
   createQuataion2(){
     this.RequestService.post('http://localhost:8080/api/quotation/createQuotation/'+this.idR, this.quotationForm)
