@@ -301,8 +301,7 @@ export class FormQuotationComponent implements OnInit {
           new Rect([410,120],[130,25]).color('white').lineColor('#c2c2c2').round(5).end,
           new Rect([425,160],[130,25]).color('white').lineColor('#c2c2c2').round(5).end,
           new Rect([380,200],[130,25]).color('white').lineColor('#c2c2c2').round(5).end,
-          new Rect([70,500],[440,60]).color('white').lineColor('#c2c2c2').round(5).end,
-          
+          new Rect([70,290],[0,0]).color('white').lineColor('white').end
           
         ]).end
         
@@ -321,9 +320,10 @@ export class FormQuotationComponent implements OnInit {
       pdf.add(new Txt('Tiempo de Garantía(meses):').absolutePosition(296,165).fontSize(10).color('black').font('Roboto').end)
       pdf.add(new Txt('Validez de Oferta:').absolutePosition(296,205).fontSize(10).color('black').font('Roboto').end)
       pdf.add(new Txt('Detalle del item/articulo/bien/servicio').alignment("center").absolutePosition(0,265).fontSize(12).color('black').font('Roboto').bold().end)
-      pdf.add(this.createTable(this.priceQuotationDetail))
-      pdf.add(new Txt('Ingrese un comentario:').absolutePosition(70,480).fontSize(9).color('black').font('Roboto').end)
       
+      pdf.add(this.createTable(this.priceQuotationDetail))
+      pdf.add(new Txt('Ingrese un comentario:').margin([70,10]).fontSize(9).color('black').font('Roboto').end)
+      pdf.add(new Canvas([new Rect([70,10],[440,60]).color('white').lineColor('#c2c2c2').round(5).end]).end)
       pdf.create().print();
     
     }else{
@@ -341,8 +341,7 @@ export class FormQuotationComponent implements OnInit {
           new Rect([410,250],[130,25]).color('white').lineColor('#c2c2c2').round(5).end,
           new Rect([425,285],[130,25]).color('white').lineColor('#c2c2c2').round(5).end,
           new Rect([380,330],[130,25]).color('white').lineColor('#c2c2c2').round(5).end,
-          new Rect([70,620],[440,60]).color('white').lineColor('#c2c2c2').round(5).end,
-          
+          new Rect([70,445],[0,0]).color('white').lineColor('white').end
           
         ]).end
         
@@ -371,9 +370,10 @@ export class FormQuotationComponent implements OnInit {
       pdf.add(new Txt('Tiempo de Garantía(meses):').absolutePosition(296,295).fontSize(10).color('black').font('Roboto').end)
       pdf.add(new Txt('Validez de Oferta:').absolutePosition(296,335).fontSize(10).color('black').font('Roboto').end)
       pdf.add(new Txt('Detalle del item/articulo/bien/servicio').alignment("center").absolutePosition(0,420).fontSize(12).color('black').font('Roboto').bold().end)
+      
       pdf.add(this.createTableWith(this.priceQuotationDetail))
-      pdf.add(new Txt('Ingrese un comentario:').absolutePosition(70,600).fontSize(9).color('black').font('Roboto').end)
-        
+      pdf.add(new Txt('Ingrese un comentario:').margin([70,10]).fontSize(9).color('black').font('Roboto').end)
+      pdf.add(new Canvas([new Rect([70,10],[440,60]).color('white').lineColor('#c2c2c2').round(5).end]).end) 
       pdf.create().print();
 
 }
@@ -388,7 +388,7 @@ createTable(data: Item[]):ITable{
     return new Table([
     [ 'Nro', 'CANTIDAD','UNIDAD','DETALLE','PRECIO UNITARIO','SUBTOTAL'],
     ...this.extractData(data),
-  ]).absolutePosition(70,310).alignment('center').fontSize(10).layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
+  ]).margin([60,10]).alignment('center').fontSize(9).layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
           return  '#c2c2c2';
   },vLineColor:((rowIndex:number,node:any,columnIndex:number)=>{
       return  '#c2c2c2';
@@ -402,7 +402,7 @@ createTableWith(data: Item[]):ITable{
     return new Table([
       [ 'Nro', 'CANTIDAD','UNIDAD','DETALLE','PRECIO UNITARIO','SUBTOTAL'],
       ...this.extractData(data),
-    ]).absolutePosition(70,460).alignment('center').fontSize(10).layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
+    ]).margin([60,10]).alignment('center').fontSize(9).layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
       return  '#c2c2c2';
     },vLineColor:((rowIndex:number,node:any,columnIndex:number)=>{
       return  '#c2c2c2';
