@@ -507,7 +507,7 @@ generateReport(state:string){
           pdf.add(new Txt('Estado:                                    ' + state).end);
           pdf.add(new Txt('Fecha de emision:                 ' + this.reqReceived?.date).end);
           pdf.add(pdf.ln(1));
-          pdf.add(new Canvas([new Line([0,0], [520, 0]).end]).end );
+          //pdf.add(new Canvas([new Line([0,0], [520, 0]).end]).end );
           //decripcion
           pdf.add(pdf.ln(1));
           pdf.add(new Txt('1.  SOLICITADO').bold().fontSize(13).end); 
@@ -541,8 +541,8 @@ generateReport(state:string){
             pdf.add(new Txt('TOTAL:  Bs. '+this.quotationsCompleted[quot].total).margin([20,0]).end);
             pdf.add(new Txt('Comentarios:').margin([18,5]).end);
             pdf.add(new Txt(this.quotationsCompleted[quot].commentary).margin([18,0]).end);
-            pdf.add(pdf.ln(1));
-            pdf.add(new Canvas([new Line([20  ,0], [480, 0]).end]).end );
+            pdf.add(pdf.ln(2));
+            //pdf.add(new Canvas([new Line([20  ,0], [480, 0]).end]).end );
           }
           pdf.add(pdf.ln(1));
           let sc=0; let exp=0;
@@ -576,7 +576,7 @@ generateReport(state:string){
 
 
           //decision
-          pdf.add(new Txt('3.  DECISIÓN').bold().fontSize(13).end);
+          pdf.add(new Txt('4.  DECISIÓN').bold().fontSize(13).end);
           pdf.add(pdf.ln(1));
           if(state=='Aprobado'){ pdf.add(new Txt('Cotización elegida:           '+this.quotChoice.nameBussiness).margin([100,0]).end);
           pdf.add(new Txt('TOTAL.                               Bs. '+this.quotChoice.total).margin([100,0]).end);
