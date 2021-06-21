@@ -6,10 +6,17 @@
     <div>
         <div class="search__bar"  >
                 <mat-form-field appearance="outline" >
-                    <input matInput placeholder="buscar por rubro">
+                    <input matInput placeholder="buscar por rubro"
+                    [formControl]="searchInput"
+                    [matAutocomplete]="auto">
                    <mat-icon matSuffix>search</mat-icon>
+                   <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
                  </mat-form-field>
-                 <button color="primary" mat-raised-button >BUSCAR</button>
+                 <button color="primary" mat-raised-button (click)="getCompanies()">BUSCAR</button>
         </div>
 
         <div class="search__list">
@@ -19,14 +26,27 @@
                     <mat-list-option style="height: 75px; " class="mat-primary" [value]="company">
                         <div>
                             <h2>{{company.name}}</h2>
-                            <p>{{nameArea}}</p>
+                            <p>{{company.nameArea}}</p>
                             <p>{{company.eMail}}</p>
                         </div>
                     </mat-list-option>
                 </div>
             </mat-selection-list>
         </mat-dialog-content>
+        <div class="not__business" *ngIf="notCompanies==true">
+            <div style=" place-items: center; height: 100%;">
+                <div class="container">
+                        <h1 class="title">WHOOPS!</h1>
+                        <p> No hay resultados para el área <a >{{nameArea}}</a> </p>
+                        <p>Comprueba la ortografía o prueba con otras palabras clave.</p>
+                        <button mat-stroked-button class="btn-delined" (click)="ngOnInit()" ><mat-icon>reply</mat-icon>VOLVER</button>
+                     
+                </div>
+            </div>
         </div>
+        </div>
+        
+        
     </div>
         <mat-dialog-actions align="end" class="btn__search" style="margin-top:10px; ">
             <button class="btn__search--omit" mat-button mat-dialog-close (click)="getQuotationFormEmpty()" >CREAR SIN ELEGIR</button>
@@ -113,4 +133,39 @@
         background-color: var(--btn-color-pri);
         font-size: 17px;
     }
+    .container {
+        padding: 15px;
+        padding-bottom: 30px;
+        min-width: 500px;
+        min-height: max-content;  margin-bottom: 100px;
+        border-radius: 10px;
+        text-align: center;
+}
+
+.not__business h1{
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: 0.60em;
+  text-align: center;
+  margin-bottom: 35px;
+  color: rgb(48, 48, 48);
+  margin-left: 10px;
+  
+}
+.not__business p{
+  font-size: 17px;
+  text-align: center;
+  color: rgb(48, 48, 48);
+}
+p a{
+    font-weight: bold;
+}
+.btn-delined{
+  font-size: 17px;
+  color: var(--btn-color-pri);
+  border-color: var(--btn-color-pri);
+  text-align: center;
+}
+
+
 </style>
