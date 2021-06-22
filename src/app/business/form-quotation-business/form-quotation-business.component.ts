@@ -9,11 +9,14 @@ import { SnackbarSendRequestComponent } from 'src/app/userRUG/snackbar-send-requ
 import {RequestService} from '../../services/request.service';
 import { DialogValidationCancelComponent } from '../dialog-validation-cancel/dialog-validation-cancel.component';
 import { DialogValidationSendComponent } from '../dialog-validation-send/dialog-validation-send.component';
+
+import {DgCompanyRegisterComponent } from '../dg-company-register/dg-company-register.component'
 import { ActivatedRoute } from '@angular/router';
 export interface Item{
   quantity : number,
   unit : string,
   description : string,
+  features:string,
   unitPrice : number,
   totalPrice : number,
 }
@@ -57,7 +60,7 @@ export class FormQuotationBusinessComponent implements OnInit {
       state:['COTIZADO'],
       priceQuotationDetail: [this.priceQuotationDetail,],
   });
-
+  
   constructor(
     private formBuilder: FormBuilder,
     private RequestService: RequestService,
@@ -66,7 +69,7 @@ export class FormQuotationBusinessComponent implements OnInit {
     private router: Router,
     private rutaActiva: ActivatedRoute, 
   ) { }
-
+  
   displayedColumns: string[] = ['index', 'quantity', 'unit', 'description','unitPrice','totalPrice'];
   dataSource =  new MatTableDataSource<Item>([]);
   columnas=[
@@ -96,7 +99,9 @@ export class FormQuotationBusinessComponent implements OnInit {
   }
   pressed:boolean;
 
+
   refresh() {
+    
     this.dataSource.data = this.priceQuotationDetail;
 } 
 
@@ -119,7 +124,6 @@ export class FormQuotationBusinessComponent implements OnInit {
 
 
     loadDataQuotation(){
-      console.log(this.idQuot);
       this.RequestService.get('http://localhost:8080/api/quotation/getById/'+this.idQuot)
       .subscribe(r=>{
         this.load=true;
@@ -128,18 +132,21 @@ export class FormQuotationBusinessComponent implements OnInit {
         let state=this.dataQuotation.state
         if(state == 'SIN COTIZAR'){
           this.business=this.dataQuotation.business
-          console.log(this.business)
+          console.log("EMPRESA ->",this.business)
           this.priceQuotationDetail=this.dataQuotation.priceQuotationDetail
+          console.log(typeof(this.priceQuotationDetail))
+
+
+
           this.refresh()
-        }else if( state == 'COTIZADO' ){
-         this.router.navigate(['/response-form']);
-        }else if(state == 'INCOMPLETO'){
-          this.router.navigate(['/response-form']);
-        }else if(state == 'EXPIRADO'){
-          this.router.navigate(['/error']);
+          }else if( state == 'COTIZADO' ){
+            this.router.navigate(['/response-form']);
+              }else if(state == 'INCOMPLETO'){
+                this.router.navigate(['/response-form']);
+                }else if(state == 'EXPIRADO'){
+                  this.router.navigate(['/error']);
         }
         //this.business=this.dataQuotation.business
-
       })
     }
   saveQuotation(quotation,formDirective1: FormGroupDirective){
@@ -197,64 +204,76 @@ export class FormQuotationBusinessComponent implements OnInit {
     }
       
 }
-saveQuotationSinBusiness(quotation,formDirective1: FormGroupDirective){
-  quotation.priceQuotationDetail.map(detail=>{
-    if(detail.unitPrice == null){
-       quotation.state='INCOMPLETO'
-    }
-  })
-  //console.log(quotation)
-  this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
-            .subscribe( respuesta =>{
-              console.log('Solicitud enviada!!');
-              this.openSnackBar();
-              
-            })
-   
-          formDirective1.resetForm();
-       this.quotationForm.reset();
-       this.quotationForm.reset();
-       this.quotationForm.get('wayOfPayment').setValue("");
-       this.quotationForm.get('garantyTerm').setValue("");
-       this.quotationForm.get('deliveryTerm').setValue("");
-       this.quotationForm.get('offValidation').setValue("");
-       this.quotationForm.get('total').setValue("");
-       this.i=0;
-       this.priceQuotationDetail=[];
-       this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
-       this.pressed=false;
-       this.refresh(); 
-       window.location.reload();
-}
-openDialog() {
-  this.dialog.open(DialogValidationSendComponent);
-}
-openDialogCancel(){
-  this.dialog.open(DialogValidationCancelComponent);
-}
-openSnackBar() {
-  this._snackBar.openFromComponent(SnackbarSendRequestComponent, {
-    duration: 3000,
-    panelClass:"blue-snackbar",
-  });
-}
-getTotalCost() {
-  return this.priceQuotationDetail.map(t => t.totalPrice).reduce((acc, value) => acc + value, 0);
-}
-
-goForm(){
-  this.router.navigate(['/cotizador/form-quotation/:id']);
-  window.location.reload();
-}
-thereIsBusiness():boolean{
-  if(this.load==true){
-    if(this.business==null){
-      return true;
-    }else{
-      return false;
-    }
+  saveQuotationSinBusiness(quotation,formDirective1: FormGroupDirective){
+    quotation.priceQuotationDetail.map(detail=>{
+      if(detail.unitPrice == null){
+        quotation.state='INCOMPLETO'
+      }
+    })
+    //console.log(quotation)
+    this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
+              .subscribe( respuesta =>{
+                console.log('Solicitud enviada!!');
+                this.openSnackBar();
+                
+              })
+    
+            formDirective1.resetForm();
+        this.quotationForm.reset();
+        this.quotationForm.reset();
+        this.quotationForm.get('wayOfPayment').setValue("");
+        this.quotationForm.get('garantyTerm').setValue("");
+        this.quotationForm.get('deliveryTerm').setValue("");
+        this.quotationForm.get('offValidation').setValue("");
+        this.quotationForm.get('total').setValue("");
+        this.i=0;
+        this.priceQuotationDetail=[];
+        this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
+        this.pressed=false;
+        this.refresh(); 
+        window.location.reload();
   }
-  
-}
+  openDialog() {
+    this.dialog.open(DialogValidationSendComponent);
+  }
+  openDialogCancel(){
+    this.dialog.open(DialogValidationCancelComponent);
+  }
+  openSnackBar() {
+    this._snackBar.openFromComponent(SnackbarSendRequestComponent, {
+      duration: 3000,
+      panelClass:"blue-snackbar",
+    });
+  }
+  getTotalCost() {
+    return this.priceQuotationDetail.map(t => t.totalPrice).reduce((acc, value) => acc + value, 0);
+  }
 
+  goForm(){
+    this.router.navigate(['/cotizador/form-quotation/:id']);
+    window.location.reload();
+  }
+  thereIsBusiness():boolean{
+    if(this.load==true){
+      if(this.business==null){
+        return true;
+      }else{
+        return false;
+      }
+    }
+    
+  }
+  //registrarEmpresa
+  saveRsocial(e:any){
+    const jsonData = JSON.stringify(e.target.value)
+    localStorage.setItem('Razon social', jsonData);
+  }
+  openRegister(){
+    this.dialog.open(DgCompanyRegisterComponent,{  
+      data:{
+      razonsocial:localStorage.getItem('Razon social')
+      }
+    });
+  
+  }
 }

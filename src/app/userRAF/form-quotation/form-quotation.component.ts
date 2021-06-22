@@ -20,10 +20,12 @@ export interface Item{
   quantity : number,
   unit : string,
   description : string,
+  
+features:string,
   unitPrice : number,
   totalPrice : number,
 }
-type TableRow=[number,number,string,string,number,number]
+type TableRow=[number,number,string,string,string,number,number]
 
 
 
@@ -271,6 +273,9 @@ export class FormQuotationComponent implements OnInit {
     this.router.navigate(['/req-content/:id']);
     window.location.reload();
   }
+
+
+  //imprimir
   thereIsBusiness():boolean{
     if(this.load==true){
       if(this.business==null){
@@ -284,101 +289,49 @@ export class FormQuotationComponent implements OnInit {
 
   async printForm(){
     const pdf=new PdfMakeWrapper();
-    pdf.pageMargins([0,0,0,0])
-    pdf.pageSize('letter')
-    pdf.pageOrientation('portrait')
+    pdf.pageMargins([0,20,0,0])
+    pdf.pageSize('A4')
+    pdf.defaultStyle({
+      fontSize:11,
+      //font:'roboto'
+    })
     if(this.thereIsBusiness()){
-      pdf.add(
-        new Canvas([
-          new Rect([0,0],[612,45]).color('#700aff').end,
-          new Line([10,250],[600,250]).color('#c2c2c2').end,
-          new Rect([130,85],[380,25]).color('white').lineColor('#c2c2c2').round(5).end,
-    
-          new Rect([105,150],[10,10]).color('white').lineColor('#c2c2c2').end,
-          new Rect([105,170],[10,10]).color('white').lineColor('#c2c2c2').end,
-          new Rect([105,190],[10,10]).color('white').lineColor('#c2c2c2').end,
-          
-          new Rect([410,120],[130,25]).color('white').lineColor('#c2c2c2').round(5).end,
-          new Rect([425,160],[130,25]).color('white').lineColor('#c2c2c2').round(5).end,
-          new Rect([380,200],[130,25]).color('white').lineColor('#c2c2c2').round(5).end,
-          new Rect([70,290],[0,0]).color('white').lineColor('white').end
-          
-        ]).end
-        
-        
-      )
-      pdf.add( await (await new Img('../../../assets/icon.PNG').absolutePosition(5,3).height(40).width(35).build()));
-      pdf.add(new Txt('FORMULARIO DE COTIZACION').absolutePosition(40,10).fontSize(13).bold().color('white').font('Roboto').end)
-      pdf.add(new Txt('Moneda(Bs)').absolutePosition(40,28).fontSize(9).color('white').font('Roboto').end)
-      pdf.add(new Txt('Información de la cotización').alignment("center").absolutePosition(0,50).fontSize(12).color('black').font('Roboto').bold().end)
-      pdf.add(new Txt('Razón Social:').absolutePosition(70,90).fontSize(10).color('black').font('Roboto').end)
-      pdf.add(new Txt('Forma de Pago:').absolutePosition(70,130).fontSize(10).color('black').font('Roboto').end)
-      pdf.add(new Txt('A Crédito').absolutePosition(120,150).fontSize(9).color('black').font('Roboto').end)
-      pdf.add(new Txt('Al Contado').absolutePosition(120,170).fontSize(9).color('black').font('Roboto').end)
-      pdf.add(new Txt('Al Contado y a Crédito').absolutePosition(120,190).fontSize(9).color('black').font('Roboto').end)
-      pdf.add(new Txt('Tiempo de Entrega(días):').absolutePosition(296,125).fontSize(10).color('black').font('Roboto').end)
-      pdf.add(new Txt('Tiempo de Garantía(meses):').absolutePosition(296,165).fontSize(10).color('black').font('Roboto').end)
-      pdf.add(new Txt('Validez de Oferta:').absolutePosition(296,205).fontSize(10).color('black').font('Roboto').end)
-      pdf.add(new Txt('Detalle del item/articulo/bien/servicio').alignment("center").absolutePosition(0,265).fontSize(12).color('black').font('Roboto').bold().end)
+      pdf.add(new Txt('UNIVERSIDAD MAYOR DE SAN SIMÓN').margin([20,0]).bold().fontSize(13).end);
+      pdf.add(new Txt('ADQUISICIONES').margin([20,0]).bold().fontSize(13).end);
+      pdf.add(new Txt('Teléfono: 4250660 ; 4232198').margin([20,0]).fontSize(10).end);
+      pdf.add(new Txt('Fax: 4231765 ; Casilla 992').margin([20,0]).fontSize(10).end);
+      pdf.add(new Txt('Cochabmaba - Bolivia').margin([20,0]).fontSize(10).end);
+
+      pdf.add(new Txt('SOLICITUD DE COTIZACIÓN').bold().alignment('center').fontSize(13).end);
+      pdf.add(new Txt('Moneda (Bs)').bold().alignment('center').fontSize(12).end);
+      pdf.add(pdf.ln(1));
+      pdf.add(new Txt('Razon Social: ...........................................................................................\
+      Fecha: ............./............./............./').margin([20,10]).end);
+      pdf.add(new Txt('Agradecemos a Uds. cotizarnos, los articulos que a continuacion se  detallan. Luego este formulario debe devolverse en sobre cerrado debidamente FIRMADO y SELLADO (favor especificar Marca, Modelo, Industria)')
+         .margin([30,0]).fontSize(9).end);
       
       pdf.add(this.createTable(this.priceQuotationDetail))
-      pdf.add(new Txt('Ingrese un comentario:').margin([70,10]).fontSize(9).color('black').font('Roboto').end)
-      pdf.add(new Canvas([new Rect([70,10],[440,60]).color('white').lineColor('#c2c2c2').round(5).end]).end)
+      pdf.add(new Txt('Tiempo de entrega (dias): .....................................................    Validez de oferta:   ............./............./............./').margin([20,5]).end);
+      pdf.add(new Txt('Tiempo de garantia (meses): ................................................ ').margin([20,5]).end);
+      //pdf.add(new Txt('Validez de oferta:   ............./............./............./').margin([20,5]).end);
+      pdf.add(new Txt('Forma de pago: ').margin([20,5]).end);
+      pdf.add(new Txt('(  ) A Crédito').margin([120,5]).end)
+      pdf.add(new Txt('(  )  Al Contado').margin([120,5]).end)
+      pdf.add(new Txt('(  )  Al Contado y a Crédito').margin([120,5]).end)
+      pdf.add(new Txt('Comentarios:').margin([20,10]).end)
+      pdf.add(new Canvas([new Rect([30,5],[540,70]).color('white').lineColor('#c2c2c2').round(5).end]).end)
       pdf.create().print();
     
     }else{
 
-      pdf.add(
-        new Canvas([
-          new Rect([0,0],[612,45]).color('#700aff').end,
-          new Line([10,200],[600,200]).color('#c2c2c2').end,
-          new Line([10,410],[600,410]).color('#c2c2c2').end,
-    
-          new Rect([105,275],[10,10]).color('white').lineColor('#c2c2c2').end,
-          new Rect([105,295],[10,10]).color('white').lineColor('#c2c2c2').end,
-          new Rect([105,315],[10,10]).color('white').lineColor('#c2c2c2').end,
-          
-          new Rect([410,250],[130,25]).color('white').lineColor('#c2c2c2').round(5).end,
-          new Rect([425,285],[130,25]).color('white').lineColor('#c2c2c2').round(5).end,
-          new Rect([380,330],[130,25]).color('white').lineColor('#c2c2c2').round(5).end,
-          new Rect([70,445],[0,0]).color('white').lineColor('white').end
-          
-        ]).end
-        
-        
-      )
-      pdf.add( await (await new Img('../../../assets/icon.PNG').absolutePosition(5,3).height(40).width(35).build()));
-      pdf.add(new Txt('FORMULARIO DE COTIZACION').absolutePosition(40,10).fontSize(13).bold().color('white').font('Roboto').end)
-      pdf.add(new Txt('Moneda(Bs)').absolutePosition(40,28).fontSize(9).color('white').font('Roboto').end)
-      pdf.add(new Txt('Información de la empresa').alignment("center").absolutePosition(0,50).fontSize(12).color('black').font('Roboto').bold().end)
-      pdf.add(new Txt('Razón Social:').absolutePosition(70,90).fontSize(10).color('black').font('Roboto').bold().end)
-      pdf.add(new Txt(this.business.name).absolutePosition(135,90).fontSize(10).color('black').font('Roboto').color('#666666').end)
-      pdf.add(new Txt('NIT:').absolutePosition(70,110).fontSize(10).color('black').font('Roboto').bold().end)
-      pdf.add(new Txt(this.business.nit).absolutePosition(100,110).fontSize(10).color('black').font('Roboto').color('#666666').end)
-      pdf.add(new Txt('e-mail:').absolutePosition(70,130).fontSize(10).color('black').font('Roboto').bold().end)
-      pdf.add(new Txt(this.business.eMail).absolutePosition(110,130).fontSize(10).color('black').font('Roboto').color('#666666').end)
-      pdf.add(new Txt('Teléfono:').absolutePosition(70,150).fontSize(10).color('black').font('Roboto').bold().end)
-      pdf.add(new Txt(this.business.phone).absolutePosition(115,150).fontSize(10).color('black').font('Roboto').color('#666666').end)
-      pdf.add(new Txt('Dirección:').absolutePosition(70,170).fontSize(10).color('black').font('Roboto').bold().end)
-      pdf.add(new Txt(this.business.adress).absolutePosition(120,170).fontSize(10).color('black').font('Roboto').color('#666666').end)
-      pdf.add(new Txt('Información de la cotización').alignment("center").absolutePosition(0,210).fontSize(12).color('black').font('Roboto').bold().end)
-      pdf.add(new Txt('Forma de Pago:').absolutePosition(70,255).fontSize(10).color('black').font('Roboto').end)
-      pdf.add(new Txt('A Crédito').absolutePosition(120,275).fontSize(9).color('black').font('Roboto').end)
-      pdf.add(new Txt('Al Contado').absolutePosition(120,295).fontSize(9).color('black').font('Roboto').end)
-      pdf.add(new Txt('Al Contado y a Crédito').absolutePosition(120,315).fontSize(9).color('black').font('Roboto').end)
-      pdf.add(new Txt('Tiempo de Entrega(días):').absolutePosition(296,255).fontSize(10).color('black').font('Roboto').end)
-      pdf.add(new Txt('Tiempo de Garantía(meses):').absolutePosition(296,295).fontSize(10).color('black').font('Roboto').end)
-      pdf.add(new Txt('Validez de Oferta:').absolutePosition(296,335).fontSize(10).color('black').font('Roboto').end)
-      pdf.add(new Txt('Detalle del item/articulo/bien/servicio').alignment("center").absolutePosition(0,420).fontSize(12).color('black').font('Roboto').bold().end)
-      
+      pdf.add(pdf.ln(10));
       pdf.add(this.createTableWith(this.priceQuotationDetail))
-      pdf.add(new Txt('Ingrese un comentario:').margin([70,10]).fontSize(9).color('black').font('Roboto').end)
-      pdf.add(new Canvas([new Rect([70,10],[440,60]).color('white').lineColor('#c2c2c2').round(5).end]).end) 
+
       pdf.create().print();
 
 }
 
-
+//   
 
 
 }
@@ -386,9 +339,9 @@ export class FormQuotationComponent implements OnInit {
 createTable(data: Item[]):ITable{
   [{}]
     return new Table([
-    [ 'Nro', 'CANTIDAD','UNIDAD','DETALLE','PRECIO UNITARIO','SUBTOTAL'],
+    [ 'Nro', 'CANTIDAD','UNIDAD','DETALLE',' _CARACTERISTICAS_ ','PRECIO UNITARIO','SUBTOTAL'],
     ...this.extractData(data),
-  ]).margin([60,10]).alignment('center').fontSize(9).layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
+  ]).margin([20,10]).alignment('center').fontSize(10).layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
           return  '#c2c2c2';
   },vLineColor:((rowIndex:number,node:any,columnIndex:number)=>{
       return  '#c2c2c2';
@@ -400,20 +353,20 @@ createTable(data: Item[]):ITable{
 createTableWith(data: Item[]):ITable{
     [{}]
     return new Table([
-      [ 'Nro', 'CANTIDAD','UNIDAD','DETALLE','PRECIO UNITARIO','SUBTOTAL'],
+      [ 'Nro', 'CANTIDAD','UNIDAD','DETALLE',' CARACTERISTICAS ','PRECIO UNITARIO','SUBTOTAL'],
       ...this.extractData(data),
-    ]).margin([60,10]).alignment('center').fontSize(9).layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
+    ]).margin([20,10]).alignment('center').fontSize(10).layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
       return  '#c2c2c2';
     },vLineColor:((rowIndex:number,node:any,columnIndex:number)=>{
       return  '#c2c2c2';
     }),fillColor:((rowIndex:number,node:any,columnIndex:number)=>{
       return  rowIndex===0?'#c2c2c2':'';
     })
-    }).end;
+    }).end; 
 }
 extractData(data:Item[]):TableRow[]{
     var index=1
-    return data.map(row=>[index++,row.quantity,row.unit,row.description,row.unitPrice,row.totalPrice])
+    return data.map(row=>[index++,row.quantity,row.unit,row.description,'',row.unitPrice,row.totalPrice])
 }
 
 }

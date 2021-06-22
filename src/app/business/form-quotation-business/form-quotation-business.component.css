@@ -45,25 +45,24 @@ h2 {
   color: black;
 }
 
-h3{
+h3 {
   color: var(--txt-color-subt);
   font-weight: 500;
   text-align: center;
   margin-top: 15px;
   font-size: 17px;
-
 }
-.information__business{
+.information__business {
   padding-left: 35px;
 }
-.info-empresa h3{
-  text-align: start; 
+.info-empresa h3 {
+  text-align: start;
   margin-left: 15px;
-  display: flex; 
-  line-height: 4px; 
+  display: flex;
+  line-height: 4px;
   font-size: 16px;
 }
-.info-empresa p{        
+.info-empresa p {
   margin-left: 15px;
   font-weight: lighter;
 }
@@ -96,27 +95,26 @@ h3{
   /* border-radius: 10px; border:  1px solid;
     border-color: #e0e0e0; */
 }
-.form-base__s1{
+.form-base__s1 {
   padding: 15px;
   text-align: center;
 }
-.form-base__s1 div{
+.form-base__s1 div {
   padding-top: 15px;
   padding-bottom: 15px;
   justify-content: center;
   display: inline-flex;
 }
 
-.form-base__s1--fds div{
+.form-base__s1--fds div {
   width: 25%;
   padding-left: 35px;
   padding-right: 35px;
 }
-.form-base__s1--fds mat-form-field{
+.form-base__s1--fds mat-form-field {
   width: 100%;
 }
 .form__tableItem {
-  
   align-items: center;
   padding: 15px;
 }
@@ -124,11 +122,9 @@ h3{
   display: grid;
   align-items: center;
   padding: 25px;
-  width: 100%;
 }
 table {
-  
-  width: 85%;
+  width: 100%;
 }
 tr.mat-footer-row {
   font-weight: bold;

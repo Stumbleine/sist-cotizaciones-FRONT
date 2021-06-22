@@ -1,6 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { Router } from '@angular/router';
-
+import {RequestService} from '../../services/request.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'app-qoatation-card',
   templateUrl: './qoatation-card.component.html',
@@ -8,10 +9,11 @@ import { Router } from '@angular/router';
 })
 export class QoatationCardComponent implements OnInit {
 
-  constructor(private route:Router, ) { }
+  constructor(private route:Router,  public RequestService: RequestService,
+    private snack:MatSnackBar) { }
 
   ngOnInit(): void {
-
+    this.getFiles();
   }
   @Input() idSR:any
   @Input() quot:any;
@@ -44,5 +46,56 @@ export class QoatationCardComponent implements OnInit {
         color ='#FFF176';
       }
     return color;
+  }
+  actionDelete(){
+    
+  }
+  dataFile:any;
+  getFiles(){
+    this.RequestService.get('http://localhost:8080/api/Document/Quotation/'+this.quot.idPriceQuotation)
+    .subscribe(file=>{
+        this.dataFile=file;
+        console.log('FILE :', this.dataFile);
+    })
+  }
+
+  deleteQuot(idQuot){
+
+    if(this.dataFile!=null){
+      this.deleteDoc();
+      this.RequestService.delete2('quotation/deleteQuotation/'+idQuot).subscribe({
+          next:()=>{
+            console.log('cotizacion eliminado')
+            this.snack.open('Cotizacion eliminada','CERRAR',{duration:5000,panelClass:'snackSuccess'})
+          },
+          error:()=>{
+            console.log('Ocurrio un error al eliminar cotizacion')
+            this.snack.open('Ocurrio un error al eliminar cotizacion','CERRAR',{duration:5000})
+          },
+        })
+
+    }else{
+      this.RequestService.delete2('quotation/deleteQuotation/'+idQuot).subscribe({
+          next:()=>{
+            console.log('cotizacion eliminado')
+            this.snack.open('Cotizacion eliminada','CERRAR',{duration:5000,panelClass:'snackSuccess'})
+          },
+          error:()=>{
+            console.log('Ocurrio un error al eliminar cotizacion')
+            this.snack.open('Ocurrio un error al eliminar cotizacion','CERRAR',{duration:5000})
+          },
+        })
+    }
+  }
+  deleteDoc(){
+    this.RequestService.delete2('Document/delete/'+this.quot.idPriceQuotation).subscribe({
+      next:()=>{
+        console.log('Archivo eliminado')
+      },
+      error:()=>{
+        console.log('Archivo no eliminado')
+      },
+    })
+
   }
 }

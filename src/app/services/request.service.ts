@@ -38,4 +38,9 @@ export class RequestService {
       return this.http.delete(url);
     
   }
+
+  public delete2(url:string){
+    return this.http.delete('http://localhost:8080/api/'+url);
+  
+  }
 }

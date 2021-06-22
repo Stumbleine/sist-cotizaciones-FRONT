@@ -94,7 +94,8 @@ export class ReqContentComponent implements OnInit {
   });
   
 
-  public dateExpiration:any;
+  public dateExpiration:any=localStorage.getItem('dateExpiration')
+  public dateEdit:boolean=false;
   public quotationsCard=null;
   validDate(status){
     let res:boolean;
@@ -195,7 +196,7 @@ export class ReqContentComponent implements OnInit {
         this.quotationsCard=r;
         console.log("TARJETAS QuotS .... ",this.quotationsCard);
         this.filterCompletedQ(this.quotationsCard);
-        this.dateExpiration=this.quotationsCard[0]?.deadline;
+        //this.dateExpiration=this.quotationsCard[0]?.deadline;
 
         this.loadDataChart(this.idReqSpending)  
     })
@@ -244,6 +245,11 @@ export class ReqContentComponent implements OnInit {
     this.RequestService.put('http://localhost:8080/api/req-content/updateDeadLine/'+id,dateee)
     .subscribe(r=>{
       console.log("Fecha actualizada !!!!");
+      this.dateEdit=false;
+      localStorage.setItem('dateExpiration',this.dateExpired)
+      this.dateExpiration=localStorage.getItem('dateExpiration')
+      console.log(this.dateExpiration)
+      //window.location.reload();
     })
   }
 

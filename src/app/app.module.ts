@@ -60,6 +60,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 import {PdfMakeWrapper} from 'pdfmake-wrapper'
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import { DgCompanyRegisterComponent } from './business/dg-company-register/dg-company-register.component';
 
 PdfMakeWrapper.setFonts(pdfFonts);
 @NgModule({
@@ -86,6 +87,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
     ErrorPageComponent,  
     DgChartValidationComponent, QuotationContentComponent, DialogGComponent, ResponseFormComponent, FilesComponent,
      DgUploadComponent,
+     DgCompanyRegisterComponent,
 
   ],
   imports: [

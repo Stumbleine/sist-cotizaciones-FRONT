@@ -99,7 +99,7 @@ place-items: center;">
                     </mat-expansion-panel-header>
 
                         <form class="quotations-section" [formGroup]="dateValidation">
-                            <div style="text-align: center; padding: 15px;" *ngIf="dateExpiration==null">
+                            <div style="text-align: center; padding: 15px;" *ngIf="dateExpiration==null || dateEdit==true">
                                 <p>Es necesario elegir una fecha de vencimiento para los formularios.</p>
                                 <div style="display: inline-flex; align-items: center;">
                                     <mat-form-field  appearance="outline">
@@ -111,14 +111,15 @@ place-items: center;">
                                         <button mat-mini-fab color="primary" (click)="saveDateExpiration(reqReceived?.idSpendingUnitRequest)"><mat-icon>save</mat-icon></button>
                                     </div>
                                 </div>
-                            </div>
-                            <div style="text-align: center; padding: 10px;" *ngIf="dateExpiration!=null">
-                                <h2 style="color: #0a6cff; font-size: 17px;" >
-                                    Fecha de expiración de los formularios:  <p style="font-style: italic;">{{dateExpiration}}</p>
+                            </div>  
+                            <div style=" display: flex;  justify-content: center;" *ngIf="dateExpiration!=null && dateEdit==false">
+                                <h2 style="color: #0a6cff; font-size: 17px; display: flex; margin-top: 5px;" >
+                                    Fecha de expiración de los formularios:  <p style="font-style: italic;"> {{dateExpiration}}</p>
                                 </h2>
-                                <!--div>
-                                    <button mat-mini-fab color="mat-grey"><mat-icon>edit</mat-icon></button>
-                                </div-->
+                                <div   style="margin-left: 10px;" >
+                                    <button mat-mini-fab matTooltip="editar fecha"  mat-icon-button (click)="dateEdit=true">
+                                        <mat-icon style="font-size: 20px; ">edit</mat-icon></button>
+                                </div>
                             </div>
 
                             <div class="quotation--cards" >

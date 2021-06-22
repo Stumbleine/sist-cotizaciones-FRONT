@@ -28,7 +28,7 @@
                             <div *ngIf="thereIsBusiness()">
                                 <mat-form-field appearance="outline">
                                 <mat-label>Razon social</mat-label>
-                                <input matInput placeholder="Placeholder"formControlName='businessCompanyName' required>
+                                <input matInput placeholder="Placeholder"formControlName='businessCompanyName' required (change)="saveRsocial($event)">
                                 <mat-error class="form__validation--size">campo razon social es requerido</mat-error>
                               </mat-form-field>
                             </div>
@@ -96,7 +96,13 @@
                               <td mat-cell *matCellDef="let element" style="min-width: 85px;text-align: center;"> {{element[columna.name]}} </td>
                               <td mat-footer-cell *matFooterCellDef></td> 
                             </ng-container>
-
+                            <ng-container matColumnDef="features" >
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> CARACTERISTICAS </th>
+                                <td mat-cell *matCellDef="let element   " style="text-align: center;" > 
+                                    <input type="text" [(ngModel)]="element.features" 
+                                     [name]="element.idPriceQuotationDetail"  > </td>
+                                <td mat-footer-cell *matFooterCellDef></td>
+                            </ng-container>
 
                             <ng-container matColumnDef="unitPrice" >
                                 <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> PRECIO UNITARIO </th>
@@ -179,7 +185,7 @@
                     <div style="text-align: center; ">
                         <div style="display: flex ">
                             <div style="width: 87%; text-align: end;"><p >¿Desea registrar su empresa?</p></div>
-                            <div style="width: 8%; "><a style="color: var(--btn-color-pri);" href="false">  REGISTRAR</a></div>
+                            <div style="width: 8%; "><a style="color: var(--btn-color-pri); cursor: pointer;" (click)="openRegister()">  REGISTRAR</a></div>
                         </div>
                     </div>
                        
