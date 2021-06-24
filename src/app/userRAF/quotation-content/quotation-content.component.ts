@@ -7,6 +7,7 @@ export interface Items{
   idRequestDetail: number;
   quantity: number;
   unit: string;
+  features:string;
   description:string;
   unitPrice:string;
   totalPrice:string;
@@ -31,12 +32,13 @@ export class QuotationContentComponent implements OnInit {
   business:any;
 
   public items:Items[]=[];
-  displayedColumns: string[] = ['index', 'quantity', 'unit', 'description','unitPrice','totalPrice'];
+  displayedColumns: string[] = ['index', 'quantity', 'unit','description', 'features','unitPrice','totalPrice'];
   dataSource =  new MatTableDataSource<Items>([]);
   columnas=[
     {titulo:"CANTIDAD" ,name: "quantity"},
     {titulo:"UNIDAD" ,name: "unit"},
     {titulo:"DETALLE" ,name: "description"},
+    {titulo:"CARACTERISTICAS" ,name: "features"},
     {titulo:"PRECIO UNITARIO" ,name: "unitPrice"},
     {titulo:"SUBTOTAL" ,name: "totalPrice"}
   ];

@@ -20,8 +20,8 @@ export interface Item{
   quantity : number,
   unit : string,
   description : string,
-  
-features:string,
+  features:string,
+
   unitPrice : number,
   totalPrice : number,
 }
@@ -49,6 +49,7 @@ export class FormQuotationComponent implements OnInit {
   itemForm = this.formBuilder.group({
     quantity: ['',[Validators.required]],
     unit: ['',[Validators.required]],
+    features:[''],
     description: ['',[Validators.required]],
     unitPrice:['',[Validators.required]],
     totalPrice:['',]
@@ -67,7 +68,7 @@ export class FormQuotationComponent implements OnInit {
 });
 
 
-  displayedColumns: string[] = ['index', 'quantity', 'unit', 'description','unitPrice','totalPrice'];
+  displayedColumns: string[] = ['index', 'quantity', 'unit', 'description','features','upload','unitPrice','totalPrice'];
   dataSource =  new MatTableDataSource<Item>([]);
   columnas=[
     
@@ -86,6 +87,11 @@ export class FormQuotationComponent implements OnInit {
     })
     this.refresh()
   }
+  metodoFeatures(){
+    console.log("-----",this.dataSource.data);
+    console.log("---------------asas---")
+  }
+
   public items:Item[]=[];
   public idQuot:any;
   public idSR:any;
@@ -339,7 +345,7 @@ export class FormQuotationComponent implements OnInit {
 createTable(data: Item[]):ITable{
   [{}]
     return new Table([
-    [ 'Nro', 'CANTIDAD','UNIDAD','DETALLE',' _CARACTERISTICAS_ ','PRECIO UNITARIO','SUBTOTAL'],
+    [ 'Nro', 'CANTIDAD','UNIDAD','DETALLE','_CARACTERISTICAS_','PRECIO UNITARIO','SUBTOTAL'],
     ...this.extractData(data),
   ]).margin([20,10]).alignment('center').fontSize(10).layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
           return  '#c2c2c2';
@@ -353,7 +359,7 @@ createTable(data: Item[]):ITable{
 createTableWith(data: Item[]):ITable{
     [{}]
     return new Table([
-      [ 'Nro', 'CANTIDAD','UNIDAD','DETALLE',' CARACTERISTICAS ','PRECIO UNITARIO','SUBTOTAL'],
+      [ 'Nro', 'CANTIDAD','UNIDAD','DETALLE','CARACTERISTICAS','PRECIO UNITARIO','SUBTOTAL'],
       ...this.extractData(data),
     ]).margin([20,10]).alignment('center').fontSize(10).layout({hLineColor:(rowIndex:number,node:any,columnIndex:number)=>{
       return  '#c2c2c2';
@@ -366,7 +372,7 @@ createTableWith(data: Item[]):ITable{
 }
 extractData(data:Item[]):TableRow[]{
     var index=1
-    return data.map(row=>[index++,row.quantity,row.unit,row.description,'',row.unitPrice,row.totalPrice])
+    return data.map(row=>[index++,row.quantity,row.unit,row.description,row.features,row.unitPrice,row.totalPrice])
 }
 
 }

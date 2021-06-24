@@ -70,7 +70,7 @@ export class FormQuotationBusinessComponent implements OnInit {
     private rutaActiva: ActivatedRoute, 
   ) { }
   
-  displayedColumns: string[] = ['index', 'quantity', 'unit', 'description','unitPrice','totalPrice'];
+  displayedColumns: string[] = ['index', 'quantity', 'unit', 'description','features','unitPrice','totalPrice'];
   dataSource =  new MatTableDataSource<Item>([]);
   columnas=[
     

@@ -54,7 +54,7 @@ export class DgUploadComponent implements OnInit {
       this.fileName = file.name;
 
       const formD = new FormData();
-      formD.append("hey","asd");
+ 
       formD.append("document", file);
       console.log("formData",formD);
       this.formData=formD;

@@ -114,26 +114,45 @@
                                     </ng-container>
                 
                                     <ng-container *ngFor="let columna of columnas" matColumnDef="{{columna.name}}" >
-                                      <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 85px; font-weight: bold;"> {{columna.titulo}}  </th>
-        
-        
-                                      <td mat-cell *matCellDef="let element" style="min-width: 85px;text-align: center;"> {{element[columna.name]}} </td>
+                                      <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 70px; font-weight: bold;"> {{columna.titulo}}  </th>
+                                      <td mat-cell *matCellDef="let element" style="min-width: 70px;text-align: center;"> {{element[columna.name]}} </td>
                                       <td mat-footer-cell *matFooterCellDef></td> 
                                     </ng-container>
+
                                     <ng-container matColumnDef="features" >
-                                        <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> CARACTERISTICAS </th>
+                                        <th mat-header-cell *matHeaderCellDef style="min-width: 180px;   text-align: center;font-weight: bold;"> CARACTERISTICAS </th>
                                         <td mat-cell *matCellDef="let element   " style="text-align: center;" > 
-                                            <input type="text" [(ngModel)]="element.features" 
-                                             [name]="element.idPriceQuotationDetail"  > </td>
+                                            <input matInput class="inputTable" type="text" [(ngModel)]="element.features" [ngModelOptions]="{standalone: true}"
+                                             [name]="element.idPriceQuotationDetail"  (change)="metodoFeatures()"> </td>
                                         <td mat-footer-cell *matFooterCellDef></td>
                                     </ng-container>
                                            
-        
+                                    <ng-container matColumnDef="upload" >
+                                        <th mat-header-cell *matHeaderCellDef style="min-width: 70px;   text-align: center;font-weight: bold;"> ADJUNTAR </th>
+                                        <td mat-cell *matCellDef="let element   " style="text-align: center; " > 
+                                            <mat-form-field style="width: 70px; font-size: 10px ;"  >
+                                            <ngx-mat-file-input  [accept]="'.pdf'" #removableInput  
+                                                    [name]="element.idPriceQuotationDetail" [ngModelOptions]="{standalone: true}">
+                                            </ngx-mat-file-input >
+                                            <button style="font-size: 16px;" mat-icon-button  matSuffix *ngIf="!removableInput.empty " (click)="removableInput.clear($event)">
+                                              <mat-icon >clear</mat-icon>
+                                            </button>
+                                            <button mat-icon-button  matSuffix *ngIf="removableInput.empty " >
+                                                <mat-icon style="font-size: 18px;" >upload_file</mat-icon>
+                                            </button>
+                                            <button mat-icon-button  matSuffix *ngIf="!removableInput.empty " >
+                                                <mat-icon style="font-size: 18px;" >done</mat-icon>
+                                            </button>
+                                        </mat-form-field>
+                                         </td>
+                                        <td mat-footer-cell *matFooterCellDef></td>
+                                    </ng-container>
+
                                     <ng-container matColumnDef="unitPrice" >
-                                        <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> PRECIO UNITARIO </th>
+                                        <th mat-header-cell *matHeaderCellDef style="min-width: 110px; text-align: center;font-weight: bold;"> PRECIO UNITARIO </th>
         
                                         <td mat-cell *matCellDef="let element" style="text-align: center;" > 
-                                            <input type="number" [(ngModel)]="element.unitPrice" [ngModelOptions]="{standalone: true}"
+                                            <input matInput class="inputTable" type="number" [(ngModel)]="element.unitPrice" [ngModelOptions]="{standalone: true}"
                                              [name]="element.idPriceQuotationDetail" (change)="metodo()" > </td>
                                         <td mat-footer-cell *matFooterCellDef></td>
                                     </ng-container>
@@ -225,117 +244,6 @@
 </div>
 
 <style>
-        .snackSuccess{
-        background: var(--state-color-5);
-        
-    }
-    h3{
-        color: var(--txt-color-subt);
-        font-weight: 500;
-        text-align: center;
-        margin-top: 15px;
-        font-size: 17px;
 
-    }
-        .container{
-        width: 80%;
-        min-width: 900px;
-        max-width: 1300px;
-        background-color: rgb(255, 255, 255);
-        box-shadow: 0px 20px 50px -15px #c2c2c2;
-        height: 100%;
-        border-radius: 10px;
-            margin-top: 50px;
-            margin-bottom: 100px;
-    }
-    .header{
-        display: flex;
-        height: 75px; width: 100%;
-        background-color: var(--txt-color-title2);
-        
-    }
-    .header__title {
-        text-align: start;
-        align-self: center;
-        color: white;
-        min-width: 300px;
-    }
-    .header--actions{
-        display: flex;
-        align-items: center;
-    }
-    .btn-icons mat-icon{
-         color: white;
-         font-size: 30px;
-         margin-top: -7px;
-    }
-
-    .example-spacer {
-        flex: 1 1 auto;
-    }
-
-    .info-empresa h3{
-
-        margin-left: 15px;
-        display: flex; 
-        line-height: 10px; 
-        font-size: 16px;
-    }
-    .info-empresa p{        
-        margin-left: 15px;
-        font-weight: lighter;}
-    /*contenido form-base*/
-    .form-base__s1{
-        padding: 15px;
-        text-align: center;
-    }
-    .form-base__s1 div{
-        padding-top: 15px;
-        padding-bottom: 15px;
-        justify-content: center;
-        display: inline-flex;
-    }
-
-    .form-base__s1--fds div{
-        width: 25%;
-        padding-left: 35px;
-        padding-right: 35px;
-    }
-    .form-base__s1--fds mat-form-field{
-        width: 100%;
-    }
-    /*tabla*/
-    .form-base__s2{
-        display: flex;
-        padding: 15px;
-        margin-bottom: 15px;
-    }
-    tr.mat-footer-row {
-    font-weight: bold;
-    background-color: #ebebeb;
-}
-    /*fields*/
-    .s2__fields{
-        width: 30%;
-        border-radius: 10px; border:  1px solid;
-        border-color: #e0e0e0;
-
-        text-align: center;
-    }
-    .s2__fields mat-form-field{
-        width: 70%;
-        margin-top: 15px;
-        min-width: 220px;
-    }
-
-    /*Botones*/
-    .form-actions{
-        text-align: end; width: 100%;
-        padding-top: 25px;padding-bottom: 25px;
-    }
-    .btn-raised {
-         color: white;
-        background-color: var(--btn-color-pri);
-    }
 
 </style>

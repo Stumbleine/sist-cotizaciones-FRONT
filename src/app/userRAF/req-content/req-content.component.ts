@@ -196,7 +196,11 @@ export class ReqContentComponent implements OnInit {
         this.quotationsCard=r;
         console.log("TARJETAS QuotS .... ",this.quotationsCard);
         this.filterCompletedQ(this.quotationsCard);
-        //this.dateExpiration=this.quotationsCard[0]?.deadline;
+
+        if(this.quotationsCard[0]?.deadline!=null){
+          this.dateExpiration=this.quotationsCard[0]?.deadline;
+        }
+        
 
         this.loadDataChart(this.idReqSpending)  
     })
@@ -249,7 +253,7 @@ export class ReqContentComponent implements OnInit {
       localStorage.setItem('dateExpiration',this.dateExpired)
       this.dateExpiration=localStorage.getItem('dateExpiration')
       console.log(this.dateExpiration)
-      //window.location.reload();
+      window.location.reload();
     })
   }
 

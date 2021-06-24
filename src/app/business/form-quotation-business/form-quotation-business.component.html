@@ -90,25 +90,25 @@
                             </ng-container>
         
                             <ng-container *ngFor="let columna of columnas" matColumnDef="{{columna.name}}" >
-                              <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 85px; font-weight: bold;"> {{columna.titulo}}  </th>
+                              <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 80px; font-weight: bold;"> {{columna.titulo}}  </th>
 
-
-                              <td mat-cell *matCellDef="let element" style="min-width: 85px;text-align: center;"> {{element[columna.name]}} </td>
+                              <td mat-cell *matCellDef="let element" style="min-width: 80px;text-align: center;"> {{element[columna.name]}} </td>
                               <td mat-footer-cell *matFooterCellDef></td> 
                             </ng-container>
+
                             <ng-container matColumnDef="features" >
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> CARACTERISTICAS </th>
+                                <th mat-header-cell *matHeaderCellDef style="min-width: 180px;   text-align: center;font-weight: bold;"> CARACTERISTICAS </th>
                                 <td mat-cell *matCellDef="let element   " style="text-align: center;" > 
-                                    <input type="text" [(ngModel)]="element.features" 
+                                    <input matInput class="inputTable" type="text" [(ngModel)]="element.features" [ngModelOptions]="{standalone: true}"
                                      [name]="element.idPriceQuotationDetail"  > </td>
                                 <td mat-footer-cell *matFooterCellDef></td>
                             </ng-container>
 
                             <ng-container matColumnDef="unitPrice" >
-                                <th mat-header-cell *matHeaderCellDef style="text-align: center;font-weight: bold;"> PRECIO UNITARIO </th>
+                                <th mat-header-cell *matHeaderCellDef style="min-width: 110px;text-align: center;font-weight: bold;"> PRECIO UNITARIO </th>
 
                                 <td mat-cell *matCellDef="let element" style="text-align: center;" > 
-                                    <input type="number" [(ngModel)]="element.unitPrice" [ngModelOptions]="{standalone: true}"
+                                    <input matInput class="inputTable" type="number" [(ngModel)]="element.unitPrice" [ngModelOptions]="{standalone: true}"
                                      [name]="element.idPriceQuotationDetail" (change)="metodo()" > </td>
                                 <td mat-footer-cell *matFooterCellDef></td>
                             </ng-container>
