@@ -20,6 +20,8 @@ export class DgUploadComponent implements OnInit {
     ) { }
 
   public idQuot=this.data.idQuot;
+  transform:any=this.data.transform;
+  idRow:any=this.data.idRowItem;
   code:string="uploader";
 
   ngOnInit(): void {
@@ -48,15 +50,12 @@ export class DgUploadComponent implements OnInit {
   onFileSelected(event) {
 
     const file:File = event.target.files[0];
-    console.log(file, event);
+    //console.log(file, event);
     if (file) {
-      
       this.fileName = file.name;
-
       const formD = new FormData();
- 
       formD.append("document", file);
-      console.log("formData",formD);
+      //console.log("formData",formD);
       this.formData=formD;
 
      }
@@ -70,11 +69,7 @@ export class DgUploadComponent implements OnInit {
         next:()=>{
           console.log('Archivo guardado')
           this.snack.open('Archivo agregado exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
-
             window.location.reload();
-
-          
-             
         },
         error:()=>{
           console.log('Archivo no guardado')
@@ -118,6 +113,32 @@ export class DgUploadComponent implements OnInit {
     }, 3000);
 
     }
-    
+    featureFormData=new FormData();
+  onFileSelected2(event){
+      
+    const file:File = event.target.files[0];
+    console.log(file, event);
+    if (file) {
+      this.fileName = file.name;
+      this.featureFormData.append("idRow", this.idRow);
+      this.featureFormData.append("document", file);
+      console.log("formData",this.featureFormData);
+    }
+  }
+    postFileFeature(){
+      console.log("enviando archivo",this.idRow)
+      this.RequestService.post('http://localhost:8080/api/Document/uploadDetail',this.featureFormData).subscribe(
+      {
+        next:()=>{
+          console.log('Archivo guardado')
+          this.snack.open('Archivo agregado exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
+            //window.location.reload();
+        },
+        error:()=>{
+          console.log('Archivo no guardado')
+          this.snack.open('error, el archivo no se subio.','CERRAR',{duration:5000})
+        },
+      })
+    }
     
 }

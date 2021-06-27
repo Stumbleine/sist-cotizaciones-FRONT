@@ -9,6 +9,7 @@ import { SnackbarSendRequestComponent } from 'src/app/userRUG/snackbar-send-requ
 import {RequestService} from '../../services/request.service';
 import { DialogValidationCancelComponent } from '../dialog-validation-cancel/dialog-validation-cancel.component';
 import { DialogValidationSendComponent } from '../dialog-validation-send/dialog-validation-send.component';
+import { DgUploadComponent} from '../../components/dg-upload/dg-upload.component'
 
 import {DgCompanyRegisterComponent } from '../dg-company-register/dg-company-register.component'
 import { ActivatedRoute } from '@angular/router';
@@ -70,7 +71,7 @@ export class FormQuotationBusinessComponent implements OnInit {
     private rutaActiva: ActivatedRoute, 
   ) { }
   
-  displayedColumns: string[] = ['index', 'quantity', 'unit', 'description','features','unitPrice','totalPrice'];
+  displayedColumns: string[] = ['index', 'quantity', 'unit', 'description','features','upload','unitPrice','totalPrice'];
   dataSource =  new MatTableDataSource<Item>([]);
   columnas=[
     
@@ -274,6 +275,16 @@ export class FormQuotationBusinessComponent implements OnInit {
       razonsocial:localStorage.getItem('Razon social')
       }
     });
-  
   }
+  openUploader(idRow){
+    console.log(idRow,"IDE DE LA FILA Pasad")
+    this.dialog.open(DgUploadComponent,{
+      data:{
+        idRowItem:idRow,
+        transform:'featureFile'
+
+      }
+    });
+  }
+
 }

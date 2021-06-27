@@ -68,7 +68,7 @@ export class FormQuotationComponent implements OnInit {
 });
 
 
-  displayedColumns: string[] = ['index', 'quantity', 'unit', 'description','features','upload','unitPrice','totalPrice'];
+  displayedColumns: string[] = ['index', 'quantity', 'unit', 'description','features','unitPrice','totalPrice'];
   dataSource =  new MatTableDataSource<Item>([]);
   columnas=[
     
@@ -87,10 +87,7 @@ export class FormQuotationComponent implements OnInit {
     })
     this.refresh()
   }
-  metodoFeatures(){
-    console.log("-----",this.dataSource.data);
-    console.log("---------------asas---")
-  }
+
 
   public items:Item[]=[];
   public idQuot:any;
@@ -127,7 +124,6 @@ export class FormQuotationComponent implements OnInit {
 
       }
     });
-    
   }
   
   reOpen(agreed:boolean){

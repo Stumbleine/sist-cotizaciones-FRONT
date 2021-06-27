@@ -61,6 +61,10 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import {PdfMakeWrapper} from 'pdfmake-wrapper'
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { DgCompanyRegisterComponent } from './business/dg-company-register/dg-company-register.component';
+import { HomeAdminComponent } from './userAdmin/home-admin/home-admin.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterUserComponent } from './userAdmin/register-user/register-user.component';
+import { RegisterRoleComponent } from './userAdmin/register-role/register-role.component';
 
 PdfMakeWrapper.setFonts(pdfFonts);
 @NgModule({
@@ -88,6 +92,10 @@ PdfMakeWrapper.setFonts(pdfFonts);
     DgChartValidationComponent, QuotationContentComponent, DialogGComponent, ResponseFormComponent, FilesComponent,
      DgUploadComponent,
      DgCompanyRegisterComponent,
+     HomeAdminComponent,
+     LoginComponent,
+     RegisterUserComponent,
+     RegisterRoleComponent,
 
   ],
   imports: [

@@ -1,0 +1,67 @@
+
+<div class="main">
+
+
+        <mat-card class="mat-elevation-z5">
+            <mat-card-title style="text-align: center; padding-top: 25px; padding-bottom: 25px;"> 
+                Iniciar Sesion
+            </mat-card-title>
+            <mat-card-content >
+                <div style="width: 100%;">
+                    <div class="field">
+                        <mat-form-field  appearance="outline" style="width: 100%;">
+                        <mat-label>Username</mat-label>
+                        <input matInput placeholder="Nombre de usuario" required type="text">
+                        <mat-error >este campo es requerido</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="field">
+                        <mat-form-field  appearance="outline" style="width: 100%;">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput placeholder="Ingrese contraseña" required type="password">
+                        <mat-error>este campo es requerido</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div style="text-align: center; width: 100%;">
+                        <button mat-raised-button class="btn-login">
+                            INICIAR SESION
+                            <mat-icon>arrow_forward</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+
+</div>
+
+<style>
+
+    .main{
+        /*display: grid;
+        place-items: center;*/
+        display: flex; justify-content: center;  align-items: center;
+
+        height: 100%;
+    }
+
+    mat-card{
+        width:310px;
+        height: 325px;
+        background-color: white;
+        margin-bottom: 100px;
+    }
+    .field{
+        width: 100%;
+        padding-bottom: 15px;
+
+    }
+    
+    .btn-login{
+        background-color: var( --txt-color-title2);
+        width: 100%;
+        color: white;
+        height: 40px;
+    }
+
+</style>

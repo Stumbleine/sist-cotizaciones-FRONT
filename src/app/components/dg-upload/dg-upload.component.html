@@ -1,4 +1,4 @@
-<div style="width:450px ;">
+<div style="width:450px ;" *ngIf="transform!='featureFile'">
     <h2>
         Insertar cotizacion escaneado 
     </h2>
@@ -15,19 +15,12 @@
                 </button>
                 <mat-hint>buscar archivo pdf.</mat-hint>
               </mat-form-field>
-
-            
         </div>
         <div style="text-align: end; width: 100%; margin-right: 15px;" >
                 <button mat-raised-button class="btn-raised" (click)="postFile(idQuot)"  [disabled]="disalbedInput()">GUARDAR</button>
                 <!--button mat-raised-button class="btn-raised" (click)="replace=true" *ngIf="replace==false && dataFile !=null " *ngIf="replace==true || dataFile==null">Si, reemplazar</button-->
         </div>
-
-
     </div>
-
-
-
 
         <div class="report-section" *ngIf="dataFile!=null" >
             <mat-list >
@@ -49,8 +42,34 @@
         <div class="report-section" style="text-align: center; padding: 10px;" *ngIf="dataFile==null">
             <p>No se han subido archivos aun.</p>
         </div>
-
 </div>
+<div style="width:450px ;" *ngIf="transform=='featureFile'">
+    <h2>
+        Especificaciones del articulo
+    </h2>
+    <div class="container" >
+        
+        <div style="width: 100%;" >
+            <p *ngIf="dataFile!=null && replace==false" >Ya se subio un archivo.</p>
+            <mat-form-field class="container__field" appearance="outline"  >
+                <ngx-mat-file-input  [accept]="'.pdf'" (change)="onFileSelected2($event)" 
+                #removableInput  formControlName="removablefile" placeholder="ingrese un pdf">
+                </ngx-mat-file-input>
+                <button mat-icon-button  matSuffix *ngIf="!removableInput.empty " (click)="removableInput.clear($event)">
+                  <mat-icon >clear</mat-icon>
+                </button>
+                <mat-hint>buscar archivo pdf.</mat-hint>
+              </mat-form-field>
+        </div>
+        <div style="text-align: end; width: 100%; margin-right: 15px;" >
+                <button mat-raised-button class="btn-raised" (click)="postFileFeature()"  >GUARDAR</button>
+        </div>
+    </div>
+</div>
+
+
+
+
 <style>
         .example-spacer {
         flex: 1 1 auto;

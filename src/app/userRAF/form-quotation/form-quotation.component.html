@@ -126,27 +126,7 @@
                                              [name]="element.idPriceQuotationDetail"  (change)="metodoFeatures()"> </td>
                                         <td mat-footer-cell *matFooterCellDef></td>
                                     </ng-container>
-                                           
-                                    <ng-container matColumnDef="upload" >
-                                        <th mat-header-cell *matHeaderCellDef style="min-width: 70px;   text-align: center;font-weight: bold;"> ADJUNTAR </th>
-                                        <td mat-cell *matCellDef="let element   " style="text-align: center; " > 
-                                            <mat-form-field style="width: 70px; font-size: 10px ;"  >
-                                            <ngx-mat-file-input  [accept]="'.pdf'" #removableInput  
-                                                    [name]="element.idPriceQuotationDetail" [ngModelOptions]="{standalone: true}">
-                                            </ngx-mat-file-input >
-                                            <button style="font-size: 16px;" mat-icon-button  matSuffix *ngIf="!removableInput.empty " (click)="removableInput.clear($event)">
-                                              <mat-icon >clear</mat-icon>
-                                            </button>
-                                            <button mat-icon-button  matSuffix *ngIf="removableInput.empty " >
-                                                <mat-icon style="font-size: 18px;" >upload_file</mat-icon>
-                                            </button>
-                                            <button mat-icon-button  matSuffix *ngIf="!removableInput.empty " >
-                                                <mat-icon style="font-size: 18px;" >done</mat-icon>
-                                            </button>
-                                        </mat-form-field>
-                                         </td>
-                                        <td mat-footer-cell *matFooterCellDef></td>
-                                    </ng-container>
+
 
                                     <ng-container matColumnDef="unitPrice" >
                                         <th mat-header-cell *matHeaderCellDef style="min-width: 110px; text-align: center;font-weight: bold;"> PRECIO UNITARIO </th>
