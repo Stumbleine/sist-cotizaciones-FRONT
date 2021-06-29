@@ -271,7 +271,10 @@ export class FormQuotationBusinessComponent implements OnInit {
   openRegister(){
     this.dialog.open(DgCompanyRegisterComponent,{  
       data:{
-      razonsocial:localStorage.getItem('Razon social')
+      //razonsocial:localStorage.getItem('Razon social'),
+        razonsocial:this.quotationForm.get('businessCompanyName').value,
+      idQuotation:this.idQuot,
+      quotation: this.quotationForm.value
       }
     });
   
