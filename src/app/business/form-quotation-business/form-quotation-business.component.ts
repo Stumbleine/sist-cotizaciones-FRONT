@@ -241,7 +241,7 @@ export class FormQuotationBusinessComponent implements OnInit {
         this.pressed=false;
         this.refresh();
 
-        //window.location.reload();
+        window.location.reload();
   }
   openDialog() {
     this.dialog.open(DialogValidationSendComponent);
@@ -314,28 +314,26 @@ export class FormQuotationBusinessComponent implements OnInit {
     if(this.listID.find(id=>id==idRowItem)){
       colorFile='#0a6cff'
     }else{colorFile='#7c7c7c;'}
-    console.log(colorFile)
     return colorFile;
   }
 
   postFilesFeatures(){
-    const featureFormData=new FormData();
-    
+    console.log("ARCHIVOS por item : =>>>>>",this.listFiles)
     for (let i=0;i<this.listFiles.length;i++){
+      var featureFormData:any=new FormData();
+
       featureFormData.append("idRow", this.listFiles[i].idRow);
       featureFormData.append("document",  this.listFiles[i].fileFeature);
-      console.log("formData",featureFormData);
       this.RequestService.post('http://localhost:8080/api/Document/uploadDetail',featureFormData).subscribe(
         {
           next:()=>{
             console.log('Archivo guardado'+ this.listFiles[i].idRow)
-            //this.snack.open('Archivo agregado exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
           },
           error:()=>{
             console.log('Archivo no guardado'+ this.listFiles[i].idRow)
-            //this.snack.open('error, el archivo no se subio.','CERRAR',{duration:5000})
           },
         })
     }
+
   }
 }
