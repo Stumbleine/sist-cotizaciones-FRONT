@@ -1,13 +1,13 @@
 <div class="card"> 
     <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;"> 
-        <h2>Registrar Rol</h2>
+        <h2>Registrar Unidad</h2>
     </div> 
 
         <div style="width: 100%;">
             <div class="field">
                 <mat-form-field  appearance="outline" style="width: 100%;">
-                <mat-label>Nombre de Rol</mat-label>
-                <input matInput placeholder="ingres nombre de rol" required type="text">
+                <mat-label>Nombre de unidad</mat-label>
+                <input matInput placeholder="ingres nombre de unidad" required type="text">
                 <mat-error >este campo es requerido</mat-error>
                 </mat-form-field>
             </div>
@@ -20,7 +20,7 @@
             </div>
             <div class="field">
                 <mat-form-field appearance="outline" style="width: 100%;">
-                    <mat-label>Privilegios</mat-label>
+                    <mat-label>Facultad</mat-label>
                     <mat-select [(value)]="facultieSelected">
                       <mat-option value="none">None</mat-option>
                       <mat-option value="1">Facultad de Ciencias y Tecnologia</mat-option>
@@ -62,4 +62,3 @@
         height: 40px;
     }
 </style>
-

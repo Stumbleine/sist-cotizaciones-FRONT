@@ -18,8 +18,8 @@
 
 
 <div class="report-section" *ngIf="code=='documentQuot'" >
-
-    <mat-list>
+    <p style="font-style: italic;" *ngIf="dataFile==null">no se subieron archivos</p>
+    <mat-list *ngIf="dataFile!=null">
         <div mat-subheader> archivos</div>
         <mat-list-item  style="display: flex; ">
             <button mat-icon-button (click)="getQuotPDF_blob()" >

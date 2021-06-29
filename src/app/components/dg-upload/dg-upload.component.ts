@@ -4,6 +4,11 @@ import {FilesComponent} from '../file/files.component'
 import {RequestService} from 'src/app/services/request.service'
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { FormBuilder,} from '@angular/forms';
+
+interface ItemFile {
+  idRow:string,
+  fileFeature:File
+}
 @Component({
   selector: 'app-dg-upload',
   templateUrl: './dg-upload.component.html',
@@ -24,6 +29,9 @@ export class DgUploadComponent implements OnInit {
   idRow:any=this.data.idRowItem;
   code:string="uploader";
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
   ngOnInit(): void {
     this.getFiles();
   }
@@ -48,7 +56,6 @@ export class DgUploadComponent implements OnInit {
   fileName = '';
   formData = new FormData();
   onFileSelected(event) {
-
     const file:File = event.target.files[0];
     //console.log(file, event);
     if (file) {
@@ -57,10 +64,9 @@ export class DgUploadComponent implements OnInit {
       formD.append("document", file);
       //console.log("formData",formD);
       this.formData=formD;
-
      }
-
   }
+
   quotationForm = this.formBuilder.group({
     removablefile:['',],})
   postFile(id){
@@ -76,11 +82,9 @@ export class DgUploadComponent implements OnInit {
           this.snack.open('error, el archivo no se subio.','CERRAR',{duration:5000})
         },
       })
-      
-      
     }
 
-      replace:boolean=false;
+    replace:boolean=false;
     disalbedInput(){
       let disabled:boolean=false;
       if(this.dataFile!=null){
@@ -91,8 +95,8 @@ export class DgUploadComponent implements OnInit {
       }
       return disabled;
     }
+
     deleteDoc(){
-      
       this.RequestService.delete('http://localhost:8080/api/Document/delete/'+this.idQuot).subscribe(
       {
         next:()=>{
@@ -107,38 +111,57 @@ export class DgUploadComponent implements OnInit {
      // this.getFiles();
       //this.dialogRef.close();
      // this.reopen.emit(true);
-     setTimeout(() => {
-      this.ngOnInit()
-
-    }, 3000);
-
+     setTimeout(() => {this.ngOnInit()}, 3000);
     }
-    featureFormData=new FormData();
+
+    file:File;
+    eventFileItem(event){
+      this.file=event.target.files[0];
+    }
+
+/*
+    json=localStorage.getItem('listFiles')
+    listFiles:ItemFile[]= JSON.parse(this.json) || [];
+
   onFileSelected2(event){
-      
+    
     const file:File = event.target.files[0];
     console.log(file, event);
+    let itemFile:ItemFile={
+      idRow:this.idRow,
+      fileFeature:file
+    }
     if (file) {
-      this.fileName = file.name;
-      this.featureFormData.append("idRow", this.idRow);
-      this.featureFormData.append("document", file);
-      console.log("formData",this.featureFormData);
+      this.listFiles.push(itemFile);
+      const jsonData = JSON.stringify(this.listFiles);
+      localStorage.setItem('listFiles', jsonData);
     }
+    let verify=localStorage.getItem('listFiles');
+   
+    console.log('listVarible',this.listFiles);
+    console.log('localstorageFILES',verify);
   }
-    postFileFeature(){
-      console.log("enviando archivo",this.idRow)
-      this.RequestService.post('http://localhost:8080/api/Document/uploadDetail',this.featureFormData).subscribe(
-      {
-        next:()=>{
-          console.log('Archivo guardado')
-          this.snack.open('Archivo agregado exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
-            //window.location.reload();
-        },
-        error:()=>{
-          console.log('Archivo no guardado')
-          this.snack.open('error, el archivo no se subio.','CERRAR',{duration:5000})
-        },
-      })
-    }
+
+
+    postFilesFeatures(){
+      const featureFormData=new FormData();
+      
+      for (let i=0;i<this.listFiles.length;i++){
+        featureFormData.append("idRow", this.listFiles[i].idRow);
+        featureFormData.append("document",  this.listFiles[i].fileFeature);
+        console.log("formData",featureFormData);
+        this.RequestService.post('http://localhost:8080/api/Document/uploadDetail',featureFormData).subscribe(
+          {
+            next:()=>{
+              console.log('Archivo guardado'+ this.listFiles[i].idRow)
+              this.snack.open('Archivo agregado exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
+            },
+            error:()=>{
+              console.log('Archivo no guardado'+ this.listFiles[i].idRow)
+              this.snack.open('error, el archivo no se subio.','CERRAR',{duration:5000})
+            },
+          })
+      }
+    }*/
     
 }

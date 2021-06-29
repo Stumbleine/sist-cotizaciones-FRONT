@@ -32,7 +32,7 @@ export class QuotationContentComponent implements OnInit {
   business:any;
 
   public items:Items[]=[];
-  displayedColumns: string[] = ['index', 'quantity', 'unit','description', 'features','unitPrice','totalPrice'];
+  displayedColumns: string[] = ['index', 'quantity', 'unit','description', 'features','archivo','unitPrice','totalPrice'];
   dataSource =  new MatTableDataSource<Items>([]);
   columnas=[
     {titulo:"CANTIDAD" ,name: "quantity"},
@@ -70,4 +70,16 @@ export class QuotationContentComponent implements OnInit {
         }
     return color;
   }
+
+  getItemAdjunto(idRow){
+    this.RequestService.getFile('http://localhost:8080/api/Document/blob/ItemDocument/'+idRow)
+    .subscribe(blob=>{
+      let pdf = new Blob([blob],{type: 'application/pdf'});
+      let fileData = new File([pdf], "name", {type: 'application/pdf'});
+      let fileURL = window.URL.createObjectURL(fileData);
+      window.open(fileURL,"_blank")
+      //saveAs(blob, data?.nameDocumenQuotaion);
+      })
+  }
 }
+

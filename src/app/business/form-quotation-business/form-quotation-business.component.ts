@@ -31,7 +31,10 @@ export interface Quotation{
     priceQuotationDetail: Item[],
     businessCompanyName:string,
 }
-
+export interface ItemFile {
+  idRow:string,
+  fileFeature:File
+}
 @Component({
   selector: 'app-form-quotation-business',
   templateUrl: './form-quotation-business.component.html',
@@ -178,11 +181,13 @@ export class FormQuotationBusinessComponent implements OnInit {
          this.RequestService.put('http://localhost:8080/api/quotation/updateQuotationAddingBusiness/'+this.idQuot,{"idBusiness":this.business.idBusiness})
             .subscribe( respuesta =>{
               this.idLastBusiness=respuesta;
+              this.postFilesFeatures();
               console.log('actualizando idBusiness!!');
               
               
             })
        })
+       
        formDirective1.resetForm();
        this.quotationForm.reset();
        this.quotationForm.reset();
@@ -196,6 +201,7 @@ export class FormQuotationBusinessComponent implements OnInit {
        this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
        this.pressed=false;
        this.refresh();
+
        window.location.reload();
    /* }
    else{
@@ -206,6 +212,7 @@ export class FormQuotationBusinessComponent implements OnInit {
       
 }
   saveQuotationSinBusiness(quotation,formDirective1: FormGroupDirective){
+    
     quotation.priceQuotationDetail.map(detail=>{
       if(detail.unitPrice == null){
         quotation.state='INCOMPLETO'
@@ -215,6 +222,7 @@ export class FormQuotationBusinessComponent implements OnInit {
     this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
               .subscribe( respuesta =>{
                 console.log('Solicitud enviada!!');
+                this.postFilesFeatures(); 
                 this.openSnackBar();
                 
               })
@@ -231,8 +239,9 @@ export class FormQuotationBusinessComponent implements OnInit {
         this.priceQuotationDetail=[];
         this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
         this.pressed=false;
-        this.refresh(); 
-        window.location.reload();
+        this.refresh();
+
+        //window.location.reload();
   }
   openDialog() {
     this.dialog.open(DialogValidationSendComponent);
@@ -276,15 +285,57 @@ export class FormQuotationBusinessComponent implements OnInit {
       }
     });
   }
+//archivos por item
+  fileItem:File;
+  listFiles:ItemFile[]=[];
+  listID:any=[];
   openUploader(idRow){
-    console.log(idRow,"IDE DE LA FILA Pasad")
-    this.dialog.open(DgUploadComponent,{
+
+    const dialogRef=this.dialog.open(DgUploadComponent,{
       data:{
         idRowItem:idRow,
         transform:'featureFile'
-
       }
     });
+    dialogRef.afterClosed().subscribe(response=>{
+      this.fileItem=response;
+      let itemFile:ItemFile={
+        idRow:idRow,
+        fileFeature:this.fileItem
+      }
+      this.listFiles.push(itemFile);
+      if(response){
+        this.listID.push(idRow);
+      }
+    })
+  }
+  findIdfile(idRowItem){
+    let colorFile:string;
+    if(this.listID.find(id=>id==idRowItem)){
+      colorFile='#0a6cff'
+    }else{colorFile='#7c7c7c;'}
+    console.log(colorFile)
+    return colorFile;
   }
 
+  postFilesFeatures(){
+    const featureFormData=new FormData();
+    
+    for (let i=0;i<this.listFiles.length;i++){
+      featureFormData.append("idRow", this.listFiles[i].idRow);
+      featureFormData.append("document",  this.listFiles[i].fileFeature);
+      console.log("formData",featureFormData);
+      this.RequestService.post('http://localhost:8080/api/Document/uploadDetail',featureFormData).subscribe(
+        {
+          next:()=>{
+            console.log('Archivo guardado'+ this.listFiles[i].idRow)
+            //this.snack.open('Archivo agregado exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
+          },
+          error:()=>{
+            console.log('Archivo no guardado'+ this.listFiles[i].idRow)
+            //this.snack.open('error, el archivo no se subio.','CERRAR',{duration:5000})
+          },
+        })
+    }
+  }
 }

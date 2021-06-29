@@ -1,1 +1,94 @@
-<p>register-user works!</p>
+<div class="card"> 
+    <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;"> 
+        <h2>Registrar Usuario</h2>
+    </div> 
+
+        <div style="width: 100%;">
+            <div class="field">
+                <mat-form-field  appearance="outline" style="width: 100%;">
+                <mat-label>Nombres</mat-label>
+                <input matInput placeholder="ingres nombre de rol" required type="text">
+                <mat-error >este campo es requerido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="field">
+                <mat-form-field  appearance="outline" style="width: 100%;">
+                <mat-label>Correo</mat-label>
+                <input matInput placeholder="ingrese una description" required type="password">
+                <mat-error>este campo es requerido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="field">
+                <mat-form-field  appearance="outline" style="width: 100%;">
+                <mat-label>Contraseña</mat-label>
+                <input matInput placeholder="ingrese una description" required type="password">
+                <mat-error>este campo es requerido</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="field" style="padding-bottom: 0;">
+                <mat-form-field  appearance="outline" style="width: 100%;">
+                <mat-label>Confirmar contraseña</mat-label>
+                <input matInput placeholder="ingrese una description" required type="password">
+                <mat-error>este campo es requerido</mat-error>
+                </mat-form-field>
+            </div>
+            <mat-divider style="padding-bottom: 15px;"></mat-divider>
+            <div class="field" >
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Asignar Rol</mat-label>
+                    <mat-select [(value)]="facultieSelected">
+                      <mat-option value="none">None</mat-option>
+                      <mat-option value="1">Facultad de Ciencias y Tecnologia</mat-option>
+                      <mat-option value="2">Facultad de Arquitectura</mat-option>
+                      <mat-option value="3">Facultad de Humanidades y Ciencias de Educación</mat-option>
+                      <mat-option value="4">Facultad de Arquitectura y Ciencas del Hábitat</mat-option>
+                      <mat-option value="5">Facultad de Ciencias Economicas</mat-option>
+                      <mat-option value="6">Facultad de Ciencias Juridicas y Politicas</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <div class="field">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Unidad</mat-label>
+                    <mat-select [(value)]="facultieSelected">
+                      <mat-option value="none">None</mat-option>
+                      <mat-option value="1">Facultad de Ciencias y Tecnologia</mat-option>
+                      <mat-option value="2">Facultad de Arquitectura</mat-option>
+                      <mat-option value="3">Facultad de Humanidades y Ciencias de Educación</mat-option>
+                      <mat-option value="4">Facultad de Arquitectura y Ciencas del Hábitat</mat-option>
+                      <mat-option value="5">Facultad de Ciencias Economicas</mat-option>
+                      <mat-option value="6">Facultad de Ciencias Juridicas y Politicas</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <div style="text-align: center; width: 100%;">
+                <button mat-raised-button class="btn-login">
+                    REGISTRAR
+                </button>
+            </div>
+        </div>
+
+</div>
+
+
+<style>
+    .card{
+        width:310px;
+        height: 640px;
+        background-color: white;
+
+    }
+    .field{
+        width: 100%;
+        padding-bottom: 12px;
+
+    }
+    
+    .btn-login{
+        background-color: var( --txt-color-title2);
+        width: 100%;
+        color: white;
+        height: 40px;
+    }
+</style>
+

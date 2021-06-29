@@ -52,7 +52,7 @@
         <div style="width: 100%;" >
             <p *ngIf="dataFile!=null && replace==false" >Ya se subio un archivo.</p>
             <mat-form-field class="container__field" appearance="outline"  >
-                <ngx-mat-file-input  [accept]="'.pdf'" (change)="onFileSelected2($event)" 
+                <ngx-mat-file-input  [accept]="'.pdf'" (change)="eventFileItem($event)" 
                 #removableInput  formControlName="removablefile" placeholder="ingrese un pdf">
                 </ngx-mat-file-input>
                 <button mat-icon-button  matSuffix *ngIf="!removableInput.empty " (click)="removableInput.clear($event)">
@@ -62,7 +62,7 @@
               </mat-form-field>
         </div>
         <div style="text-align: end; width: 100%; margin-right: 15px;" >
-                <button mat-raised-button class="btn-raised" (click)="postFileFeature()"  >GUARDAR</button>
+                <button mat-raised-button class="btn-raised" [mat-dialog-close]="file"  >GUARDAR</button>
         </div>
     </div>
 </div>

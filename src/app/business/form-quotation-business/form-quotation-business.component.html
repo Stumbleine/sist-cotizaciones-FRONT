@@ -110,7 +110,7 @@
  
                                    
                                     <button mat-icon-button type="button" matSuffix  (click)="openUploader(element.idPriceQuotationDetail)">
-                                        <mat-icon style="color: #7c7c7c;">upload_file</mat-icon>
+                                        <mat-icon [ngStyle]="{'color':findIdfile(element.idPriceQuotationDetail)}">upload_file</mat-icon>
                                     </button>
 
                                  </td>

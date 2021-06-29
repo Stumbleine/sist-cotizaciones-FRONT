@@ -10,7 +10,7 @@
                     <div class="card--header">
                         <mat-card-title style="margin-top: 5px;">Roles/Privilegios</mat-card-title>
     
-                        <button class="btn-add" mat-raised-button ><mat-icon>add</mat-icon> ROL</button>
+                        <button class="btn-add" mat-raised-button (click)="openRegisterRole()"><mat-icon>add</mat-icon> ROL</button>
                     </div>
                     <mat-divider></mat-divider>
                 </div>
@@ -23,7 +23,7 @@
                     <div class="card--header">
                         <mat-card-title style="margin-top: 5px;" >Unidades</mat-card-title>
     
-                        <button class="btn-add" mat-raised-button ><mat-icon>add</mat-icon> UNIDAD</button>
+                        <button class="btn-add" mat-raised-button (click)="openRegisterUnidad()"><mat-icon>add</mat-icon> UNIDAD</button>
                     </div>
                     <mat-divider></mat-divider>
                 </div>
@@ -47,7 +47,7 @@
                     <div class="card--header">
                         <mat-card-title style="margin-top: 5px;">Usuarios</mat-card-title>
     
-                        <button class="btn-add" mat-raised-button ><mat-icon>add</mat-icon>USUARIO</button>
+                        <button class="btn-add" mat-raised-button (click)="openRegisterUser()"><mat-icon>add</mat-icon>USUARIO</button>
                     </div>
                     <mat-divider></mat-divider>
                     <div style="text-align: end;">

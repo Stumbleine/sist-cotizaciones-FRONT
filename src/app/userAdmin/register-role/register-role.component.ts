@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class RegisterRoleComponent implements OnInit {
 
   constructor() { }
-
+  facultieSelected="none"
   ngOnInit(): void {
   }
 
