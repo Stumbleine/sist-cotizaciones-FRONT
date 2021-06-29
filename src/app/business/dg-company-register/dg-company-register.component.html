@@ -10,7 +10,7 @@
         <ng-template #showInput >
             <div style="width: 80%;">
                 <mat-form-field  appearance="outline" style="width: 80%;margin-left: 15px;">
-                    <input matInput placeholder="Ingrese el nombre de su empresa"  type="text" formControlName='nameBusiness' required>
+                    <input matInput placeholder="Ingrese el nombre de su empresa"  type="text" formControlName='nameBusiness' required >
                 <mat-error class="form__validation--size">campo Nombre es requerido</mat-error>
                 </mat-form-field>
             </div>
@@ -60,7 +60,7 @@
                 <mat-form-field  appearance="outline">
                     <mat-label>e-mail</mat-label>
                     <input matInput placeholder="Ingrese coreo electronico" type="email" formControlName='eMail' required>
-                <mat-error class="form__validation--size">campo e-mail es requerido</mat-error>
+                <mat-error *ngIf="isValidField('eMail')" class="form__validation--size">{{getErrorMessage('eMail')}}</mat-error>
                 </mat-form-field>
             </div>
             

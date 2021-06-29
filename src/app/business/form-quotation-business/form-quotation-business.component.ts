@@ -91,7 +91,13 @@ export class FormQuotationBusinessComponent implements OnInit {
   }
   public items:Item[]=[];
   public idQuot:any;
+  public lastQuotation:any;
   ngOnInit(): void {
+    this.RequestService.disparadorDataQuotation.subscribe(data=>{this.lastQuotation=data})
+    /* if(this.lastQuotation != null){
+      this.loadDataQuotation();
+      this.updateDataQuotation();
+    } */
     this.idQuot= this.rutaActiva.snapshot.params.idQ;
     this.loadDataQuotation();
     
@@ -269,6 +275,7 @@ export class FormQuotationBusinessComponent implements OnInit {
     localStorage.setItem('Razon social', jsonData);
   }
   openRegister(){
+    this.quotationForm.get('priceQuotationDetail').setValue(this.priceQuotationDetail);
     this.dialog.open(DgCompanyRegisterComponent,{  
       data:{
       //razonsocial:localStorage.getItem('Razon social'),
@@ -278,5 +285,33 @@ export class FormQuotationBusinessComponent implements OnInit {
       }
     });
   
+  }
+  loadDataQuotationRegister(){
+    this.RequestService.get('http://localhost:8080/api/quotation/getById/'+this.idQuot)
+    .subscribe(r=>{
+      this.load=true;
+     // console.log(r);
+      this.dataQuotation = r;
+      let state=this.dataQuotation.state
+      if(state == 'SIN COTIZAR'){
+        this.business=this.dataQuotation.business
+       // console.log("EMPRESA ->",this.business)
+        this.priceQuotationDetail=this.lastQuotation.data.priceQuotationDetail
+        this.lastQuotation.data.businessCompanyName=""
+        this.quotationForm.setValue(this.lastQuotation.data)
+        //console.log(typeof(this.priceQuotationDetail))
+        }else if( state == 'COTIZADO' ){
+          this.router.navigate(['/response-form']);
+            }else if(state == 'INCOMPLETO'){
+              this.router.navigate(['/response-form']);
+              }else if(state == 'EXPIRADO'){
+                this.router.navigate(['/error']);
+      }
+      //this.business=this.dataQuotation.business
+    })
+  }
+  updateDataQuotation(){
+    this.lastQuotation.data.total= this.getTotalCost();
+    this.loadDataQuotationRegister()
   }
 }

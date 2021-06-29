@@ -6,6 +6,7 @@ import{HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 })
 export class RequestService {
   @Output() disparadorChart: EventEmitter<any>=new EventEmitter();
+  @Output() disparadorDataQuotation: EventEmitter<any>=new EventEmitter();
   constructor(
     private http: HttpClient,
   ) { }

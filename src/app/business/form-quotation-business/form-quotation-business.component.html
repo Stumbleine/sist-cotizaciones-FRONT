@@ -181,7 +181,7 @@
                       </mat-form-field>
                 </div>
                 <mat-divider></mat-divider>
-                <div style=" text-align: right;"*ngIf="thereIsBusiness()">
+                <div style=" text-align: right;"*ngIf="thereIsBusiness() && lastQuotation==null">
                     <div style="text-align: center; ">
                         <div style="display: flex ">
                             <div style="width: 87%; text-align: end;"><p >¿Desea registrar su empresa?</p></div>
@@ -189,6 +189,9 @@
                         </div>
                     </div>
                        
+                </div>
+                <div style=" text-align: right;"*ngIf="lastQuotation!=null && thereIsBusiness()">
+                    <button mat-raised-button class="btn-raised" style="margin-right: 25px; font-size: 15px;" type="button"[click]="updateDataQuotation()">ACTUALIZAR DATOS</button>
                 </div>
                 <div  class="form__buttons">
                     <button mat-button style="color: #ff4848;margin-right: 15px;" (click)="openDialogCancel();" type="button"> CANCELAR</button>
