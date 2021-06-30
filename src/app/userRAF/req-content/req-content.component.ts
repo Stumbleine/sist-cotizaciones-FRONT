@@ -94,7 +94,7 @@ export class ReqContentComponent implements OnInit {
   });
   
 
-  public dateExpiration:any=null;
+  public dateExpiration:any;
   public dateEdit:boolean=false;
   public quotationsCard=null;
   validDate(status){
@@ -250,7 +250,7 @@ export class ReqContentComponent implements OnInit {
     .subscribe(r=>{
       console.log("Fecha actualizada !!!!");
       this.dateEdit=false;
-      this.dateExpiration=this.dateEdit;
+      this.dateExpiration=this.dateExpired;
       //localStorage.setItem('dateExpiration',this.dateExpired)
       //this.dateExpiration=localStorage.getItem('dateExpiration')
       //console.log(this.dateExpiration)
