@@ -302,7 +302,7 @@ export class FormQuotationComponent implements OnInit {
       pdf.add(new Txt('ADQUISICIONES').margin([20,0]).bold().fontSize(13).end);
       pdf.add(new Txt('Teléfono: 4250660 ; 4232198').margin([20,0]).fontSize(10).end);
       pdf.add(new Txt('Fax: 4231765 ; Casilla 992').margin([20,0]).fontSize(10).end);
-      pdf.add(new Txt('Cochabmaba - Bolivia').margin([20,0]).fontSize(10).end);
+      pdf.add(new Txt('Cochabamba - Bolivia').margin([20,0]).fontSize(10).end);
 
       pdf.add(new Txt('SOLICITUD DE COTIZACIÓN').bold().alignment('center').fontSize(13).end);
       pdf.add(new Txt('Moneda (Bs)').bold().alignment('center').fontSize(12).end);
@@ -325,10 +325,32 @@ export class FormQuotationComponent implements OnInit {
       pdf.create().print();
     
     }else{
+      pdf.add(new Txt('UNIVERSIDAD MAYOR DE SAN SIMÓN').margin([20,0]).bold().fontSize(13).end);
+      pdf.add(new Txt('ADQUISICIONES').margin([20,0]).bold().fontSize(13).end);
+      pdf.add(new Txt('Teléfono: 4250660 ; 4232198').margin([20,0]).fontSize(10).end);
+      pdf.add(new Txt('Fax: 4231765 ; Casilla 992').margin([20,0]).fontSize(10).end);
+      pdf.add(new Txt('Cochabamba - Bolivia').margin([20,0]).fontSize(10).end);
 
-      pdf.add(pdf.ln(10));
+      pdf.add(new Txt('SOLICITUD DE COTIZACIÓN').bold().alignment('center').fontSize(13).end);
+      pdf.add(new Txt('Moneda (Bs)').bold().alignment('center').fontSize(12).end);
+      pdf.add(pdf.ln(1));
+      pdf.add(new Txt('Razon Social: '+this.business.name).margin([20,10]).end);
+      pdf.add(new Txt('NIT: '+this.business.NIT).margin([20,10]).end);
+      pdf.add(new Txt('Fecha: ............./............./............./'+this.business.name).margin([20,10]).end);
+      pdf.add(new Txt('Agradecemos a Uds. cotizarnos, los articulos que a continuacion se  detallan. Luego este formulario debe devolverse en sobre cerrado debidamente FIRMADO y SELLADO (favor especificar Marca, Modelo, Industria)')
+         .margin([30,0]).fontSize(9).end);
+
+
       pdf.add(this.createTableWith(this.priceQuotationDetail))
-
+      pdf.add(new Txt('Tiempo de entrega (dias): .....................................................    Validez de oferta:   ............./............./............./').margin([20,5]).end);
+      pdf.add(new Txt('Tiempo de garantia (meses): ................................................ ').margin([20,5]).end);
+      //pdf.add(new Txt('Validez de oferta:   ............./............./............./').margin([20,5]).end);
+      pdf.add(new Txt('Forma de pago: ').margin([20,5]).end);
+      pdf.add(new Txt('(  ) A Crédito').margin([120,5]).end)
+      pdf.add(new Txt('(  )  Al Contado').margin([120,5]).end)
+      pdf.add(new Txt('(  )  Al Contado y a Crédito').margin([120,5]).end)
+      pdf.add(new Txt('Comentarios:').margin([20,10]).end)
+      pdf.add(new Canvas([new Rect([30,5],[540,70]).color('white').lineColor('#c2c2c2').round(5).end]).end)
       pdf.create().print();
 
 }
