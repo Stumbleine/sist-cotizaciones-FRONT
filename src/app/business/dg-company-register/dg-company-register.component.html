@@ -1,52 +1,96 @@
 
-<div>
+<form  [formGroup]="registerBusiness" #formDirective="ngForm" (ngSubmit)="saveBusiness(registerBusiness.value,formDirective)">
     <div style="text-align: center; width: 100%;">
         <h2 style="color: var( --txt-color-subt);">REGISTRO DE EMPRESA</h2>
     </div>
-    <h2 style=" display: flex; color: var( --txt-color-subt);">Nombre de la empresa: 
-        <p style="font-weight: normal; margin-left: 15px;">{{razonSocial}}</p></h2>
+    <div style=" display: flex;">
+        <h2 style="width: 20%; color: var( --txt-color-subt);">Nombre de la empresa: </h2>
+        <h2 *ngIf="razonSocial!='';else showInput" style="font-weight: lighter; margin-left: 15px;">{{razonSocial}}</h2>
+        
+        <ng-template #showInput >
+            <div style="width: 80%;">
+                <mat-form-field  appearance="outline" style="width: 80%;margin-left: 15px;">
+                    <input matInput placeholder="Ingrese el nombre de su empresa"  type="text" formControlName='nameBusiness' required >
+                <mat-error class="form__validation--size">campo Nombre es requerido</mat-error>
+                </mat-form-field>
+            </div>
+            
+        </ng-template>
+    </div>
+    
+        
     <div class="form-base__s1" >
         <div class="form-base__s1--fds"  style=" width: 100%;">
                 
             <div>
                 <mat-form-field  appearance="outline">
-                    <mat-label>Nro de NIT</mat-label>
-                    <input matInput placeholder="Ingrese nro de NIT"  type="text">
-                <mat-error class="form__validation--size">campo NIT es requerido</mat-error>
+                    <mat-label>Descripción</mat-label>
+                    <input matInput placeholder="Ingrese descripción de su empresa"  type="text" formControlName='description' required>
+                <mat-error class="form__validation--size">campo descripción es requerido</mat-error>
                 </mat-form-field>
-            </div>
+            </div>  
             <div  >                           
                 <mat-form-field  appearance="outline">
-                    <mat-label>Telefono</mat-label>
-                    <input matInput placeholder="Ingrese Validez de oferta"  type="text"> 
-                <mat-error class="form__validation--size">campo telefono es requerido</mat-error>
+                    <mat-label>Área</mat-label>
+                    <input matInput placeholder="Ingrese nombre del rubro/Area"  type="text" 
+                    formControlName='nameArea' 
+                    required
+                    [matAutocomplete]="auto"> 
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error class="form__validation--size">campo área es requerido</mat-error>
                 </mat-form-field>
-            </div>
+            </div>  
+            
+            
         </div>
         <div class="form-base__s1--fds"  style=" width: 100%;">
             <div>
                 <mat-form-field  appearance="outline">
-                    <mat-label>e-mail</mat-label>
-                    <input matInput placeholder="Ingrese coreo electronico" type="email">
-                <mat-error class="form__validation--size">campo e-mail es requerido</mat-error>
+                    <mat-label>Nro de NIT</mat-label>
+                    <input matInput placeholder="Ingrese nro de NIT"   formControlName='nit' type="number"
+                    min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                <mat-error class="form__validation--size">campo NIT es requerido</mat-error>
                 </mat-form-field>
             </div>
+            <div>
+                <mat-form-field  appearance="outline">
+                    <mat-label>e-mail</mat-label>
+                    <input matInput placeholder="Ingrese coreo electronico" type="email" formControlName='eMail' required>
+                <mat-error *ngIf="isValidField('eMail')" class="form__validation--size">{{getErrorMessage('eMail')}}</mat-error>
+                </mat-form-field>
+            </div>
+            
+        </div>
+        <div class="form-base__s1--fds"  style=" width: 100%;">
             <div  >                           
                 <mat-form-field  appearance="outline">
                     <mat-label>Dirección</mat-label>
-                    <input matInput placeholder="Ingrese Validez de oferta"  type="text"> 
-                <mat-error class="form__validation--size">campo direccón es requerido</mat-error>
+                    <input matInput placeholder="Ingrese direccón"  type="text" formControlName='address'> 
+                <mat-error class="form__validation--size">campo dirección es requerido</mat-error>
                 </mat-form-field>
             </div>
+            <div >                           
+                <mat-form-field  appearance="outline">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput placeholder="Ingrese número de Teléfono"  formControlName='phone' required type="number"
+                    min="1" pattern="^[0-9]+" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
+                <mat-error class="form__validation--size">campo telefono es requerido</mat-error>
+                </mat-form-field>
+            </div>
+           
         </div>
     </div>
     <div  class="form-actions">
-        <button mat-button style="color: #ff4848;margin-right: 15px;"  type="button"> CANCELAR</button>
-        <button mat-raised-button class="btn-raised" style="margin-right: 25px; font-size: 17px;" type="submit" >
+        <button mat-button mat-dialog-close style="color: #ff4848;margin-right: 15px;"  type="button"> CANCELAR</button>
+        <button mat-raised-button class="btn-raised" style="margin-right: 25px; font-size: 17px;" type="submit"  [disabled]="registerBusiness.invalid">
             REGISTRAR
         </button>
     </div>
-</div>
+</form>
 
 <style>
     .form-base__s1{

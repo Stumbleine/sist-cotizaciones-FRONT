@@ -392,7 +392,7 @@ export class ReqContentComponent implements OnInit {
 
     if(status=='Cotizando' && this.quotationsCompleted.length>=2){
 
-      if(this.chartReceived.length==0){
+      if(this.chartReceived?.length==0){
         disabled=true;
       }
     }else{
