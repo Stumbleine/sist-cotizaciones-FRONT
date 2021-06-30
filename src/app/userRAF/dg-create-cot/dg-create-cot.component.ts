@@ -5,6 +5,9 @@ import {RequestService} from '../../services/request.service';
 import {Router} from '@angular/router'
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatListOption } from '@angular/material/list';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 @Component({
   selector: 'app-dg-create-cot',
   templateUrl: './dg-create-cot.component.html',
@@ -19,12 +22,15 @@ export class DgCreateCotComponent implements OnInit {
       public RequestService: RequestService,private route:Router, private snack:MatSnackBar
       ) {}
 
-  //buscador de empresas
-  
+  //variables buscador de empresas
+  searchInput = new FormControl();
+  options: any;
+  filteredOptions: Observable<string[]>;
+  public notCompanies=false;
 
   public Companies:any;
   //variables creacion de cotizacion
-  public nameArea:string="Inmuebles"
+  public nameArea:string;
   public listBusinessSelected:any[]=[]
   public quotationForm:any;
   idR=this.data.idSR;
@@ -35,14 +41,62 @@ export class DgCreateCotComponent implements OnInit {
   }
   ngOnInit(): void {
     console.log("Este es el id de la solicitud:", this.quotationForm);
-    this.getCompanies();
+    this.getAllCompanies();
+    this.getAllAreas()
+    
   }
   getCompanies(){
-    this.RequestService.get('http://localhost:8080/api/area/getBusinessesByAreaName/'+this.nameArea).subscribe(r=>{
+    this.notCompanies=false;
+    this.nameArea=this.searchInput.value.toLowerCase()
+    this.nameArea=this.nameArea.charAt(0).toUpperCase()+this.nameArea.slice(1);
+    console.log(this.nameArea)
+    if(this.nameArea==null|| this.nameArea==""){
+      this.getAllCompanies()
+    }else{
+      this.RequestService.get('http://localhost:8080/api/area/getBusinessesByAreaName/'+this.nameArea).subscribe(r=>{
       this.Companies=r;
+      this.sortBusiness();
+      if(this.Companies.length==0){
+        this.notCompanies=true;
+      } 
+    })
+    }
+    
+  }
+  getAllCompanies(){
+    this.notCompanies=false
+    this.RequestService.get('http://localhost:8080/api/area/getAllBusiness/').subscribe(r=>{
+    this.Companies=r;
+     this.sortBusiness();
     })
   }
-  
+  getAllAreas(){
+    this.RequestService.get('http://localhost:8080/api/area/getAllNameArea/').subscribe(r=>{
+      this.options=r;
+      this.filteredOptions = this.searchInput.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this.filter(value))
+    );
+    })
+  }
+  filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  sortBusiness(){
+    this.Companies.sort((a,b)=>{
+      const nameA=a.name.toLowerCase();
+      const nameB=b.name.toLowerCase();
+      if(nameA<nameB){
+       return -1
+      }if(nameA>nameB){
+       return 1
+      }
+      return 0
+    })
+  }
   getListBusiness(options: MatListOption[]) {
     this.listBusinessSelected=options.map(o=> o.value);
     console.log(this.listBusinessSelected)
