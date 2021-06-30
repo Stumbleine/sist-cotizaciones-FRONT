@@ -2,6 +2,8 @@ import { Component, OnInit,Input } from '@angular/core';
 import { Router } from '@angular/router';
 import {RequestService} from '../../services/request.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import { DgConfirmDeleteComponent } from 'src/app/components/dg-confirm-delete/dg-confirm-delete.component';
 @Component({
   selector: 'app-qoatation-card',
   templateUrl: './qoatation-card.component.html',
@@ -9,8 +11,11 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class QoatationCardComponent implements OnInit {
 
-  constructor(private route:Router,  public RequestService: RequestService,
-    private snack:MatSnackBar) { }
+  constructor(
+    private route:Router,  
+    public RequestService: RequestService,
+    private snack:MatSnackBar,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getFiles();
@@ -47,9 +52,7 @@ export class QoatationCardComponent implements OnInit {
       }
     return color;
   }
-  actionDelete(){
-    
-  }
+
   dataFile:any;
   getFiles(){
     this.RequestService.get('http://localhost:8080/api/Document/Quotation/'+this.quot.idPriceQuotation)
@@ -58,7 +61,15 @@ export class QoatationCardComponent implements OnInit {
         console.log('FILE :', this.dataFile);
     })
   }
-
+  actionDelete(idQuot){
+    const dialogRef=this.dialog.open(DgConfirmDeleteComponent,
+      {
+        data:{
+          idQuot:idQuot,
+          nameCompany:this.quot.nameBussiness,
+        }
+      })
+  }/*
   deleteQuot(idQuot){
 
     if(this.dataFile!=null){
@@ -97,5 +108,5 @@ export class QoatationCardComponent implements OnInit {
       },
     })
 
-  }
+  }*/
 }

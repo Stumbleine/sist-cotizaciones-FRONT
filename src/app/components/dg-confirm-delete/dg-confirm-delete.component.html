@@ -1,0 +1,10 @@
+<div>
+    <div>
+        <h2>Esta seguro de eliminar la cotizacion {{nameBussines}}</h2>
+        <p>Se eliminaran toda la informacion y documentos adjuntos</p>
+    </div>
+    <div mat-dialog-actions style="text-align: end;">
+    <button mat-dialog-close mat-button style="color: var(--btn-color-pri);margin-right: 5px;">CANCELAR</button>
+      <button mat-raised-button class="raised" (click)="deleteQuot(idQuot)">ACEPTAR</button>
+    </div>
+</div>

@@ -99,7 +99,7 @@ place-items: center;">
                     </mat-expansion-panel-header>
 
                         <form class="quotations-section" [formGroup]="dateValidation">
-                            <div style="text-align: center; padding: 15px;" *ngIf="dateExpiration==null || dateEdit==true">
+                            <div style="text-align: center; padding: 15px;" *ngIf="dateExpiration==null ">
                                 <p>Es necesario elegir una fecha de vencimiento para los formularios.</p>
                                 <div style="display: inline-flex; align-items: center;">
                                     <mat-form-field  appearance="outline">
@@ -112,7 +112,7 @@ place-items: center;">
                                     </div>
                                 </div>
                             </div>  
-                            <div style=" display: flex;  justify-content: center;" *ngIf="dateExpiration!=null && dateEdit==false">
+                            <div style=" display: flex;  justify-content: center;" *ngIf="dateExpiration!=null ">
                                 <h2 style="color: #0a6cff; font-size: 17px; display: flex; margin-top: 5px;" >
                                     Fecha de expiración de los formularios:  <p style="font-style: italic;"> {{dateExpiration}}</p>
                                 </h2>
