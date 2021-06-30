@@ -254,7 +254,7 @@ export class ReqContentComponent implements OnInit {
       //localStorage.setItem('dateExpiration',this.dateExpired)
       //this.dateExpiration=localStorage.getItem('dateExpiration')
       //console.log(this.dateExpiration)
-      window.location.reload();
+      //window.location.reload();
     })
   }
 

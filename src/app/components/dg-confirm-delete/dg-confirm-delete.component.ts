@@ -51,6 +51,7 @@ deleteQuot(idQuot){
             this.snack.open('Ocurrio un error al eliminar cotizacion','CERRAR',{duration:5000})
           },
         })
+        window.location.reload();
     }
   }
   deleteDoc(){
