@@ -1,3 +1,5 @@
+<form  [formGroup]="registerUser" #formDirective="ngForm" (ngSubmit)="saveUnit(registerUser.value,formDirective)">
+
 <div class="card"> 
     <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;"> 
         <h2>Registrar Usuario</h2>
@@ -7,57 +9,61 @@
             <div class="field">
                 <mat-form-field  appearance="outline" style="width: 100%;">
                 <mat-label>Nombres</mat-label>
-                <input matInput placeholder="ingres nombre de rol" required type="text">
+                <input matInput placeholder="ingres nombre de usuario" formControlName="name"
+                        required type="text">
                 <mat-error >este campo es requerido</mat-error>
                 </mat-form-field>
             </div>
             <div class="field">
                 <mat-form-field  appearance="outline" style="width: 100%;">
                 <mat-label>Correo</mat-label>
-                <input matInput placeholder="ingrese una description" required type="password">
-                <mat-error>este campo es requerido</mat-error>
+                <input matInput placeholder="ingrese un correo" required type="email"
+                        formControlName="email">
+                <mat-error *ngIf="isValidField('email')" >{{getErrorMessage('email')}}</mat-error>
                 </mat-form-field>
             </div>
             <div class="field">
                 <mat-form-field  appearance="outline" style="width: 100%;">
                 <mat-label>Contraseña</mat-label>
-                <input matInput placeholder="ingrese una description" required type="password">
+                <input matInput [type]="hide ? 'password' : 'text'" placeholder="ingrese una description" 
+                        required type="password" formControlName="password">
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
                 <mat-error>este campo es requerido</mat-error>
                 </mat-form-field>
             </div>
             <div class="field" style="padding-bottom: 0;">
                 <mat-form-field  appearance="outline" style="width: 100%;">
                 <mat-label>Confirmar contraseña</mat-label>
-                <input matInput placeholder="ingrese una description" required type="password">
+                <input matInput [type]="hide ? 'password' : 'text'" placeholder="ingrese una description" 
+                        required type="password" >
+                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
                 <mat-error>este campo es requerido</mat-error>
                 </mat-form-field>
             </div>
             <mat-divider style="padding-bottom: 15px;"></mat-divider>
+
+            <!--asignacion-->
             <div class="field" >
                 <mat-form-field appearance="outline" style="width: 100%;">
                     <mat-label>Asignar Rol</mat-label>
-                    <mat-select [(value)]="facultieSelected">
-                      <mat-option value="none">None</mat-option>
-                      <mat-option value="1">Facultad de Ciencias y Tecnologia</mat-option>
-                      <mat-option value="2">Facultad de Arquitectura</mat-option>
-                      <mat-option value="3">Facultad de Humanidades y Ciencias de Educación</mat-option>
-                      <mat-option value="4">Facultad de Arquitectura y Ciencas del Hábitat</mat-option>
-                      <mat-option value="5">Facultad de Ciencias Economicas</mat-option>
-                      <mat-option value="6">Facultad de Ciencias Juridicas y Politicas</mat-option>
+                    <mat-select formControlName="idRole">
+                        <mat-option *ngFor="let rol of roles" [value]="rol.idRole">
+                            {{rol.roleName}}
+                          </mat-option>
                     </mat-select>
                   </mat-form-field>
             </div>
             <div class="field">
                 <mat-form-field appearance="outline" style="width: 100%;">
                     <mat-label>Unidad</mat-label>
-                    <mat-select [(value)]="facultieSelected">
-                      <mat-option value="none">None</mat-option>
-                      <mat-option value="1">Facultad de Ciencias y Tecnologia</mat-option>
-                      <mat-option value="2">Facultad de Arquitectura</mat-option>
-                      <mat-option value="3">Facultad de Humanidades y Ciencias de Educación</mat-option>
-                      <mat-option value="4">Facultad de Arquitectura y Ciencas del Hábitat</mat-option>
-                      <mat-option value="5">Facultad de Ciencias Economicas</mat-option>
-                      <mat-option value="6">Facultad de Ciencias Juridicas y Politicas</mat-option>
+                    <mat-select formControlName="idSpendingUnit">
+                        <mat-option *ngFor="let unit of units" [value]="unit.idSpendingUnit">
+                            {{unit.nameUnit}}
+                          </mat-option>
                     </mat-select>
                   </mat-form-field>
             </div>

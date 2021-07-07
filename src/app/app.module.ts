@@ -67,6 +67,7 @@ import { RegisterUserComponent } from './userAdmin/register-user/register-user.c
 import { RegisterRoleComponent } from './userAdmin/register-role/register-role.component';
 import { RegisterUnidadComponent } from './userAdmin/register-unidad/register-unidad.component';
 import { DgConfirmDeleteComponent } from './components/dg-confirm-delete/dg-confirm-delete.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 PdfMakeWrapper.setFonts(pdfFonts);
 @NgModule({
@@ -100,6 +101,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
      RegisterRoleComponent,
      RegisterUnidadComponent,
      DgConfirmDeleteComponent,
+     NavBarComponent,
 
   ],
   imports: [

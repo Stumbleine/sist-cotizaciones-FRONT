@@ -1,0 +1,85 @@
+<div *ngIf="transform==='raf'">
+    <div  class="mat-elevation-z5">
+        <span style="font-size: 40px;">Sistema de cotizaciones</span>
+        <span class="example-spacer"></span>
+    
+        <div class="navigation-routes">
+    
+            <ol class="nav-route">
+              <li>
+                 <a routerLink="home-raf">Inicio</a>
+              </li>
+     
+              <li>
+                 <a routerLink="login">Unidades</a>
+              </li>
+              <li>
+                 <a routerLink="login" >Empresas</a>
+                 </li>
+              
+           </ol>
+       </div>
+    
+       <div>
+    
+       </div>
+        <button mat-stroked-button style="border-color: #ffff; font-size: 17px; margin-right: 1%; ">SALIR</button>
+    
+    </div>
+</div>
+<div  *ngIf="transform=='rug'">
+    <mat-toolbar class=" mat-elevation-z5">
+        <span style="font-size: 40px;">Sistema de cotizaciones</span>
+        <span class="example-spacer"></span>
+    
+        <div class="navigation-routes">
+    
+            <ol class="nav-route">
+                <li>
+                    <a routerLink="home-raf">Inicio</a>
+                </li>
+    
+              
+           </ol>
+       </div>
+    
+       <div>
+    
+       </div>
+        <button mat-stroked-button style="border-color: #ffff; font-size: 17px; margin-right: 1%; ">SALIR</button>
+    
+    </mat-toolbar>
+</div>
+<div>
+    
+<mat-toolbar *ngIf="transform==='admin'"   class="mat-elevation-z5">
+    <span style="font-size: 40px;">Sistema de cotizaciones</span>
+    <span class="example-spacer"></span>
+
+    <div class="navigation-routes">
+
+        <ol class="nav-route">
+            <li>
+                <a routerLink="home-raf">Roles/permisos</a>
+            </li>
+    
+            <li>
+                <a routerLink="login">Usuarios</a>
+            </li>
+            <li>
+                <a routerLink="login" >Unidades</a>
+            </li>
+            <li>
+                <a routerLink="login" >Empresas</a>
+            </li>
+          
+       </ol>
+   </div>
+
+   <div>
+
+   </div>
+    <button mat-stroked-button style="border-color: #ffff; font-size: 17px; margin-right: 1%; ">SALIR</button>
+
+</mat-toolbar>
+</div>

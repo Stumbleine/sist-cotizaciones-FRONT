@@ -1,31 +1,33 @@
 
   
-<div>
+<div style="display: grid; place-items: center; ">
 
-    <div style="display: flex; ">
-        <div id="user-bar" style=" width: 25%;">
-            <app-user-bar></app-user-bar>
-        </div>
-        <div style="width: 75%;">
+    <app-nav-bar [transform]="'admin'"></app-nav-bar>
+
+        <div style="width: 80%;  min-width: 700px;">
             <div id="action-bar">
-                <mat-form-field appearance="fill">
-                    <mat-label>Ordenar por</mat-label>
-                    <mat-select disableRipple>
-                      <mat-option value="1">Option 1</mat-option>
-                      <mat-option value="2">Option 2</mat-option>
-                      <mat-option value="3">Option 3</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                  <div class="spacer"></div>
-                <button class="btn-pri" mat-raised-button routerLink="/form-solicitud">
-                    NUEVA SOLICITUD
-                </button>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ordenar por</mat-label>
+                        <mat-select disableRipple>
+                          <mat-option value="1">Option 1</mat-option>
+                          <mat-option value="2">Option 2</mat-option>
+                          <mat-option value="3">Option 3</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+       
+                <div>
+                    <button class="btn-pri" mat-raised-button routerLink="/form-solicitud">
+                        NUEVA SOLICITUD
+                    </button>
+                </div>
             </div>
             <div id="lista">
                 <h2 >Lista de solicitudes enviadas.</h2>
-                <mat-grid-list cols="1" rowHeight="270px"  >
+                <mat-grid-list [cols]="cols$ | async" rowHeight="270px" gutterSize="10px" >
                     
-                    <mat-grid-tile *ngFor="let req of requestsSent" >
+                    <mat-grid-tile *ngFor="let req of requestsSent">
                         <app-summary-card [nro]="req.idSpendingUnitRequest" [sigla]="req.initials" [date]="req.date" [status]="req.status"
                         [type]="req.type" [amount]="req.estimatedAmount" [username]="req.username"></app-summary-card>
                     </mat-grid-tile>
@@ -36,14 +38,13 @@
             </div>
         </div>
 
-    </div>
 </div>
 <style>
 
-.spacer {
-  flex-grow: 1;
-}
-#lista h2{
+    .spacer {
+    flex-grow: 1;
+    }
+    #lista h2{
         color: var(--txt-color-subt);
         margin-left: 3%;
     }
@@ -63,8 +64,6 @@
     margin:0 2% 0 2%;
     display: flex;
     justify-content: space-between;
-
         padding: 15px;
-
     }
 </style>

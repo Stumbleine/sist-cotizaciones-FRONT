@@ -26,13 +26,19 @@
                         <button class="btn-add" mat-raised-button (click)="openRegisterUnidad()"><mat-icon>add</mat-icon> UNIDAD</button>
                     </div>
                     <mat-divider></mat-divider>                
-                    <div>
-                        <mat-grid-list cols="1" rowHeight="80px" gutterSize="10px">
+                    <div style="margin-top: 15px;">
+                        <mat-grid-list cols="1" rowHeight="60px" gutterSize="7px">
                             <mat-grid-tile *ngFor="let unit of units" >
                                 <div class="card-unit">
                                     <h3 class="title-unit" >{{unit.nameUnit}}</h3>
-                                    <p>Responsable: sin asignar</p>
-                                    <p>Descripción: {{unit.description}}</p>
+                                    <h4 *ngIf="unit.responsable!==null">Responsable: <p>{{unit.responsable}}</p></h4>
+                                    <div style="display: flex;">
+                                        <h4 *ngIf="unit.responsable==null"> Responsable: <p style="font-style: italic;">sin asignar</p> 
+                                            <button mat-icon-button matSuffix style="display: inline-flexbox;" ><mat-icon style="font-size:10px;">edit</mat-icon></button>
+                                        </h4>
+                                        
+                                    </div>
+                                    <!--h4 >Descripción: {{unit.description}}</h4-->
                                 </div>
                             </mat-grid-tile>
                         </mat-grid-list>
@@ -106,7 +112,7 @@
 </div>
 <style>
      .card-unit{
-         background-color: rgb(226, 226, 226);
+         background-color: rgb(236, 236, 236);
          
         width: 100%;
         height: 100%;
@@ -116,9 +122,15 @@
 
      }
 
+     .card-unit h4{
+         line-height: 0px;
+         display: flex;
+         height: fit-content;
+     }
      .card-unit p{
-         line-height: 5px;
-         
+         line-height: 0px;
+        margin-left: 5px;
+        font-style: italic;
      }
      .title-unit{
         text-transform: uppercase;

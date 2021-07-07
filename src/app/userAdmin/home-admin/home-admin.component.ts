@@ -22,6 +22,7 @@ export class HomeAdminComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private RequestService: RequestService,) { }
   units:any;
+  roles:any;
   usersResponse:any;
   users:User[]=[];
 
@@ -38,11 +39,12 @@ export class HomeAdminComponent implements OnInit {
   ngOnInit(): void {
     this.loadUnits();
     this.loadUsers();
+    this.loadRoles();
   }
 
   //localhost:8080/api/user/allUsers
   loadUnits(){
-    this.RequestService.get('http://localhost:8080/api/spendingUnit/allSpendingUnits ').subscribe(r=>{
+    this.RequestService.get('http://localhost:8080/api/spendingUnit/allSpendingUnits').subscribe(r=>{
       this.units=r;
       console.log(this.units)
     })
@@ -56,7 +58,12 @@ export class HomeAdminComponent implements OnInit {
     })
   }
 
-
+  loadRoles(){
+    this.RequestService.get('http://localhost:8080/api/role/allRoles').subscribe(r=>{
+      this.roles=r;
+      console.log(this.units)
+    })
+  }
 
 
 
@@ -69,6 +76,11 @@ export class HomeAdminComponent implements OnInit {
     this.dialog.open(RegisterRoleComponent);
   }
   openRegisterUser(){
-    this.dialog.open(RegisterUserComponent);
+    this.dialog.open(RegisterUserComponent,{
+      data:{
+        unitList:this.units,
+        roleList:this.roles,
+      }
+    });
   }
 }

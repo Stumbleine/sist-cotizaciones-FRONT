@@ -35,7 +35,7 @@ export class RegisterUnidadComponent implements OnInit {
       next:()=>{
         console.log('Unidad creada exitosamente!!');
         this.snack.open('Unidad registrada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
-        //window.location.reload();
+        window.location.reload();
       },
       error:()=>{
         console.log('Ocurrio un error, no se creo la cotizacon.');
