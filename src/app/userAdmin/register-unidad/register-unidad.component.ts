@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {FormControl, FormBuilder, FormGroupDirective, Validators} from '@angular/forms';
 import {RequestService} from '../../services/request.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
@@ -13,7 +14,10 @@ export class RegisterUnidadComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private RequestService: RequestService,
-    private snack:MatSnackBar,) { }
+    private snack:MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: any,) { }
+  transform=this.data.transform;
+  employees=this.data.employees;
 
   facultieSelected="1"
   registerUnit= this.formBuilder.group({
@@ -22,6 +26,9 @@ export class RegisterUnidadComponent implements OnInit {
     faculty:['',[Validators.required]],
 
   });
+  assigResp=this.formBuilder.group({
+    idEmploye:['',[Validators.required]],
+  })
 
 
   ngOnInit(): void {
@@ -39,6 +46,22 @@ export class RegisterUnidadComponent implements OnInit {
       },
       error:()=>{
         console.log('Ocurrio un error, no se creo la cotizacon.');
+        this.snack.open('Fallo al registrar la Unidad','CERRAR',{duration:5000})
+      }
+    });
+  }
+
+  saveAssigUser(employe,formDirective: FormGroupDirective){
+    const idEmploye=employe.idEmploye;
+    this.RequestService.put('http://localhost:8080/api/user/responsable/'+idEmploye,{})
+    .subscribe({
+      next:()=>{
+        console.log('Responsable asignado');
+        this.snack.open('Responsable asignado !.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
+        window.location.reload();
+      },
+      error:()=>{
+        console.log('Ocurrio un error, no se pudo asignar.');
         this.snack.open('Fallo al registrar la Unidad','CERRAR',{duration:5000})
       }
     });

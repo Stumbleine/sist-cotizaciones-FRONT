@@ -94,6 +94,7 @@ export class FormQuotationBusinessComponent implements OnInit {
     this.refresh()
   }
   public items:Item[]=[];
+  public idQuotEncode:any;
   public idQuot:any;
   public lastQuotation:any;
   ngOnInit(): void {
@@ -102,7 +103,8 @@ export class FormQuotationBusinessComponent implements OnInit {
       this.loadDataQuotation();
       this.updateDataQuotation();
     } */
-    this.idQuot= this.rutaActiva.snapshot.params.idQ;
+    this.idQuotEncode= this.rutaActiva.snapshot.params.idQ;
+    this.idQuot=window.atob(this.idQuotEncode);
     this.loadDataQuotation();
     
     console.log("this is quotID",this.idQuot);

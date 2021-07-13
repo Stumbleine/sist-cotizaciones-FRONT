@@ -22,6 +22,7 @@ export class QoatationCardComponent implements OnInit {
   }
   @Input() idSR:any
   @Input() quot:any;
+  @Input() reqStatus:any;
 
   
   routerQuotation(status){
@@ -67,6 +68,7 @@ export class QoatationCardComponent implements OnInit {
         data:{
           idQuot:idQuot,
           nameCompany:this.quot.nameBussiness,
+          quotState:this.quot.state,
         }
       })
   }/*

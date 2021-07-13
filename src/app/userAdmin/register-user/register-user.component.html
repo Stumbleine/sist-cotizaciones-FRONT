@@ -16,10 +16,10 @@
             </div>
             <div class="field">
                 <mat-form-field  appearance="outline" style="width: 100%;">
-                <mat-label>Correo</mat-label>
-                <input matInput placeholder="ingrese un correo" required type="email"
-                        formControlName="email">
-                <mat-error *ngIf="isValidField('email')" >{{getErrorMessage('email')}}</mat-error>
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="ingrese un nick" required type="text"
+                        formControlName="username" (change)="validUsername()" [(ngModel)]="existUser">
+                <mat-error *ngIf="isValidField('username')" >{{getErrorMessage('text')}}</mat-error>
                 </mat-form-field>
             </div>
             <div class="field">
@@ -39,7 +39,7 @@
                 <input matInput [type]="hide ? 'password' : 'text'" placeholder="ingrese una description" 
                         required type="password" >
                 <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> 
                 </button>
                 <mat-error>este campo es requerido</mat-error>
                 </mat-form-field>

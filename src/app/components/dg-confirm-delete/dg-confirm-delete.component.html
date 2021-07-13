@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="quotState==('SIN COTIZAR' || 'EXPIRADO')">
     <div>
         <h2>Esta seguro de eliminar la cotizacion {{nameBussines}}?</h2>
         <p>Se eliminara toda la informacion y documentos adjuntos</p>
@@ -6,5 +6,14 @@
     <div mat-dialog-actions style="text-align: end;">
     <button mat-dialog-close mat-button style="margin-right: 5px;">CANCELAR</button>
     <button mat-raised-button style="background-color: var(--btn-color-pri); color:white " class="raised" (click)="deleteQuot(idQuot)">SI, ELIMINAR</button>
+    </div>
+</div>
+<div *ngIf="quotState==('INCOMPLETO' || 'COTIZADO')">
+    <div>
+        <h2>No se puede eliminar la cotización</h2>
+        <p>La cotizacion ya contiene información.</p>
+    </div>
+    <div mat-dialog-actions style="text-align: end;">
+    <button mat-raised-button style="background-color: var(--btn-color-pri); color:white " mat-dialog-close class="raised">CERRAR</button>
     </div>
 </div>

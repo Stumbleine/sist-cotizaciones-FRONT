@@ -1,48 +1,80 @@
-<form  [formGroup]="registerUnit" #formDirective="ngForm" (ngSubmit)="saveUnit(registerUnit.value,formDirective)">
+<div *ngIf="transform=='register'">
+    <form  [formGroup]="registerUnit" #formDirective="ngForm" (ngSubmit)="saveUnit(registerUnit.value,formDirective)">
 
-    <div class="card"> 
-        <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;"> 
-            <h2>Registrar Unidad</h2>
-        </div> 
-
-            <div style="width: 100%;">
-                <div class="field">
-                    <mat-form-field  appearance="outline" style="width: 100%;">
-                    <mat-label>Nombre de unidad</mat-label>
-                    <input matInput placeholder="ingres nombre de unidad" formControlName="nameUnit" required type="text">
-                    <mat-error class="form__validation--size">este campo es requerido</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="field">
-                    <mat-form-field  appearance="outline" style="width: 100%;">
-                    <mat-label>Descripción</mat-label>
-                    <input matInput placeholder="ingrese una description" formControlName="description" required type="text">
-                    <mat-error class="form__validation--size">este campo es requerido</mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="field">
-                    <mat-form-field appearance="outline" style="width: 100%;">
-                        <mat-label>Facultad</mat-label>
-                        <mat-select formControlName="faculty" >
-                            <mat-option value="Facultad de Ciencias y Tecnologia">Facultad de Ciencias y Tecnologia</mat-option>
-                            <mat-option value="Facultad de Humanidades y Ciencias de Educación">Facultad de Humanidades y Ciencias de Educación</mat-option>
-                            <mat-option value="Facultad de Arquitectura y Ciencas del Hábitat">Facultad de Arquitectura y Ciencas del Hábitat</mat-option>
-                            <mat-option value="Facultad de Ciencias Economicas">Facultad de Ciencias Economicas</mat-option>
-                            <mat-option value="Facultad de Ciencias Juridicas y Politicas">Facultad de Ciencias Juridicas y Politicas</mat-option>
-                        </mat-select>
+        <div class="card"> 
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;"> 
+                <h2>Registrar Unidad</h2>
+            </div> 
+            
+                <div style="width: 100%;">
+                    <div class="field">
+                        <mat-form-field  appearance="outline" style="width: 100%;">
+                        <mat-label>Nombre de unidad</mat-label>
+                        <input matInput placeholder="ingres nombre de unidad" formControlName="nameUnit" required type="text">
                         <mat-error class="form__validation--size">este campo es requerido</mat-error>
-                    </mat-form-field>
+                        </mat-form-field>
+                    </div>
+                    <div class="field">
+                        <mat-form-field  appearance="outline" style="width: 100%;">
+                        <mat-label>Descripción</mat-label>
+                        <input matInput placeholder="ingrese una description" formControlName="description" required type="text">
+                        <mat-error class="form__validation--size">este campo es requerido</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="field">
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>Facultad</mat-label>
+                            <mat-select formControlName="faculty" >
+                                <mat-option value="Facultad de Ciencias y Tecnologia">Facultad de Ciencias y Tecnologia</mat-option>
+                                <mat-option value="Facultad de Humanidades y Ciencias de Educación">Facultad de Humanidades y Ciencias de Educación</mat-option>
+                                <mat-option value="Facultad de Arquitectura y Ciencas del Hábitat">Facultad de Arquitectura y Ciencas del Hábitat</mat-option>
+                                <mat-option value="Facultad de Ciencias Economicas">Facultad de Ciencias Economicas</mat-option>
+                                <mat-option value="Facultad de Ciencias Juridicas y Politicas">Facultad de Ciencias Juridicas y Politicas</mat-option>
+                            </mat-select>
+                            <mat-error class="form__validation--size">este campo es requerido</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div style="text-align: center; width: 100%;">
+                        <button mat-raised-button class="btn-login" type="submit" [disabled]="registerUnit.invalid">
+                            REGISTRAR
+                        </button>
+                    </div>
                 </div>
-                <div style="text-align: center; width: 100%;">
-                    <button mat-raised-button class="btn-login" type="submit" [disabled]="registerUnit.invalid">
-                        REGISTRAR
-                    </button>
+    
+        </div>
+    </form>
+    
+</div>
+<div  *ngIf="transform=='assig'">
+    <form  [formGroup]="assigResp" #formDirective="ngForm" (ngSubmit)="saveAssigUser(assigResp.value,formDirective)">
+        <div style="        width:310px; height: 200px; background-color: white;"> 
+            <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;"> 
+                <h2>Asignar responsable</h2>
+            </div> 
+    
+                <div style="width: 100%;">
+                    <div class="field">
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>Facultad</mat-label>
+                            <mat-select formControlName="idEmploye" >
+                                <mat-option *ngFor="let employe of employees" [value]="employe.idUser">
+                                    {{employe.name}}
+                                  </mat-option>
+                            </mat-select>
+                            <mat-error class="form__validation--size">este campo es requerido</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div style="text-align: center; width: 100%;">
+                        <button mat-raised-button class="btn-login" type="submit" [disabled]="assigResp.invalid">
+                            ASIGNAR
+                        </button>
+                    </div>
                 </div>
-            </div>
-
-    </div>
-</form>
-
+    
+        </div>
+    </form>
+    
+</div>
 
 <style>
     .card{

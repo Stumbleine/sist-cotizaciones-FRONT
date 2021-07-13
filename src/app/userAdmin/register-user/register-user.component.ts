@@ -20,11 +20,12 @@ export class RegisterUserComponent implements OnInit {
     roles:any;
     units:any;
   private isValidEmail:any=/\S+@\S+\.\S/;
+  private isValidUserName:any=/^[a-zA-Z0-9]+$/;
   unitSelected="1"
   registerUser= this.formBuilder.group({
     name:['',[Validators.required]],
     password:['',[Validators.required]],
-    email:['',[Validators.required,Validators.pattern(this.isValidEmail)]],
+    username:['',[Validators.required,Validators.pattern(this.isValidUserName)]],
     idRole:['',[Validators.required]],
     idSpendingUnit:['',[Validators.required]],
 
@@ -54,21 +55,28 @@ export class RegisterUserComponent implements OnInit {
       }
     });
   }
-
-
+  existUser:string;
+  validUsername(){
+    this.RequestService.get('http://localhost:8080/api/user/uniqueUserName/'+this.existUser).subscribe(r=>{
+      console.log(r);
+    })  
+  }
   getErrorMessage(field: string):string{
     let message;
     if(this.registerUser.get(field).errors.required){
-      message="Campo email es requerido"
+      message="Campo username es requerido"
     }else if(this.registerUser.get(field).hasError('pattern')){
-      message="El email no es valido"
+      message="El campo username no es valido"
     }
     return message
   }
+
+
   isValidField(field: string):boolean{
     return(
       (this.registerUser.get(field).touched || this.registerUser.get(field).dirty) &&
        !this.registerUser.get(field).valid
     )
   }
+
 }

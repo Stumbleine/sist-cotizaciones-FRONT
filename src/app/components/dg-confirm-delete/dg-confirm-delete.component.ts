@@ -14,6 +14,7 @@ export class DgConfirmDeleteComponent implements OnInit {
 
   idQuot=this.data.idQuot;
   nameBussines=this.data.nameCompany;
+  quotState=this.data.quotState;
   ngOnInit(): void {
 
   }

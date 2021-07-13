@@ -1,6 +1,8 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
+
+
 @Component({
   selector: 'app-dialog-g',
   templateUrl: './dialog-g.component.html',
@@ -14,9 +16,11 @@ export class DialogGComponent implements OnInit {
 
   ) { }
 
-  public idQuot=this.data.idQuot;
-  public link:string="http://localhost:4200/cotizador/form-quotation/"+this.idQuot;
+   idQuot=this.data.idQuot;
+   decodedData = window.btoa(this.idQuot);
+  public link:string="http://localhost:4200/cotizador/form-quotation/"+this.decodedData;
   ngOnInit(): void {
+    console.log(window.atob(this.decodedData))
   }
 
 }

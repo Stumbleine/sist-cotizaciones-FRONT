@@ -13,6 +13,51 @@
                         <button class="btn-add" mat-raised-button (click)="openRegisterRole()"><mat-icon>add</mat-icon> ROL</button>
                     </div>
                     <mat-divider></mat-divider>
+
+                    <div style="display: grid; place-items: center; margin-top: 20px;margin-bottom: 10px;">
+                        <table mat-table [dataSource]="dataSourceRole" class="mat-elevation-z5" style="width: 100%;">
+    
+                        <ng-container matColumnDef="index" >
+                            <th mat-header-cell *matHeaderCellDef style="text-align: center;min-width: 70px;font-weight: bold;"> Nro </th>
+                            <td mat-cell *matCellDef="let element;let i=index;" style="text-align: center;" > {{i+1}} </td>
+                        </ng-container>
+    
+                        <ng-container *ngFor="let columna of columnasRole" matColumnDef="{{columna.name}}" >
+                          <th mat-header-cell *matHeaderCellDef style="text-align: center;  min-width: 150px; font-weight: bold;"> {{columna.titulo}}  </th>
+                          <td mat-cell *matCellDef="let element" style="min-width: 85px;text-align: center;"> {{element[columna.name]}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="privileges" >
+                            <th mat-header-cell *matHeaderCellDef style="min-width: 70px;   text-align: center;font-weight: bold;"> PRIVILEGIOS </th>
+                            <td mat-cell *matCellDef="let element   " style="text-align: center; " >
+                                <button mat-icon-button type="button" matSuffix  >
+                                    <mat-icon style="color:var(--btn-color-pri);">vpn_key</mat-icon>
+                                </button>
+                             </td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="actions" >
+                            <th mat-header-cell *matHeaderCellDef style="min-width: 85px;   text-align: center;font-weight: bold;"> ACCIONES </th>
+                            <td mat-cell *matCellDef="let element   " style="text-align: center; " > 
+
+                               
+                                <button mat-icon-button type="button" matSuffix  >
+                                    <mat-icon style="color:var(--state-color-3);">edit</mat-icon>
+                                </button>
+                                <button mat-icon-button type="button" matSuffix  >
+                                    <mat-icon style="color:var(--btn-color-error);" >delete</mat-icon>
+                                </button>
+
+                             </td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+    
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsRole"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsRole;"></tr>
+                      </table>
+                    </div>
+
                 </div>
     
             </mat-grid-tile >
@@ -27,17 +72,21 @@
                     </div>
                     <mat-divider></mat-divider>                
                     <div style="margin-top: 15px;">
-                        <mat-grid-list cols="1" rowHeight="60px" gutterSize="7px">
+                        <mat-grid-list cols="1" rowHeight="70px" gutterSize="7px">
                             <mat-grid-tile *ngFor="let unit of units" >
                                 <div class="card-unit">
                                     <h3 class="title-unit" >{{unit.nameUnit}}</h3>
+
                                     <h4 *ngIf="unit.responsable!==null">Responsable: <p>{{unit.responsable}}</p></h4>
-                                    <div style="display: flex;">
-                                        <h4 *ngIf="unit.responsable==null"> Responsable: <p style="font-style: italic;">sin asignar</p> 
-                                            <button mat-icon-button matSuffix style="display: inline-flexbox;" ><mat-icon style="font-size:10px;">edit</mat-icon></button>
-                                        </h4>
-                                        
-                                    </div>
+
+                                    <div style="display: flex; height: 25px;">
+                                        <h4 *ngIf="unit.responsable==null"> Responsable: <p style="font-style: italic;">sin asignar</p> </h4>
+                                        <div style="margin-left: 15px;">
+                                            <button style="  height: 27px; width: 27px;"
+                                                    mat-icon-button (click)="openAssignement(unit.employees)" >
+                                                    <mat-icon style="margin-bottom: 15px; color:var(--btn-color-pri);  font-size:25px;">person</mat-icon></button>
+                                        </div>
+                                        </div>
                                     <!--h4 >Descripción: {{unit.description}}</h4-->
                                 </div>
                             </mat-grid-tile>
@@ -111,69 +160,5 @@
     </div>
 </div>
 <style>
-     .card-unit{
-         background-color: rgb(236, 236, 236);
-         
-        width: 100%;
-        height: 100%;
-        max-width: 100%;
-        padding: 10px;
 
-
-     }
-
-     .card-unit h4{
-         line-height: 0px;
-         display: flex;
-         height: fit-content;
-     }
-     .card-unit p{
-         line-height: 0px;
-        margin-left: 5px;
-        font-style: italic;
-     }
-     .title-unit{
-        text-transform: uppercase;
-        color:var(--txt-color-title2);
-        margin-top: 15px;
-        line-height: 10px;
-        font-weight: bold;
-        letter-spacing: 0.5px;
-        
-     }
-        .main{
-        /*display: grid;
-        place-items: center;*/
-        display: flex; justify-content: center;  align-items: center;
-        
-        
-        }
-    .container{
-        width: 85%;
-        min-width: 1100px;
-        margin-top: 20px;
-
-    }
-
-    .card{
-
-        width: 100%;
-        height: 100%;
-        max-width: 100%;
-        padding: 15px;
-    }
-    .card--header{
-        display: flex; justify-content: space-between; margin-bottom: 15px;
-        margin-top: 15px;
- 
-    }
-    .btn-add{
-        background-color: var(--btn-color-pri);
-        color:white;
-    }
-    mat-grid-tile{
-        border-radius: 10px;
-        background-color: white;
-    }
-    
 </style>

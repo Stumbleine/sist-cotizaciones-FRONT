@@ -58,7 +58,8 @@ import { FilesComponent } from './components/file/files.component';
 import { DgUploadComponent } from './components/dg-upload/dg-upload.component'
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 
-import {PdfMakeWrapper} from 'pdfmake-wrapper'
+import {PdfMakeWrapper} from 'pdfmake-wrapper';
+
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { DgCompanyRegisterComponent } from './business/dg-company-register/dg-company-register.component';
 import { HomeAdminComponent } from './userAdmin/home-admin/home-admin.component';
@@ -123,8 +124,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
     MatPaginatorModule,
     MatDialogModule,
     MatSnackBarModule,
-    ReactiveFormsModule,MatListModule,MatAutocompleteModule,ClipboardModule
-
+    ReactiveFormsModule,MatListModule,MatAutocompleteModule,ClipboardModule,
   ],
   providers: [    RequestService,],
   bootstrap: [AppComponent,FormRequestComponent,

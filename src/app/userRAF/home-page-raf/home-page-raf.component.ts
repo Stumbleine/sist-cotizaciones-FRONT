@@ -16,6 +16,7 @@ export class HomePageRAFComponent implements OnInit {
   
   ngOnInit(): void {
     this.loadData();
+    //this.iniciarW();
   }
   loadData(){
     this.RequestService.get('http://localhost:8080/api/administration')

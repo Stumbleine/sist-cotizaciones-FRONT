@@ -13,6 +13,13 @@ export interface User{
   role:string;
   spendingUnit:string;
 }
+export interface Role{
+  idRole:number;
+  privilegios:string[];
+  roleName:string;
+}
+
+
 @Component({
   selector: 'app-home-admin',
   templateUrl: './home-admin.component.html',
@@ -22,7 +29,7 @@ export class HomeAdminComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private RequestService: RequestService,) { }
   units:any;
-  roles:any;
+  rolesResponse:any;
   usersResponse:any;
   users:User[]=[];
 
@@ -35,6 +42,13 @@ export class HomeAdminComponent implements OnInit {
     {titulo:"UNIDAD" ,name: "spendingUnit"},
 
   ];
+  roles:Role[]=[];
+
+  displayedColumnsRole: string[] = ['index', 'roleName','privileges', 'actions'];
+  dataSourceRole =  new MatTableDataSource<Role>([]);
+  columnasRole=[
+    {titulo:"NOMBRE ROL" ,name: "roleName"},
+  ];
 
   ngOnInit(): void {
     this.loadUnits();
@@ -46,7 +60,7 @@ export class HomeAdminComponent implements OnInit {
   loadUnits(){
     this.RequestService.get('http://localhost:8080/api/spendingUnit/allSpendingUnits').subscribe(r=>{
       this.units=r;
-      console.log(this.units)
+      console.log("Unidades ",this.units)
     })
   }
   loadUsers(){
@@ -54,14 +68,16 @@ export class HomeAdminComponent implements OnInit {
       this.usersResponse=r;
       this.users=this.usersResponse;
       this.dataSource.data=this.users;
-      console.log(this.users)
+      console.log("USERS ",this.users)
     })
   }
 
   loadRoles(){
     this.RequestService.get('http://localhost:8080/api/role/allRoles').subscribe(r=>{
-      this.roles=r;
-      console.log(this.units)
+      this.rolesResponse=r;
+      this.roles=this.rolesResponse;
+      this.dataSourceRole.data=this.roles;
+      console.log("ROLES ",this.roles)
     })
   }
 
@@ -69,7 +85,12 @@ export class HomeAdminComponent implements OnInit {
 
 
   openRegisterUnidad(){
-    this.dialog.open(RegisterUnidadComponent
+    this.dialog.open(RegisterUnidadComponent,
+      {
+        data:{
+          transform:'register'
+        }
+      }
     );
   }
   openRegisterRole(){
@@ -82,5 +103,16 @@ export class HomeAdminComponent implements OnInit {
         roleList:this.roles,
       }
     });
+  }
+
+  openAssignement(employees){
+    this.dialog.open(RegisterUnidadComponent,
+      {
+        data:{
+          transform:'assig',
+          employees:employees,
+        }
+      }
+      );
   }
 }

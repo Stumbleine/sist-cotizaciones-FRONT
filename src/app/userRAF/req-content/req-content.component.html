@@ -126,7 +126,7 @@ place-items: center;">
                                 <mat-grid-list cols="3"  rowHeight="160px"  gutterSize="10px"  >
                                     <mat-grid-tile *ngFor="let quotCard of quotationsCard" >
                                     <app-qoatation-card style="width: 100%;" [idSR]="reqReceived?.idSpendingUnitRequest" 
-                                    
+                                    [reqStatus]="reqReceived?.status"
                                     [quot]='quotCard'
                                     ></app-qoatation-card>
                                 </mat-grid-tile>
