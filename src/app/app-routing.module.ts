@@ -13,9 +13,10 @@ import {ResponseFormComponent} from './components/response-form/response-form.co
 import {FilesComponent} from './components/file/files.component'
 import { LoginComponent } from './components/login/login.component';
 import { HomeAdminComponent } from './userAdmin/home-admin/home-admin.component';
+import { UserGuard } from './security/user.guard';
 const routes: Routes = [
-  { path: 'home-raf', component:  HomePageRAFComponent},
-  { path: 'home-rug', component:  HomePageComponent},
+  { path: 'home-raf', component:  HomePageRAFComponent, canActivate:[UserGuard]},
+  { path: 'home-rug', component:  HomePageComponent, canActivate:[UserGuard]},
   { path: 'form-solicitud', component:  FormRequestComponent},
   
   {path: '', pathMatch: 'full', redirectTo: 'home-rug'},
@@ -30,7 +31,7 @@ const routes: Routes = [
 { path: 'home-raf/file',component:FilesComponent},
 { path: 'login',component:LoginComponent},
 
-{ path: 'home-admin',component:HomeAdminComponent}
+{ path: 'home-admin',component:HomeAdminComponent, canActivate:[UserGuard]}
  
 ]
 @NgModule({

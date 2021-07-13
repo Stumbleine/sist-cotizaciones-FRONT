@@ -1,5 +1,5 @@
 
-<div class="main">
+<form class="main" [formGroup]="loginForm" #formDirective="ngForm" (ngSubmit)="onLogin(loginForm.value,formDirective)">
 
 
         <mat-card class="mat-elevation-z5">
@@ -11,19 +11,19 @@
                     <div class="field">
                         <mat-form-field  appearance="outline" style="width: 100%;">
                         <mat-label>Username</mat-label>
-                        <input matInput placeholder="Nombre de usuario" required type="text">
+                        <input matInput placeholder="Nombre de usuario" required type="text" formControlName='username'>
                         <mat-error >este campo es requerido</mat-error>
                         </mat-form-field>
                     </div>
                     <div class="field">
                         <mat-form-field  appearance="outline" style="width: 100%;">
                         <mat-label>Contraseña</mat-label>
-                        <input matInput placeholder="Ingrese contraseña" required type="password">
+                        <input matInput placeholder="Ingrese contraseña" required type="password" formControlName='password'>
                         <mat-error>este campo es requerido</mat-error>
                         </mat-form-field>
                     </div>
                     <div style="text-align: center; width: 100%;">
-                        <button mat-raised-button class="btn-login">
+                        <button mat-raised-button class="btn-login" type="submit"> 
                             INICIAR SESION
                             <mat-icon>arrow_forward</mat-icon>
                         </button>
@@ -33,7 +33,7 @@
         </mat-card>
 
 
-</div>
+    </form>
 
 <style>
 

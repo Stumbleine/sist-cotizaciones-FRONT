@@ -17,7 +17,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSelectModule} from '@angular/material/select'
 import {MatDividerModule} from '@angular/material/divider';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {HttpClientModule} from '@angular/common/http' 
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http' 
 import {RequestService} from '../app/services/request.service';
 import {CommonModule} from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -68,6 +68,8 @@ import { RegisterRoleComponent } from './userAdmin/register-role/register-role.c
 import { RegisterUnidadComponent } from './userAdmin/register-unidad/register-unidad.component';
 import { DgConfirmDeleteComponent } from './components/dg-confirm-delete/dg-confirm-delete.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { CookieService } from 'ngx-cookie-service';
+import { interceptorProvider, } from './security/jwt-interceptor.interceptor';
 
 PdfMakeWrapper.setFonts(pdfFonts);
 @NgModule({
@@ -126,7 +128,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
     ReactiveFormsModule,MatListModule,MatAutocompleteModule,ClipboardModule
 
   ],
-  providers: [    RequestService,],
+  providers: [RequestService,CookieService,interceptorProvider],
   bootstrap: [AppComponent,FormRequestComponent,
   ]
 })
