@@ -70,7 +70,7 @@ import { DgConfirmDeleteComponent } from './components/dg-confirm-delete/dg-conf
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { CookieService } from 'ngx-cookie-service';
 import { interceptorProvider, } from './security/jwt-interceptor.interceptor';
-
+import {MatMenuModule} from '@angular/material/menu';
 PdfMakeWrapper.setFonts(pdfFonts);
 @NgModule({
   declarations: [ 
@@ -104,6 +104,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
      RegisterUnidadComponent,
      DgConfirmDeleteComponent,
      NavBarComponent,
+     
 
   ],
   imports: [
@@ -125,7 +126,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
     MatPaginatorModule,
     MatDialogModule,
     MatSnackBarModule,
-    ReactiveFormsModule,MatListModule,MatAutocompleteModule,ClipboardModule
+    ReactiveFormsModule,MatListModule,MatAutocompleteModule,ClipboardModule,MatMenuModule,
 
   ],
   providers: [RequestService,CookieService,interceptorProvider],

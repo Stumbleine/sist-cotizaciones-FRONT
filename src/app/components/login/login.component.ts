@@ -11,6 +11,9 @@ import {RequestService} from '../../services/request.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+public idUser:any;
+public user:any={};
+public userName:any;
 
   loginForm = this.formBuilder.group({
     username: ['',[Validators.required]],
@@ -35,7 +38,12 @@ export class LoginComponent implements OnInit {
         console.log(respuesta)
         formDirective.resetForm();
         this.cookieService.set('token',respuesta.jwt)
+        this.idUser=respuesta.id;
+        this.userName=respuesta.userName;
+        this.user={idUser:this.idUser,userName:this.userName}
+        this.saveDataUser();
         this.sendRoute(respuesta.roles)
+        
        },
       error:()=>{
        
@@ -52,5 +60,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/','home-admin'])
     }
   }
-
+  saveDataUser(){
+    localStorage.setItem("user",JSON.stringify(this.user))
+  }
 }

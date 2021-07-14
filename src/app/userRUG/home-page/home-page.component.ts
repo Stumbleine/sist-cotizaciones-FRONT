@@ -11,20 +11,38 @@ import { map, debounceTime,distinctUntilChanged } from 'rxjs/operators';
 export class HomePageComponent implements OnInit {
   constructor(private RequestService: RequestService) { }
   public requestsSent=null
-
+  public requestsSentCopy=null
+  public status= "";
+  public notRequest=false;
+  public user:any={};
   ngOnInit(): void {
+    this.getDataUser();
     this.loadData();
     //window.addEventListener('resize', this.screenW);
   }
   loadData(){
-    this.RequestService.get('http://localhost:8080/api/spendingUnit/1')
+    this.RequestService.get('http://localhost:8080/api/spendingUnit/'+this.user.idUser)
     .subscribe(r=>{
       console.log(r);
       this.requestsSent = r;
+      this.requestsSentCopy=r;
     })
   }
-
-  
+  filterBy(option){
+    this.notRequest=false;
+    this.status=option;
+    if(this.status=="Todos" || this.status==""){
+      this.requestsSent=this.requestsSentCopy
+    }else{
+      this.requestsSent=this.requestsSentCopy.filter(request => request.status=== this.status);
+      if(this.requestsSent.length==0){
+        this.notRequest=true;
+      }
+    }
+  }
+  getDataUser(){
+    this.user=JSON.parse(localStorage.getItem("user"))
+  }
   screenW(){
 
     const width:number=window.innerWidth;

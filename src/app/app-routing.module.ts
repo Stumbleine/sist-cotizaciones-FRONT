@@ -17,17 +17,17 @@ import { UserGuard } from './security/user.guard';
 const routes: Routes = [
   { path: 'home-raf', component:  HomePageRAFComponent, canActivate:[UserGuard]},
   { path: 'home-rug', component:  HomePageComponent, canActivate:[UserGuard]},
-  { path: 'form-solicitud', component:  FormRequestComponent},
+  { path: 'form-solicitud', component:  FormRequestComponent,canActivate:[UserGuard]},
   
   {path: '', pathMatch: 'full', redirectTo: 'home-rug'},
-  {path:'req-content/:id',component:ReqContentComponent},
-  {path:'req-content/:idSR/form-quotation/:idQ',component:FormQuotationComponent},
+  {path:'req-content/:id',component:ReqContentComponent,canActivate:[UserGuard]},
+  {path:'req-content/:idSR/form-quotation/:idQ',component:FormQuotationComponent,canActivate:[UserGuard]},
   {path: 'cotizador/form-quotation/:idQ', component: FormQuotationBusinessComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home-rug'},
   {path: 'req-content/:idSR/error', component:ErrorPageComponent },
   {path: 'error', component:ErrorPageComponent },
   {path: 'response-form', component:ResponseFormComponent}, 
-  {path:'req-content/:idSR/quot-content/:quotID',component:QuotationContentComponent},
+  {path:'req-content/:idSR/quot-content/:quotID',component:QuotationContentComponent,canActivate:[UserGuard]},
 { path: 'home-raf/file',component:FilesComponent},
 { path: 'login',component:LoginComponent},
 
