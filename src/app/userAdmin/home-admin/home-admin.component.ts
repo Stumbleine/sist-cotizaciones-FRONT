@@ -12,6 +12,8 @@ import { DgPrivelegesComponent } from 'src/app/componets/dg-priveleges/dg-privel
 export interface User{
   idUser: number;
   name: string;
+  email:string;
+  registrationDate:string;
   privileges: {};
   role:string;
   spendingUnit:string;
@@ -37,12 +39,13 @@ export class HomeAdminComponent implements OnInit {
   users:User[]=[];
   idUser:any;
   userName:any;
-  displayedColumns: string[] = ['index', 'name', 'role', 'privileges','spendingUnit','actions'];
+  displayedColumns: string[] = ['index', 'name', 'role', 'email','registrationDate','spendingUnit','actions'];
   dataSource =  new MatTableDataSource<User>([]);
   columnas=[
     {titulo:"NOMBRE USUARIO" ,name: "name"},
     {titulo:"USER ROL" ,name: "role"},
-    {titulo:"PRIVILEGIOS" ,name: "privileges"},
+    {titulo:"CORREO" ,name: "email"},
+    {titulo:"FECHA CREACIÓN" ,name: "registrationDate"},
     {titulo:"UNIDAD" ,name: "spendingUnit"},
 
   ];
