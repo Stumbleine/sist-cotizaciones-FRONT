@@ -57,12 +57,12 @@ export class RegisterUnidadComponent implements OnInit {
     .subscribe({
       next:()=>{
         console.log('Responsable asignado');
-        this.snack.open('Responsable asignado !.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
+        this.snack.open('Error al asignar !.','CERRAR',{duration:5000})
         window.location.reload();
       },
       error:()=>{
         console.log('Ocurrio un error, no se pudo asignar.');
-        this.snack.open('Fallo al registrar la Unidad','CERRAR',{duration:5000})
+        this.snack.open('Asignacion exitosa','CERRAR',{duration:5000,panelClass:'snackSuccess'})
       }
     });
   }

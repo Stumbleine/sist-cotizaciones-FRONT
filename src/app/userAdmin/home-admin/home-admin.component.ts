@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit,Inject,ViewChild,ElementRef } from '@angular/core';
+
 import { RegisterUnidadComponent } from '../register-unidad/register-unidad.component';
 import { RegisterRoleComponent } from '../register-role/register-role.component';
 import { RegisterUserComponent } from '../register-user/register-user.component';
 import { MatTableDataSource } from '@angular/material/table';
 import {RequestService} from '../../services/request.service';
-import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DgPrivelegesComponent } from 'src/app/componets/dg-priveleges/dg-priveleges.component';
+
 
 export interface User{
   idUser: number;
   name: string;
-  privileges: string[];
+  privileges: {};
   role:string;
   spendingUnit:string;
 }
 export interface Role{
   idRole:number;
-  privilegios:string[];
+  privilegios:{};
   roleName:string;
 }
 
@@ -134,4 +136,31 @@ export class HomeAdminComponent implements OnInit {
       }
       );
   }
+  openPriveleges(priv){
+    this.dialog.open(DgPrivelegesComponent,{
+      data:{
+        privileges:priv
+      }
+    })
+  }
 }
+/*
+@Component({
+  selector: 'app-dg-priveleges',
+  template: `<div #el *ngFor="let priv of privileges">{{priv.privilege}}</div>`
+})
+export class dgPrivelegesComponent implements OnInit {
+  @ViewChild('el') div:ElementRef;
+  ngAfterViewInit(){
+    this.div.nativeElement.setAttribute('highlight', '');
+  } 
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) { }
+    privileges:any;
+  ngOnInit(): void {
+    this.privileges=this.data.privileges;
+    console.log(this.privileges);
+  }
+
+}*/
