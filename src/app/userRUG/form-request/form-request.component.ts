@@ -35,7 +35,7 @@ export class FormRequestComponent implements OnInit {
  i=0;
   currentDate=new Date;
   date= new DatePipe('en-US').transform(this.currentDate,'yyyy-MM-dd');
-
+  user:any;
   productForm = this.formBuilder.group({
     quantity: ['',[Validators.required]],
     unit: ['',[Validators.required]],
@@ -66,6 +66,7 @@ export class FormRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.getDataUser()
   }
   
   pressed:boolean;
@@ -96,7 +97,7 @@ export class FormRequestComponent implements OnInit {
     Request=request;
     console.log(Request);
       if(this.pressed){  
-          this.RequestService.post('http://localhost:8080/api/request',Request)
+          this.RequestService.post('http://localhost:8080/api/request'+this.user.idUser,Request)
           .subscribe( respuesta =>{
             console.log('Solicitud enviada!!');
             this.openSnackBar();
@@ -130,5 +131,8 @@ openSnackBar() {
     duration: 3000,
     panelClass:"blue-snackbar",
   });
+}
+getDataUser(){
+  this.user=JSON.parse(localStorage.getItem("user"))
 }
 }
