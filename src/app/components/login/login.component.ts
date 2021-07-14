@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 public idUser:any;
 public user:any={};
 public userName:any;
+public errorLogin:boolean;
 
   loginForm = this.formBuilder.group({
     username: ['',[Validators.required]],
@@ -31,6 +32,7 @@ public userName:any;
   }
 
   onLogin(login,formDirective: FormGroupDirective){
+    this.errorLogin=false;
     console.log(login)
     this.RequestService.post('http://localhost:8080/api/auth/authenticate',login)
     .subscribe( {
@@ -46,7 +48,8 @@ public userName:any;
         
        },
       error:()=>{
-       
+        formDirective.resetForm();
+        this.errorLogin=true;
       }
     });
       

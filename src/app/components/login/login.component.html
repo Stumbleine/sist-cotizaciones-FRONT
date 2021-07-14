@@ -1,11 +1,19 @@
 <app-nav-bar [transform]="''" ></app-nav-bar>
 <form class="main" [formGroup]="loginForm" #formDirective="ngForm" (ngSubmit)="onLogin(loginForm.value,formDirective)">
 
+<div class="welcome__te">
+    <h1>Bienvenido al sistema de cotizaciones</h1>
+    <div class="logo">
+        <img src="../../../assets/logo.png" alt="">
+    </div>
+</div>
 
         <mat-card class="mat-elevation-z5">
             <mat-card-title style="text-align: center; padding-top: 25px; padding-bottom: 25px;"> 
                 Iniciar Sesion
             </mat-card-title>
+            <mat-error *ngIf="errorLogin==true" style="font-size: 12px;"><mat-icon>error_outline</mat-icon> Usuario o contraseña incorrectos</mat-error>
+                
             <mat-card-content >
                 <div style="width: 100%;">
                     <div class="field">
@@ -22,8 +30,8 @@
                         <mat-error>este campo es requerido</mat-error>
                         </mat-form-field>
                     </div>
-                    <div style="text-align: center; width: 100%;">
-                        <button mat-raised-button class="btn-login" type="submit"> 
+                    <div style="text-align: center; width: 100%; " >
+                        <button mat-raised-button style="background-color:#0a6cff; width: 100%; color: white;" type="submit"> 
                             INICIAR SESION
                             <mat-icon>login</mat-icon>
                         </button>
