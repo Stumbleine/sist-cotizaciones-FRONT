@@ -1,85 +1,78 @@
+<div *ngIf="transform===''">
+    <mat-toolbar >
+        <button mat-icon-button >
+            <mat-icon></mat-icon>
+          </button>
+        <span>Sistema de cotizaciones</span>
+        <div class="example-spacer"></div>
+        <a *ngIf="transform==='admin'" mat-button routerLink=""><mat-icon></mat-icon> Permisos/Usuarios</a>
+        <a mat-button ><mat-icon>home</mat-icon> Inicio</a>
+        <a mat-button><mat-icon>supervised_user_circle</mat-icon> About us</a>
+        <a mat-raised-button ><mat-icon>login</mat-icon> Iniciar sesion</a>
+    </mat-toolbar>
+
+</div> 
 <div *ngIf="transform==='raf'">
-    <div  class="mat-elevation-z5">
-        <span style="font-size: 40px;">Sistema de cotizaciones</span>
-        <span class="example-spacer"></span>
-    
-        <div class="navigation-routes">
-    
-            <ol class="nav-route">
-              <li>
-                 <a routerLink="home-raf">Inicio</a>
-              </li>
-     
-              <li>
-                 <a routerLink="login">Unidades</a>
-              </li>
-              <li>
-                 <a routerLink="login" >Empresas</a>
-                 </li>
-              
-           </ol>
-       </div>
-    
-       <div>
-    
-       </div>
-        <button mat-stroked-button style="border-color: #ffff; font-size: 17px; margin-right: 1%; ">SALIR</button>
-    
-    </div>
-</div>
-<div  *ngIf="transform=='rug'">
-    <mat-toolbar class=" mat-elevation-z5">
-        <span style="font-size: 40px;">Sistema de cotizaciones</span>
-        <span class="example-spacer"></span>
-    
-        <div class="navigation-routes">
-    
-            <ol class="nav-route">
-                <li>
-                    <a routerLink="home-raf">Inicio</a>
-                </li>
-    
-              
-           </ol>
-       </div>
-    
-       <div>
-    
-       </div>
-        <button mat-stroked-button style="border-color: #ffff; font-size: 17px; margin-right: 1%; ">SALIR</button>
-    
+    <mat-toolbar >
+        <button mat-icon-button >
+            <mat-icon>menu</mat-icon>
+          </button>
+        <span>Sistema de cotizaciones</span>
+        <div class="example-spacer"></div>
+        <a mat-button routerLink="home-raf"><mat-icon>home</mat-icon> Inicio</a>
+        <a mat-button><mat-icon>supervised_user_circle</mat-icon> Unidades</a>
+        <a mat-button><mat-icon>business</mat-icon> Empresas</a>
+        <a mat-raised-button class="btn-raised " ><mat-icon>account_circle</mat-icon> {{user.userName}}<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>expand_more</mat-icon>
+        </button></a>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item class="btn-logout">
+                    <a mat-raised-button color="accent"(click)="logout()" ><mat-icon>logout</mat-icon> Cerrar sesion</a>
+                </button>
+            </mat-menu>
+        
+
+    </mat-toolbar>
+
+</div> 
+<div  *ngIf="transform==='rug'">
+    <mat-toolbar >
+        <button mat-icon-button >
+            <mat-icon>menu</mat-icon>
+          </button>
+        <span>Sistema de cotizaciones</span>
+        <div class="example-spacer"></div>
+        <a mat-button routerLink="home-rug"><mat-icon>home</mat-icon> Inicio</a>
+        <a mat-raised-button class="btn-raised " ><mat-icon>account_circle</mat-icon> {{user.userName}}<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>expand_more</mat-icon>
+        </button></a>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item class="btn-logout">
+                    <a mat-raised-button color="accent"(click)="logout()" ><mat-icon>logout</mat-icon> Cerrar sesion</a>
+                </button>
+            </mat-menu>
     </mat-toolbar>
 </div>
-<div>
+
+<div  *ngIf="transform==='admin'" >
     
-<mat-toolbar *ngIf="transform==='admin'"   class="mat-elevation-z5">
-    <span style="font-size: 40px;">Sistema de cotizaciones</span>
-    <span class="example-spacer"></span>
-
-    <div class="navigation-routes">
-
-        <ol class="nav-route">
-            <li>
-                <a routerLink="home-raf">Roles/permisos</a>
-            </li>
-    
-            <li>
-                <a routerLink="login">Usuarios</a>
-            </li>
-            <li>
-                <a routerLink="login" >Unidades</a>
-            </li>
-            <li>
-                <a routerLink="login" >Empresas</a>
-            </li>
-          
-       </ol>
-   </div>
-
-   <div>
-
-   </div>
-    <button mat-stroked-button style="border-color: #ffff; font-size: 17px; margin-right: 1%; ">SALIR</button>
-
+<mat-toolbar >
+    <button mat-icon-button >
+        <mat-icon>menu</mat-icon>
+      </button>
+    <span>Sistema de cotizaciones</span>
+    <div class="example-spacer"></div>
+    <a  mat-button routerLink=""><mat-icon>fact_check</mat-icon>Roles/Permisos</a>
+    <a  mat-button routerLink=""><mat-icon>person</mat-icon>Usuarios</a>
+    <a mat-button routerLink=""><mat-icon>supervised_user_circle</mat-icon> Unidades</a>
+    <a mat-button routerLink=""><mat-icon>business</mat-icon> Empresas</a>
+    <a mat-raised-button class="btn-raised " ><mat-icon>account_circle</mat-icon> {{user.userName}}<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>expand_more</mat-icon>
+    </button></a>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item class="btn-logout">
+                <a mat-raised-button color="accent"(click)="logout()" ><mat-icon>logout</mat-icon> Cerrar sesion</a>
+            </button>
+        </mat-menu>
 </mat-toolbar>
 </div>

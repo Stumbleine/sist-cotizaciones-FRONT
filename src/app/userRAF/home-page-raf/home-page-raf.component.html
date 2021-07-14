@@ -1,19 +1,22 @@
 
   
 <div>
-    <app-nav-bar [transform]="'raf'"></app-nav-bar>
+
     <div style="display: grid; place-items: center;  ">
 
         <div style="width: 80%; min-width: 700px; ">
             <div id="action-bar">
                 <div>
                     <mat-form-field appearance="outline">
-                        <mat-label>Ordenar por</mat-label>
-                        <mat-select disableRipple>
-                          <mat-option value="1">Option 1</mat-option>
-                          <mat-option value="2">Option 2</mat-option>
-                          <mat-option value="3">Option 3</mat-option>
-                        </mat-select>
+                        <mat-label>Filtrar por</mat-label>
+                        <mat-select disableRipple (selectionChange)="filterBy($event.value)">
+                            <mat-option value="Todos">Todos</mat-option>
+                            <mat-option value="Pendiente">Pendiente</mat-option>
+                            <mat-option value="Autorizado">Autorizado</mat-option>
+                            <mat-option value="Cotizando">Cotizando</mat-option>
+                            <mat-option value="Rechazado">Rechazado</mat-option>
+                            <mat-option value="Aprobado">Aprobado</mat-option>
+                          </mat-select>
                       </mat-form-field>
                 </div>
                   <div class="monto">
@@ -34,7 +37,16 @@
                     </mat-grid-tile>
 
                 </mat-grid-list>
-
+                
+                <div class="not__business" *ngIf="notRequest==true">
+                    <div style=" place-items: center; height: 100%;">
+                        <div class="container">
+                                <h1 class="title">WHOOPS!</h1>
+                                <p> No hay solicitudes en estado <a >{{status}}</a> </p>
+                                
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -86,5 +98,29 @@
     justify-content: space-between;
     padding: 15px;
 
+    }
+    .container {
+        padding: 15px;
+        padding-bottom: 30px;
+        min-width: 500px;
+        min-height: max-content;  margin-bottom: 100px;
+        border-radius: 10px;
+        text-align: center;
+}
+
+    .not__business h1{
+    font-size: 35px;
+    font-weight: 600;
+    letter-spacing: 0.60em;
+    text-align: center;
+    margin-bottom: 35px;
+    color: rgb(48, 48, 48);
+    margin-left: 10px;
+    
+    }
+    .not__business p{
+    font-size: 17px;
+    text-align: center;
+    color: rgb(48, 48, 48);
     }
 </style>

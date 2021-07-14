@@ -33,7 +33,8 @@ export class HomeAdminComponent implements OnInit {
   rolesResponse:any;
   usersResponse:any;
   users:User[]=[];
-
+  idUser:any;
+  userName:any;
   displayedColumns: string[] = ['index', 'name', 'role', 'privileges','spendingUnit','actions'];
   dataSource =  new MatTableDataSource<User>([]);
   columnas=[
@@ -55,6 +56,11 @@ export class HomeAdminComponent implements OnInit {
     this.loadUnits();
     this.loadUsers();
     this.loadRoles();
+    this.RequestService.disparadorDataUser.subscribe(dataUser=>{
+      console.log(dataUser)
+      this.idUser=dataUser.idUser;
+      this.userName=dataUser.userName
+    })
   }
 
   //localhost:8080/api/user/allUsers
