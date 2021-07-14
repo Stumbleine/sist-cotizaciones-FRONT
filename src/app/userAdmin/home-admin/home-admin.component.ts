@@ -5,6 +5,7 @@ import { RegisterRoleComponent } from '../register-role/register-role.component'
 import { RegisterUserComponent } from '../register-user/register-user.component';
 import { MatTableDataSource } from '@angular/material/table';
 import {RequestService} from '../../services/request.service';
+import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export interface User{
   idUser: number;
@@ -101,6 +102,18 @@ export class HomeAdminComponent implements OnInit {
       data:{
         unitList:this.units,
         roleList:this.roles,
+        user:null,
+        transform:'register',
+      }
+    });
+  }
+  openEditUser(user){
+    this.dialog.open(RegisterUserComponent,{
+      data:{
+        unitList:this.units,
+        roleList:this.roles,
+        user:user,
+        transform:'edit',
       }
     });
   }
