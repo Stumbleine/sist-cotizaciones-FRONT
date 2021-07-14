@@ -3,7 +3,7 @@ import {RequestService} from '../../services/request.service';
 
 import { Observable, fromEvent, } from 'rxjs';
 import { map, debounceTime,distinctUntilChanged } from 'rxjs/operators';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-home-page-raf',
   templateUrl: './home-page-raf.component.html',
@@ -11,7 +11,9 @@ import { map, debounceTime,distinctUntilChanged } from 'rxjs/operators';
 })
 export class HomePageRAFComponent implements OnInit {
   message="admin";
-  constructor(private RequestService: RequestService) { }
+  constructor(
+    private RequestService: RequestService,
+    private snack:MatSnackBar,) { }
   public requestsReceived=null;
   public requestsReceivedCopy=null
   public status= "";
@@ -19,6 +21,7 @@ export class HomePageRAFComponent implements OnInit {
   public user:any;
   ngOnInit(): void {
     this.loadData();
+    this.loadMonto();
     //this.iniciarW();
   }
   loadData(){
@@ -56,5 +59,32 @@ export class HomePageRAFComponent implements OnInit {
 
   private checkWidth(e: Window): boolean {
     return e.innerWidth <= 1600;
+  }
+  monto:any;
+  montoUpdate:any;
+  editMonto:boolean=false;
+  loadMonto(){
+    this.RequestService.get('http://localhost:8080/api/spendingUnit/getBudget/')
+    .subscribe(r=>{
+      console.log(r);
+      this.monto = r;
+    })
+  }
+  updateMonto(){
+    var montoData=new FormData();
+    console.log(this.montoUpdate)
+    montoData.append('budget',this.montoUpdate);
+    this.RequestService.put('http://localhost:8080/api/spendingUnit/updateBudget/',montoData)
+    .subscribe({
+      next:()=>{
+        console.log('Monto actualizado!!');
+        this.snack.open('Monto actualizado','CERRAR',{duration:5000,panelClass:'snackSuccess',})
+        window.location.reload();
+      },
+      error:()=>{
+        console.log('errroorr.');
+        this.snack.open('Fallo al actualizar monto','CERRAR',{duration:5000})
+      }
+    })
   }
 }

@@ -1,9 +1,9 @@
 .card-unit {
   background-color: rgb(236, 236, 236);
-
-  width: 100%;
+  border-radius: 20px;
+  width: 90%;
   height: 100%;
-  max-width: 100%;
+
   padding: 10px;
 }
 
@@ -51,7 +51,20 @@
   background-color: var(--btn-color-pri);
   color: white;
 }
-mat-grid-tile {
-  border-radius: 10px;
-  background-color: white;
+
+.container-table {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 310px;
+}
+::ng-deep .snackSuccess {
+  background-color: var(--state-color-5);
+}
+::ng-deep .snackSuccess button {
+  color: white;
 }

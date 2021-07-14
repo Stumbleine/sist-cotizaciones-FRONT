@@ -18,6 +18,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
     this.getDataUser();
     this.loadData();
+    this.loadMonto();
     //window.addEventListener('resize', this.screenW);
   }
   loadData(){
@@ -69,6 +70,15 @@ export class HomePageComponent implements OnInit {
   private checkWidth(e: Window): boolean {
     return e.innerWidth <= 1600;
   }
+  monto:any;
+  loadMonto(){
+    this.RequestService.get('http://localhost:8080/api/spendingUnit/getBudget/')
+    .subscribe(r=>{
+      console.log(r);
+      this.monto = r;
+    })
+  }
+
   /*
   <mat-grid-list [cols]="cols$ | async"></mat-grid-list>
   */

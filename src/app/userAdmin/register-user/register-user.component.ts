@@ -98,7 +98,9 @@ export class RegisterUserComponent implements OnInit {
     .subscribe({
       next:()=>{
         this.snack.open('Usuario registrada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
-        window.location.reload();
+        //window.location.reload();
+        console.log("LOG >>=",user);
+    
       },
       error:()=>{
         this.snack.open('Fallo al registrar el usuario','CERRAR',{duration:5000})

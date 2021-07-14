@@ -72,6 +72,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { CookieService } from 'ngx-cookie-service';
 import { interceptorProvider, } from './security/jwt-interceptor.interceptor';
 import {MatMenuModule} from '@angular/material/menu';
+import { DgPrivelegesComponent } from './componets/dg-priveleges/dg-priveleges.component';
 PdfMakeWrapper.setFonts(pdfFonts);
 @NgModule({
   declarations: [ 
@@ -105,6 +106,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
      RegisterUnidadComponent,
      DgConfirmDeleteComponent,
      NavBarComponent,
+     DgPrivelegesComponent,
      
 
   ],

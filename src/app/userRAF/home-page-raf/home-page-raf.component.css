@@ -1,0 +1,76 @@
+#lista h2 {
+  color: var(--txt-color-subt);
+  margin-left: 3%;
+}
+.monto {
+  display: flex;
+  width: 400px;
+
+  align-items: center;
+}
+.monto h2 {
+  margin-right: 5%;
+  margin-top: 2%;
+  color: var(--txt-color-subt);
+}
+.monto-div {
+  background-color: var(--color-back);
+}
+.monto div {
+  height: 55px;
+  display: flex;
+
+  width: 250px;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 10px;
+}
+.monto div h2 {
+  margin-top: 5%;
+  margin-left: 10%;
+  font-weight: bold;
+  color: #ffc400;
+}
+/* #lista{
+    display: grid;
+    place-items: center;
+    background-color: aqua;
+    
+}*/
+#action-bar {
+  margin: 0 2% 0 2%;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+.container {
+  padding: 15px;
+  padding-bottom: 30px;
+  min-width: 500px;
+  min-height: max-content;
+  margin-bottom: 100px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.not__business h1 {
+  font-size: 35px;
+  font-weight: 600;
+  letter-spacing: 0.6em;
+  text-align: center;
+  margin-bottom: 35px;
+  color: rgb(48, 48, 48);
+  margin-left: 10px;
+}
+.not__business p {
+  font-size: 17px;
+  text-align: center;
+  color: rgb(48, 48, 48);
+}
+::ng-deep .snackSuccess {
+  background-color: var(--state-color-5);
+}
+::ng-deep .snackSuccess button {
+  color: white;
+}

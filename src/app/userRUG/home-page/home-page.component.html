@@ -19,7 +19,15 @@
                         </mat-select>
                       </mat-form-field>
                 </div>
-       
+                <div class="monto">
+                    <h2>Monto tope</h2>
+                    <div class="monto-div" >
+                        <div>
+                          <h2 *ngIf=" monto!=null ">Bs. {{monto}}</h2>
+                          <p *ngIf=" monto==null "style="font-style: italic ;">undefined</p>
+                        </div>
+                      </div>
+                </div>
                 <div>
                     <button class="btn-pri" mat-raised-button routerLink="/form-solicitud">
                         NUEVA SOLICITUD
@@ -55,6 +63,35 @@
     .spacer {
     flex-grow: 1;
     }
+    .monto{
+        display: flex;
+        width: 350px;
+        margin-top: 10px;
+    }
+    .monto h2 {
+  margin-right: 5%;
+  margin-top: 2%;
+  color: var(--txt-color-subt);
+}
+.monto-div {
+  background-color: var(--color-back);
+}
+.monto div {
+  height: 50px;
+  display: flex;
+
+  width: 200px;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 10px;
+}
+.monto div h2 {
+  margin-top: 15px;
+  margin-left: 10%;
+  font-weight: bold;
+  color: #ffc400;
+}
     #lista h2{
         color: var(--txt-color-subt);
         margin-left: 3%;
