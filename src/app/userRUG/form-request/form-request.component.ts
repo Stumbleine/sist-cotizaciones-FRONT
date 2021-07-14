@@ -97,7 +97,7 @@ export class FormRequestComponent implements OnInit {
     Request=request;
     console.log(Request);
       if(this.pressed){  
-          this.RequestService.post('http://localhost:8080/api/request'+this.user.idUser,Request)
+          this.RequestService.post('http://localhost:8080/api/request/'+this.user.idUser,Request)
           .subscribe( respuesta =>{
             console.log('Solicitud enviada!!');
             this.openSnackBar();
