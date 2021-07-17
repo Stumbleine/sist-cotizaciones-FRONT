@@ -22,9 +22,7 @@
         <a mat-button routerLink="/home-raf"><mat-icon>home</mat-icon> Inicio</a>
         <a mat-button><mat-icon>supervised_user_circle</mat-icon> Unidades</a>
         <a mat-button><mat-icon>business</mat-icon> Empresas</a>
-        <a mat-raised-button class="btn-raised " ><mat-icon>account_circle</mat-icon> {{user.userName}}<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>expand_more</mat-icon>
-        </button></a>
+        <a mat-raised-button class="btn-raised " ><mat-icon>account_circle</mat-icon> {{user.userName}}<mat-icon>expand_more</mat-icon></a>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item class="btn-logout">
                     <a mat-raised-button color="accent"(click)="logout()" ><mat-icon>logout</mat-icon> Cerrar sesion</a>
@@ -43,9 +41,7 @@
         <span>Sistema de cotizaciones</span>
         <div class="example-spacer"></div>
         <a mat-button routerLink="/home-rug"><mat-icon>home</mat-icon> Inicio</a>
-        <a mat-raised-button class="btn-raised " ><mat-icon>account_circle</mat-icon> {{user.userName}}<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>expand_more</mat-icon>
-        </button></a>
+        <a mat-raised-button class="btn-raised " [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon> {{user.userName}} <mat-icon>expand_more</mat-icon></a>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item class="btn-logout">
                     <a mat-raised-button color="accent"(click)="logout()" ><mat-icon>logout</mat-icon> Cerrar sesion</a>
@@ -66,9 +62,7 @@
     <a  mat-button routerLink=""><mat-icon>person</mat-icon>Usuarios</a>
     <a mat-button routerLink=""><mat-icon>supervised_user_circle</mat-icon> Unidades</a>
     <a mat-button routerLink=""><mat-icon>business</mat-icon> Empresas</a>
-    <a mat-raised-button class="btn-raised " ><mat-icon>account_circle</mat-icon> {{user.userName}}<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>expand_more</mat-icon>
-    </button></a>
+    <a mat-raised-button class="btn-raised "[matMenuTriggerFor]="menu" ><mat-icon>account_circle</mat-icon> {{user.userName}}<mat-icon>expand_more</mat-icon></a>
         <mat-menu #menu="matMenu">
             <button mat-menu-item class="btn-logout">
                 <a mat-raised-button color="accent"(click)="logout()" ><mat-icon>logout</mat-icon> Cerrar sesion</a>
