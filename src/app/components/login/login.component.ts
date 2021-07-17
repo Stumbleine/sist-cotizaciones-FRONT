@@ -39,12 +39,14 @@ public errorLogin:boolean;
       next:(respuesta:any)=>{
         console.log(respuesta)
         formDirective.resetForm();
-        this.cookieService.set('token',respuesta.jwt)
+        const dateNow = new Date();
+        dateNow.setMinutes(dateNow.getMinutes() + 60);
+        this.cookieService.set('token',respuesta.jwt,dateNow)
         this.idUser=respuesta.id;
         this.userName=respuesta.userName;
         this.user={idUser:this.idUser,userName:this.userName}
-        this.saveDataUser();
-        this.sendRoute(respuesta.roles)
+        this.saveDataUser(respuesta.roles);
+        this.sendRoute(respuesta.identifier)
         
        },
       error:()=>{
@@ -54,16 +56,19 @@ public errorLogin:boolean;
     });
       
   }
-  sendRoute(roles: any){
-    if(roles[0].authority=='ROLE_RAF'){
+  sendRoute(identifier: any){
+    if(identifier==3){
       this.router.navigate(['/','home-raf'])
-    }else if(roles[0].authority=='ROLE_RUG'){
+    }else if(identifier==2){
       this.router.navigate(['/','home-rug'])
-    }else if(roles[0].authority=='ROLE_ADMIN'){
+    }else if(identifier==1){
       this.router.navigate(['/','home-admin'])
     }
   }
-  saveDataUser(){
-    localStorage.setItem("user",JSON.stringify(this.user))
+  saveDataUser(roles:any){
+    
+    localStorage.setItem("user",JSON.stringify(this.user));
+    //localStorage.setItem("permisos",JSON.stringify(roles=[{authority:"ROLE_CREAR_PEDIDO"},{authority:"ROLE_VER_PEDIDO"}]))
+    localStorage.setItem("permits",JSON.stringify(roles));
   }
 }

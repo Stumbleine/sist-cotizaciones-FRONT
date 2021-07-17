@@ -24,6 +24,7 @@ export class SummaryCardComponent implements OnInit {
   @Input() amount:string;
   @Input() status:string;
   @Input() date:string;
+  @Input() permitFile:boolean;
 
   openDialog() {
     this.dialog.open(DialogRequestedComponent,{
