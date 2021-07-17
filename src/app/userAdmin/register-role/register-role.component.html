@@ -1,9 +1,9 @@
 <div class="card"> 
-    <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;"> 
+    <div style="text-align: center; margin-top: 5px; margin-bottom: 10px;"> 
         <h2>Registrar Rol</h2>
     </div> 
 
-        <div style="width: 100%;">
+        <div style="width: 100%; margin-top: 20px;" >
             <div class="field">
                 <mat-form-field  appearance="outline" style="width: 100%;">
                 <mat-label>Nombre de Rol</mat-label>
@@ -17,6 +17,14 @@
                 <input matInput placeholder="ingrese una description" required type="password">
                 <mat-error>este campo es requerido</mat-error>
                 </mat-form-field>
+            </div>
+            <div  class="field">
+                <label id="example-radio-group-label">Elije tipo de unidad a la que pertenece el rol</label>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                    [(ngModel)]="typeUnit">
+                    <mat-radio-button  class="example-radio-button" value="1">Administracion financiera</mat-radio-button>
+                    <mat-radio-button  class="example-radio-button" value="2">Unidad de gasto</mat-radio-button>
+                </mat-radio-group>
             </div>
             <div class="field">
                 <mat-form-field appearance="outline" style="width: 100%;">
@@ -45,7 +53,7 @@
 <style>
     .card{
         width:310px;
-        height: 380px;
+        height: 490px;
         background-color: white;
 
     }
@@ -60,6 +68,16 @@
         width: 100%;
         color: white;
         height: 40px;
+    }
+    .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    }
+
+    .example-radio-button {
+    margin: 5px;
+    margin-left: 20px;
     }
 </style>
 

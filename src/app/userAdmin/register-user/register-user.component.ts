@@ -135,7 +135,7 @@ export class RegisterUserComponent implements OnInit {
 
   getErrorMessageEmail(field: string,funct:string):string{
     let message;
-    if(funct=='registar'){
+    if(funct=='register'){
       if(this.registerUser.get(field).errors.required){
         message="Campo email es requerido"
       }else if(this.registerUser.get(field).hasError('pattern')){
