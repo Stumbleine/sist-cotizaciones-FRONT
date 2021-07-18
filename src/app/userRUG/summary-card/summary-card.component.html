@@ -7,7 +7,7 @@
         
         <div style="display: flex;">
             <div style=" margin-top: 5px; text-align: center; width: 100px;"><p id="nroPedido">Nro {{nro}}</p></div>
-            <button *ngIf="data!=null" matTooltip="mostrar informe" mat-icon-button style="margin-top: -4px; margin-left: -10px" (click)="openReport()">
+            <button *ngIf="data!=null && permitFile==true" matTooltip="mostrar informe" mat-icon-button style="margin-top: -4px; margin-left: -10px" (click)="openReport()">
                 <img  width="20px" height="20px"  src="./../../../assets/file-pdf-regular.svg" alt="pdf del reporte"></button>
         
             <button mat-icon-button style="margin-top: -4px; margin-right: -10px;" (click)="openDialog()"><mat-icon>launch</mat-icon></button>

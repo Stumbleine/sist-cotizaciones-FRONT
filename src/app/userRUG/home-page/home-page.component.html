@@ -29,7 +29,7 @@
                       </div>
                 </div>
                 <div>
-                    <button class="btn-pri" mat-raised-button routerLink="/form-solicitud">
+                    <button class="btn-pri" mat-raised-button routerLink="/form-solicitud" *ngIf="loadButton==true">
                         NUEVA SOLICITUD
                     </button>
                 </div>
@@ -39,8 +39,8 @@
                 <mat-grid-list [cols]="cols$ | async" rowHeight="270px" gutterSize="10px" >
                     
                     <mat-grid-tile *ngFor="let req of requestsSent">
-                        <app-summary-card [nro]="req.idSpendingUnitRequest" [sigla]="req.initials" [date]="req.date" [status]="req.status"
-                        [type]="req.type" [amount]="req.estimatedAmount" [username]="req.username"></app-summary-card>
+                        <app-summary-card *ngIf="loadPedidos==true"[nro]="req.idSpendingUnitRequest" [sigla]="req.initials" [date]="req.date" [status]="req.status"
+                        [type]="req.type" [amount]="req.estimatedAmount" [username]="req.username" [permitFile]="loadFile"></app-summary-card>
                     </mat-grid-tile>
 
                     

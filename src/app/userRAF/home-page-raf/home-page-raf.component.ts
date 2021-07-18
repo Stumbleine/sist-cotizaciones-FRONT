@@ -25,7 +25,9 @@ export class HomePageRAFComponent implements OnInit {
     //this.iniciarW();
   }
   loadData(){
-    this.RequestService.get('http://localhost:8080/api/spendingUnit')
+    this.user=JSON.parse(localStorage.getItem("user"))
+    console.log(this.user.idUser)
+    this.RequestService.get('http://localhost:8080/api/spendingUnit/allRequest/'+this.user.idUser)
     .subscribe(r=>{
       console.log(r);
       this.requestsReceived = r;

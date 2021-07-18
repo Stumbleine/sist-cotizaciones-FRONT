@@ -15,6 +15,10 @@ export class HomePageComponent implements OnInit {
   public status= "";
   public notRequest=false;
   public user:any={};
+  public permits:any;
+  public loadButton:boolean=false;
+  public loadFile:boolean=false;
+  public loadPedidos:boolean=false;
   ngOnInit(): void {
     this.getDataUser();
     this.loadData();
@@ -43,6 +47,18 @@ export class HomePageComponent implements OnInit {
   }
   getDataUser(){
     this.user=JSON.parse(localStorage.getItem("user"))
+    this.permits=JSON.parse(localStorage.getItem("permits"))
+    this.permits.map(permit=>{
+      if(permit.authority=="ROLE_CREAR_PEDIDO"){
+        this.loadButton=true;
+      }
+      if(permit.authority=="ROLE_VER_PEDIDO"){
+        this.loadPedidos=true;
+      }
+      if(permit.authority=="ROLE_VER_INFORME"){
+        this.loadFile=true;
+      }
+    })
   }
   screenW(){
 
