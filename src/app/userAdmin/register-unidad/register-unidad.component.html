@@ -21,6 +21,14 @@
                         <mat-error class="form__validation--size">este campo es requerido</mat-error>
                         </mat-form-field>
                     </div>
+                    <div  class="field">
+                        <label id="example-radio-group-label">Seleccione el tipo de unidad </label>
+                        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                             (change)="printType($event)" formControlName="identifierUnit">
+                            <mat-radio-button  class="example-radio-button" value="3">Administracion financiera</mat-radio-button>
+                            <mat-radio-button  class="example-radio-button" value="2">Unidad de gasto</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
                     <div class="field">
                         <mat-form-field appearance="outline" style="width: 100%;">
                             <mat-label>Facultad</mat-label>
@@ -78,10 +86,10 @@
 
 <style>
     .card{
-        width:310px;
-        height: 380px;
+        width:330px;
+        height: 490px;
         background-color: white;
-
+        padding-left: 10px; padding-right: 10px;
     }
     .field{
         width: 100%;
@@ -101,4 +109,14 @@
   ::ng-deep .snackSuccess button {
     color: white;
   }
+  .example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    }
+
+    .example-radio-button {
+    margin: 5px;
+    margin-left: 20px;
+    }
 </style>

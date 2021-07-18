@@ -77,31 +77,33 @@
                     </div>
                     <mat-divider></mat-divider>                
                     <div style="margin-top: 15px;">
-                        <mat-grid-list cols="1" rowHeight="70px" gutterSize="7px">
-                            <div style="height: 310px; overflow: scroll; overflow-x: hidden;    ">
-                            <mat-grid-tile *ngFor="let unit of units" >
+                        <div style="height: 310px; overflow: scroll; overflow-x: hidden;    ">
+                        <mat-grid-list cols="1" rowHeight="83px" gutterSize="7px">
+                            
+                            <mat-grid-tile *ngFor="let unit of units"  >
                                 
-                                <div class="card-unit">
-                                    <h3 class="title-unit" >{{unit.nameUnit}}</h3>
+                                <div class="card-unit" >
+                                    <h4 class="title-unit" style="line-height: 0px;">{{unit.nameUnit}}</h4>
+                                    
+                                    <h4   *ngIf="unit.responsable!==null">Responsable: <p>{{unit.responsable}}</p></h4>
 
-                                    <h4 *ngIf="unit.responsable!==null">Responsable: <p>{{unit.responsable}}</p></h4>
-                                    
-                                        
-                                        <div style="display: flex; height: 25px; ">
-                                            <h4 *ngIf="unit.responsable==null"> Responsable: <p style="font-style: italic;">sin asignar</p> </h4>
-                                            <div style="margin-left: 15px;">
-                                                <button style="  height: 27px; width: 27px;"
-                                                        mat-icon-button (click)="openAssignement(unit.employees)" >
-                                                        <mat-icon style="margin-bottom: 15px; color:var(--btn-color-pri);  font-size:25px;">person</mat-icon></button>
+                                    <div *ngIf="unit.responsable==null" style="display: flex; height: 20px; ">
+                                            <h4 style="margin-top: 6px;"> Responsable: <p>sin asignar</p> </h4>
+
+                                            <div style="margin-left: 15px; ">
+                                                <button style=" height: 20px; width: 20px; " mat-icon-button (click)="openAssignement(unit.employees)" >
+                                                        <mat-icon style="margin-bottom: 25px; color:var(--btn-color-pri);  font-size:20px;">person</mat-icon>
+                                                </button>
                                             </div>
-                                        </div>
-                                    
+                                    </div>
+                                    <h4 style="margin-top: 7px;" >{{unit.faculty}}</h4>
                                     <!--h4 >Descripción: {{unit.description}}</h4-->
                                 </div>
                                 
                             </mat-grid-tile>
-                            </div>
+                            
                         </mat-grid-list>
+                    </div>
                     </div>
                 </div>
 

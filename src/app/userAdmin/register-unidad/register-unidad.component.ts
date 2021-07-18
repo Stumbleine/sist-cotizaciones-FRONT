@@ -23,6 +23,7 @@ export class RegisterUnidadComponent implements OnInit {
   registerUnit= this.formBuilder.group({
     nameUnit:['',[Validators.required]],
     description:['',[Validators.required]],
+    identifierUnit:['',[Validators.required]],
     faculty:['',[Validators.required]],
 
   });
@@ -33,7 +34,9 @@ export class RegisterUnidadComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  printType(e){
+    console.log(this.registerUnit);
+  }
   saveUnit(unit,formDirective: FormGroupDirective){
     console.log("Esta es a unidadRegistrar",unit);
     

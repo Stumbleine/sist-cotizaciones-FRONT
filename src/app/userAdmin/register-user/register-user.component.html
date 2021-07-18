@@ -48,8 +48,8 @@
                     <div class="field" >
                         <mat-form-field appearance="outline" style="width: 100%;">
                             <mat-label>Asignar Rol</mat-label>
-                            <mat-select formControlName="idRole" required>
-                                <mat-option *ngFor="let rol of roles" [value]="rol.idRole">
+                            <mat-select formControlName="idRole" required (valueChange)="changeType($event)" >
+                                <mat-option *ngFor="let rol of roles" [value]="rol.idRole" >
                                     {{rol.roleName}}
                                   </mat-option>
                             </mat-select>
@@ -59,9 +59,14 @@
                         <mat-form-field appearance="outline" style="width: 100%;">
                             <mat-label>Unidad</mat-label>
                             <mat-select formControlName="idSpendingUnit" required>
-                                <mat-option *ngFor="let unit of units" [value]="unit.idSpendingUnit">
-                                    {{unit.nameUnit}}
-                                  </mat-option>
+                                
+
+                                <ng-container *ngIf="typeUnit=='3'">
+                                    <mat-option  *ngFor="let unit of rafUnits" [value]="unit.idSpendingUnit">{{unit.nameUnit}}</mat-option>
+                                </ng-container>
+                                  <ng-container *ngIf="typeUnit=='2'">
+                                    <mat-option  *ngFor="let unit of rugUnits" [value]="unit.idSpendingUnit">{{unit.nameUnit}}</mat-option>
+                                </ng-container>
                             </mat-select>
                           </mat-form-field>
                     </div>
@@ -132,10 +137,10 @@
 </div>
 <style>
     .card{
-        width:320px;
-        height: 640px;
+        width:330px;
+        height: 650px;
         background-color: white;
-
+        padding-left: 10px; padding-right: 10px;
     }
     .field{
         width: 100%;

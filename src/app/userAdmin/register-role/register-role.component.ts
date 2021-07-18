@@ -14,39 +14,57 @@ export class RegisterRoleComponent implements OnInit {
     private RequestService: RequestService,
     private snack:MatSnackBar
   ) { }
+  privilegeSelected=new FormControl();
 
-  registerUser= this.formBuilder.group({
+  registerRole= this.formBuilder.group({
     roleName:['',[Validators.required]],
     description:['',[Validators.required]],
+    privileges:['',[Validators.required]]
   });
 
   facultieSelected="none"
   typeUnit:string;
   privilegesList:any;
-  privilegesRAF:any;
-  privilegesRUG:any;
-  privigeleSelected=new FormControl();
+  privilegesRAF:any[]=[];
+  privilegesRUG:any[]=[];
+  //privilegesRUG:string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  checked = false;
   ngOnInit(): void {
     this.loadPrivileges();
-    this.filterPrivileges();
+    
 
   }
+  printType(e){
+    console.log(e,this.typeUnit);
+  }
+  print(e){
+    console.log(e);
+    console.log('formControl asasdas',this.privilegeSelected);
+  }
   loadPrivileges(){
-
+    this.RequestService.get('http://localhost:8080/api/privilege/allPrivileges').subscribe(r=>{
+      this.privilegesList=r;
+      console.log(this.privilegesList);
+      this.filterPrivileges();
+    })
   }
 
   filterPrivileges(){
-    for (let quot in this.privilegesList){
-      if(this.privilegesList[quot].function == '2'){
-        this.privilegesRAF.push(this.privilegesList[quot]);
-      }else if(this.privilegesList[quot].function == '1'){
-        this.privilegesRAF.push(this.privilegesList[quot]);
+    for (let priv in this.privilegesList){
+      if(this.privilegesList[priv].identifier == '2'){
+        this.privilegesRUG.push(this.privilegesList[priv]);
+      }else if(this.privilegesList[priv].identifier == '3'){
+        this.privilegesRAF.push(this.privilegesList[priv]);
       } 
     }
+    console.log('RAF __>',this.privilegesRAF);
+    console.log('RUG __>',this.privilegesRUG)
   }
-
-  saveRole(){
-    this.RequestService.post('http://localhost:8080/api/role/registerRole',{}).subscribe({
+  ss(role,formDirective: FormGroupDirective){
+    console.log("ROLE REGISTRADO >>>>>>>>>>",role)
+  }
+  saveRole(role,formDirective: FormGroupDirective){
+    this.RequestService.post('http://localhost:8080/api/role/registerRole',role).subscribe({
       next:()=>{
         this.snack.open('Usuario registrada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
         //window.location.reload();

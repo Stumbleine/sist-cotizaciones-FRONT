@@ -1,3 +1,6 @@
+mat-grid-tile {
+  background-color: white;
+}
 .card-unit {
   background-color: rgb(236, 236, 236);
   border-radius: 20px;
@@ -6,22 +9,23 @@
 
   padding: 10px;
 }
+.title-unit {
+  text-transform: uppercase;
+  color: var(--txt-color-title2);
+  margin-top: 20px;
 
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
 .card-unit h4 {
   display: flex;
+  line-height: 7px;
 }
 .card-unit p {
   margin-left: 5px;
   font-style: italic;
 }
-.title-unit {
-  text-transform: uppercase;
-  color: var(--txt-color-title2);
-  margin-top: 20px;
-  line-height: 0px;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-}
+
 .main {
   /*display: grid;
    place-items: center;*/

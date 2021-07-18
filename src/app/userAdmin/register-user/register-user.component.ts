@@ -63,9 +63,41 @@ export class RegisterUserComponent implements OnInit {
       this.user=this.data.user;
       this.editUser.controls['password'].setValue(this.passwordGenerate);
     }
-
+    this.filterUnit();
   }
+  rafUnits:any[]=[];
+  rugUnits:any[]=[];
+  typeUnit:string;
   //var generator = require('generate-password');
+
+  changeType(e){
+    console.log(e);
+    if(e==1){
+      this.typeUnit='1';
+    }else{
+      var role = this.roles.filter(function(role) {
+        return role.idRole === e;
+      });
+      var privelegios:any=role[0].privilegios;
+      this.typeUnit=privelegios[0].identifier;
+     console.log(role)
+     console.log(privelegios)
+      console.log("TYPE UNIT",this.typeUnit)
+    }
+  }
+  filterUnit(){
+    for (let priv in this.units){
+      if(this.units[priv].identifierUnit == '2'){
+        this.rugUnits.push(this.units[priv]);
+      }else if(this.units[priv].identifierUnit == '3'){
+        this.rafUnits.push(this.units[priv]);
+      } 
+    }
+    console.log('RAF __>',this.rafUnits);
+    console.log('RUG __>',this.rugUnits)
+  }
+
+
    generatePassword(passwordLength) {
     var numberChars = "0123456789";
     var upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
