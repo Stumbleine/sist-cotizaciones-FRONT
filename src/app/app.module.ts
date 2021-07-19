@@ -133,7 +133,6 @@ PdfMakeWrapper.setFonts(pdfFonts);
 
   ],
   providers: [RequestService,CookieService,interceptorProvider],
-  bootstrap: [AppComponent,FormRequestComponent,
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

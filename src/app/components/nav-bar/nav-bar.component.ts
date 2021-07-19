@@ -21,7 +21,7 @@ export class NavBarComponent implements OnInit {
   }
   logout(){
     this.cookieService.delete('token','/','localhost',false,'Lax')
-    localStorage.clear(); 
+    localStorage.clear()
     window.location.reload();
   }
   getDataUser(){

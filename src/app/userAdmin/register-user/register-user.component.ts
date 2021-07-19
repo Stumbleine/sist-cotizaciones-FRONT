@@ -185,7 +185,7 @@ export class RegisterUserComponent implements OnInit {
     //var valor=this.registerUser?.get(field)    console.log(valor)
 
     if(funct=='register'){
-      if(this.registerUser?.get(field).errors.required){
+      if(this.registerUser?.get(field).errors?.required){
         message="Campo nombre de usuario es requerido"
       }else if(this.registerUser?.get(field).hasError('pattern')){
         message="nombre de usuario no es valido"

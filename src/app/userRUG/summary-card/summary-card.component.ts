@@ -34,11 +34,14 @@ export class SummaryCardComponent implements OnInit {
   }
   data:any;
   getPDFReport(){
-    this.RequestService.get('http://localhost:8080/api/Document/Report/'+this.nro)
+    if(this.status== "Rechazado"|| this.status=="Aprobado"){
+      this.RequestService.get('http://localhost:8080/api/Document/Report/'+this.nro)
     .subscribe(file=>{
     this.data=file;
     console.log(this.data)
     })
+    }
+    
   }
   openReport(){
     this.getPDF_blob();
