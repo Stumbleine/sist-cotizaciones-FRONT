@@ -20,11 +20,11 @@
                       </mat-form-field>
                 </div>
                 <div class="monto">
-                    <h2>Monto tope</h2>
+                    <h2 style="font-size: 16px;">Monto tope</h2>
                     <div class="monto-div" >
                         <div>
                           <h2 *ngIf=" monto!=null ">Bs. {{monto}}</h2>
-                          <p *ngIf=" monto==null "style="font-style: italic ;">undefined</p>
+                          <p *ngIf=" monto==null "style="font-style: italic ; nargin-top:10px;">No definido</p>
                         </div>
                       </div>
                 </div>
@@ -65,7 +65,7 @@
     }
     .monto{
         display: flex;
-        width: 350px;
+        width: 330px;
         margin-top: 10px;
     }
     .monto h2 {

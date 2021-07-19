@@ -4,7 +4,7 @@
 }
 .monto {
   display: flex;
-  width: 400px;
+  width: 350px;
 
   align-items: center;
 }
@@ -20,7 +20,7 @@
   height: 55px;
   display: flex;
 
-  width: 250px;
+  width: 210px;
   justify-content: space-between;
   align-items: center;
 

@@ -103,7 +103,7 @@ place-items: center;">
 
                         <form class="quotations-section" [formGroup]="dateValidation">
                             <div style="text-align: center; padding: 15px;" *ngIf="dateExpiration==null || dateEdit==true">
-                                <p>Es necesario elegir una fecha de vencimiento para los formularios.</p>
+                                <p *ngIf="manageQuotes==true">Es necesario elegir una fecha de vencimiento para los formularios.</p>
                                 <div *ngIf="manageQuotes==true" style="display: inline-flex; align-items: center;">
                                     <mat-form-field  appearance="outline">
                                         <mat-label>Fecha de vencimiento</mat-label>
@@ -170,7 +170,13 @@ place-items: center;">
                             </div>
 
                             <div class="comparative__charts" *ngIf="activateChart()">
-                                <p>CUADRO COMPARATIVO</p><button mat-raised-button class="btn-raised-p"  (click)="setStateFalse()" *ngIf="reqReceived?.status=='Cotizando'"><mat-icon>refresh</mat-icon> NUEVO</button>
+                                <p>CUADRO COMPARATIVO</p>
+                                <ng-container *ngIf="manageQuotes==true">
+                                    <button  mat-raised-button class="btn-raised-p"  (click)="setStateFalse()" *ngIf="reqReceived?.status=='Cotizando'">
+                                        <mat-icon>refresh</mat-icon> 
+                                        NUEVO
+                                    </button>
+                                </ng-container>
                                 <app-comparative-chart *ngFor="let i of [1]" 
                                     [quotationsCompleted]="quotationsCompleted" [status]="status"  [pressedNew]="pressedNew"
                                     [manageQuotes]="manageQuotes" (chartComp)="comparativeChartRec($event)"
