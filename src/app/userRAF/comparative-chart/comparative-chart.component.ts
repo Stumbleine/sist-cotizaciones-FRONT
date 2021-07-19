@@ -24,6 +24,7 @@ export class ComparativeChartComponent implements OnInit {
   @Input()quotationsCompleted:any;
   @Input()status:any;
   @Input()pressedNew:any;
+  @Input() manageQuotes:boolean;
   constructor(
     private RequestService: RequestService,private rutaActiva: ActivatedRoute
   ) { }

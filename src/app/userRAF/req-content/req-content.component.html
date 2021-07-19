@@ -83,13 +83,15 @@ place-items: center;">
                   </div>
 
                     
-                    <div  style="text-align: end; margin-bottom: 10px; margin-top: 15px;"  
+                    <ng-container *ngIf="makeDecisions==true">
+                        <div  style="text-align: end; margin-bottom: 10px; margin-top: 15px;"  
                         *ngIf="DecisionDescripcion==false">
-                        <button mat-raised-button class="btn-raised-e" [disabled]="disabledButtons(reqReceived?.status)" 
-                        (click)="rechazarPendiente()">RECHAZAR</button>
-                        <button mat-raised-button class="btn-raised-s" [disabled]="disabledButtons(reqReceived?.status)" 
-                        (click)="changeState(reqReceived?.idSpendingUnitRequest,'Autorizado',null)">AUTORIZAR</button>
-                  </div>
+                            <button mat-raised-button class="btn-raised-e" [disabled]="disabledButtons(reqReceived?.status)" 
+                            (click)="rechazarPendiente()">RECHAZAR</button>
+                            <button mat-raised-button class="btn-raised-s" [disabled]="disabledButtons(reqReceived?.status)" 
+                            (click)="changeState(reqReceived?.idSpendingUnitRequest,'Autorizado',null)">AUTORIZAR</button>
+                        </div>
+                    </ng-container>
                 </mat-expansion-panel>
 
                 <!-- COTIZACIONES -->
@@ -102,7 +104,7 @@ place-items: center;">
                         <form class="quotations-section" [formGroup]="dateValidation">
                             <div style="text-align: center; padding: 15px;" *ngIf="dateExpiration==null || dateEdit==true">
                                 <p>Es necesario elegir una fecha de vencimiento para los formularios.</p>
-                                <div style="display: inline-flex; align-items: center;">
+                                <div *ngIf="manageQuotes==true" style="display: inline-flex; align-items: center;">
                                     <mat-form-field  appearance="outline">
                                         <mat-label>Fecha de vencimiento</mat-label>
                                         <input matInput  [(ngModel)]="dateExpired" type="date" placeholder="Ingrese fecha limite" formControlName='date' required > 
@@ -118,7 +120,7 @@ place-items: center;">
                                     Fecha de expiración de los formularios:  <p style="font-style: italic;"> {{dateExpiration}}</p>
                                 </h2>
                                 <div   style="margin-left: 10px;" >
-                                    <button mat-mini-fab matTooltip="editar fecha"  mat-icon-button (click)="dateEdit=true">
+                                    <button *ngIf="manageQuotes==true" mat-mini-fab matTooltip="editar fecha"  mat-icon-button (click)="dateEdit=true" >
                                         <mat-icon style="font-size: 20px; ">edit</mat-icon></button>
                                 </div>
                             </div>
@@ -128,13 +130,13 @@ place-items: center;">
                                     <mat-grid-tile *ngFor="let quotCard of quotationsCard" >
                                     <app-qoatation-card style="width: 100%;" [idSR]="reqReceived?.idSpendingUnitRequest" 
                                     [reqStatus]="reqReceived?.status"
-                                    [quot]='quotCard'
+                                    [quot]='quotCard' [manageQuotes]="manageQuotes"
                                     ></app-qoatation-card>
                                 </mat-grid-tile>
                             </mat-grid-list>
                             </div>
 
-                            <div style="text-align: center;padding: 15px;">
+                            <div *ngIf="manageQuotes==true" style="text-align: center;padding: 15px;">
                                 <button mat-raised-button class="btn-raised-p" (click)="openDialog()" 
                                 [disabled]="validDate(reqReceived?.status)"> <mat-icon>add</mat-icon> COTIZACIÓN</button>
                             </div>
@@ -161,7 +163,7 @@ place-items: center;">
                                 </mat-selection-list>
 
                             </div> 
-                            <div style="text-align: center;padding: 15px;">
+                            <div *ngIf="manageQuotes==true" style="text-align: center;padding: 15px;">
                                 <button mat-raised-button class="btn-raised-p" [disabled]="verifyCheck()" (click)="setStateButtonDialog()">GENERAR CUADRO</button>
                                 
 
@@ -169,9 +171,9 @@ place-items: center;">
 
                             <div class="comparative__charts" *ngIf="activateChart()">
                                 <p>CUADRO COMPARATIVO</p><button mat-raised-button class="btn-raised-p"  (click)="setStateFalse()" *ngIf="reqReceived?.status=='Cotizando'"><mat-icon>refresh</mat-icon> NUEVO</button>
-                                <app-comparative-chart *ngFor="let i of [1]" [quotationsCompleted]="quotationsCompleted"
-                                [status]="status"  [pressedNew]="pressedNew"
-                                (chartComp)="comparativeChartRec($event)"
+                                <app-comparative-chart *ngFor="let i of [1]" 
+                                    [quotationsCompleted]="quotationsCompleted" [status]="status"  [pressedNew]="pressedNew"
+                                    [manageQuotes]="manageQuotes" (chartComp)="comparativeChartRec($event)"
                                 ></app-comparative-chart>
                             </div>
 
@@ -209,7 +211,8 @@ place-items: center;">
                             <mat-error >Este campo es obligatorio</mat-error>
                         </mat-form-field>
                     </div>
-                    <div>
+                    
+                    <div *ngIf="makeDecisions==true">
                         <div style="text-align: center;padding: 15px;">
                             <button mat-raised-button class="btn-raised-error" 
                                 [disabled]="disabledBtnAR(reqReceived?.status)"  
@@ -221,7 +224,7 @@ place-items: center;">
                                 >APROBAR</button>
                         </div>
                     </div>
-
+                    
 
                 </div>
                 <div *ngIf="(reqReceived?.status=='Aprobado'||reqReceived?.status=='Rechazado')" 

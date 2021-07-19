@@ -7,9 +7,11 @@
 
     <div class="btn-icons">        
         <button mat-icon-button (click)="routerQuotation(quot?.state)"><mat-icon>launch</mat-icon></button>
-        <button mat-icon-button (click)="actionDelete(quot?.idPriceQuotation)" 
-            *ngIf="reqStatus=='Cotizando'"
-        ><mat-icon>delete</mat-icon></button>
+        <ng-container *ngIf="manageQuotes==true">
+            <button mat-icon-button *ngIf="reqStatus=='Cotizando'  " 
+            (click)="actionDelete(quot?.idPriceQuotation)" 
+    ><mat-icon>delete</mat-icon></button>
+        </ng-container>
     </div>
 
 </mat-card>

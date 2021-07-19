@@ -57,7 +57,6 @@ export class ReqContentComponent implements OnInit {
     private RequestService: RequestService,
     private rutaActiva: ActivatedRoute,
     private formBuilder: FormBuilder,) {}
-
   
   state:string;
   stateButton=false;
@@ -125,8 +124,14 @@ export class ReqContentComponent implements OnInit {
     {name:'Informe de aceptación',date:new Date('02/08/2021')}
   ]
   
-  
+  public user:any={};
+  public permits:any;
+  public manageQuotes:boolean=false;
+  public makeDecisions:boolean=false;
+  public viewRequest:boolean=false;
+
   ngOnInit(): void {
+    
     this.idReqSpending= this.rutaActiva.snapshot.params.id,
     this.loadData(this.idReqSpending);
 
@@ -136,7 +141,24 @@ export class ReqContentComponent implements OnInit {
     this.RequestService.disparadorChart.subscribe(data=>{
       this.stateButton=data;
     })
-    
+    this.getDataUser();
+    console.log(this.makeDecisions)
+  }
+
+  getDataUser(){
+    this.user=JSON.parse(localStorage.getItem("user"))
+    this.permits=JSON.parse(localStorage.getItem("permits"))
+    this.permits.map(permit=>{
+      if(permit.authority=="ROLE_VER_DETALLE_PEDIDO"){
+        this.viewRequest=true;
+      }
+      if(permit.authority=="ROLE_GESTIONAR_COTIZACIONES"){
+        this.manageQuotes=true;
+      }
+      if(permit.authority=="ROLE_TOMAR_DECISION"){
+        this.makeDecisions=true;
+      }
+    })
   }
 
 //SOLICITUD DE PEDIDO functions and HTTP

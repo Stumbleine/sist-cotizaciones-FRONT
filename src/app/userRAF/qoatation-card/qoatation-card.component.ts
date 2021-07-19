@@ -23,6 +23,7 @@ export class QoatationCardComponent implements OnInit {
   @Input() idSR:any
   @Input() quot:any;
   @Input() reqStatus:any;
+  @Input() manageQuotes:boolean;
 
   
   routerQuotation(status){

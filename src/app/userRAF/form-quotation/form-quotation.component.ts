@@ -92,14 +92,38 @@ export class FormQuotationComponent implements OnInit {
   public items:Item[]=[];
   public idQuot:any;
   public idSR:any;
+
+  public user:any={};
+  public permits:any;
+  public manageQuotes:boolean=false;
+  public makeDecisions:boolean=false;
+  public viewRequest:boolean=false;
   ngOnInit(): void {
 
     this.idQuot= this.rutaActiva.snapshot.params.idQ;
     this.idSR= this.rutaActiva.snapshot.params.idSR;
     this.loadDataQuotation();
     this.getFiles()
+    this.getDataUser()
     console.log("asasas",this.idQuot)
   }
+  getDataUser(){
+    this.user=JSON.parse(localStorage.getItem("user"))
+    this.permits=JSON.parse(localStorage.getItem("permits"))
+    this.permits.map(permit=>{
+      if(permit.authority=="ROLE_VER_DETALLE_PEDIDO"){
+        this.viewRequest=true;
+      }
+      if(permit.authority=="ROLE_GESTIONAR_COTIZACIONES"){
+        this.manageQuotes=true;
+      }
+      if(permit.authority=="ROLE_TOMAR_DECISION"){
+        this.makeDecisions=true;
+      }
+    })
+  }
+
+
   dataFile:any;
   getFiles(){
     this.RequestService.get('http://localhost:8080/api/Document/Quotation/'+this.idQuot)
@@ -271,9 +295,9 @@ export class FormQuotationComponent implements OnInit {
     return this.priceQuotationDetail.map(t => t.totalPrice).reduce((acc, value) => acc + value, 0);
   }
   
-  goForm(){
-    this.router.navigate(['/req-content/:id']);
-    window.location.reload();
+  backRequestContent(){
+    this.router.navigate(['/req-content/'+this.idSR]);
+
   }
 
 

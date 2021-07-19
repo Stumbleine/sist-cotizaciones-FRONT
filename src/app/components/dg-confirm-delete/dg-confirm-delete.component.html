@@ -1,4 +1,4 @@
-<div *ngIf="quotState==('SIN COTIZAR' || 'EXPIRADO')">
+<div *ngIf="quotState=='SIN COTIZAR' || quotState=='EXPIRADO'">
     <div>
         <h2>Esta seguro de eliminar la cotizacion {{nameBussines}}?</h2>
         <p>Se eliminara toda la informacion y documentos adjuntos</p>
@@ -8,7 +8,7 @@
     <button mat-raised-button style="background-color: var(--btn-color-pri); color:white " class="raised" (click)="deleteQuot(idQuot)">SI, ELIMINAR</button>
     </div>
 </div>
-<div *ngIf="quotState==('INCOMPLETO' || 'COTIZADO')">
+<div *ngIf="quotState== 'INCOMPLETO' || quotState=='COTIZADO'">
     <div>
         <h2>No se puede eliminar la cotización</h2>
         <p>La cotizacion ya contiene información.</p>

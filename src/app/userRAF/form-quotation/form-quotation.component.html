@@ -12,20 +12,23 @@
                 </div>
                 <span class="example-spacer"></span>
                 <div class="header--actions">
-                    <button mat-button matTooltip="Subir cotizacion escaneado" class="btn-icons" (click)="openUploader()">
+                    <button *ngIf="manageQuotes==true" mat-button matTooltip="Subir cotizacion escaneado" class="btn-icons" (click)="openUploader()">
                         <mat-icon *ngIf="dataFile==null">upload_file</mat-icon>
                         <mat-icon *ngIf="dataFile!=null">task</mat-icon>
                     </button>
                     <button mat-button matTooltip="Imprimir formulario" class="btn-icons" (click)="printForm()">
                         <mat-icon >print</mat-icon>
                     </button>
-                    <button mat-raised-button style="margin-right: 25px; margin-left: 15px;" (click)="openGLink()"> ENVIAR </button>
+                    <button *ngIf="manageQuotes==true" mat-raised-button style="margin-right: 25px; margin-left: 15px;" (click)="openGLink()"> ENVIAR </button>
                 </div>
             </div>
 
-
+            
 
             <div style="padding:10px;">
+                <div style="margin-top: 5px;">
+                    <button mat-stroked-button (click)="backRequestContent()"> <mat-icon matSuffix>arrow_back</mat-icon> Volver</button>
+                </div>
                 <div *ngIf="!thereIsBusiness()">
                     <h3>Información de la empresa</h3>
                     <div class="info-empresa" style="padding: 15px; ">
@@ -204,19 +207,25 @@
                             <mat-error class="form__validation--size">campo comentario es requerido</mat-error>
                           </mat-form-field>
                     </div>
+                    
+                <ng-container *ngIf="manageQuotes==true">
                     <mat-divider></mat-divider>
-
                 <div  class="form-actions">
                     <div *ngIf="validPDFupload==true">
                         <p style="color: #ff4848; margin-right: 15px;">
                             Aun no se subio un documento escaneado de la cotización.
                         </p>
                     </div>
-                    <button mat-button style="color: #ff4848;margin-right: 15px;" (click)="openDialogCancel();" type="button"> CANCELAR</button>
-                    <button mat-raised-button class="btn-raised" style="margin-right: 25px;" [disabled]="quotationForm.invalid" type="submit" >
-                        GUARDAR
+                    <button mat-button style="color: #ff4848;margin-right: 15px;" 
+                            (click)="openDialogCancel();" type="button"> 
+                            CANCELAR
+                    </button>
+                    <button mat-raised-button class="btn-raised" style="margin-right: 25px;" 
+                            [disabled]="quotationForm.invalid" type="submit" >
+                            GUARDAR
                     </button>
                 </div>
+                </ng-container>
                 </form>
                 
             </div>
