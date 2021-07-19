@@ -24,14 +24,15 @@
         <a mat-button><mat-icon>business</mat-icon> Empresas</a> -->
         <a mat-raised-button class="btn-raised " [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon> {{user.userName}}<mat-icon>expand_more</mat-icon></a>
             <mat-menu #menu="matMenu" class="menu-without-scroll">
-                <button mat-menu-item>
-                    <mat-icon>work</mat-icon>
-                    <span>{{user.spendingUnit}}</span>
-                  </button>
-                  <button mat-menu-item style="max-width:fit-content;min-width: fit-content">
-                    <mat-icon>account_balance</mat-icon>
-                    <span >{{user.faculty}}</span>
-                  </button>
+                <ng-container  >
+                  <div class="menu-info" >
+                   <div> <mat-icon style="color: #555555;">account_circle</mat-icon></div>
+                    <div><p style="text-transform: uppercase; line-height: 15px;">{{user.userName}}</p></div>
+                    <div><p>{{user.spendingUnit}}</p></div>
+                    <div><p>{{user.faculty}}</p></div>
+                  </div>
+                </ng-container>
+        
                 <button mat-menu-item class="btn-logout">
                     <a mat-raised-button color="accent"(click)="logout()" style="width: 100%;"><mat-icon>logout</mat-icon> Cerrar sesion</a>
                 </button>
@@ -51,14 +52,14 @@
         <a mat-button routerLink="/home-rug"><mat-icon>home</mat-icon> Inicio</a>
         <a mat-raised-button class="btn-raised " [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon> {{user.userName}} <mat-icon>expand_more</mat-icon></a>
             <mat-menu #menu="matMenu" class="menu-without-scroll">
-                <button mat-menu-item>
-                    <mat-icon>work</mat-icon>
-                    <span>{{user.spendingUnit}}</span>
-                  </button>
-                  <button mat-menu-item style="max-width:fit-content;min-width: fit-content">
-                    <mat-icon>account_balance</mat-icon>
-                    <span >{{user.faculty}}</span>
-                  </button>
+              <ng-container  >
+                <div class="menu-info" >
+                 <div> <mat-icon style="color: #555555;">account_circle</mat-icon></div>
+                  <div><p style="text-transform: uppercase; line-height: 15px;">{{user.userName}}</p></div>
+                  <div><p>{{user.spendingUnit}}</p></div>
+                  <div><p>{{user.faculty}}</p></div>
+                </div>
+              </ng-container>
                 <button mat-menu-item class="btn-logout">
                     <a mat-raised-button color="accent"(click)="logout()" style="width: 100%;"><mat-icon>logout</mat-icon> Cerrar sesion</a>
                 </button>

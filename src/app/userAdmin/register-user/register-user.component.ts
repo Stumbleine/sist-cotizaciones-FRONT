@@ -53,7 +53,7 @@ export class RegisterUserComponent implements OnInit {
   hide = false;
   passwordGenerate:any=this.generatePassword(8);
   rolesDisp:any[]=[];
-
+  destroy:boolean;
   ngOnInit(): void {
     this.transform=this.data.transform;
     this.roles=this.data.roleList;
@@ -65,12 +65,13 @@ export class RegisterUserComponent implements OnInit {
       this.user=this.data.user;
       this.fiterRoleType();
       this.editUser.controls['name'].setValue(this.user?.name);
-      this.editUser.controls['password'].setValue(this.user?.password);
+      //this.editUser.controls['password'].setValue(this.user?.password);
       this.editUser.controls['email'].setValue(this.user?.email);
       this.editUser.controls['username'].setValue(this.user?.username);
 
     }
     this.filterUnit();
+    setTimeout(() => {  return this.destroy=false; }, 20000);
   }
   
   fiterRoleType(){
@@ -163,6 +164,7 @@ export class RegisterUserComponent implements OnInit {
     });
   }
   saveEdit(update,formDirective: FormGroupDirective){
+
     
     this.RequestService.put('http://localhost:8080/api/user/updateDataUser/'+this.user?.idUser, update)
     .subscribe({
@@ -174,7 +176,7 @@ export class RegisterUserComponent implements OnInit {
         this.snack.open('Fallo al actualizar el usuario','CERRAR',{duration:5000})
       }
     });
-    console.log(update)
+
   }
 
   existUser:string;
@@ -234,10 +236,12 @@ export class RegisterUserComponent implements OnInit {
       (this.registerUser.get(field).touched || this.registerUser.get(field).dirty) &&
        !this.registerUser.get(field).valid
     )  }
+
     isValidFieldEdit(field: string):boolean{
       return(
         (this.editUser.get(field).touched || this.editUser.get(field).dirty) &&
          !this.editUser.get(field).valid
       )  }
-
+      
+     
 }
