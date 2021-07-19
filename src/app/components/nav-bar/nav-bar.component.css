@@ -60,4 +60,8 @@ mat-form-field{
 }
 .btn-logout{
   color: white;
+  width: 100%;
+}
+::ng-deep .menu-without-scroll {
+  overflow: hidden !important;
 }

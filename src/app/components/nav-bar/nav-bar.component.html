@@ -25,7 +25,7 @@
         <a mat-raised-button class="btn-raised " [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon> {{user.userName}}<mat-icon>expand_more</mat-icon></a>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item class="btn-logout">
-                    <a mat-raised-button color="accent"(click)="logout()" ><mat-icon>logout</mat-icon> Cerrar sesion</a>
+                    <a mat-raised-button color="accent"(click)="logout()" style="width: 100%;"><mat-icon>logout</mat-icon> Cerrar sesion</a>
                 </button>
             </mat-menu>
         
@@ -42,9 +42,17 @@
         <div class="example-spacer"></div>
         <a mat-button routerLink="/home-rug"><mat-icon>home</mat-icon> Inicio</a>
         <a mat-raised-button class="btn-raised " [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon> {{user.userName}} <mat-icon>expand_more</mat-icon></a>
-            <mat-menu #menu="matMenu">
+            <mat-menu #menu="matMenu" class="menu-without-scroll">
+                <button mat-menu-item>
+                    <mat-icon>work</mat-icon>
+                    <span>{{user.spendingUnit}}</span>
+                  </button>
+                  <button mat-menu-item style="max-width:fit-content;min-width: fit-content">
+                    <mat-icon>account_balance</mat-icon>
+                    <span >{{user.faculty}}</span>
+                  </button>
                 <button mat-menu-item class="btn-logout">
-                    <a mat-raised-button color="accent"(click)="logout()" ><mat-icon>logout</mat-icon> Cerrar sesion</a>
+                    <a mat-raised-button color="accent"(click)="logout()" style="width: 100%;"><mat-icon>logout</mat-icon> Cerrar sesion</a>
                 </button>
             </mat-menu>
     </mat-toolbar>
@@ -58,14 +66,13 @@
       </button>
     <span>Sistema de cotizaciones</span>
     <div class="example-spacer"></div>
-    <a  mat-button routerLink=""><mat-icon>fact_check</mat-icon>Roles/Permisos</a>
-    <a  mat-button routerLink=""><mat-icon>person</mat-icon>Usuarios</a>
-    <a mat-button routerLink=""><mat-icon>supervised_user_circle</mat-icon> Unidades</a>
-    <a mat-button routerLink=""><mat-icon>business</mat-icon> Empresas</a>
+    <a  mat-button ><mat-icon>fact_check</mat-icon>Roles/Permisos</a>
+    <a  mat-button ><mat-icon>person</mat-icon>Usuarios</a>
+    <a mat-button ><mat-icon>supervised_user_circle</mat-icon> Unidades</a>
     <a mat-raised-button class="btn-raised "[matMenuTriggerFor]="menu" ><mat-icon>account_circle</mat-icon> {{user.userName}}<mat-icon>expand_more</mat-icon></a>
         <mat-menu #menu="matMenu">
             <button mat-menu-item class="btn-logout">
-                <a mat-raised-button color="accent"(click)="logout()" ><mat-icon>logout</mat-icon> Cerrar sesion</a>
+                <a mat-raised-button color="accent"(click)="logout()" style="width: 100%;"><mat-icon>logout</mat-icon> Cerrar sesion</a>
             </button>
         </mat-menu>
 </mat-toolbar>

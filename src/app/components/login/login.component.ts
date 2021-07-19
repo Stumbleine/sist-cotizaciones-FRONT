@@ -44,7 +44,7 @@ public errorLogin:boolean;
         this.cookieService.set('token',respuesta.jwt,dateNow)
         this.idUser=respuesta.id;
         this.userName=respuesta.userName;
-        this.user={idUser:this.idUser,userName:this.userName}
+        this.user={idUser:this.idUser,userName:this.userName,spendingUnit:respuesta.spendingUnit,faculty:respuesta.faculty}
         this.saveDataUser(respuesta.roles);
         this.sendRoute(respuesta.identifier)
         
