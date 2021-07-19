@@ -66,13 +66,13 @@ export class RegisterRoleComponent implements OnInit {
   saveRole(role,formDirective: FormGroupDirective){
     this.RequestService.post('http://localhost:8080/api/role/registerRole',role).subscribe({
       next:()=>{
-        this.snack.open('Usuario registrada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
-        //window.location.reload();
+        this.snack.open('Rol registrada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
+        window.location.reload();
         console.log('exito registrar role');
     
       },
       error:()=>{
-        this.snack.open('Fallo al registrar el usuario','CERRAR',{duration:5000});
+        this.snack.open('Fallo al registrar el Rol','CERRAR',{duration:5000});
         console.log('error registrar role');
       }
     })

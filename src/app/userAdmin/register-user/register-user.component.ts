@@ -163,7 +163,8 @@ export class RegisterUserComponent implements OnInit {
     });
   }
   saveEdit(update,formDirective: FormGroupDirective){
-    /*this.RequestService.put('http://localhost:8080/api/user/updateDataUser/'+this.user?.idUser, update)
+
+    this.RequestService.put('http://localhost:8080/api/user/updateDataUser/'+this.user?.idUser, update)
     .subscribe({
       next:()=>{
         this.snack.open('Usuario actualizado exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
@@ -172,7 +173,7 @@ export class RegisterUserComponent implements OnInit {
       error:()=>{
         this.snack.open('Fallo al actualizar el usuario','CERRAR',{duration:5000})
       }
-    });*/
+    });
     console.log(update)
   }
 
