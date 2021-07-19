@@ -33,16 +33,8 @@
                     <mat-label>Privilegios</mat-label>
                     <mat-select  multiple (valueChange)="print($event)" formControlName="privileges">
                         <ng-container *ngIf="typeUnit==='3'">
-                            
-                            <mat-option [value]="privilegesRAF[0]?.privilege"   >
-                                {{privilegesRAF[0]?.privilege}}
-                            </mat-option>
-                            <mat-option [value]="privilegesRAF[1]?.privilege">
-                                {{privilegesRAF[1]?.privilege}}
-                            </mat-option>
-                            <mat-option [value]="privilegesRAF[2]?.privilege" >
-                                {{privilegesRAF[2]?.privilege}}
-                            </mat-option>
+                            <mat-option  *ngFor="let priv of privilegesRAF" [value]="priv">{{priv.privilege}}</mat-option>
+
                         </ng-container>
                       
                         <ng-container *ngIf="typeUnit==='2'">

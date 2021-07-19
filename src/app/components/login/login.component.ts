@@ -20,17 +20,17 @@ public errorLogin:boolean;
     username: ['',[Validators.required]],
     password: ['',[Validators.required]],
   });
-
+ 
   constructor(
     private formBuilder: FormBuilder,
     private RequestService: RequestService,
     private cookieService: CookieService,
     private router: Router
   ) { }
-
+  hide=true;
   ngOnInit(): void {
   }
-
+  
   onLogin(login,formDirective: FormGroupDirective){
     this.errorLogin=false;
     console.log(login)

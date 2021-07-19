@@ -26,7 +26,11 @@
                     <div class="field">
                         <mat-form-field  appearance="outline" style="width: 100%;">
                         <mat-label>Contraseña</mat-label>
-                        <input matInput placeholder="Ingrese contraseña" required type="password" formControlName='password'>
+                        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Ingrese contraseña" 
+                                required type="password" formControlName='password'>
+                        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
                         <mat-error>este campo es requerido</mat-error>
                         </mat-form-field>
                     </div>

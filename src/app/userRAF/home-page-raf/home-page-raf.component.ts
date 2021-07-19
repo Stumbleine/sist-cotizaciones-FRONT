@@ -18,15 +18,37 @@ export class HomePageRAFComponent implements OnInit {
   public requestsReceivedCopy=null
   public status= "";
   public notRequest=false;
-  public user:any;
+  public user:any={};
+
+  public permits:any;
+  public manageQuotes:boolean=false;
+  public makeDecisions:boolean=false;
+  public loadPedidos:boolean=false;
   ngOnInit(): void {
+    this.getDataUser();
     this.loadData();
     this.loadMonto();
     //this.iniciarW();
   }
-  loadData(){
+  getDataUser(){
     this.user=JSON.parse(localStorage.getItem("user"))
-    console.log(this.user.idUser)
+    this.permits=JSON.parse(localStorage.getItem("permits"))
+    console.log("USER--->",this.user);
+    console.log("PERMITS--->",this.permits)
+    this.permits.map(permit=>{
+      if(permit.authority=="ROLE_VER_DETALLE_PEDIDO"){
+        this.loadPedidos=true;
+      }
+      if(permit.authority=="ROLE_GESTIONAR_COTIZACIONES"){
+        this.manageQuotes=true;
+      }
+      if(permit.authority=="ROLE_TOMAR_DECISION"){
+        this.makeDecisions=true;
+      }
+    })
+  }
+  loadData(){
+   // this.user=JSON.parse(localStorage.getItem("user")) console.log(this.user.idUser)
     this.RequestService.get('http://localhost:8080/api/spendingUnit/allRequest/'+this.user.idUser)
     .subscribe(r=>{
       console.log(r);

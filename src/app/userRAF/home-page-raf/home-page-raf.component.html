@@ -46,7 +46,7 @@
                 <mat-grid-list [cols]="cols$ | async" rowHeight="270px" gutterSize="10px">
                     
                     <mat-grid-tile *ngFor="let req of requestsReceived" >
-                        <app-sum-card-raf [nro]="req.idSpendingUnitRequest" [sigla]="req.initials" [date]="req.date" [status]="req.status"
+                        <app-sum-card-raf *ngIf="loadPedidos==true" [nro]="req.idSpendingUnitRequest" [sigla]="req.initials" [date]="req.date" [status]="req.status"
                         [type]="req.type" [amount]="req.estimatedAmount" [username]="req.username"></app-sum-card-raf>
                     </mat-grid-tile>
 
