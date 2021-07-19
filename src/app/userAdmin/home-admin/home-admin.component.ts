@@ -42,7 +42,7 @@ export class HomeAdminComponent implements OnInit {
   displayedColumns: string[] = ['index', 'name', 'role', 'email','registrationDate','spendingUnit','actions'];
   dataSource =  new MatTableDataSource<User>([]);
   columnas=[
-    {titulo:"NOMBRE USUARIO" ,name: "name"},
+    {titulo:"NOMBRE" ,name: "name"},
     {titulo:"USER ROL" ,name: "role"},
     {titulo:"CORREO" ,name: "email"},
     {titulo:"FECHA CREACIÓN" ,name: "registrationDate"},

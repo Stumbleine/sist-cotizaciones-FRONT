@@ -34,7 +34,6 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
 //componentes propios
 import { HomePageComponent } from './userRUG/home-page/home-page.component';
 import { SummaryCardComponent } from './userRUG/summary-card/summary-card.component';
-import { UserBarComponent } from './userRUG/user-bar/user-bar.component';
 import { DialogRequestedComponent } from './userRUG/dialog-requested/dialog-requested.component';
 import { HomePageRAFComponent } from './userRAF/home-page-raf/home-page-raf.component'
 import { DialogValidationComponent } from './userRUG/dialog-validation/dialog-validation.component';
@@ -80,7 +79,7 @@ PdfMakeWrapper.setFonts(pdfFonts);
   
     HomePageComponent, 
     SummaryCardComponent,
-    UserBarComponent,
+
     DialogRequestedComponent, 
     HomePageRAFComponent,
     FormRequestComponent,
