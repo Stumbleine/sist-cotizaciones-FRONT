@@ -184,7 +184,7 @@ export class FormQuotationBusinessComponent implements OnInit {
        this.RequestService.put('http://localhost:8080/api/quotation/updateQuotation/'+this.idQuot,quotation)
        .subscribe( respuesta =>{
          console.log('Solicitud enviada!!');
-         this.openSnackBar();
+         //this.openSnackBar();
          console.log({"idBusiness":this.business.idBusiness})
          this.RequestService.put('http://localhost:8080/api/quotation/updateQuotationAddingBusiness/'+this.idQuot,{"idBusiness":this.business.idBusiness})
             .subscribe( respuesta =>{
@@ -210,7 +210,7 @@ export class FormQuotationBusinessComponent implements OnInit {
        this.pressed=false;
        this.refresh();
 
-       window.location.reload();
+       //window.location.reload();
    /* }
    else{
        console.log("Por lo menos un item!!!")
@@ -231,7 +231,7 @@ export class FormQuotationBusinessComponent implements OnInit {
               .subscribe( respuesta =>{
                 console.log('Solicitud enviada!!');
                 this.postFilesFeatures(); 
-                this.openSnackBar();
+                //this.openSnackBar();
                 
               })
     
@@ -249,7 +249,7 @@ export class FormQuotationBusinessComponent implements OnInit {
         this.pressed=false;
         this.refresh();
 
-        window.location.reload();
+       // window.location.reload();
   }
   openDialog() {
     this.dialog.open(DialogValidationSendComponent);
@@ -340,6 +340,8 @@ export class FormQuotationBusinessComponent implements OnInit {
         {
           next:()=>{
             console.log('Archivo guardado'+ this.listFiles[i].idRow)
+            this.openSnackBar();
+            window.location.reload();
           },
           error:()=>{
             console.log('Archivo no guardado'+ this.listFiles[i].idRow)
