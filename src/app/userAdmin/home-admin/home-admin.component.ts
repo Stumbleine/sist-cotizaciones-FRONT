@@ -51,10 +51,11 @@ export class HomeAdminComponent implements OnInit {
   ];
   roles:Role[]=[];
 
-  displayedColumnsRole: string[] = ['index', 'roleName','privileges', 'actions'];
+  displayedColumnsRole: string[] = ['index', 'roleName','description','privileges'];
   dataSourceRole =  new MatTableDataSource<Role>([]);
   columnasRole=[
     {titulo:"NOMBRE ROL" ,name: "roleName"},
+    {titulo:"DESCRIPCIÓN" ,name: "description"},
   ];
 
   ngOnInit(): void {

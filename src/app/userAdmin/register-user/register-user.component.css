@@ -1,0 +1,24 @@
+.card {
+  width: 330px;
+  height: 650px;
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.field {
+  width: 100%;
+  padding-bottom: 12px;
+}
+
+.btn-login {
+  background-color: var(--txt-color-title2);
+  width: 100%;
+  color: white;
+  height: 40px;
+}
+::ng-deep .snackSuccess {
+  background-color: var(--state-color-5);
+}
+::ng-deep .snackSuccess button {
+  color: white;
+}

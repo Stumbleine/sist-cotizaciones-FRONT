@@ -81,10 +81,13 @@
         
         </form>
 </div>
+
+
+<!--EDITAR USUARIO-->
 <div *ngIf="transform=='edit'">
     <form  [formGroup]="editUser" #formDirective="ngForm" (ngSubmit)="saveEdit(editUser.value,formDirective)">
 
-        <div class="card" style="height: 460px;"> 
+        <div class="card" style="height: 580px;"> 
             <div style="text-align: center; margin-top: 10px; margin-bottom: 15px;"> 
                 <h2>Actualizar datos</h2>
             </div> 
@@ -125,6 +128,15 @@
                         <mat-error *ngIf="isValidFieldEdit('email')" >{{getErrorMessageEmail('email','edit')}}</mat-error>
                         </mat-form-field>
                     </div>
+                    <div class="field">
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>Role</mat-label>
+                            <mat-select   (valueChange)="print($event)" formControlName="idRole">
+                                    <mat-option  *ngFor="let role of rolesDisp" [value]="role.idRole">{{role.roleName}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>
+
                     <div style="text-align: center; width: 100%;">
                         <button mat-raised-button class="btn-login" >
                             ACTUALIZAR
@@ -135,30 +147,5 @@
         
     </form>
 </div>
-<style>
-    .card{
-        width:330px;
-        height: 650px;
-        background-color: white;
-        padding-left: 10px; padding-right: 10px;
-    }
-    .field{
-        width: 100%;
-        padding-bottom: 12px;
 
-    }
-    
-    .btn-login{
-        background-color: var( --txt-color-title2);
-        width: 100%;
-        color: white;
-        height: 40px;
-    }
-    ::ng-deep .snackSuccess {
-    background-color: var(--state-color-5);
-  }
-  ::ng-deep .snackSuccess button {
-    color: white;
-  }
-</style>
 

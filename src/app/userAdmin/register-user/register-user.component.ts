@@ -48,10 +48,12 @@ export class RegisterUserComponent implements OnInit {
       asyncValidators:[this.usernameCheck()],
         updateOn: 'blur'
     }],
+    idRole:['',[]],
   })
   hide = false;
   passwordGenerate:any=this.generatePassword(8);
-  
+  rolesDisp:any[]=[];
+
   ngOnInit(): void {
     this.transform=this.data.transform;
     this.roles=this.data.roleList;
@@ -61,10 +63,31 @@ export class RegisterUserComponent implements OnInit {
 
     if(this.transform=='edit'){
       this.user=this.data.user;
-      this.editUser.controls['password'].setValue(this.passwordGenerate);
+      this.fiterRoleType();
+      this.editUser.controls['name'].setValue(this.user?.name);
+      this.editUser.controls['password'].setValue(this.user?.password);
+      this.editUser.controls['email'].setValue(this.user?.email);
+      this.editUser.controls['username'].setValue(this.user?.username);
+
     }
     this.filterUnit();
   }
+  
+  fiterRoleType(){
+    var userPrivileges=this.user.privileges;
+    var privIdentifier= userPrivileges[0].identifier;
+    console.log(privIdentifier);
+    this.rolesDisp=this.filterRole(privIdentifier);
+    console.log("RD -->",this.rolesDisp)
+  }
+  filterRole(ident){
+    var role = this.roles.filter(function(role) {
+      return role.privilegios[0].identifier === ident;
+    });
+    console.log("ROLES DISPONIBLES",role)
+    return role;
+  }
+
   rafUnits:any[]=[];
   rugUnits:any[]=[];
   typeUnit:string;
@@ -130,7 +153,7 @@ export class RegisterUserComponent implements OnInit {
     .subscribe({
       next:()=>{
         this.snack.open('Usuario registrada exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
-        //window.location.reload();
+        window.location.reload();
         console.log("LOG >>=",user);
     
       },
@@ -140,16 +163,17 @@ export class RegisterUserComponent implements OnInit {
     });
   }
   saveEdit(update,formDirective: FormGroupDirective){
-    this.RequestService.put('http://localhost:8080/api/user/updateDataUser/'+this.user?.idUser, update)
+    /*this.RequestService.put('http://localhost:8080/api/user/updateDataUser/'+this.user?.idUser, update)
     .subscribe({
       next:()=>{
         this.snack.open('Usuario actualizado exitosamente.','CERRAR',{duration:5000,panelClass:'snackSuccess',})
-        window.location.reload();
+        //window.location.reload();
       },
       error:()=>{
         this.snack.open('Fallo al actualizar el usuario','CERRAR',{duration:5000})
       }
-    });
+    });*/
+    console.log(update)
   }
 
   existUser:string;
