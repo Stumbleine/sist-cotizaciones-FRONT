@@ -83,9 +83,9 @@
                             <mat-grid-tile *ngFor="let unit of units"  >
                                 
                                 <div class="card-unit" >
-                                    <h4 class="title-unit" style="line-height: 0px;">{{unit.nameUnit}}</h4>
+                                    <h4 class="title-unit" style="line-height: 0px;">{{unit.nameUnit}} (U{{unit.idSpendingUnit}})</h4>
                                     
-                                    <h4   *ngIf="unit.responsable!==null">Responsable: <p>{{unit.responsable}}</p></h4>
+                                    <div   *ngIf="unit.responsable!==null" style="display: flex; height: 18px; "><h4 >Responsable: <p>{{unit.responsable}}</p></h4></div>
 
                                     <div *ngIf="unit.responsable==null" style="display: flex; height: 20px; ">
                                             <h4 style="margin-top: 6px;"> Responsable: <p>sin asignar</p> </h4>

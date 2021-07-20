@@ -1,6 +1,9 @@
 <app-nav-bar [transform]="'rug'"></app-nav-bar>
 <div class="form">
   <form class="form__content " [formGroup]="requestForm" #formDirectiveNew="ngForm" (ngSubmit)="saveRequest(requestForm.value,formDirectiveNew)">
+    <div>
+      <button mat-stroked-button [routerLink]="['/home-rug']"> <mat-icon matSuffix>arrow_back</mat-icon> Volver</button>
+  </div>
     <div class="form__title">
       <p>PEDIDO </p>
 
