@@ -26,8 +26,11 @@
             
 
             <div style="padding:10px;">
-                <div style="margin-top: 5px;">
-                    <button mat-stroked-button (click)="backRequestContent()"> <mat-icon matSuffix>arrow_back</mat-icon> Volver</button>
+                <div style="display: flex; justify-content: space-between;">
+                    <div style="margin-top: 5px;">
+                        <button mat-stroked-button (click)="backRequestContent()"> <mat-icon matSuffix>arrow_back</mat-icon> Volver</button>
+                    </div>
+                    <p style="color: var(--txt-color-error); margin-right: 20px; margin-top: 15px; font-size: 16px;">Nro: {{dataQuotation.idPriceQuotation}}</p>
                 </div>
                 <div *ngIf="!thereIsBusiness()">
                     <h3>Información de la empresa</h3>

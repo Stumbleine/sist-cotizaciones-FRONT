@@ -330,7 +330,7 @@ export class FormQuotationComponent implements OnInit {
 
       pdf.add(new Txt('SOLICITUD DE COTIZACIÓN').bold().alignment('center').fontSize(13).end);
       pdf.add(new Txt('Moneda (Bs)').bold().alignment('center').fontSize(12).end);
-      pdf.add(pdf.ln(1));
+      pdf.add(new Txt('Nro: '+this.dataQuotation.idPriceQuotation).alignment('right').margin([40,5]).color('red').end);
       pdf.add(new Txt('Razon Social: ...........................................................................................\
       Fecha: ............./............./............./').margin([20,10]).end);
       pdf.add(new Txt('Agradecemos a Uds. cotizarnos, los articulos que a continuacion se  detallan. Luego este formulario debe devolverse en sobre cerrado debidamente FIRMADO y SELLADO (favor especificar Marca, Modelo, Industria)')
@@ -374,7 +374,7 @@ export class FormQuotationComponent implements OnInit {
       pdf.add(new Txt('(  )  Al Contado').margin([120,5]).end)
       pdf.add(new Txt('(  )  Al Contado y a Crédito').margin([120,5]).end)
       pdf.add(new Txt('Comentarios:').margin([20,10]).end)
-      pdf.add(new Canvas([new Rect([30,5],[540,70]).color('white').lineColor('#c2c2c2').round(5).end]).end)
+      pdf.add(new Canvas([new Rect([30,5],[530,70]).color('white').lineColor('#c2c2c2').round(5).end]).end)
       pdf.create().print();
 
 }

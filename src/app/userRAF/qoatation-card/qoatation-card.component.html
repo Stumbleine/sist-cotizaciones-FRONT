@@ -5,13 +5,20 @@
         <p >{{quot?.state}}</p>
 
 
-    <div class="btn-icons">        
-        <button mat-icon-button (click)="routerQuotation(quot?.state)"><mat-icon>launch</mat-icon></button>
-        <ng-container *ngIf="manageQuotes==true">
-            <button mat-icon-button *ngIf="reqStatus=='Cotizando'  " 
-            (click)="actionDelete(quot?.idPriceQuotation)" 
-    ><mat-icon>delete</mat-icon></button>
-        </ng-container>
+    <div class="btn-icons">   
+        <div >
+            <p style="color: var(--txt-color-error);margin-top:15px; font-size: 16px;">
+                Nro {{quot.idPriceQuotation}}
+            </p>
+        </div>     
+        <div >
+            <button mat-icon-button (click)="routerQuotation(quot?.state)"><mat-icon>launch</mat-icon></button>
+            <ng-container *ngIf="manageQuotes==true">
+                <button mat-icon-button *ngIf="reqStatus=='Cotizando'  " 
+                    (click)="actionDelete(quot?.idPriceQuotation)" ><mat-icon>delete</mat-icon>
+                </button>
+            </ng-container>
+        </div>
     </div>
 
 </mat-card>
@@ -24,18 +31,19 @@
         font-style: italic;
         font-weight: 450;
         color: #747474;
-        
     }
     .btn-icons{
         text-align: end;
         margin-top: 20px;
-        
+
+        display: flex;
+        justify-content: space-between;
     }
     mat-icon{color:#525252}
     ::ng-deep .snackSuccess {
-  background-color: var(--state-color-5);
-}
-::ng-deep .snackSuccess button {
-  color: white;
-}
+     background-color: var(--state-color-5);
+    }
+    ::ng-deep .snackSuccess button {
+    color: white;
+    }
 </style>
