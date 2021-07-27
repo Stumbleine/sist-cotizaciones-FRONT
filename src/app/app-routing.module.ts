@@ -14,24 +14,27 @@ import {FilesComponent} from './components/file/files.component'
 import { LoginComponent } from './components/login/login.component';
 import { HomeAdminComponent } from './userAdmin/home-admin/home-admin.component';
 import { UserGuard } from './security/user.guard';
+import { RolRugGuard } from './security/rol-rug.guard';
+import { RolAdminGuard } from './security/rol-admin.guard';
+import { RolRafGuard } from './security/rol-raf.guard';
 const routes: Routes = [
-  { path: 'home-raf', component:  HomePageRAFComponent, canActivate:[UserGuard]},
-  { path: 'home-rug', component:  HomePageComponent, canActivate:[UserGuard]},
-  { path: 'form-solicitud', component:  FormRequestComponent,canActivate:[UserGuard]},
+  { path: 'home-raf', component:  HomePageRAFComponent, canActivate:[UserGuard,RolRafGuard]},
+  { path: 'home-rug', component:  HomePageComponent, canActivate:[UserGuard,RolRugGuard]},
+  { path: 'form-solicitud', component:  FormRequestComponent,canActivate:[UserGuard,RolRugGuard]},
   
   {path: '', pathMatch: 'full', redirectTo: 'home-rug'},
-  {path:'req-content/:id',component:ReqContentComponent,canActivate:[UserGuard]},
-  {path:'req-content/:idSR/form-quotation/:idQ',component:FormQuotationComponent,canActivate:[UserGuard]},
+  {path:'req-content/:id',component:ReqContentComponent,canActivate:[UserGuard,RolRafGuard]},
+  {path:'req-content/:idSR/form-quotation/:idQ',component:FormQuotationComponent,canActivate:[UserGuard,RolRafGuard]},
   {path: 'cotizador/form-quotation/:idQ', component: FormQuotationBusinessComponent},
   {path: '', pathMatch: 'full', redirectTo: 'home-rug'},
   {path: 'req-content/:idSR/error', component:ErrorPageComponent },
   {path: 'error', component:ErrorPageComponent },
   {path: 'response-form', component:ResponseFormComponent}, 
-  {path:'req-content/:idSR/quot-content/:quotID',component:QuotationContentComponent,canActivate:[UserGuard]},
+  {path:'req-content/:idSR/quot-content/:quotID',component:QuotationContentComponent,canActivate:[UserGuard,RolRafGuard]},
 { path: 'home-raf/file',component:FilesComponent},
 { path: 'login',component:LoginComponent},
 
-{ path: 'home-admin',component:HomeAdminComponent, canActivate:[UserGuard]}
+{ path: 'home-admin',component:HomeAdminComponent, canActivate:[UserGuard,RolAdminGuard]}
  
 ]
 @NgModule({

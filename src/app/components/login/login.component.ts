@@ -29,19 +29,22 @@ public errorLogin:boolean;
   ) { }
   hide=true;
   ngOnInit(): void {
+    localStorage.clear()
+    this.cookieService.deleteAll();
   }
   
   onLogin(login,formDirective: FormGroupDirective){
     this.errorLogin=false;
-    console.log(login)
+    //console.log(login)
     this.RequestService.post('http://localhost:8080/api/auth/authenticate',login)
     .subscribe( {
       next:(respuesta:any)=>{
-        console.log(respuesta)
+        //console.log(respuesta)
         formDirective.resetForm();
         const dateNow = new Date();
         dateNow.setMinutes(dateNow.getMinutes() + 60);
         this.cookieService.set('token',respuesta.jwt,dateNow)
+        this.cookieService.set('identifier',respuesta.identifier,dateNow)
         this.idUser=respuesta.id;
         this.userName=respuesta.userName;
         this.user={idUser:this.idUser,userName:this.userName,spendingUnit:respuesta.spendingUnit,faculty:respuesta.faculty}

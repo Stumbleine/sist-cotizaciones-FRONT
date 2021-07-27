@@ -12,11 +12,29 @@ export class UserGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const cookie= this.cookieService.check('token')
-    if(!cookie){
+    const identifier= this.cookieService.get('identifier')
+    const identifierPage= this.cookieService.get('identifierPage')
+    
+     if(!cookie){
       this.router.navigate(['/','login'])
     }else{
       return true;
-    }
+      
+    } 
+    /* if(!cookie ){
+      this.router.navigate(['/','login'])
+    }else{
+      if(identifierPage!=""){
+        if(identifier==identifierPage){
+          return true;
+        }else{
+          this.router.navigate(['/','login'])
+        }
+      }else{
+        return true;
+      }
+    } */
+  
       
   }
   
